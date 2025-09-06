@@ -1,0 +1,109 @@
+
+<!-- CUSTOMER RESPONSE SECTION -->
+<section id="response" style="background: linear-gradient(135deg, #0A1F44, #00AEEF); padding: 60px 20px; color: #fff;">
+  <h2 style="text-align: center; font-size: 32px; margin-bottom: 10px;">💬 What Our Customers Say</h2>
+  <p style="text-align: center; color: #d0e7ff; margin-bottom: 40px;">Real feedback from our happy clients</p>
+
+  <!-- Carousel Container -->
+  <div style="overflow: hidden; max-width: 900px; margin: auto; border-radius: 12px;">
+    <div id="testimonialCarouselTrack" class="testimonial-carousel-track" style="display: flex; transition: transform 0.6s ease-in-out;">
+      <!-- Slides -->
+      <div class="testimonial" style="flex: 0 0 100%; padding: 20px; text-align: center;">
+        <img src="https://i.ibb.co/MyztSZgH/Whats-App-Image-2025-07-12-at-11-09-15-AM-Copy.jpg" alt="Customer 1"
+             style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
+        <h3>Samuel Mahia</h3>
+        <p>"MotorPride helped me get my dream car through their flexible loan options. Highly recommended!"</p>
+      </div>
+      <div class="testimonial" style="flex: 0 0 100%; padding: 20px; text-align: center;">
+        <img src="https://i.ibb.co/VcDz0px0/Whats-App-Image-2025-07-12-at-11-10-56-AM.jpg" alt="Customer 2"
+             style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
+        <h3>Samson Mahia</h3>
+        <p>"I hired a Land Cruiser Prado for my trip to Amboseli through their Safari service. The car was clean, powerful, and fuel-efficient. Great experience"</p>
+      </div>
+      <div class="testimonial" style="flex: 0 0 100%; padding: 20px; text-align: center;">
+        <img src="https://i.ibb.co/FLM5PgDf/Whats-App-Image-2025-07-12-at-11-11-48-AM.jpg" alt="Customer 3"
+             style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
+        <h3>Eric Karanja</h3>
+        <p>"Very professional and responsive team. They even helped me reserve a unit through WhatsApp before I traveled to Nairobi. Highly recommend them"</p>
+      </div>
+      <div class="testimonial" style="flex: 0 0 100%; padding: 20px; text-align: center;">
+        <img src="https://i.ibb.co/Y73yDZLT/Whats-App-Image-2025-07-15-at-12-13-26-PM-1.jpg" alt="Customer 3"
+             style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
+        <h3>Elizabeth Mahia</h3>
+        <p>"MotorPride gave me the best deal on a clean, low-mileage Toyota Axio. The process was smooth and transparent. I’ll definitely come back for my next car."</p>
+      </div>
+      <div class="testimonial" style="flex: 0 0 100%; padding: 20px; text-align: center;">
+        <img src="https://i.ibb.co/FqgBR5s4/Whats-App-Image-2025-07-15-at-12-13-26-PM.jpg" alt="Customer 3"
+             style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
+        <h3>Michael Kibe</h3>
+        <p>"They even helped me sell my car fast. The process was transparent and fair."</p>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div style="text-align: center; margin-top: 20px;">
+      <button onclick="prevTestimonial()" style="margin-right: 10px; padding: 8px 16px; background: #fff; color: #0A1F44; border: none; border-radius: 6px;">◀</button>
+      <button onclick="nextTestimonial()" style="padding: 8px 16px; background: #fff; color: #0A1F44; border: none; border-radius: 6px;">▶</button>
+    </div>
+  </div>
+
+  <!-- Feedback Form (unchanged) -->
+  <div style="max-width: 600px; margin: 60px auto 0; background: #ffffff; color: #000; padding: 30px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);">
+    <h3 style="text-align: center; margin-bottom: 20px; color: #0a1f44;">📝 Submit Your Feedback</h3>
+    <form action="https://formsubmit.co/kibesamson8@gmail.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="New Customer Feedback - MotorPride">
+      <input type="hidden" name="_captcha" value="false">
+
+      <label>Your Name (optional):</label>
+      <input type="text" name="name" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; margin-bottom: 10px;">
+
+      <label>Type of Feedback:</label>
+      <select name="type" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; margin-bottom: 10px;">
+        <option value="">-- Select --</option>
+        <option>Praise</option>
+        <option>Complaint</option>
+        <option>Suggestion</option>
+      </select>
+
+      <label>Your Message:</label>
+      <textarea name="message" rows="4" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; margin-bottom: 10px;"></textarea>
+
+      <label>Upload Photo (optional):</label>
+      <input type="file" name="attachment" accept="image/*" style="width: 100%; margin-bottom: 10px;">
+
+      <label>Contact (WhatsApp or Email):</label>
+      <input type="text" name="contact" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; margin-bottom: 15px;">
+
+      <button type="submit" style="width: 100%; background-color: #00aeef; color: white; padding: 12px; border: none; border-radius: 6px; font-weight: bold;">
+        Send Feedback
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- Carousel Script -->
+<script>
+  let testimonialIndex = 0;
+  const testimonialTrack = document.getElementById('testimonialCarouselTrack');
+  const testimonialSlides = testimonialTrack.children.length;
+
+  function showTestimonial(i) {
+    testimonialIndex = (i + testimonialSlides) % testimonialSlides;
+    testimonialTrack.style.transform = `translateX(-${testimonialIndex * 100}%)`;
+  }
+
+  function nextTestimonial() {
+    showTestimonial(testimonialIndex + 1);
+  }
+
+  function prevTestimonial() {
+    showTestimonial(testimonialIndex - 1);
+  }
+
+  // Initialize carousel on page load
+  document.addEventListener("DOMContentLoaded", function () {
+    showTestimonial(0);
+    setInterval(() => nextTestimonial(), 8000);
+  });
+</script>
+

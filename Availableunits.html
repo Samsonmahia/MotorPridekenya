@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Available Units - MotorPride Kenya</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+  :root {
+    --neon-green: #39ff14;
+    --electric-blue: #00aeef;
+    --cool-gray: #ffffff;
+    --midnight-blue: #0a1F44;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--cool-gray);
+    color: var(--midnight-blue);
+  }
+
+  nav {
+    background: var(--electric-blue);
+    padding: 1rem;
+  }
+
+  .nav-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s;
+  }
+
+  nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background: var(--electric-blue);
+    min-width: 160px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 16px;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  h2 {
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 0 20px 40px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+
+  .card img.main-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .card img.main-img:hover {
+    transform: scale(1.02);
+  }
+
+  .card-content {
+    padding: 1rem;
+  }
+
+  .reserve-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: #25d366;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .expanded-section {
+    display: none;
+    padding: 10px 15px;
+    border-top: 1px solid #ddd;
+  }
+
+  .thumbnails {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px 0;
+    justify-content: center;
+    flex-wrap: nowrap;
+    scrollbar-width: thin;
+  }
+
+  .thumbnails img {
+    height: 60px;
+    width: 90px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border 0.2s;
+    flex-shrink: 0;
+  }
+
+  .thumbnails img:hover,
+  .thumbnails img:focus {
+    border-color: var(--electric-blue);
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+
+  .pagination button {
+    padding: 10px 20px;
+    background: var(--electric-blue);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .pagination button:disabled {
+    background: #ccc;
+    cursor: default;
+  }
+
+  footer {
+    background: var(--midnight-blue);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  /* Back to home button */
+  .back-home {
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    background: var(--midnight-blue);
+    color: white;
+    padding: 10px 18px;
+    text-decoration: none;
+    width: fit-content;
+    border-radius: 6px;
+  }
+
+  /* Mobile improvements */
+  @media (max-width: 768px) {
+    nav {
+      padding: 0.5rem;
+    }
+
+    .nav-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dropdown-content {
+      position: static;
+      box-shadow: none;
+    }
+
+    .card img.main-img {
+      height: 180px;
+    }
+
+    .thumbnails img {
+      height: 50px;
+      width: 75px;
+    }
+
+    .card-content h3 {
+      font-size: 1.1rem;
+    }
+
+    .reserve-btn {
+      padding: 6px 12px;
+    }
+  }
+</style>
+
+</head>
+<body>
+
+<!-- ✅ Navigation -->
+<nav>
+  <div class="nav-container">
+    <div class="dropdown">
+      <a href="index.html#who">About Us</a>
+      <div class="dropdown-content">
+        <a href="index.html#who">Who We Are</a>
+        <a href="index.html#what">What We Do</a>
+        <a href="index.html#mission">Mission</a>
+        <a href="index.html#vision">Vision</a>
+        <a href="index.html#why">Why Choose Us</a>
+        <a href="index.html#team">Our Team</a>
+      </div>
+    </div>
+    <a href="index.html#response">Customer Response</a>
+    <a href="index.html#car-match">Smart Match</a>
+    <div class="dropdown">
+      <a href="index.html#featured">Featured Vehicles</a>
+      <div class="dropdown-content">
+        <a href="available-units.html">Available Units</a>
+      </div>
+    </div>
+    <a href="index.html#brands">Car Brands</a>
+    <a href="index.html#cars">More Cars</a>
+    <a href="index.html#sell-car">Sell Your Car</a>
+    <div class="dropdown">
+      <a href="index.html#car-hire">Car Hire</a>
+      <div class="dropdown-content">
+        <a href="index.html#self-drive">Self Drive</a>
+        <a href="index.html#non-self-drive">Non Self Drive</a>
+        <a href="index.html#safari">Tourist and Safaris</a>
+        <a href="index.html#trucks">Trucks and Lorries</a>
+      </div>
+    </div>
+    <a href="index.html#loan">Loan Calculator</a>
+    <a href="index.html#location">Location</a>
+  </div>
+</nav>
+
+<!-- ✅ Back to Home -->
+<a href="index.html" class="back-home">← Back to Home</a>
+
+<!-- ✅ Units Section -->
+<section id="units">
+  <h2>Available Units - MotorPride Kenya</h2>
+  <div class="grid" id="vehicleGrid"></div>
+  <div class="pagination">
+    <button id="prevBtn">Previous</button>
+    <button id="nextBtn">Next</button>
+  </div>
+</section>
+
+<!-- ✅ Script (use same as yours for now) -->
+<script>
+  const vehicles = [
+   { 
+    name: "Toyota Fielder 2009",
+    images: [
+      "https://i.ibb.co/0jLh8m06/Whats-App-Image-2025-06-30-at-8-47-14-PM.jpg",
+      "https://i.ibb.co/MDRNwh7N/Whats-App-Image-2025-06-30-at-8-47-17-PM.jpg",
+      "https://i.ibb.co/21VYXxzm/Whats-App-Image-2025-06-30-at-8-47-19-PM.jpg",
+      "https://i.ibb.co/0jLh8m06/Whats-App-Image-2025-06-30-at-8-47-14-PM.jpg",
+      "https://i.ibb.co/F49HVZ6Z/Whats-App-Image-2025-06-30-at-8-47-15-PM.jpg"
+    ],
+    fuel: "Petrol",
+    price: "KSh 920K",
+    year: 2009,
+    transmission: "Automatic",
+    engine: "1300cc",
+    mileage: "65,000 km",
+    color: "Silver",
+    features: ["Power Steering", "Fog Lights", "ABS"]
+  },
+  {
+    name: "TOYOTA HARRIER GS 2016 MODEL",
+    images: [
+      "https://i.ibb.co/MyBjkds3/Whats-App-Image-2025-06-27-at-7-04-30-PM.jpg",
+      "https://i.ibb.co/8DNGtkKY/Whats-App-Image-2025-06-27-at-7-04-29-PM-1.jpg",
+      "https://i.ibb.co/Q7Zw3qcp/Whats-App-Image-2025-06-27-at-7-04-29-PM.jpg",
+      "https://i.ibb.co/Jw6hkbS8/Whats-App-Image-2025-06-27-at-7-04-28-PM.jpg",
+      "https://i.ibb.co/Jw6hkbS8/Whats-App-Image-2025-06-27-at-7-04-28-PM.jpg",
+      "https://i.ibb.co/Jw6hkbS8/Whats-App-Image-2025-06-27-at-7-04-28-PM.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 1.55M",
+    year: 2016,
+    transmission: "Automatic",
+    engine: "2000cc",
+    mileage: "65,000 km",
+    color: "original paint",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+    name: "Nissan Note 2014 MODEL",
+    images: [
+      "https://i.ibb.co/8W7SBp4/Whats-App-Image-2025-06-23-at-2-34-22-PM.jpg",
+      "https://i.ibb.co/7JCKywhs/Whats-App-Image-2025-06-23-at-2-34-23-PM.jpg",
+      "https://i.ibb.co/RpcZ4syB/Whats-App-Image-2025-06-23-at-2-34-22-PM-1.jpg",
+      "https://i.ibb.co/9kKCqbSt/Whats-App-Image-2025-06-23-at-2-34-21-PM.jpg",
+      "https://i.ibb.co/9kKCqbSt/Whats-App-Image-2025-06-23-at-2-34-21-PM.jpg",
+      "https://i.ibb.co/9kKCqbSt/Whats-App-Image-2025-06-23-at-2-34-21-PM.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 750K",
+    year: 2014,
+    transmission: "Automatic",
+    engine: "1200cc",
+    mileage: "65,000 km",
+    color: "original gray",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+  name: "HONDA FIT HYBRID",
+  images: [
+    "https://i.ibb.co/vfyNZcw/Whats-App-Image-2025-07-16-at-7-34-52-PM.jpg",
+    "https://i.ibb.co/cXkN5Zm8/Whats-App-Image-2025-07-16-at-7-34-51-PM.jpg",
+    "https://i.ibb.co/v6QBzg96/Whats-App-Image-2025-07-16-at-7-34-53-PM-1.jpg",
+    "https://i.ibb.co/VYFYYB7B/Whats-App-Image-2025-07-16-at-7-34-53-PM.jpg",
+    "https://i.ibb.co/nNzPHYxM/Whats-App-Image-2025-07-16-at-7-34-54-PM.jpg",
+    "https://i.ibb.co/gb8b10NJ/Whats-App-Image-2025-07-16-at-7-34-55-PM.jpg",
+    "https://i.ibb.co/NnJF7Nfm/Whats-App-Image-2025-07-16-at-7-34-57-PM-1.jpg",
+    "https://i.ibb.co/zHt8symM/Whats-App-Image-2025-07-16-at-7-34-57-PM.jpg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 1.15M",
+  year: 2012,
+  transmission: "Automatic",
+  engine: "1500cc",
+  mileage: "72,000 km",
+  color: "PEARL WHITE",
+  features: ["Reverse Camera", "Eco Mode", "ABS Brakes", "Keyless Start"]
+},
+  {
+    name: "SUZUKI SWIFT 2013 MODEL",
+    images: [
+      "https://i.ibb.co/gZyHTCYL/Whats-App-Image-2025-06-22-at-3-48-43-AM.jpg",
+      "https://i.ibb.co/FkYP6Rb9/Whats-App-Image-2025-06-22-at-3-48-43-AM-1.jpg",
+      "https://i.ibb.co/RpC70tPr/Whats-App-Image-2025-06-22-at-3-48-44-AM.jpg",
+      "https://i.ibb.co/MDSDcfDF/Whats-App-Image-2025-06-22-at-3-48-44-AM-1.jpg",
+      "https://i.ibb.co/bgsp0sFr/Whats-App-Image-2025-06-22-at-3-48-46-AM.jpg",
+      "https://i.ibb.co/20fJzXLz/Whats-App-Image-2025-06-22-at-3-48-45-AM-1.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 800K",
+    year: 2013,
+    transmission: "Automatic",
+    engine: "1200cc",
+    mileage: "65,000 km",
+    color: "WINE RED",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+    name: "TOYOTA PROBOX 2016 MODEL",
+    images: [
+      "https://i.ibb.co/mCQSjV0k/Whats-App-Image-2025-06-21-at-1-53-02-PM.jpg",
+      "https://i.ibb.co/N6K2b4QW/Whats-App-Image-2025-06-21-at-1-53-04-PM.jpg",
+      "https://i.ibb.co/tPzGpDVb/Whats-App-Image-2025-06-21-at-1-53-06-PM.jpg",
+      "https://i.ibb.co/Jw6sVJkh/Whats-App-Image-2025-06-21-at-1-53-09-PM.jpg",
+      "https://i.ibb.co/8DHFGXbY/Whats-App-Image-2025-06-21-at-1-53-11-PM.jpg",
+      "https://i.ibb.co/8DHFGXbY/Whats-App-Image-2025-06-21-at-1-53-11-PM.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "980K",
+    year: 2016,
+    transmission: "Automatic",
+    engine: "1500cc",
+    mileage: "65,000 km",
+    color: "original gray",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+    name: "SUBARU XV 2014 MODEL",
+    images: [
+      "https://i.ibb.co/XkZK1Rp6/Whats-App-Image-2025-06-21-at-10-32-20-AM.jpg",
+      "https://i.ibb.co/6c68zvWq/Whats-App-Image-2025-06-21-at-10-32-21-AM.jpg",
+      "https://i.ibb.co/G4PbZLPC/Whats-App-Image-2025-06-21-at-10-32-22-AM.jpg",
+      "https://i.ibb.co/VYpqQdT6/Whats-App-Image-2025-06-21-at-10-32-23-AM.jpg",
+      "https://i.ibb.co/DHscM2RD/Whats-App-Image-2025-06-21-at-10-32-31-AM.jpg",
+      "https://i.ibb.co/vvwRqXd6/Whats-App-Image-2025-06-21-at-10-32-28-AM.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 1.55M",
+    year: 2016,
+    transmission: "Automatic",
+    engine: "2000cc",
+    mileage: "65,000 km",
+    color: "PEARL WHITE",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+    name: "MAZDA CX5 2014 MODEL",
+    images: [
+      "https://i.ibb.co/tpxNWL3G/Whats-App-Image-2025-06-17-at-3-29-38-AM.jpg",
+      "https://i.ibb.co/Rkr9CBdc/Whats-App-Image-2025-06-17-at-3-29-39-AM.jpg",
+      "https://i.ibb.co/ksj6xBF8/Whats-App-Image-2025-06-17-at-3-29-39-AM-1.jpg",
+      "https://i.ibb.co/Sw9jw4Cn/Whats-App-Image-2025-06-17-at-3-29-40-AM.jpg",
+      "https://i.ibb.co/v4jYTZjp/Whats-App-Image-2025-06-17-at-3-29-40-AM-1.jpg",
+      "https://i.ibb.co/BKF4pxSX/Whats-App-Image-2025-06-17-at-3-29-43-AM.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 1.65M",
+    year: 2016,
+    transmission: "Automatic",
+    engine: "2200cc",
+    mileage: "65,000 km",
+    color: "originaL BLACK",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+  name: "SUBARU FORESTER 2010 MODEL",
+  images: [
+    "https://i.ibb.co/dwSG3Tvz/Whats-App-Image-2025-07-16-at-1-54-21-PM.jpg",
+    "https://i.ibb.co/1G15ttKD/Whats-App-Image-2025-07-16-at-1-54-36-PM.jpg",
+    "https://i.ibb.co/90BThbY/Whats-App-Image-2025-07-16-at-1-54-38-PM.jpg",
+    "https://i.ibb.co/rRYy1x4g/Whats-App-Image-2025-07-16-at-1-54-40-PM.jpg",
+    "https://i.ibb.co/9kxnRYZr/Whats-App-Image-2025-07-16-at-1-54-47-PM.jpg"
+  ],
+  fuel: "Hybrid",
+  price: "KSh 1.2M",
+  year: 2010,
+  transmission: "Automatic",
+  engine: "2000cc",
+  mileage: "78,000 km",
+  color: "Pearl White",
+  features: ["Reverse Camera", "Push Start", "Fog Lights"]
+},
+  {
+    name: "MAZDA AXELA XDL2018 MODEL",
+    images: [
+      "https://i.ibb.co/Vb4hc9J/Whats-App-Image-2025-06-13-at-9-24-57-PM.jpg",
+      "https://i.ibb.co/fVwgpP2T/Whats-App-Image-2025-06-13-at-9-24-57-PM-1.jpg",
+      "https://i.ibb.co/Mk5kgjtF/Whats-App-Image-2025-06-13-at-9-24-58-PM.jpg",
+      "https://i.ibb.co/pvvTkWSK/Whats-App-Image-2025-06-13-at-9-25-02-PM.jpg",
+      "https://i.ibb.co/mFg8G14q/Whats-App-Image-2025-06-13-at-9-25-04-PM.jpg",
+      "https://i.ibb.co/Xxb4KNvq/Whats-App-Image-2025-06-13-at-9-25-04-PM-1.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 1.9M",
+    year: 2016,
+    transmission: "Automatic",
+    engine: "1500cc",
+    mileage: "65,000 km",
+    color: "original gray",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+    name: "TOYOTA RAV4  ADVENTURE NEWSHAPE 2019",
+    images: [
+      "https://i.ibb.co/tP3w27rg/Whats-App-Image-2025-06-29-at-9-37-12-PM.jpg",
+      "https://i.ibb.co/XZ8DJzjH/Whats-App-Image-2025-06-29-at-2-38-36-PM.jpg",
+      "https://i.ibb.co/r2N0LrQR/Whats-App-Image-2025-06-29-at-2-38-36-PM-1.jpg",
+      "https://i.ibb.co/GfCnVC5Z/Whats-App-Image-2025-06-29-at-2-38-38-PM.jpg",
+      "https://i.ibb.co/Y7QsjSgT/Whats-App-Image-2025-06-29-at-9-37-09-PM.jpg",
+      "https://i.ibb.co/Y7QsjSgT/Whats-App-Image-2025-06-29-at-9-37-09-PM.jpg",
+      "https://i.ibb.co/Y7QsjSgT/Whats-App-Image-2025-06-29-at-9-37-09-PM.jpg"
+    ],
+    fuel: "Diesel",
+    price: "KSh 4.6M",
+    year: 2019,
+    transmission: "Automatic",
+    engine: "2000cc",
+    mileage: "65,000 km",
+    color: "Silver",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  }
+
+  ]; // Your full array from before (not repeated here for brevity)
+ 
+  const grid = document.getElementById("vehicleGrid");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  let currentPage = 1;
+  const itemsPerPage = 13;
+
+  function renderPage(page) {
+    grid.innerHTML = "";
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const pageItems = vehicles.slice(start, end);
+
+    pageItems.forEach((car, index) => {
+      const globalIndex = start + index;
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${car.images[0]}" alt="${car.name}" class="main-img" data-index="${globalIndex}" />
+        <div class="card-content">
+          <h3>${car.name}</h3>
+          <p>${car.fuel} | ${car.price}</p>
+          <a class="reserve-btn" href="https://wa.me/254723098206?text=Hi%20MotorPride%2C%20I%20want%20to%20reserve%20${encodeURIComponent(car.name)}" target="_blank">💳 Reserve</a>
+        </div>
+        <div class="expanded-section" id="expand-${globalIndex}">
+          <div class="thumbnails">
+            ${car.images.map((img, i) => `
+              <img 
+                src="${img}" 
+                alt="Thumbnail ${i + 1}" 
+                class="thumb-img" 
+                data-img="${img}" 
+                data-parent="${globalIndex}" />
+            `).join('')}
+          </div>
+          <div class="details" style="text-align:center; color:#0A1F44;">
+            <strong>${car.name}</strong><br>
+            ${car.fuel} | ${car.price}<br>
+            Year: ${car.year} | Transmission: ${car.transmission}<br>
+            Engine: ${car.engine} | Mileage: ${car.mileage}<br>
+            Color: ${car.color}<br>
+            Features: ${car.features.join(", ")}
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    prevBtn.disabled = page === 1;
+    nextBtn.disabled = end >= vehicles.length;
+  }
+
+  // Image click handlers
+  grid.addEventListener("click", function (e) {
+    // Main image click to expand
+    if (e.target.classList.contains("main-img")) {
+      const idx = e.target.dataset.index;
+      document.querySelectorAll(".expanded-section").forEach(section => {
+        section.style.display = "none";
+      });
+      const expandBox = document.getElementById("expand-" + idx);
+      if (expandBox) expandBox.style.display = "block";
+    }
+
+    // Thumbnail click to update main image
+    if (e.target.classList.contains("thumb-img")) {
+      const newSrc = e.target.dataset.img;
+      const parentIdx = e.target.dataset.parent;
+      const mainImg = document.querySelector(`.main-img[data-index="${parentIdx}"]`);
+      if (mainImg) {
+        mainImg.src = newSrc;
+        // Optional: visually indicate selected thumbnail
+        e.target.parentElement.querySelectorAll("img").forEach(img => img.style.border = "2px solid transparent");
+        e.target.style.border = "2px solid #00aeef";
+      }
+    }
+  });
+
+  // Pagination controls
+  prevBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderPage(currentPage);
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if ((currentPage * itemsPerPage) < vehicles.length) {
+      currentPage++;
+      renderPage(currentPage);
+    }
+  });
+
+  renderPage(currentPage);
+</script>
+
+
+<!-- ✅ Footer -->
+<footer>
+  <p>&copy; 2025 MotorPride Kenya. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

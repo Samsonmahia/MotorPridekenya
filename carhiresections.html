@@ -1,0 +1,137 @@
+
+<!-- ✅ Car Hire Sections (Self Drive + Non Self Drive) with Smart Toggle -->
+
+<style>
+  .car-hire-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  .car-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 300px;
+    padding: 15px;
+  }
+  .car-card img.main-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  .thumbnails {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .thumbnails img {
+    width: 55px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  .thumbnails img:hover {
+    border-color: #00aeef;
+  }
+  .thumbnails.hidden {
+    display: none;
+  }
+  .reserve-btn {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    background: #25d366;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+</style>
+
+<script>
+  function toggleThumbnails(mainImg) {
+    const card = mainImg.closest('.car-card');
+    const thumbs = card.querySelector('.thumbnails');
+    thumbs.classList.toggle('hidden');
+  }
+</script>
+
+<!-- ✅ SELF DRIVE SECTION -->
+<section id="self-drive" style="padding: 40px 20px; background-color: #f9f9f9;">
+  <h2 style="text-align: center; color: #0A1F44; margin-bottom: 10px;">🚗 Self Drive Car Hire</h2>
+  <p style="text-align: center; color: #333; margin-bottom: 30px;">Enjoy full control — hire and drive on your own terms. Starting from <strong>Ksh 3,000/day</strong>.</p>
+  
+  <div class="car-hire-grid">
+    <!-- Self Drive Car 1 -->
+    <div class="car-card">
+      <img src="https://i.ibb.co/39Gg0Scp/Whats-App-Image-2025-07-12-at-11-45-08-AM-1.jpg" class="main-image" id="main1" alt="Toyota Vitz" onclick="toggleThumbnails(this)">
+      <div class="thumbnails hidden">
+        <img src="https://i.ibb.co/39Gg0Scp/Whats-App-Image-2025-07-12-at-11-45-08-AM-1.jpg" onclick="document.getElementById('main1').src=this.src">
+        <img src="https://via.placeholder.com/100x60?text=Side" onclick="document.getElementById('main1').src=this.src">
+        <img src="https://via.placeholder.com/100x60?text=Interior" onclick="document.getElementById('main1').src=this.src">
+      </div>
+      <h3>Toyota Vitz</h3>
+      <p>Fuel Saver • 1300cc • Auto</p>
+      <p><strong>Ksh 3,000/day</strong></p>
+      <a href="https://wa.me/254723098206?text=Hi%2C%20I%20want%20to%20book%20Toyota%20Vitz%20for%20Self%20Drive." class="reserve-btn" target="_blank">Reserve on WhatsApp</a>
+    </div>
+
+    <!-- Self Drive Car 2 -->
+    <div class="car-card">
+      <img src="https://i.ibb.co/ghCYtBX/Whats-App-Image-2025-07-12-at-11-45-08-AM.jpg" class="main-image" id="main2" alt="Toyota Axio" onclick="toggleThumbnails(this)">
+      <div class="thumbnails hidden">
+        <img src="https://i.ibb.co/ghCYtBX/Whats-App-Image-2025-07-12-at-11-45-08-AM.jpg" onclick="document.getElementById('main2').src=this.src">
+        <img src="https://via.placeholder.com/100x60?text=Side" onclick="document.getElementById('main2').src=this.src">
+        <img src="https://via.placeholder.com/100x60?text=Interior" onclick="document.getElementById('main2').src=this.src">
+      </div>
+      <h3>Toyota Axio</h3>
+      <p>1500cc • Comfortable & Reliable</p>
+      <p><strong>Ksh 3,800/day</strong></p>
+      <a href="https://wa.me/254723098206?text=Hi%2C%20I%20want%20to%20book%20Toyota%20Axio%20for%20Self%20Drive." class="reserve-btn" target="_blank">Reserve on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ NON SELF DRIVE SECTION -->
+<section id="non-self-drive" style="padding: 40px 20px; background-color: #ffffff;">
+  <h2 style="text-align: center; color: #0A1F44; margin-bottom: 10px;">🚘 Non Self Drive (With Driver)</h2>
+  <p style="text-align: center; color: #333; margin-bottom: 30px;">Relax while we drive you — ideal for events, business, or long trips. From <strong>Ksh 4,500/day</strong>.</p>
+
+  <div class="car-hire-grid">
+    <!-- Non Self Drive Car 1 -->
+    <div class="car-card">
+      <img src="https://i.ibb.co/jvnc2Mbp/Whats-App-Image-2025-06-29-at-2-58-03-PM.jpg" class="main-image" id="main3" alt="Toyota Noah" onclick="toggleThumbnails(this)">
+      <div class="thumbnails hidden">
+        <img src="https://i.ibb.co/JwzGSjNW/Whats-App-Image-2025-06-29-at-2-58-01-PM.jpg" onclick="document.getElementById('main3').src=this.src">
+        <img src="https://i.ibb.co/1Jn7h55F/Whats-App-Image-2025-06-29-at-2-58-03-PM-1.jpg" onclick="document.getElementById('main3').src=this.src">
+        <img src="https://i.ibb.co/27vgR4tL/Whats-App-Image-2025-06-29-at-2-58-01-PM-1.jpg" onclick="document.getElementById('main3').src=this.src">
+      </div>
+      <h3>MERCEDES BENZ E300</h3>
+      <p>7-Seater • Events & Group Travel</p>
+      <p><strong>Ksh 7,000/day</strong></p>
+      <a href="https://wa.me/254723098206?text=Hi%2C%20I%20want%20to%20hire%20Toyota%20Noah%20with%20driver." class="reserve-btn" target="_blank">Reserve on WhatsApp</a>
+    </div>
+
+    <!-- Non Self Drive Car 2 -->
+    <div class="car-card">
+      <img src="https://i.ibb.co/hJLZSq5r/Whats-App-Image-2025-06-29-at-7-56-42-PM-1-Copy-Copy.jpg" class="main-image" id="main4" alt="Subaru Forester" onclick="toggleThumbnails(this)">
+      <div class="thumbnails hidden">
+        <img src="https://i.ibb.co/hJLZSq5r/Whats-App-Image-2025-06-29-at-7-56-42-PM-1-Copy-Copy.jpg" onclick="document.getElementById('main4').src=this.src">
+        <img src="https://i.ibb.co/chVThv0s/Whats-App-Image-2025-06-29-at-7-56-43-PM-1.jpg" onclick="document.getElementById('main4').src=this.src">
+        <img src="https://i.ibb.co/pvrp36FV/Whats-App-Image-2025-06-29-at-7-56-47-PM-1.jpg" onclick="document.getElementById('main4').src=this.src">
+      </div>
+      <h3>MAZDA AXELA HATCHBACK 2016 MODEL</h3>
+      <p>4WD • Long Distance Travel</p>
+      <p><strong>Ksh 6,500/day</strong></p>
+      <a href="https://wa.me/254723098206?text=Hi%2C%20I%20want%20to%20hire%20Subaru%20Forester%20with%20driver." class="reserve-btn" target="_blank">Reserve on WhatsApp</a>
+    </div>
+  </div>
+</section>
