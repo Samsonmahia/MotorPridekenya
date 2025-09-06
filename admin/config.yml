@@ -17,8 +17,8 @@ collections:
       - {label: "Price", name: "price", widget: "string"}
       - {label: "Fuel Type", name: "fuel", widget: "string"}
       - {label: "Transmission", name: "transmission", widget: "string"}
-      - {label: "Main Image", name: "main_image", widget: "image"}
-      - {label: "Gallery", name: "gallery", widget: "list", field: {label: "Image", name: "image", widget: "image"}}
+      - {label: "Main Image", name: "main_image", widget: "string"}
+      - {label: "Gallery", name: "gallery", widget: "list", field: {label: "Image", name: "image", widget: "string"}}
 
   - name: "featured_cars"
     label: "Featured Cars"
@@ -29,4 +29,4 @@ collections:
       - {label: "Car Name", name: "title", widget: "string"}
       - {label: "Year", name: "year", widget: "number"}
       - {label: "Price", name: "price", widget: "string"}
-      - {label: "Image", name: "main_image", widget: "image"}
+      - {label: "Image", name: "main_image", widget: "string"}
