@@ -1,18 +1,75 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: main   # change if your repo uses "master"
 
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+# Since you're using ibb.co, no need for media_folder/public_folder
+# We'll use string fields for image URLs instead
 
 collections:
-  - name: "cars"
-    label: "Cars"
-    folder: "content/cars"
+  # Featured Cars
+  - name: "featured_cars"
+    label: "Featured Cars"
+    folder: "content/featured_cars"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Car Name", name: "title", widget: "string" }
-      - { label: "Year", name: "year", widget: "number" }
-      - { label: "Price", name: "price", widget: "string" }
-      - { label: "Image", name: "image", widget: "string" }
+      - { name: "title", label: "Car Name", widget: "string" }
+      - { name: "price", label: "Price", widget: "string" }
+      - { name: "fuel", label: "Fuel Type", widget: "string" }
+      - { name: "year", label: "Year", widget: "number" }
+      - { name: "mileage", label: "Mileage", widget: "string" }
+      - { name: "transmission", label: "Transmission", widget: "string" }
+      - { name: "reg_no", label: "Registration Number", widget: "string" }
+      - label: "Car Images"
+        name: "images"
+        widget: "list"
+        fields:
+          - { label: "Image URL", name: "url", widget: "string" }
+
+  # Available Units
+  - name: "available_units"
+    label: "Available Units"
+    folder: "content/available_units"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: "title", label: "Car Name", widget: "string" }
+      - { name: "brand", label: "Brand", widget: "string" }
+      - { name: "price", label: "Price", widget: "string" }
+      - { name: "fuel", label: "Fuel Type", widget: "string" }
+      - { name: "year", label: "Year", widget: "number" }
+      - { name: "transmission", label: "Transmission", widget: "string" }
+      - { name: "features", label: "Features", widget: "list", field: {label: "Feature", name: "feature", widget: "string"} }
+      - label: "Car Images"
+        name: "images"
+        widget: "list"
+        fields:
+          - { label: "Image URL", name: "url", widget: "string" }
+
+  # Car Hire Packages
+  - name: "car_hire"
+    label: "Car Hire Packages"
+    folder: "content/car_hire"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: "title", label: "Package Name", widget: "string" }
+      - { name: "type", label: "Type (Self Drive / Non-Self Drive / Safari)", widget: "string" }
+      - { name: "price", label: "Price", widget: "string" }
+      - { name: "description", label: "Description", widget: "text" }
+      - label: "Package Images"
+        name: "images"
+        widget: "list"
+        fields:
+          - { label: "Image URL", name: "url", widget: "string" }
+
+  # Testimonials
+  - name: "testimonials"
+    label: "Customer Testimonials"
+    folder: "content/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: "name", label: "Customer Name", widget: "string" }
+      - { name: "comment", label: "Testimonial", widget: "text" }
+      - { name: "photo_url", label: "Photo (ibb.co URL)", widget: "string" }

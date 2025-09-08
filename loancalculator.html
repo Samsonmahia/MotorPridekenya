@@ -1,0 +1,58 @@
+
+<!-- LOAN CALCULATOR -->
+<section id="loan" style="padding: 60px 20px; background-color: #f5faff;">
+  <h2 style="text-align: center; color: #0a1f44; margin-bottom: 30px;">💰 Car Loan Calculator</h2>
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; max-width: 900px; margin: auto;">
+
+    <!-- Loan Form -->
+    <div style="flex: 1 1 360px;">
+      <label>Vehicle Price (Ksh)</label>
+      <input type="number" id="loan-amount" placeholder="e.g. 1500000" style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc;">
+
+      <label>Down Payment (Ksh)</label>
+      <input type="number" id="down-payment" placeholder="e.g. 300000" style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc;">
+
+      <label>Loan Term (Months)</label>
+      <input type="number" id="loan-term" placeholder="e.g. 36" style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc;">
+
+      <label>Interest Rate (%)</label>
+      <input type="number" id="interest-rate" placeholder="e.g. 13" step="0.1" style="width:100%; padding:10px; margin-bottom:20px; border-radius:6px; border:1px solid #ccc;">
+
+      <button onclick="calculateLoan()" style="width: 100%; background-color: #00aeef; color: white; padding: 12px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold;">Calculate</button>
+    </div>
+
+    <!-- Loan Summary -->
+    <div style="flex: 1 1 360px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
+      <h3 style="margin-bottom: 20px;">📊 Loan Summary</h3>
+      <p><strong>Monthly Payment:</strong> <span id="monthly-payment">--</span></p>
+      <p><strong>Total Interest:</strong> <span id="total-interest">--</span></p>
+      <p><strong>Total Amount Payable:</strong> <span id="total-cost">--</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- Loan Calculator Script -->
+<script>
+  function calculateLoan() {
+    const loanAmount = parseFloat(document.getElementById("loan-amount").value) || 0;
+    const downPayment = parseFloat(document.getElementById("down-payment").value) || 0;
+    const months = parseFloat(document.getElementById("loan-term").value) || 1;
+    const interestRate = parseFloat(document.getElementById("interest-rate").value) || 0;
+
+    const principal = loanAmount - downPayment;
+    const monthlyRate = interestRate / 100 / 12;
+
+    let monthlyPayment = principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months));
+    let totalPayment = monthlyPayment * months;
+    let totalInterest = totalPayment - principal;
+
+    // Format numbers
+    monthlyPayment = isFinite(monthlyPayment) ? monthlyPayment.toFixed(2) : "--";
+    totalInterest = isFinite(totalInterest) ? totalInterest.toFixed(2) : "--";
+    totalPayment = isFinite(totalPayment) ? totalPayment.toFixed(2) : "--";
+
+    document.getElementById("monthly-payment").innerText = `Ksh ${monthlyPayment}`;
+    document.getElementById("total-interest").innerText = `Ksh ${totalInterest}`;
+    document.getElementById("total-cost").innerText = `Ksh ${totalPayment}`;
+  }
+</script>
