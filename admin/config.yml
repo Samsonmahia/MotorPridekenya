@@ -1,75 +1,50 @@
 backend:
   name: git-gateway
-  branch: main   # change if your repo uses "master"
+  branch: main   # or master depending on your repo default branch
 
-# Since you're using ibb.co, no need for media_folder/public_folder
-# We'll use string fields for image URLs instead
+media_folder: "static/uploads"    # where uploaded images will go
+public_folder: "/uploads"
 
 collections:
-  # Featured Cars
   - name: "featured_cars"
     label: "Featured Cars"
     folder: "content/featured_cars"
     create: true
     slug: "{{slug}}"
     fields:
-      - { name: "title", label: "Car Name", widget: "string" }
-      - { name: "price", label: "Price", widget: "string" }
-      - { name: "fuel", label: "Fuel Type", widget: "string" }
-      - { name: "year", label: "Year", widget: "number" }
-      - { name: "mileage", label: "Mileage", widget: "string" }
-      - { name: "transmission", label: "Transmission", widget: "string" }
-      - { name: "reg_no", label: "Registration Number", widget: "string" }
-      - label: "Car Images"
-        name: "images"
-        widget: "list"
-        fields:
-          - { label: "Image URL", name: "url", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Image", name: "image", widget: "image" }
 
-  # Available Units
   - name: "available_units"
     label: "Available Units"
     folder: "content/available_units"
     create: true
     slug: "{{slug}}"
     fields:
-      - { name: "title", label: "Car Name", widget: "string" }
-      - { name: "brand", label: "Brand", widget: "string" }
-      - { name: "price", label: "Price", widget: "string" }
-      - { name: "fuel", label: "Fuel Type", widget: "string" }
-      - { name: "year", label: "Year", widget: "number" }
-      - { name: "transmission", label: "Transmission", widget: "string" }
-      - { name: "features", label: "Features", widget: "list", field: {label: "Feature", name: "feature", widget: "string"} }
-      - label: "Car Images"
-        name: "images"
-        widget: "list"
-        fields:
-          - { label: "Image URL", name: "url", widget: "string" }
+      - { label: "Car Name", name: "car_name", widget: "string" }
+      - { label: "Price", name: "price", widget: "string" }
+      - { label: "Year", name: "year", widget: "number" }
+      - { label: "Fuel Type", name: "fuel", widget: "string" }
+      - { label: "Images", name: "images", widget: "list", field: {label: Image, name: image, widget: image} }
 
-  # Car Hire Packages
   - name: "car_hire"
-    label: "Car Hire Packages"
+    label: "Car Hire"
     folder: "content/car_hire"
     create: true
     slug: "{{slug}}"
     fields:
-      - { name: "title", label: "Package Name", widget: "string" }
-      - { name: "type", label: "Type (Self Drive / Non-Self Drive / Safari)", widget: "string" }
-      - { name: "price", label: "Price", widget: "string" }
-      - { name: "description", label: "Description", widget: "text" }
-      - label: "Package Images"
-        name: "images"
-        widget: "list"
-        fields:
-          - { label: "Image URL", name: "url", widget: "string" }
+      - { label: "Package Name", name: "package_name", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Price", name: "price", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
 
-  # Testimonials
   - name: "testimonials"
-    label: "Customer Testimonials"
+    label: "Testimonials"
     folder: "content/testimonials"
     create: true
     slug: "{{slug}}"
     fields:
-      - { name: "name", label: "Customer Name", widget: "string" }
-      - { name: "comment", label: "Testimonial", widget: "text" }
-      - { name: "photo_url", label: "Photo (ibb.co URL)", widget: "string" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Comment", name: "comment", widget: "text" }
+      - { label: "Photo", name: "photo", widget: "image" }
