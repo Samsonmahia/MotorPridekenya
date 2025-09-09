@@ -1,332 +1,193 @@
-<section id="our-journey" style="font-family: Arial, sans-serif; margin:0; padding:0;">
-  <!-- Heading Bar -->
-<div style="background: linear-gradient(90deg, #0A1F44, #00AEEF); 
-            color: white; 
-            padding: 20px; 
-            font-weight: bold; 
-            font-size: 28px; 
-            letter-spacing:1px; 
-            position: relative; 
-            text-align: center;">
-
-  <!-- Back to Home Button -->
-  <a href="index.html" 
-     style="background: linear-gradient(90deg, #ff0000, #cc0000); 
-            color: #fff; 
-            font-weight: bold; 
-            padding: 8px 18px; 
-            border-radius: 6px; 
-            text-decoration: none; 
-            position: absolute; 
-            left: 20px; 
-            top: 50%; 
-            transform: translateY(-50%);">
-    Back to Home
-  </a>
-
-  <!-- WHO WE ARE text -->
-  OUR JOURNEY
-</div>
-<div style="padding: 60px 20px; background: #f9f9f9;">
-  <h2 style="color:#0A1F44; text-align:center; margin-bottom: 50px; font-size:28px; font-weight:bold;">
-    Our History
-  </h2>
-
-  <div class="timeline">
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <h3>2015</h3>
-        <p>MotorPride Kenya is founded with a vision to simplify car ownership and make vehicles accessible to all Kenyans.</p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <h3>2018</h3>
-        <p>Expansion into digital marketing and flexible financing solutions to reach wider audiences.</p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <h3>2022</h3>
-        <p>Launched the MotorPride website with modern tools, online reservations, and loan calculators.</p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <h3>2025</h3>
-        <p>MotorPride Kenya becomes a leader in car sales, car hire, and safari packages with unmatched customer support.</p>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- Transformation & Trust Journey -->
-<div style="padding: 60px 20px; background: #fff;">
-  <h2 style="color:#0A1F44; text-align:center; margin-bottom: 50px; font-size:28px; font-weight:bold;">
-    Transformation & Trust Journey
-  </h2>
-
-  <div class="journey">
-    <div class="journey-step">
-      <div class="icon">🔑</div>
-      <h3>Transparency</h3>
-      <p>Clear pricing, verified units, and honest communication.</p>
-    </div>
-    <div class="journey-step">
-      <div class="icon">⚙️</div>
-      <h3>Innovation</h3>
-      <p>Digital tools, loan calculators, and online reservations.</p>
-    </div>
-    <div class="journey-step">
-      <div class="icon">🤝</div>
-      <h3>Trust</h3>
-      <p>Dedicated customer support and long-term relationships.</p>
-    </div>
-    <div class="journey-step">
-      <div class="icon">🚀</div>
-      <h3>Transformation</h3>
-      <p>Empowering Kenyans with reliable cars, safaris, and hire services.</p>
-    </div>
-  </div>
-</div>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Journey - Motorpride Kenya</title>
 <style>
-/* Journey container */
-.journey {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-  max-width: 1000px;
-  margin: auto;
-}
+  /* Reset */
+  * {margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
 
-/* Step cards */
-.journey-step {
-  background: #f9f9f9;
-  padding: 25px;
-  border-radius: 14px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.journey-step:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-}
+  body {background: #F8F9FA; color: #0A3D62; scroll-behavior: smooth;}
+  a {text-decoration:none; color: inherit;}
 
-/* Icons */
-.journey-step .icon {
-  font-size: 32px;
-  margin-bottom: 12px;
-}
+  /* Navbar */
+  nav {position: sticky; top:0; background:#fff; z-index:999; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+  nav ul {display:flex; justify-content:center; list-style:none; padding:15px;}
+  nav ul li {margin:0 20px;}
+  nav ul li a {font-weight:bold; transition:0.3s;}
+  nav ul li a:hover {color:#E63946;}
 
-/* Titles */
-.journey-step h3 {
-  color: #0A1F44;
-  font-size: 18px;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
+  /* Hero Section */
+  .hero {position:relative; background:url('https://images.unsplash.com/photo-1608889176720-7b1f1d8f3e3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-4.0.3&q=80&w=1920') center/cover no-repeat; height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; color:#0A3D62;}
+  .hero h1 {font-size:3em; font-weight:bold; margin-bottom:20px;}
+  .hero p {font-size:1.5em; margin-bottom:30px;}
+  .hero button {padding:15px 30px; font-size:1.1em; font-weight:bold; border:none; background:#E63946; color:#fff; border-radius:8px; cursor:pointer; transition:0.3s;}
+  .hero button:hover {background:#d32f2f;}
 
-/* Text */
-.journey-step p {
-  color: #555;
-  font-size: 14px;
-  line-height: 1.6;
-}
+  /* Timeline Section */
+  .timeline {padding:80px 20px; max-width:1200px; margin:0 auto;}
+  .timeline h2 {text-align:center; font-size:2.5em; margin-bottom:50px; color:#0A3D62;}
+  .timeline-container {display:flex; flex-direction:column; gap:40px;}
+  @media(min-width:768px) { .timeline-container {flex-direction:row; justify-content:space-between;} }
+  .timeline-card {background:#fff; border:2px solid #B0B0B0; border-radius:12px; padding:20px; flex:1; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform 0.3s;}
+  .timeline-card:hover {transform:translateY(-5px);}
+  .timeline-card h3 {color:#0A3D62; margin-bottom:10px;}
+  .timeline-card p {color:#E63946; font-weight:bold;}
+
+  /* Achievements Section */
+  .achievements {background: linear-gradient(90deg, #0A3D62, #B0B0B0); padding:80px 20px; color:#FFB400; text-align:center;}
+  .achievements h2 {font-size:2.5em; margin-bottom:50px; color:#fff;}
+  .stats {display:flex; flex-wrap:wrap; justify-content:center; gap:40px;}
+  .stat {font-size:1.5em; font-weight:bold; background:rgba(255,255,255,0.1); padding:30px 20px; border-radius:12px; min-width:200px; transition:0.5s; opacity:0; transform:translateY(30px);}
+  .stat.visible {opacity:1; transform:translateY(0);}
+  .stat span {display:block; font-size:2em; margin-bottom:10px;}
+
+  /* Vision Section */
+  .vision {display:flex; flex-wrap:wrap; align-items:center; padding:80px 20px; max-width:1200px; margin:0 auto;}
+  .vision img {flex:1; border-radius:12px; max-width:100%; margin-bottom:20px;}
+  .vision-text {flex:1; padding:20px;}
+  .vision-text h2 {color:#0A3D62; font-size:2.5em; margin-bottom:20px;}
+  .vision-text p {color:#0A3D62; font-weight:bold; font-size:1.2em;}
+  .vision-text span {color:#E63946;}
+
+  /* Call to Action */
+  .cta {background:#0A3D62; color:#fff; padding:80px 20px; text-align:center;}
+  .cta h2 {font-size:2.5em; margin-bottom:30px;}
+  .cta button {padding:15px 30px; font-size:1.1em; font-weight:bold; margin:10px; border:none; border-radius:8px; cursor:pointer; transition:0.3s;}
+  .cta .red {background:#E63946; color:#fff;}
+  .cta .silver {background:#B0B0B0; color:#0A3D62;}
+  .cta button:hover {opacity:0.9;}
+
+  /* Contact Section */
+  .contact {background: linear-gradient(90deg, #0A3D62, #B0B0B0); padding:60px 20px; color:#fff;}
+  .contact h2 {text-align:center; font-size:2.5em; margin-bottom:40px;}
+  .contact-container {display:flex; flex-wrap:wrap; gap:40px; justify-content:center;}
+  .contact-card {background:rgba(255,255,255,0.1); padding:20px; border-radius:12px; flex:1; min-width:200px; text-align:center;}
+  .contact-card p {margin-top:10px;}
+  .contact form {max-width:500px; margin:40px auto 0; display:flex; flex-direction:column; gap:15px;}
+  .contact input, .contact textarea {padding:12px; border-radius:8px; border:none; outline:none;}
+  .contact button {padding:15px; border:none; border-radius:8px; background:#E63946; color:#fff; font-weight:bold; cursor:pointer; transition:0.3s;}
+  .contact button:hover {background:#d32f2f;}
 </style>
+</head>
+<body>
 
-<!-- Management Section -->
-<div style="padding: 60px 20px; background:#fff;">
-  <h2 style="color:#0A1F44; text-align:center; margin-bottom: 50px; font-size:28px; font-weight:700; letter-spacing:1px;">
-    Management Team
-  </h2>
+<!-- Navigation -->
+<nav>
+  <ul>
+    <li><a href="#hero">Introduction</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#vision">Vision</a></li>
+    <li><a href="#cta">Call to Action</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 35px;">
-
-    <!-- Team Card -->
-    <div class="team-card">
-      <img src="https://i.ibb.co/BHmq43cc/Whats-App-Image-2025-09-03-at-7-02-31-PM.jpg" alt="Board Member">
-      <h3>Samuel Kiarie</h3>
-      <p>Managing Director</p>
-    </div>
-
-    <div class="team-card">
-      <img src="https://i.ibb.co/9mtm95xJ/Whats-App-Image-2025-09-03-at-7-02-52-PM.jpg" alt="Board Member">
-      <h3>Elizabeth Mahia</h3>
-      <p>Senior Board Member</p>
-    </div>
-
-    <div class="team-card">
-      <img src="https://i.ibb.co/C4JfL58/Whats-App-Image-2025-09-03-at-7-02-30-PM.jpg" alt="Salesperson">
-      <h3>Wajiku Emelda</h3>
-      <p>Sales Executive</p>
-    </div>
-
-    <div class="team-card">
-      <img src="https://i.ibb.co/Jjpg9gdQ/Whats-App-Image-2025-09-03-at-7-03-14-PM.jpg" alt="Salesperson">
-      <h3>Kipruto Collins</h3>
-      <p>Sales Executive</p>
-    </div>
-
-    <div class="team-card">
-      <img src="https://i.ibb.co/67mDLts3/Whats-App-Image-2025-06-09-at-8-59-12-PM-1.jpg" alt="Salesperson">
-      <h3>Mahia Sam</h3>
-      <p>Sales Executive</p>
-    </div>
-
-  </div>
-</div>
-
-<style>
-.team-card {
-  background: #f9f9f9;
-  padding: 20px;
-  width: 250px;
-  text-align: center;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: all 0.4s ease;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.team-card img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 15px;
-  transition: transform 0.4s ease;
-}
-
-.team-card h3 {
-  margin: 10px 0 5px;
-  color: #0A1F44;
-  font-size: 18px;
-  font-weight: 700;
-  transition: color 0.3s ease;
-}
-
-.team-card p {
-  color: #555;
-  font-size: 14px;
-  transition: color 0.3s ease;
-}
-
-/* Hover Effects */
-.team-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-  background: #00AEEF;
-  color: #fff;
-}
-
-.team-card:hover img {
-  transform: scale(1.1);
-}
-
-.team-card:hover h3,
-.team-card:hover p {
-  color: #fff;
-}
-</style>
-
-
-  <!-- Contact & Copyright -->
-  <div style="margin-top: 30px; text-align:center; padding: 20px; background:#E6E8EB;">
-    <p style="margin:5px 0; font-size:16px;"><b>Contact Us:</b> 0723098206 | kibesamson8@gmail.com</p>
-    <p style="margin:0; font-size:14px; color:#555;">&copy; 2025 MotorPride Kenya. All Rights Reserved.</p>
-  </div>
-
-  <!-- CSS -->
-  <style>
-    /* Timeline */
-    .timeline {
-      position: relative;
-      max-width: 900px;
-      margin: auto;
-    }
-    .timeline::after {
-      content: '';
-      position: absolute;
-      width: 4px;
-      background: #00AEEF;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      margin-left: -2px;
-    }
-    .timeline-item {
-      padding: 20px;
-      position: relative;
-      width: 50%;
-    }
-    .timeline-item:nth-child(odd) { left: 0; }
-    .timeline-item:nth-child(even) { left: 50%; }
-    .timeline-dot {
-      position: absolute;
-      top: 20px;
-      left: calc(50% - 10px);
-      width: 20px;
-      height: 20px;
-      background: #0A1F44;
-      border: 3px solid #00AEEF;
-      border-radius: 50%;
-      z-index: 1;
-    }
-    .timeline-content {
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow:0 4px 8px rgba(0,0,0,0.2);
-    }
-    .timeline-content h3 {
-      margin-top: 0;
-      color:#0A1F44;
-    }
-
-    /* Team Cards */
-    .team-card {
-      width: 250px;
-      text-align: center;
-      background: #f9f9f9;
-      border-radius: 12px;
-      box-shadow:0 4px 8px rgba(0,0,0,0.2);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .team-card img {
-      width: 100%;
-      height: auto;
-    }
-    .team-card h3 {
-      margin: 10px 0 5px;
-      color:#0A1F44;
-    }
-    .team-card p {
-      margin: 0 0 15px;
-      color:#00AEEF;
-      font-weight:bold;
-    }
-    .team-card:hover {
-      transform: translateY(-8px);
-      box-shadow:0 8px 16px rgba(0,0,0,0.3);
-    }
-    @media (max-width: 768px) {
-      .timeline-item { width: 100%; left: 0 !important; }
-      .timeline::after { left: 20px; }
-      .timeline-dot { left: 10px; }
-    }
-  </style>
+<!-- Hero Section -->
+<section class="hero" id="hero">
+  <h1>Our Journey at Motorpride Kenya 🚘</h1>
+  <p>From a dream to a trusted automotive partner in Kenya.</p>
+  <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})">Explore Our Story</button>
 </section>
+
+<!-- Timeline Section -->
+<section class="timeline" id="timeline">
+  <h2>Our Milestones</h2>
+  <div class="timeline-container">
+    <div class="timeline-card">
+      <h3>2018</h3>
+      <p>Motorpride idea was born.</p>
+    </div>
+    <div class="timeline-card">
+      <h3>2019</h3>
+      <p>First office opened in Ngorika.</p>
+    </div>
+    <div class="timeline-card">
+      <h3>2020</h3>
+      <p>Introduced loan calculator & digital presence.</p>
+    </div>
+    <div class="timeline-card">
+      <h3>2022</h3>
+      <p>Expanded to more regions.</p>
+    </div>
+    <div class="timeline-card">
+      <h3>2025</h3>
+      <p>Partnering with dealerships nationwide.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Achievements Section -->
+<section class="achievements" id="achievements">
+  <h2>Achievements & Growth</h2>
+  <div class="stats">
+    <div class="stat"><span>🚘</span>500+ Cars Sold</div>
+    <div class="stat"><span>👨‍👩‍👧</span>1000+ Happy Clients</div>
+    <div class="stat"><span>🌍</span>Serving Across Kenya</div>
+    <div class="stat"><span>🏆</span>5+ Years of Excellence</div>
+  </div>
+</section>
+
+<!-- Vision Section -->
+<section class="vision" id="vision">
+  <img src="https://images.unsplash.com/photo-1608889176720-7b1f1d8f3e3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-4.0.3&q=80&w=800" alt="Vision Cars">
+  <div class="vision-text">
+    <h2>Our Vision & Future</h2>
+    <p>We aim to <span>redefine car ownership</span> in Kenya by making vehicles more <span>affordable, accessible, and reliable</span> for everyone.</p>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta" id="cta">
+  <h2>Be part of our journey. Explore vehicles, financing, and partnerships today.</h2>
+  <button class="red">Browse Vehicles</button>
+  <button class="silver">Contact Us</button>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <h2>Get In Touch With Us 🚘</h2>
+  <div class="contact-container">
+    <div class="contact-card">
+      <h3>📞 Phone</h3>
+      <p>0723 098 206</p>
+    </div>
+    <div class="contact-card">
+      <h3>📧 Email</h3>
+      <p>info@motorpride.co.ke</p>
+    </div>
+    <div class="contact-card">
+      <h3>📍 Location</h3>
+      <p>Ngorika, Kiambu Road, Kenya</p>
+    </div>
+    <div class="contact-card">
+      <h3>🌐 Social</h3>
+      <p>Facebook | Instagram | Twitter</p>
+    </div>
+  </div>
+
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+</section>
+
+<script>
+  // Animate stats on scroll
+  const stats = document.querySelectorAll('.stat');
+  window.addEventListener('scroll', () => {
+    stats.forEach(stat => {
+      const rect = stat.getBoundingClientRect();
+      if(rect.top < window.innerHeight - 50) {
+        stat.classList.add('visible');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

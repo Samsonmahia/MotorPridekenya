@@ -1,107 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Subaru Models | MotorPride Kenya</title>
-  <style>
-    body { font-family: Arial, sans-serif; background:#f5f7fa; margin:0; padding:0; }
-    h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
-    .vehicle-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .vehicle-card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .vehicle-card:hover { transform: translateY(-6px); }
-    .vehicle-card img {
-      width: 100%; height: 200px; object-fit: cover;
-    }
-    .vehicle-info { padding: 15px; text-align: center; }
-    .vehicle-info h3 { margin: 5px 0; font-size:18px; color:#0A1F44; }
-    .vehicle-info p { margin: 4px 0; color:#333; font-size:14px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subaru Models | MotorPride Kenya</title>
+<style>
+body { font-family: Arial, sans-serif; background:#f5f7fa; margin:0; padding:0; }
+h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
 
-    /* Modal */
-    .modal { display:none; position:fixed; z-index:1000; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); }
-    .modal-content {
-      background:#fff; margin:3% auto; padding:20px; border-radius:12px;
-      width:90%; max-width:1000px; text-align:center; position:relative;
-    }
-    .close { position:absolute; right:15px; top:10px; font-size:28px; cursor:pointer; }
-    #modalMainImage { width:100%; max-height:450px; object-fit:cover; border-radius:10px; margin-bottom:15px; }
-    .thumbnails { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-    .thumbnails img {
-      width:110px; height:80px; object-fit:cover; border-radius:8px;
-      cursor:pointer; transition: transform 0.2s;
-    }
-    .thumbnails img:hover { transform: scale(1.08); }
-    #modalSpecs { text-align:left; margin-top:15px; }
-    #modalSpecs p { margin:5px 0; }
-    .reserve-btn {
-      display:inline-block; margin-top:15px; padding:10px 20px;
-      background:#25D366; color:#fff; border-radius:8px; text-decoration:none;
-    }
+/* Vehicle Grid */
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+@media(max-width:992px){ .vehicle-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:600px){ .vehicle-grid { grid-template-columns: 1fr; } }
 
-    /* Pagination */
-    .pagination { text-align:center; margin:30px 0; }
-    .pagination button {
-      padding:10px 16px; margin:5px; border:none; border-radius:6px;
-      background:#0A1F44; color:#fff; cursor:pointer;
-    }
-    .pagination button:disabled { background:#ccc; cursor:default; }
-  </style>
+.vehicle-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.vehicle-card:hover { transform: translateY(-6px); }
+.vehicle-card img { width:100%; height:200px; object-fit:cover; }
+.vehicle-info { padding:15px; text-align:center; }
+.vehicle-info h3 { margin:5px 0; font-size:18px; color:#0A1F44; }
+.vehicle-info p { margin:4px 0; color:#333; font-size:14px; }
+
+/* Modal */
+.modal { display:none; position:fixed; z-index:1000; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); overflow-y:auto; }
+.modal-content { background:#fff; margin:30px auto; padding:20px; border-radius:12px; width:90%; max-width:1000px; text-align:center; position:relative; display:flex; flex-direction: column; }
+.close { position:absolute; right:15px; top:10px; font-size:28px; cursor:pointer; }
+
+.modal-body { display:flex; flex-direction: column; }
+@media(min-width:768px){ .modal-body { flex-direction: row; gap:20px; } }
+
+#modalMainImage { width:100%; max-height:450px; object-fit:cover; border-radius:10px; margin-bottom:15px; }
+
+.thumbnails { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:15px; }
+@media(min-width:768px){ .thumbnails { flex-direction: column; max-height:450px; overflow-y:auto; margin:0; } }
+
+.thumbnails img { width:110px; height:80px; object-fit:cover; border-radius:8px; cursor:pointer; transition: transform 0.2s; }
+.thumbnails img:hover, .thumbnails img.active { transform: scale(1.08); border:2px solid #00AEEF; }
+
+#modalSpecs { text-align:left; margin-top:10px; font-size:14px; }
+#modalSpecs p { margin:5px 0; }
+.reserve-btn { display:inline-block; margin-top:10px; padding:10px 20px; background:#25D366; color:#fff; border-radius:8px; text-decoration:none; }
+
+/* Pagination */
+.pagination { text-align:center; margin:30px 0; }
+.pagination button { padding:10px 16px; margin:5px; border:none; border-radius:6px; background:#0A1F44; color:#fff; cursor:pointer; }
+.pagination button:disabled { background:#ccc; cursor:default; }
+</style>
 </head>
 <body>
 
-  <h2>SUBARU MODELS</h2>
-  <div id="carGrid" class="vehicle-grid"></div>
+<h2>SUBARU MODELS</h2>
+<div id="carGrid" class="vehicle-grid"></div>
 
-  <!-- Pagination -->
-  <div class="pagination">
-    <button id="prevBtn" onclick="changePage(-1)">Prev</button>
-    <button id="nextBtn" onclick="changePage(1)">Next</button>
-  </div>
+<!-- Pagination -->
+<div class="pagination">
+  <button id="prevBtn" onclick="changePage(-1)">Prev</button>
+  <button id="nextBtn" onclick="changePage(1)">Next</button>
+</div>
 
-  <!-- Modal -->
-  <div id="carModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <img id="modalMainImage" src="" alt="Car" />
-      <div id="modalThumbnails" class="thumbnails"></div>
-      <div id="modalSpecs"></div>
+<!-- Modal -->
+<div id="carModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-body">
+      <div style="flex:1;">
+        <img id="modalMainImage" src="" alt="Car" />
+        <div id="modalThumbnails" class="thumbnails"></div>
+      </div>
+      <div id="modalSpecs" style="flex:1;"></div>
     </div>
   </div>
+</div>
 
 <script>
 const vehicles = [
+ {
+  name: "SUBARU IMPREZA GP3",
+  images: [
+    "https://i.imgur.com/PJYqzOz.jpeg",
+    "https://i.imgur.com/1fbwmtS.jpeg",
+    "https://i.imgur.com/j6yyPHg.jpeg",
+    "https://i.imgur.com/kBAxzc2.jpeg",
+    "https://i.imgur.com/YOkIbIs.jpeg",
+    "https://i.imgur.com/cZlamEQ.jpeg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 1.1M",
+  year: 2014,
+  transmission: "Automatic",
+  engine: "N/A",
+  mileage: "N/A",
+  color: "N/A",
+  body: "Sedan",
+  location: "Nairobi",
+  stockID: "SB-IMP14",
+  features: [
+    "Reverse Camera",
+    "Paddle Shifters",
+    "Xenon Lights",
+    "Very Clean"
+  ]
+},
   {
-    name: "Subaru Forester XT 2015",
+    name: "2019 Subaru Outback 2.5i-L",
     images: [
-      "https://i.ibb.co/sample-subaru1.jpg",
-      "https://i.ibb.co/sample-subaru2.jpg",
-      "https://i.ibb.co/sample-subaru3.jpg",
-      "https://i.ibb.co/sample-subaru4.jpg",
-      "https://i.ibb.co/sample-subaru5.jpg",
-      "https://i.ibb.co/sample-subaru6.jpg"
+      "https://i.imgur.com/abc456a.jpeg",
+      "https://i.imgur.com/abc456b.jpeg",
+      "https://i.imgur.com/abc456c.jpeg",
+      "https://i.imgur.com/abc456d.jpeg",
+      "https://i.imgur.com/abc456e.jpeg"
     ],
-    fuel: "Petrol Turbo",
-    price: "KSh 2.25M",
-    year: 2015,
-    transmission: "Automatic AWD",
-    engine: "2000cc Turbo",
-    mileage: "82,000 km",
-    color: "White Pearl",
-    features: ["AWD", "Sunroof", "Reverse Camera", "Alloy Rims", "X-Mode"]
+    fuel: "Petrol",
+    price: "KSh 4.2M",
+    year: 2019,
+    transmission: "Automatic",
+    engine: "2500cc",
+    mileage: "20,000 km",
+    color: "Ice Silver Metallic, Gray Interior",
+    body: "SUV",
+    location: "Nairobi",
+    stockID: "SB-OUT19",
+    features: [
+      "All-Wheel Drive",
+      "Rear Cross Traffic Alert",
+      "Heated Steering Wheel",
+      "Navigation System"
+    ]
   }
 ];
 
@@ -148,10 +185,15 @@ function openModal(car) {
   modal.style.display = "block";
   modalMainImage.src = car.images[0];
   modalThumbnails.innerHTML = "";
-  car.images.forEach(img => {
+  car.images.forEach((img, index) => {
     const thumb = document.createElement("img");
     thumb.src = img;
-    thumb.onclick = () => modalMainImage.src = img;
+    if(index === 0) thumb.classList.add("active");
+    thumb.onclick = () => {
+      modalMainImage.src = img;
+      document.querySelectorAll(".thumbnails img").forEach(t => t.classList.remove("active"));
+      thumb.classList.add("active");
+    };
     modalThumbnails.appendChild(thumb);
   });
   modalSpecs.innerHTML = `
@@ -162,12 +204,16 @@ function openModal(car) {
     <p><strong>Engine:</strong> ${car.engine}</p>
     <p><strong>Mileage:</strong> ${car.mileage}</p>
     <p><strong>Color:</strong> ${car.color}</p>
+    <p><strong>Body Type:</strong> ${car.body}</p>
+    <p><strong>Location:</strong> ${car.location}</p>
+    <p><strong>Stock ID:</strong> ${car.stockID}</p>
     <p><strong>Price:</strong> ${car.price}</p>
     <p><strong>Features:</strong> ${car.features.join(", ")}</p>
     <a href="https://wa.me/254723098206?text=I want to reserve ${encodeURIComponent(car.name)}"
        class="reserve-btn" target="_blank">Reserve via WhatsApp</a>
   `;
 }
+
 function closeModal() { modal.style.display = "none"; }
 
 renderCars();
