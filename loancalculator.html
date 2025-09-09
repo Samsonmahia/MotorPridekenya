@@ -1,29 +1,28 @@
-
 <!-- LOAN CALCULATOR -->
 <section id="loan" style="padding: 60px 20px; background-color: #f5faff;">
   <h2 style="text-align: center; color: #0a1f44; margin-bottom: 30px;">💰 Car Loan Calculator</h2>
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; max-width: 900px; margin: auto;">
-
+  
+  <div class="loan-container">
     <!-- Loan Form -->
-    <div style="flex: 1 1 360px;">
+    <div class="loan-form">
       <label>Vehicle Price (Ksh)</label>
-      <input type="number" id="loan-amount" placeholder="e.g. 1500000" style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc;">
+      <input type="number" id="loan-amount" placeholder="e.g. 1500000">
 
       <label>Down Payment (Ksh)</label>
-      <input type="number" id="down-payment" placeholder="e.g. 300000" style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc;">
+      <input type="number" id="down-payment" placeholder="e.g. 300000">
 
       <label>Loan Term (Months)</label>
-      <input type="number" id="loan-term" placeholder="e.g. 36" style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc;">
+      <input type="number" id="loan-term" placeholder="e.g. 36">
 
       <label>Interest Rate (%)</label>
-      <input type="number" id="interest-rate" placeholder="e.g. 13" step="0.1" style="width:100%; padding:10px; margin-bottom:20px; border-radius:6px; border:1px solid #ccc;">
+      <input type="number" id="interest-rate" placeholder="e.g. 13" step="0.1">
 
-      <button onclick="calculateLoan()" style="width: 100%; background-color: #00aeef; color: white; padding: 12px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold;">Calculate</button>
+      <button onclick="calculateLoan()">Calculate</button>
     </div>
 
     <!-- Loan Summary -->
-    <div style="flex: 1 1 360px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
-      <h3 style="margin-bottom: 20px;">📊 Loan Summary</h3>
+    <div class="loan-summary">
+      <h3>📊 Loan Summary</h3>
       <p><strong>Monthly Payment:</strong> <span id="monthly-payment">--</span></p>
       <p><strong>Total Interest:</strong> <span id="total-interest">--</span></p>
       <p><strong>Total Amount Payable:</strong> <span id="total-cost">--</span></p>
@@ -31,28 +30,74 @@
   </div>
 </section>
 
-<!-- Loan Calculator Script -->
-<script>
-  function calculateLoan() {
-    const loanAmount = parseFloat(document.getElementById("loan-amount").value) || 0;
-    const downPayment = parseFloat(document.getElementById("down-payment").value) || 0;
-    const months = parseFloat(document.getElementById("loan-term").value) || 1;
-    const interestRate = parseFloat(document.getElementById("interest-rate").value) || 0;
-
-    const principal = loanAmount - downPayment;
-    const monthlyRate = interestRate / 100 / 12;
-
-    let monthlyPayment = principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months));
-    let totalPayment = monthlyPayment * months;
-    let totalInterest = totalPayment - principal;
-
-    // Format numbers
-    monthlyPayment = isFinite(monthlyPayment) ? monthlyPayment.toFixed(2) : "--";
-    totalInterest = isFinite(totalInterest) ? totalInterest.toFixed(2) : "--";
-    totalPayment = isFinite(totalPayment) ? totalPayment.toFixed(2) : "--";
-
-    document.getElementById("monthly-payment").innerText = `Ksh ${monthlyPayment}`;
-    document.getElementById("total-interest").innerText = `Ksh ${totalInterest}`;
-    document.getElementById("total-cost").innerText = `Ksh ${totalPayment}`;
+<style>
+  .loan-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 900px;
+    margin: auto;
   }
-</script>
+
+  .loan-form, .loan-summary {
+    flex: 1 1 300px;
+    min-width: 280px;
+    box-sizing: border-box;
+  }
+
+  .loan-form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #0a1f44;
+  }
+
+  .loan-form input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }
+
+  .loan-form button {
+    width: 100%;
+    background-color: #00aeef;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .loan-form button:hover {
+    background-color: #008ec0;
+  }
+
+  .loan-summary {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .loan-summary h3 {
+    margin-bottom: 20px;
+    color: #0a1f44;
+  }
+
+  /* ✅ Mobile-friendly adjustments */
+  @media (max-width: 600px) {
+    .loan-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .loan-form input, 
+    .loan-form button {
+      font-size: 18px;  /* Larger tap-friendly text */
+      padding: 16px;
+    }
+  }
+</style>

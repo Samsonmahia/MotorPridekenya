@@ -188,45 +188,54 @@
     @media (max-width: 768px) {
       .overview-section {
         flex-direction: column;
-        padding: 20px 15px;
-        gap: 20px;
+        padding: 25px 18px;
+        gap: 22px;
       }
 
       .overview-text h2,
       .why-market h2 {
-        font-size: 20px !important;
+        font-size: 24px !important; /* bigger on phones */
         text-align: center;
       }
 
       .overview-text p {
-        font-size: 15px !important;
+        font-size: 17px !important; /* improved readability */
+        line-height: 1.8;
         text-align: left;
       }
 
       .overview-image img {
         width: 100%;
         height: auto;
-        margin-top: 10px;
+        margin-top: 12px;
+        border-radius: 12px;
       }
 
       .market-card {
-        font-size: 16px !important;
-        height: auto;
-        padding: 20px;
+        font-size: 18px !important; /* larger text */
+        padding: 25px;
         min-width: 100%;
+        border-radius: 18px;
+        height: auto;
       }
 
       .market-card:hover {
         transform: none;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
       }
 
       .back-home {
         position: static !important;
         display: block;
-        margin: 10px auto;
+        margin: 15px auto;
+        padding: 12px 22px; /* bigger touch area */
+        font-size: 16px;
         text-align: center;
         transform: none !important;
+      }
+
+      .contact-footer p {
+        font-size: 15px;
       }
     }
   </style>

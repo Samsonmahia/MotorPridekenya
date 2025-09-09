@@ -524,440 +524,324 @@
          style="max-width:100%; border-radius:10px; box-shadow:0 6px 12px rgba(0,0,0,0.2); transition:transform 0.4s ease;">
   </div>
 </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Journey - Motorpride Kenya</title>
+<style>
+  /* Reset */
+  * {margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
 
-<!-- Why Market With Us -->
-<div style="padding: 50px 20px; background:#fff;">
-  <h2 style="color:#0A1F44; text-align:center; margin-bottom: 35px; font-size:28px; font-weight:bold;">
-    Why Market With Us
-  </h2>
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
-    <div class="market-card">Trusted & Reliable</div>
-    <div class="market-card">Affordable Deals</div>
-    <div class="market-card">Wide Selection</div>
+  body {background: #F8F9FA; color: #0A3D62; scroll-behavior: smooth;}
+  a {text-decoration:none; color: inherit;}
+
+  /* Navbar */
+  nav {position: sticky; top:0; background:#fff; z-index:999; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+  nav ul {display:flex; justify-content:center; list-style:none; padding:15px;}
+  nav ul li {margin:0 20px;}
+  nav ul li a {font-weight:bold; transition:0.3s;}
+  nav ul li a:hover {color:#E63946;}
+
+  /* Hero Section */
+  .hero {position:relative; background:url('https://images.unsplash.com/photo-1608889176720-7b1f1d8f3e3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-4.0.3&q=80&w=1920') center/cover no-repeat; height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; color:#0A3D62;}
+  .hero h1 {font-size:3em; font-weight:bold; margin-bottom:20px;}
+  .hero p {font-size:1.5em; margin-bottom:30px;}
+  .hero button {padding:15px 30px; font-size:1.1em; font-weight:bold; border:none; background:#E63946; color:#fff; border-radius:8px; cursor:pointer; transition:0.3s;}
+  .hero button:hover {background:#d32f2f;}
+
+  /* Timeline Section */
+  .timeline {padding:80px 20px; max-width:1200px; margin:0 auto;}
+  .timeline h2 {text-align:center; font-size:2.5em; margin-bottom:50px; color:#0A3D62;}
+  .timeline-container {display:flex; flex-direction:column; gap:40px;}
+  @media(min-width:768px) { .timeline-container {flex-direction:row; justify-content:space-between;} }
+  .timeline-card {background:#fff; border:2px solid #B0B0B0; border-radius:12px; padding:20px; flex:1; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform 0.3s;}
+  .timeline-card:hover {transform:translateY(-5px);}
+  .timeline-card h3 {color:#0A3D62; margin-bottom:10px;}
+  .timeline-card p {color:#E63946; font-weight:bold;}
+
+  /* Achievements Section */
+  .achievements {background: linear-gradient(90deg, #0A3D62, #B0B0B0); padding:80px 20px; color:#FFB400; text-align:center;}
+  .achievements h2 {font-size:2.5em; margin-bottom:50px; color:#fff;}
+  .stats {display:flex; flex-wrap:wrap; justify-content:center; gap:40px;}
+  .stat {font-size:1.5em; font-weight:bold; background:rgba(255,255,255,0.1); padding:30px 20px; border-radius:12px; min-width:200px; transition:0.5s; opacity:0; transform:translateY(30px);}
+  .stat.visible {opacity:1; transform:translateY(0);}
+  .stat span {display:block; font-size:2em; margin-bottom:10px;}
+
+  /* Vision Section */
+  .vision {display:flex; flex-wrap:wrap; align-items:center; padding:80px 20px; max-width:1200px; margin:0 auto;}
+  .vision img {flex:1; border-radius:12px; max-width:100%; margin-bottom:20px;}
+  .vision-text {flex:1; padding:20px;}
+  .vision-text h2 {color:#0A3D62; font-size:2.5em; margin-bottom:20px;}
+  .vision-text p {color:#0A3D62; font-weight:bold; font-size:1.2em;}
+  .vision-text span {color:#E63946;}
+
+  /* Call to Action */
+  .cta {background:#0A3D62; color:#fff; padding:80px 20px; text-align:center;}
+  .cta h2 {font-size:2.5em; margin-bottom:30px;}
+  .cta button {padding:15px 30px; font-size:1.1em; font-weight:bold; margin:10px; border:none; border-radius:8px; cursor:pointer; transition:0.3s;}
+  .cta .red {background:#E63946; color:#fff;}
+  .cta .silver {background:#B0B0B0; color:#0A3D62;}
+  .cta button:hover {opacity:0.9;}
+
+  /* Contact Section */
+  .contact {background: linear-gradient(90deg, #0A3D62, #B0B0B0); padding:60px 20px; color:#fff;}
+  .contact h2 {text-align:center; font-size:2.5em; margin-bottom:40px;}
+  .contact-container {display:flex; flex-wrap:wrap; gap:40px; justify-content:center;}
+  .contact-card {background:rgba(255,255,255,0.1); padding:20px; border-radius:12px; flex:1; min-width:200px; text-align:center;}
+  .contact-card p {margin-top:10px;}
+  .contact form {max-width:500px; margin:40px auto 0; display:flex; flex-direction:column; gap:15px;}
+  .contact input, .contact textarea {padding:12px; border-radius:8px; border:none; outline:none;}
+  .contact button {padding:15px; border:none; border-radius:8px; background:#E63946; color:#fff; font-weight:bold; cursor:pointer; transition:0.3s;}
+  .contact button:hover {background:#d32f2f;}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <ul>
+    <li><a href="#hero">Introduction</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#vision">Vision</a></li>
+    <li><a href="#cta">Call to Action</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+  <h1>Our Journey at Motorpride Kenya 🚘</h1>
+  <p>From a dream to a trusted automotive partner in Kenya.</p>
+  <!-- Explore Section Button with Open Links -->
+<div style="text-align:center; margin:20px 0;">
+  <p style="font-size:18px; font-weight:bold; margin-bottom:10px;">Explore Our Story</p>
+  <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+    <button onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})" 
+            style="background:#00aeef; color:#fff; padding:12px 20px; border:none; border-radius:6px; font-size:16px; cursor:pointer;">
+      Featured Vehicles
+    </button>
+    <button onclick="document.getElementById('available-units').scrollIntoView({behavior:'smooth'})" 
+            style="background:#0A1F44; color:#fff; padding:12px 20px; border:none; border-radius:6px; font-size:16px; cursor:pointer;">
+      Available Units
+    </button>
   </div>
 </div>
 
-<style>
-  .market-card {
-    flex: 1;
-    min-width: 280px;   /* larger min size */
-    height: 220px;      /* taller box */
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background: linear-gradient(135deg, #0A1F44, #00AEEF);
-    color:white;
-    font-weight:bold;
-    font-size:22px;     /* larger font */
-    text-align:center;
-    border-radius:20px;
-    box-shadow:0 6px 12px rgba(0,0,0,0.25);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .market-card:hover {
-    transform: translateY(-12px) scale(1.08);
-    box-shadow:0 10px 20px rgba(0,0,0,0.35);
-  }
-</style>
-
-
-
-  <!-- CSS for animation -->
-  <style>
-    .market-card {
-      flex: 1;
-      min-width: 220px;
-      height: 150px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background: linear-gradient(135deg, #0A1F44, #00AEEF);
-      color:white;
-      font-weight:bold;
-      font-size:18px;
-      text-align:center;
-      border-radius:15px;
-      box-shadow:0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .market-card:hover {
-      transform: translateY(-10px) scale(1.05);
-      box-shadow:0 8px 16px rgba(0,0,0,0.3);
-    }
-    #who-we-are img:hover {
-      transform:scale(1.05);
-    }
-  </style>
-  
 </section>
 
-<section id="our-journey" style="font-family: Arial, sans-serif; margin:0; padding:0;">
-
-  <!-- Heading Bar -->
-  <div style="background: linear-gradient(90deg, #0A1F44, #00AEEF); color: white; padding: 20px; text-align: center; font-weight: bold; font-size: 28px; letter-spacing:1px;">
-    OUR JOURNEY
-  </div><!-- Our History (Timeline Roadmap) -->
-<div style="padding: 60px 20px; background: #f9f9f9;">
-  <h2 style="color:#0A1F44; text-align:center; margin-bottom: 50px; font-size:28px; font-weight:bold;">
-    Our History
-  </h2>
-
-  <div class="timeline">
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <h3>2015</h3>
-        <p>MotorPride Kenya is founded with a vision to simplify car ownership and make vehicles accessible to all Kenyans.</p>
-      </div>
+<!-- Timeline Section -->
+<section class="timeline" id="timeline">
+  <h2>Our Milestones</h2>
+  <div class="timeline-container">
+    <div class="timeline-card">
+      <h3>2018</h3>
+      <p>Motorpride idea was born.</p>
     </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <h3>2018</h3>
-        <p>Expansion into digital marketing and flexible financing solutions to reach wider audiences.</p>
-      </div>
+    <div class="timeline-card">
+      <h3>2019</h3>
+      <p>First office opened in Ngorika.</p>
     </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <h3>2022</h3>
-        <p>Launched the MotorPride website with modern tools, online reservations, and loan calculators.</p>
-      </div>
+    <div class="timeline-card">
+      <h3>2020</h3>
+      <p>Introduced loan calculator & digital presence.</p>
     </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <h3>2025</h3>
-        <p>MotorPride Kenya becomes a leader in car sales, car hire, and safari packages with unmatched customer support.</p>
-      </div>
+    <div class="timeline-card">
+      <h3>2022</h3>
+      <p>Expanded to more regions.</p>
     </div>
+    <div class="timeline-card">
+      <h3>2025</h3>
+      <p>Partnering with dealerships nationwide.</p>
+    </div>
+  </div>
+</section>
 
+<!-- Achievements Section -->
+<section class="achievements" id="achievements">
+  <h2>Achievements & Growth</h2>
+  <div class="stats">
+    <div class="stat"><span></span>500+ Cars Sold</div>
+    <div class="stat"><span></span>1000+ Happy Clients</div>
+    <div class="stat"><span></span>Serving Across Kenya</div>
+    <div class="stat"><span></span>5+ Years of Excellence</div>
+  </div>
+</section>
+
+<!-- Vision Section -->
+<section class="vision" id="vision">
+  <img src="https://i.postimg.cc/mk01DP9B/Whats-App-Image-2025-09-09-at-1-49-20-PM.jpg" alt="Vision Cars">
+  <div class="vision-text">
+    <h2>Our Vision & Future</h2>
+    <p>We aim to <span>redefine car ownership</span> in Kenya by making vehicles more <span>affordable, accessible, and reliable</span> for everyone.</p>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta" id="cta">
+  <h2>Be part of our journey. Explore vehicles, financing, and partnerships today.</h2>
+  <!-- Explore Section Button with Open Links -->
+<div style="text-align:center; margin:20px 0;">
+  <p style="font-size:18px; font-weight:bold; margin-bottom:10px;">Explore Our Story</p>
+  <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+    <button onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})" 
+            style="background:#00aeef; color:#fff; padding:12px 20px; border:none; border-radius:6px; font-size:16px; cursor:pointer;">
+      Featured Vehicles
+    </button>
+    <button onclick="document.getElementById('available-units').scrollIntoView({behavior:'smooth'})" 
+            style="background:#0A1F44; color:#fff; padding:12px 20px; border:none; border-radius:6px; font-size:16px; cursor:pointer;">
+      Available Units
+    </button>
   </div>
 </div>
 
-<!-- Transformation & Trust Journey -->
-<div style="padding: 60px 20px; background: #fff;">
-  <h2 style="color:#0A1F44; text-align:center; margin-bottom: 50px; font-size:28px; font-weight:bold;">
-    Transformation & Trust Journey
-  </h2>
+  <button class="silver">Contact Us</button>
+</section>
 
-  <div class="journey">
-    <div class="journey-step">
-      <div class="icon">🔑</div>
-      <h3>Transparency</h3>
-      <p>Clear pricing, verified units, and honest communication.</p>
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <h2>Get In Touch With Us 🚘</h2>
+  <div class="contact-container">
+    <div class="contact-card">
+      <h3>📞 Phone</h3>
+      <p>0723 098 206</p>
     </div>
-    <div class="journey-step">
-      <div class="icon">⚙️</div>
-      <h3>Innovation</h3>
-      <p>Digital tools, loan calculators, and online reservations.</p>
+    <div class="contact-card">
+      <h3> Email</h3>
+      <p>info@motorpride.co.ke</p>
     </div>
-    <div class="journey-step">
-      <div class="icon">🤝</div>
-      <h3>Trust</h3>
-      <p>Dedicated customer support and long-term relationships.</p>
+    <div class="contact-card">
+      <h3> Location</h3>
+      <p>Ngorika, Kiambu Road, Kenya</p>
     </div>
-    <div class="journey-step">
-      <div class="icon">🚀</div>
-      <h3>Transformation</h3>
-      <p>Empowering Kenyans with reliable cars, safaris, and hire services.</p>
+    <div class="contact-card">
+      <h3> Social</h3>
+      <p>Facebook | Instagram | Twitter</p>
     </div>
   </div>
-</div>
+
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+</section>
+
+<script>
+  // Animate stats on scroll
+  const stats = document.querySelectorAll('.stat');
+  window.addEventListener('scroll', () => {
+    stats.forEach(stat => {
+      const rect = stat.getBoundingClientRect();
+      if(rect.top < window.innerHeight - 50) {
+        stat.classList.add('visible');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
+<section id="about-us" style="font-family: Arial, sans-serif; margin:0; padding:0;">
+
+  <!-- Header Bar -->
+  <div style="background: linear-gradient(90deg, #0A1F44, #00AEEF); color: white; padding: 20px; font-weight: bold; font-size: 28px; text-align: center; position: relative;">
+    <a href="index.html" style="background: #ff4d4d; color: #fff; font-weight: bold; padding: 8px 16px; border-radius: 6px; text-decoration: none; position: absolute; left: 20px; top: 50%; transform: translateY(-50%);">Back to Home</a>
+    OUR STORY & SERVICES
+  </div>
+
+  <!-- Mission, Vision, Core Values -->
+  <div style="padding:50px 20px; background:#f5f7fa; text-align:center;">
+    <h2 style="color:#0A1F44; font-size:28px; margin-bottom:35px;">Our Mission, Vision & Values</h2>
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
+      <div class="about-card">
+        <div class="icon">🎯</div>
+        <h3>Mission</h3>
+        <p>Provide trusted, affordable, and reliable automotive solutions that empower our clients.</p>
+      </div>
+      <div class="about-card">
+        <div class="icon">👁️</div>
+        <h3>Vision</h3>
+        <p>Become Kenya's leading car dealership, known for innovation, integrity, and customer satisfaction.</p>
+      </div>
+      <div class="about-card">
+        <div class="icon">💡</div>
+        <h3>Core Values</h3>
+        <p>Integrity, Reliability, Customer Focus, Innovation, and Excellence in everything we do.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Our Services -->
+  <div style="padding:50px 20px; background:#fff; text-align:center;">
+    <h2 style="color:#0A1F44; font-size:28px; margin-bottom:35px;">What We Do</h2>
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
+      <div class="service-card">🚗 <h3>Car Sales</h3><p>Affordable, reliable vehicles to suit every budget and lifestyle.</p></div>
+      <div class="service-card">📦 <h3>Car Hire</h3><p>Flexible rentals for leisure, business trips, safaris, and events.</p></div>
+      <div class="service-card">💳 <h3>Financing</h3><p>Flexible loans and payment plans that make ownership simple.</p></div>
+      <div class="service-card">🛠️ <h3>After-Sales</h3><p>Reliable maintenance and support to keep your car running smoothly.</p></div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="padding:50px 20px; background:#f5f7fa; text-align:center;">
+    <h2 style="color:#0A1F44; font-size:28px; margin-bottom:35px;">Frequently Asked Questions</h2>
+    <div style="max-width:700px; margin:auto; text-align:left;">
+      <details style="margin-bottom:15px; padding:12px; border-radius:8px; background:#fff; border:1px solid #ddd;">
+        <summary><strong>How can I reserve a car?</strong></summary>
+        <p>Click the WhatsApp reserve button under your desired car and our team will assist you.</p>
+      </details>
+      <details style="margin-bottom:15px; padding:12px; border-radius:8px; background:#fff; border:1px solid #ddd;">
+        <summary><strong>Do you offer financing?</strong></summary>
+        <p>Yes, we provide flexible financing and loan options tailored to your needs.</p>
+      </details>
+      <details style="margin-bottom:15px; padding:12px; border-radius:8px; background:#fff; border:1px solid #ddd;">
+        <summary><strong>Where are you located?</strong></summary>
+        <p>Along Kiambu Road, Nairobi, Kenya.</p>
+      </details>
+    </div>
+  </div>
+
+  <!-- Contact & WhatsApp CTA -->
+  <div style="padding:50px 20px; background:#fff; text-align:center;">
+    <h2 style="color:#0A1F44; font-size:28px; margin-bottom:25px;">Get In Touch</h2>
+    <p>📍 Kiambu Road, Nairobi | 📞 0723098206 | ✉️ kibesamson8@gmail.com</p>
+    <a href="https://wa.me/254723098206" class="whatsapp-button" target="_blank" title="Chat with Samson">
+      <img src="https://i.ibb.co/67h5sYnF/Whats-App-Image-2025-06-09-at-8-59-12-PM-1.jpg" alt="Samson Profile" class="profile-pic">
+      <div class="wa-label">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon" class="wa-icon">
+        <span>Chat with Samson</span>
+      </div>
+    </a>
+  </div>
+
+</section>
 
 <style>
-/* Journey container */
-.journey {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-  max-width: 1000px;
-  margin: auto;
-}
-
-/* Step cards */
-.journey-step {
-  background: #f9f9f9;
-  padding: 25px;
-  border-radius: 14px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+.about-card, .service-card {
+  background:#fff;
+  padding:25px;
+  width:250px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.journey-step:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-}
-
-/* Icons */
-.journey-step .icon {
-  font-size: 32px;
-  margin-bottom: 12px;
-}
-
-/* Titles */
-.journey-step h3 {
-  color: #0A1F44;
-  font-size: 18px;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-/* Text */
-.journey-step p {
-  color: #555;
-  font-size: 14px;
-  line-height: 1.6;
-}
+.about-card .icon { font-size:36px; margin-bottom:10px; }
+.about-card:hover, .service-card:hover { transform: translateY(-6px); box-shadow:0 12px 20px rgba(0,0,0,0.15); }
+.service-card { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:10px; background: linear-gradient(135deg, #0A1F44, #00AEEF); color:#fff;}
+.service-card:hover { background: linear-gradient(135deg,#39FF14,#00AEEF);}
+.whatsapp-button { display:inline-flex; align-items:center; gap:10px; padding:12px 20px; background:#25D366; color:#fff; border-radius:50px; text-decoration:none; font-weight:600; transition:all 0.3s ease;}
+.whatsapp-button:hover { background:#1ebe57; transform:translateY(-3px);}
+.profile-pic { width:40px; height:40px; border-radius:50%; border:2px solid #fff; object-fit:cover;}
+.wa-label { display:flex; align-items:center; gap:6px;}
+.wa-icon { width:20px; height:20px;}
+@media(max-width:768px){ .about-card, .service-card { width:90%; margin:auto; } }
 </style>
 
-<!-- Management Section -->
-<div style="padding: 60px 20px; background:#fff;">
-  <h2 style="color:#0A1F44; text-align:center; margin-bottom: 50px; font-size:28px; font-weight:700; letter-spacing:1px;">
-    Management Team
-  </h2>
 
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 35px;">
-
-    <!-- Team Card -->
-    <div class="team-card">
-      <img src="https://i.ibb.co/BHmq43cc/Whats-App-Image-2025-09-03-at-7-02-31-PM.jpg" alt="Board Member">
-      <h3>Samuel Kiarie</h3>
-      <p>Managing Director</p>
-    </div>
-
-    <div class="team-card">
-      <img src="https://i.ibb.co/9mtm95xJ/Whats-App-Image-2025-09-03-at-7-02-52-PM.jpg" alt="Board Member">
-      <h3>Elizabeth Mahia</h3>
-      <p>Senior Board Member</p>
-    </div>
-
-    <div class="team-card">
-      <img src="https://i.ibb.co/C4JfL58/Whats-App-Image-2025-09-03-at-7-02-30-PM.jpg" alt="Salesperson">
-      <h3>Wajiku Emelda</h3>
-      <p>Sales Executive</p>
-    </div>
-
-    <div class="team-card">
-      <img src="https://i.ibb.co/Jjpg9gdQ/Whats-App-Image-2025-09-03-at-7-03-14-PM.jpg" alt="Salesperson">
-      <h3>Kipruto Collins</h3>
-      <p>Sales Executive</p>
-    </div>
-
-    <div class="team-card">
-      <img src="https://i.ibb.co/67mDLts3/Whats-App-Image-2025-06-09-at-8-59-12-PM-1.jpg" alt="Salesperson">
-      <h3>Mahia Sam</h3>
-      <p>Sales Executive</p>
-    </div>
-
-  </div>
-</div>
-
-<style>
-.team-card {
-  background: #f9f9f9;
-  padding: 20px;
-  width: 250px;
-  text-align: center;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: all 0.4s ease;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.team-card img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 15px;
-  transition: transform 0.4s ease;
-}
-
-.team-card h3 {
-  margin: 10px 0 5px;
-  color: #0A1F44;
-  font-size: 18px;
-  font-weight: 700;
-  transition: color 0.3s ease;
-}
-
-.team-card p {
-  color: #555;
-  font-size: 14px;
-  transition: color 0.3s ease;
-}
-
-/* Hover Effects */
-.team-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-  background: #00AEEF;
-  color: #fff;
-}
-
-.team-card:hover img {
-  transform: scale(1.1);
-}
-
-.team-card:hover h3,
-.team-card:hover p {
-  color: #fff;
-}
-</style>
-
-  <!-- CSS -->
-  <style>
-    /* Timeline */
-    .timeline {
-      position: relative;
-      max-width: 900px;
-      margin: auto;
-    }
-    .timeline::after {
-      content: '';
-      position: absolute;
-      width: 4px;
-      background: #00AEEF;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      margin-left: -2px;
-    }
-    .timeline-item {
-      padding: 20px;
-      position: relative;
-      width: 50%;
-    }
-    .timeline-item:nth-child(odd) { left: 0; }
-    .timeline-item:nth-child(even) { left: 50%; }
-    .timeline-dot {
-      position: absolute;
-      top: 20px;
-      left: calc(50% - 10px);
-      width: 20px;
-      height: 20px;
-      background: #0A1F44;
-      border: 3px solid #00AEEF;
-      border-radius: 50%;
-      z-index: 1;
-    }
-    .timeline-content {
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow:0 4px 8px rgba(0,0,0,0.2);
-    }
-    .timeline-content h3 {
-      margin-top: 0;
-      color:#0A1F44;
-    }
-
-    /* Team Cards */
-    .team-card {
-      width: 250px;
-      text-align: center;
-      background: #f9f9f9;
-      border-radius: 12px;
-      box-shadow:0 4px 8px rgba(0,0,0,0.2);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .team-card img {
-      width: 100%;
-      height: auto;
-    }
-    .team-card h3 {
-      margin: 10px 0 5px;
-      color:#0A1F44;
-    }
-    .team-card p {
-      margin: 0 0 15px;
-      color:#00AEEF;
-      font-weight:bold;
-    }
-    .team-card:hover {
-      transform: translateY(-8px);
-      box-shadow:0 8px 16px rgba(0,0,0,0.3);
-    }
-    @media (max-width: 768px) {
-      .timeline-item { width: 100%; left: 0 !important; }
-      .timeline::after { left: 20px; }
-      .timeline-dot { left: 10px; }
-    }
-  </style>
-</section>
-<!-- Mission, Vision & Core Values -->
-<div style="padding: 60px 20px; background:#f5f7fa;">
-  <h2 style="color:#0A1F44; text-align:center; margin-bottom: 50px; font-size:28px; font-weight:700;">
-    Our Mission, Vision & Core Values
-  </h2>
-
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 35px;">
-    <div class="about-card">
-      <div class="icon">🎯</div>
-      <h3>Our Mission</h3>
-      <p>To provide trusted, affordable, and reliable automotive solutions that empower our clients to achieve their dreams with pride and confidence.</p>
-    </div>
-    <div class="about-card">
-      <div class="icon">👁️</div>
-      <h3>Our Vision</h3>
-      <p>To be the leading car dealership in Kenya, setting the standard for innovation, integrity, and customer satisfaction.</p>
-    </div>
-    <div class="about-card">
-      <div class="icon">💡</div>
-      <h3>Our Core Values</h3>
-      <p>Integrity, Reliability, Customer Focus, Innovation, and Excellence in all our services and relationships.</p>
-    </div>
-  </div>
-</div>
-
-<!-- FAQs -->
-<div style="padding:60px 20px; background:#fff;">
-  <h2 style="text-align:center; color:#0A1F44; margin-bottom:40px; font-size:28px;">Frequently Asked Questions</h2>
-  <div style="max-width:800px; margin:auto;">
-    <details style="margin-bottom:15px; padding:15px; border:1px solid #ddd; border-radius:10px; background:#f9f9f9;">
-      <summary><b>How can I reserve a car?</b></summary>
-      <p>Simply click on the WhatsApp reserve button under your desired car and our team will guide you.</p>
-    </details>
-    <details style="margin-bottom:15px; padding:15px; border:1px solid #ddd; border-radius:10px; background:#f9f9f9;">
-      <summary><b>Do you offer financing?</b></summary>
-      <p>Yes, we provide flexible financing and loan options tailored to your needs.</p>
-    </details>
-    <details style="margin-bottom:15px; padding:15px; border:1px solid #ddd; border-radius:10px; background:#f9f9f9;">
-      <summary><b>Where are you located?</b></summary>
-      <p>We are based along Kiambu Road, Nairobi, Kenya.</p>
-    </details>
-  </div>
-</div>
-
-<!-- Our Services (Square Cards) -->
-<div style="padding:60px 20px; background:#f9f9f9;">
-  <h2 style="text-align:center; color:#0A1F44; margin-bottom:40px; font-size:28px;">Our Services</h2>
-  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px;">
-    <div class="service-card">🚗 <h3>Car Sales</h3><p>Affordable, reliable vehicles tailored to every budget and preference.</p></div>
-    <div class="service-card">📦 <h3>Car Hire</h3><p>Flexible car hire for business, leisure, safaris, and special events.</p></div>
-    <div class="service-card">💳 <h3>Financing</h3><p>Flexible payment and loan plans designed to suit your needs.</p></div>
-    <div class="service-card">🛠️ <h3>After-Sales</h3><p>Reliable maintenance and support to keep your vehicle running smoothly.</p></div>
-  </div>
-</div>
-
-<!-- Why Choose Us (Progress Bars) -->
-<div style="padding:60px 20px; background:#fff;">
-  <h2 style="text-align:center; color:#0A1F44; margin-bottom:40px; font-size:28px;">Why Choose Us</h2>
-  <div style="max-width:800px; margin:auto;">
-    <div class="bar"><p>Customer Satisfaction <span>100%</span></p><div class="progress"><div class="progress-fill" style="--percent:95%;"></div></div></div>
-    <div class="bar"><p>Vehicle Quality <span>100%</span></p><div class="progress"><div class="progress-fill" style="--percent:90%;"></div></div></div>
-    <div class="bar"><p>After-Sales Service <span>85%</span></p><div class="progress"><div class="progress-fill" style="--percent:85%;"></div></div></div>
-    <div class="bar"><p>Market Experience <span>100%</span></p><div class="progress"><div class="progress-fill" style="--percent:100%;"></div></div></div>
-  </div>
-</div>
 <!-- Featured Vehicles Section -->
 <section id="featured">
   <h2 class="section-title">Featured Vehicles</h2>
@@ -1617,7 +1501,7 @@
       <p><strong>Drivetrain:</strong> ${car.drivetrain}</p>
     `;
 
-    notifyBtn.href = `https://wa.me/254723098206?text=Hi%20MotorPride%2C%20please%20notify%20me%20when%20${encodedName}%20is%20available`;
+    notifyBtn.href = `https://wa.me/254724804354?text=Hi%20MotorPride%2C%20please%20notify%20me%20when%20${encodedName}%20is%20available`;
     reserveBtn.href = reserveLink;
   }
 
@@ -1631,28 +1515,36 @@
     }
   });
 </script>
+<!-- WhatsApp Button -->
+<a href="https://wa.me/254724804354?text=Hello%20MotorPride%20Kenya%2C%20I%20am%20interested%20in%20this%20car." 
+   target="_blank"
+   style="display:inline-flex; align-items:center; gap:10px;
+          background: linear-gradient(45deg, #25D366, #128C7E);
+          color: white; font-size:18px; font-weight:bold;
+          padding:14px 22px; border-radius:50px; 
+          text-decoration:none; box-shadow:0 4px 12px rgba(0,0,0,0.2);
+          transition: all 0.3s ease;">
+   <img src="https://i.ibb.co/MyztSZgH/Whats-App-Image-2025-07-12-at-11-09-15-AM-Copy.jpg" 
+        alt="WhatsApp" style="width:22px; height:22px;">
+   Chat on WhatsApp
+</a>
 
-<!-- Contact Section -->
-<div style="padding:60px 20px; background:#f5f7fa;">
-  <h2 style="text-align:center; color:#0A1F44; margin-bottom:40px; font-size:28px;">Get In Touch</h2>
-  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:40px; align-items:center;">
-    <div style="flex:1; min-width:280px; color:#0A1F44;">
-      <p><strong> Location:</strong> Kiambu Road, Nairobi, Kenya</p>
-      <p><strong> Phone:</strong> 0723098206</p>
-      <p><strong>Email:</strong> kibesamson8@gmail.com</p>
-      <p><strong> WhatsApp:</strong> +254 723 098 206</p>
-    </div>
+<!-- Mobile Fixes -->
+<style>
+  @media (max-width:768px) {
+    a.whatsapp-btn {
+      font-size:20px !important;
+      padding:16px 24px !important;
+      width:100% !important;
+      justify-content:center !important;
+    }
+  }
+  a.whatsapp-btn:hover {
+    transform: scale(1.05);
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+  }
+</style>
 
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/254723098206" class="whatsapp-button" target="_blank" title="Chat with Samson">
-      <img src="https://i.ibb.co/67h5sYnF/Whats-App-Image-2025-06-09-at-8-59-12-PM-1.jpg" alt="Samson Profile" class="profile-pic" />
-      <div class="wa-label">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon" class="wa-icon" />
-        <span>Chat with Samson</span>
-      </div>
-    </a>
-  </div>
-</div>
 
 <!-- Styles for WhatsApp Button -->
 <style>
