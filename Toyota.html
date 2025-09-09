@@ -1,157 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toyota Models | MotorPride Kenya</title>
-  <style>
-    body { font-family: Arial, sans-serif; background:#f5f7fa; margin:0; padding:0; }
-    h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
-    .vehicle-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .vehicle-card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .vehicle-card:hover { transform: translateY(-6px); }
-    .vehicle-card img {
-      width: 100%; height: 200px; object-fit: cover;
-    }
-    .vehicle-info { padding: 15px; text-align: center; }
-    .vehicle-info h3 { margin: 5px 0; font-size:18px; color:#0A1F44; }
-    .vehicle-info p { margin: 4px 0; color:#333; font-size:14px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toyota Models | MotorPride Kenya</title>
+<style>
+/* GENERAL STYLES */
+body { font-family: Arial, sans-serif; background:#f5f7fa; margin:0; padding:0; }
+h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
 
-    /* Modal */
-    .modal { display:none; position:fixed; z-index:1000; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); }
-    .modal-content {
-      background:#fff; margin:3% auto; padding:20px; border-radius:12px;
-      width:90%; max-width:1000px; text-align:center; position:relative;
-    }
-    .close { position:absolute; right:15px; top:10px; font-size:28px; cursor:pointer; }
-    #modalMainImage { width:100%; max-height:450px; object-fit:cover; border-radius:10px; margin-bottom:15px; }
-    .thumbnails { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-    .thumbnails img {
-      width:110px; height:80px; object-fit:cover; border-radius:8px;
-      cursor:pointer; transition: transform 0.2s;
-    }
-    .thumbnails img:hover { transform: scale(1.08); }
-    #modalSpecs { text-align:left; margin-top:15px; }
-    #modalSpecs p { margin:5px 0; }
-    .reserve-btn {
-      display:inline-block; margin-top:15px; padding:10px 20px;
-      background:#25D366; color:#fff; border-radius:8px; text-decoration:none;
-    }
+/* VEHICLE GRID */
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 per row on desktop */
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+.vehicle-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.vehicle-card:hover { transform: translateY(-6px); }
+.vehicle-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.vehicle-info { padding: 15px; text-align: center; }
+.vehicle-info h3 { margin: 5px 0; font-size:18px; color:#0A1F44; }
+.vehicle-info p { margin: 4px 0; color:#333; font-size:14px; }
 
-    /* Pagination */
-    .pagination { text-align:center; margin:30px 0; }
-    .pagination button {
-      padding:10px 16px; margin:5px; border:none; border-radius:6px;
-      background:#0A1F44; color:#fff; cursor:pointer;
-    }
-    .pagination button:disabled { background:#ccc; cursor:default; }
-  </style>
+/* MODAL */
+.modal {
+  display:none; position:fixed; z-index:1000; top:0; left:0;
+  width:100%; height:100%; background:rgba(0,0,0,0.7);
+}
+.modal-content {
+  background:#fff; margin:3% auto; padding:20px; border-radius:12px;
+  width:90%; max-width:1000px; display:grid; grid-template-columns: 2fr 1fr; gap:20px;
+  position:relative;
+}
+.close { position:absolute; right:15px; top:10px; font-size:28px; cursor:pointer; }
+
+/* IMAGE GALLERY */
+.image-gallery { display:flex; gap:15px; }
+#modalMainImage { width:100%; object-fit:cover; border-radius:10px; margin-bottom:15px; }
+.thumbnails {
+  display:flex; flex-direction:column; gap:10px; max-height:400px; overflow-y:auto;
+}
+.thumbnails img {
+  width:80px; height:60px; object-fit:cover; border-radius:8px;
+  cursor:pointer; transition: transform 0.2s;
+}
+.thumbnails img.active { border:2px solid #00AEEF; }
+.thumbnails img:hover { transform: scale(1.08); }
+
+/* VEHICLE DETAILS */
+#modalSpecs {
+  display:grid; grid-template-columns:1fr; text-align:left; gap:6px; margin-top:0;
+}
+#modalSpecs p { margin:5px 0; }
+.reserve-btn {
+  display:inline-block; margin-top:15px; padding:10px 20px;
+  background:#25D366; color:#fff; border-radius:8px; text-decoration:none;
+}
+
+/* PAGINATION */
+.pagination { text-align:center; margin:30px 0; }
+.pagination button {
+  padding:10px 16px; margin:5px; border:none; border-radius:6px;
+  background:#0A1F44; color:#fff; cursor:pointer;
+}
+.pagination button:disabled { background:#ccc; cursor:default; }
+
+/* RESPONSIVE STYLES */
+
+/* Tablets and mobile: stack modal gallery, thumbnails below */
+@media(max-width:1024px){
+  .modal-content { grid-template-columns:1fr; }
+  .image-gallery { flex-direction: column; gap:15px; }
+  .thumbnails { flex-direction:row; max-height:none; overflow-x:auto; justify-content:center; }
+  .thumbnails img { width:90px; height:70px; }
+}
+
+/* Mobile: vehicle grid 1 per row, smaller fonts, thumbnails slightly smaller */
+@media(max-width:768px){
+  .vehicle-grid { grid-template-columns:1fr; }
+  h2 { font-size:24px; }
+  .vehicle-info h3 { font-size:16px; }
+  .vehicle-info p { font-size:13px; }
+  .thumbnails img { width:80px; height:60px; }
+}
+</style>
+
 </head>
 <body>
 
-  <h2>TOYOTA MODELS</h2>
-  <div id="carGrid" class="vehicle-grid"></div>
+<h2>TOYOTA MODELS</h2>
+<div id="carGrid" class="vehicle-grid"></div>
 
-  <!-- Pagination -->
-  <div class="pagination">
-    <button id="prevBtn" onclick="changePage(-1)">Prev</button>
-    <button id="nextBtn" onclick="changePage(1)">Next</button>
-  </div>
+<!-- Pagination -->
+<div class="pagination">
+  <button id="prevBtn" onclick="changePage(-1)">Prev</button>
+  <button id="nextBtn" onclick="changePage(1)">Next</button>
+</div>
 
-  <!-- Modal -->
-  <div id="carModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <img id="modalMainImage" src="" alt="Car" />
-      <div id="modalThumbnails" class="thumbnails"></div>
-      <div id="modalSpecs"></div>
+<!-- Modal -->
+<div id="carModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="image-gallery">
+      <div class="primary-image">
+        <img id="modalMainImage" src="" alt="Car Image" loading="lazy">
+      </div>
+      <div class="thumbnails" id="modalThumbnails"></div>
     </div>
+    <div id="modalSpecs"></div>
   </div>
+</div>
 
 <script>
 const vehicles = [
+ {
+  name: "2011 Nissan Dualis",
+  images: [
+    "https://i.imgur.com/QO9PXL5.jpeg",
+    "https://i.imgur.com/dESDhFL.jpeg",
+    "https://i.imgur.com/rundqIa.jpeg",
+    "https://i.imgur.com/jm96fls.jpeg",
+    "https://i.imgur.com/scmAMy8.jpeg",
+    "https://i.imgur.com/kBClZST.jpeg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 1.03M",
+  year: 2011,
+  transmission: "Automatic",
+  engine: "2000cc",
+  mileage: "N/A",
+  color: "Black Exterior, Dark fabric upholstery",
+  body: "SUV",
+  location: "N/A",
+  stockID: "ND-11",
+  features: [
+    "Moonroof",
+    "Foldable side mirrors",
+    "FM/DVD/Bluetooth touchscreen player",
+    "Alloy rims",
+    "Foglights"
+  ]
+},
+
   {
-    name: "TOYOTA HARRIER GS 2016 MODEL",
-    images: [
-      "https://i.ibb.co/MyBjkds3/Whats-App-Image-2025-06-27-at-7-04-30-PM.jpg",
-      "https://i.ibb.co/8DNGtkKY/Whats-App-Image-2025-06-27-at-7-04-29-PM-1.jpg",
-      "https://i.ibb.co/Q7Zw3qcp/Whats-App-Image-2025-06-27-at-7-04-29-PM.jpg",
-      "https://i.ibb.co/Jw6hkbS8/Whats-App-Image-2025-06-27-at-7-04-28-PM.jpg"
-    ],
-    fuel: "Hybrid",
-    price: "KSh 1.55M",
-    year: 2016,
-    transmission: "Automatic",
-    engine: "2000cc",
-    mileage: "65,000 km",
-    color: "original paint",
-    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
-  },
+  name: "2009 Toyota Ractis",
+  images: [
+    "https://i.imgur.com/wx2Qt16.jpeg",
+    "https://i.imgur.com/FFF6tLC.jpeg",
+    "https://i.imgur.com/UVxKA7g.jpeg",
+    "https://i.imgur.com/UAxsKPy.jpeg",
+    "https://i.imgur.com/ET5ML0N.jpeg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 680K",
+  year: 2009,
+  transmission: "Automatic",
+  engine: "1300cc",
+  mileage: "N/A",
+  color: "White Exterior, Gray Fabric Interior",
+  body: "Hatchback",
+  location: "N/A",
+  stockID: "TR-09",
+  features: [
+    "Alloy Rims",
+    "New Tyres",
+    "One owner since import",
+    "Accident Free"
+  ]
+},
+
   {
-    name: "Nissan Note 2014 MODEL",
+    name: "TOYOTA COROLLA 2015 MODEL",
     images: [
-      "https://i.ibb.co/8W7SBp4/Whats-App-Image-2025-06-23-at-2-34-22-PM.jpg",
-      "https://i.ibb.co/7JCKywhs/Whats-App-Image-2025-06-23-at-2-34-23-PM.jpg",
-      "https://i.ibb.co/RpcZ4syB/Whats-App-Image-2025-06-23-at-2-34-22-PM-1.jpg"
+      "https://i.ibb.co/3vVwLP4/corolla-1.jpg",
+      "https://i.ibb.co/3vVwLP4/corolla-2.jpg"
     ],
-    fuel: "Hybrid",
-    price: "KSh 750K",
-    year: 2014,
-    transmission: "Automatic",
-    engine: "1200cc",
-    mileage: "65,000 km",
-    color: "original gray",
-    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
-  },
-  {
-    name: "HONDA FIT HYBRID",
-    images: [
-      "https://i.ibb.co/vfyNZcw/Whats-App-Image-2025-07-16-at-7-34-52-PM.jpg",
-      "https://i.ibb.co/cXkN5Zm8/Whats-App-Image-2025-07-16-at-7-34-51-PM.jpg",
-      "https://i.ibb.co/v6QBzg96/Whats-App-Image-2025-07-16-at-7-34-53-PM-1.jpg",
-      "https://i.ibb.co/VYFYYB7B/Whats-App-Image-2025-07-16-at-7-34-53-PM.jpg"
-    ],
-    fuel: "Petrol",
-    price: "KSh 1.15M",
-    year: 2012,
-    transmission: "Automatic",
-    engine: "1500cc",
-    mileage: "72,000 km",
-    color: "Pearl White",
-    features: ["Reverse Camera", "Eco Mode", "ABS Brakes", "Keyless Start"]
+    fuel:"Petrol", price:"KSh 1.2M", year:2015, transmission:"Automatic",
+    engine:"1500cc", mileage:"78,000 km", color:"Silver", body:"Sedan",
+    location:"Mombasa", stockID:"TP-C15",
+    features:["Reverse Camera","Bluetooth","Alloy Rims"]
   }
+  // Add more cars here
 ];
 
 let currentPage = 1;
-const carsPerPage = 13;
+const carsPerPage = 6; // adjust per page
 
 function renderCars() {
   const carGrid = document.getElementById("carGrid");
   carGrid.innerHTML = "";
-  const start = (currentPage - 1) * carsPerPage;
-  const end = start + carsPerPage;
-  const paginated = vehicles.slice(start, end);
+  const start = (currentPage-1)*carsPerPage;
+  const end = start+carsPerPage;
+  const paginated = vehicles.slice(start,end);
 
   paginated.forEach(car => {
     const card = document.createElement("div");
-    card.className = "vehicle-card";
+    card.className="vehicle-card";
     card.onclick = () => openModal(car);
     card.innerHTML = `
-      <img src="${car.images[0]}" alt="${car.name}">
+      <img src="${car.images[0]}" alt="${car.name}" loading="lazy">
       <div class="vehicle-info">
         <h3>${car.name}</h3>
         <p><strong>Year:</strong> ${car.year}</p>
@@ -161,45 +222,56 @@ function renderCars() {
     carGrid.appendChild(card);
   });
 
-  document.getElementById("prevBtn").disabled = currentPage === 1;
-  document.getElementById("nextBtn").disabled = end >= vehicles.length;
+  document.getElementById("prevBtn").disabled = currentPage===1;
+  document.getElementById("nextBtn").disabled = end>=vehicles.length;
 }
 
-function changePage(direction) {
-  currentPage += direction;
-  renderCars();
-}
+function changePage(dir) { currentPage+=dir; renderCars(); }
 
-const modal = document.getElementById("carModal");
-const modalMainImage = document.getElementById("modalMainImage");
-const modalThumbnails = document.getElementById("modalThumbnails");
-const modalSpecs = document.getElementById("modalSpecs");
+// Modal
+const modal=document.getElementById("carModal");
+const modalMainImage=document.getElementById("modalMainImage");
+const modalThumbnails=document.getElementById("modalThumbnails");
+const modalSpecs=document.getElementById("modalSpecs");
 
-function openModal(car) {
-  modal.style.display = "block";
-  modalMainImage.src = car.images[0];
-  modalThumbnails.innerHTML = "";
-  car.images.forEach(img => {
-    const thumb = document.createElement("img");
-    thumb.src = img;
-    thumb.onclick = () => modalMainImage.src = img;
+function openModal(car){
+  modal.style.display="block";
+  modalMainImage.src=car.images[0];
+  modalMainImage.alt=car.name;
+
+  modalThumbnails.innerHTML="";
+  car.images.forEach((img,idx)=>{
+    const thumb=document.createElement("img");
+    thumb.src=img;
+    thumb.alt=car.name+" thumbnail "+(idx+1);
+    thumb.loading="lazy";
+    if(idx===0) thumb.classList.add("active");
+    thumb.onclick = ()=>{
+      modalMainImage.src=img;
+      document.querySelectorAll(".thumbnails img").forEach(t=>t.classList.remove("active"));
+      thumb.classList.add("active");
+    };
     modalThumbnails.appendChild(thumb);
   });
+
   modalSpecs.innerHTML = `
-    <h3>${car.name}</h3>
-    <p><strong>Fuel:</strong> ${car.fuel}</p>
-    <p><strong>Year:</strong> ${car.year}</p>
-    <p><strong>Transmission:</strong> ${car.transmission}</p>
-    <p><strong>Engine:</strong> ${car.engine}</p>
-    <p><strong>Mileage:</strong> ${car.mileage}</p>
-    <p><strong>Color:</strong> ${car.color}</p>
     <p><strong>Price:</strong> ${car.price}</p>
+    <p><strong>Make & Model:</strong> ${car.name}</p>
+    <p><strong>Year:</strong> ${car.year}</p>
+    <p><strong>Mileage:</strong> ${car.mileage}</p>
+    <p><strong>Transmission:</strong> ${car.transmission}</p>
+    <p><strong>Fuel:</strong> ${car.fuel}</p>
+    <p><strong>Body Type:</strong> ${car.body}</p>
+    <p><strong>Color:</strong> ${car.color}</p>
+    <p><strong>Location:</strong> ${car.location}</p>
+    <p><strong>Stock ID:</strong> ${car.stockID}</p>
     <p><strong>Features:</strong> ${car.features.join(", ")}</p>
     <a href="https://wa.me/254723098206?text=I want to reserve ${encodeURIComponent(car.name)}"
        class="reserve-btn" target="_blank">Reserve via WhatsApp</a>
   `;
 }
-function closeModal() { modal.style.display = "none"; }
+
+function closeModal(){ modal.style.display="none"; }
 
 renderCars();
 </script>
