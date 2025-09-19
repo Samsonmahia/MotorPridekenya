@@ -272,13 +272,10 @@
   <div class="nav-container">
 
     <!-- About Us Dropdown -->
-    <!-- About Us Dropdown -->
 <div class="dropdown">
   <a href="../aboutus.html">About Us</a>
   <div class="dropdown-content">
-    <a href="who_we_are.html">Who We Are</a>
-    <a href="our_services.html">What We Do</a>
-    <a href="our_journey.html">Our Journey</a>
+  
   </div>
 </div>
 
@@ -287,14 +284,15 @@
     <!-- Other Navigation Links -->
     <a href="../customerresponse.html">Customer Response</a>
     <a href="smart-match.html">Smart Match</a>
+<!-- Units in Stock -->
+<div class="dropdown">
+  <a href="#">Units in Stock</a>
+  <div class="dropdown-content">
+    <a href="../featuredcars.html">Featured Cars</a>
+    <a href="../used-cars.html">Used Cars</a>
+  </div>
+</div>
 
-    <!-- Featured Vehicles Dropdown -->
-    <div class="dropdown">
-      <a href="../featuredcars.html">Featured Vehicles</a>
-      <div class="dropdown-content">
-        <a href="../Availableunits.html">Available Units</a>
-      </div>
-    </div>
 
 
     <div class="dropdown">
@@ -341,125 +339,49 @@
     <img src="https://i.ibb.co/21SN32fL/468464115-18349988311134218-3734221331980260134-n.jpg" alt="Car 2">
     <img src="https://i.ibb.co/Nd9yyZss/Whats-App-Image-2025-06-12-at-8-37-43-AM.jpg" alt="Car 3">
   </div>
+  <!-- Carousel -->
+<section class="carousel">
+  <!-- your carousel code here -->
+</section>
 
-  <!-- Car Search Bar -->
-  <style>
-    .search-bar {
-      background: linear-gradient(90deg, #00aeef, #0a1f44);
-      padding: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 0;
-    }
+<!-- Browse Cars Button (below carousel) -->
+<div class="browse-cars-btn">
+  <a href="ALLCARS.HTML" class="cta-button">Browse Cars</a>
+</div>
 
-    .search-bar select,
-    .search-bar button {
-      padding: 10px;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      min-width: 140px;
-    }
+<style>
+  .browse-cars-btn {
+    text-align: center;
+    margin: 30px 0 50px; /* space from carousel */
+  }
 
-    .search-bar button {
-      background-color: var(--electric-blue);
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+  .cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #00AEEF, #39FF14); /* Electric Blue → Neon Green */
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-    .search-bar button:hover {
-      background-color: #007bbd;
-    }
-  </style>
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 174, 239, 0.5);
+  }
+</style>
 
-  <div class="search-bar">
-    <select>
-      <option selected disabled>Model</option>
-      <option>CX-5</option>
-      <option>Note</option>
-      <option>Harrier</option>
-      <option>Outback</option>
-      <option>C-Class</option>
-      <option>X-Trail</option>
-      <option>Demio</option>
-      <option>Axela</option>
-      <option>Vitz</option>
-      <option>Fit</option>
-      <option>Premio</option>
-      <option>Fielder</option>
-      <option>Probox</option>
-      <option>Hiace</option>
-      <option>Noah</option>
-      <option>Voxy</option>
-      <option>Alphard</option>
-      <option>Land Cruiser</option>
-      <option>Forester</option>
-      <option>Legacy</option>
-      <option>Impreza</option>
-      <option>Passo</option>
-      <option>Wish</option>
-      <option>Allion</option>
-      <option>Advan</option>
-      <option>March</option>
-      <option>Skyline</option>
-    </select>
+  
 
-    <select>
-      <option selected disabled>Model</option>
-      <option>TOYOTA</option>
-      <option>NISSAN</option>
-      <option>MAZDA</option>
-      <option>HONDA</option>
-      <option>SUBARU</option>
-      <option>MISTUBISHI</option>
-    </select>
-
-    <select id="year-dropdown">
-      <option selected disabled>Year</option>
-    </select>
-
-    <select>
-      <option selected disabled>Fuel Type</option>
-      <option>Petrol</option>
-      <option>Diesel</option>
-      <option>Hybrid</option>
-      <option>Electric</option>
-    </select>
-
-    <select>
-      <option selected disabled>Transmission</option>
-      <option>Automatic</option>
-      <option>Manual</option>
-    </select>
-
-    <button type="button">Search</button>
-  </div>
-
-  <script>
-    // Populate year dropdown
-    const yearDropdown = document.getElementById("year-dropdown");
-    for (let y = 2003; y <= 2025; y++) {
-      const option = document.createElement("option");
-      option.value = y;
-      option.textContent = y;
-      yearDropdown.appendChild(option);
-    }
-  </script>
+  
   <!-- WhatsApp Button -->
   <a href="https://wa.me/254700000000" class="whatsapp-button" target="_blank" title="Chat on WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 MotorPride Kenya. All rights reserved.</p>
-  </footer>
-
-  <!-- JavaScript for Carousel and Menu -->
+  <!-- JavaScript for Carousel and Menu --> 
   <script>
     // Carousel functionality
     let index = 0;
@@ -486,362 +408,499 @@
       });
     });
   </script>
-  <section id="who-we-are" style="font-family: Arial, sans-serif; margin:0; padding:0;">
-  <!-- Heading Bar -->
-  <div style="background: linear-gradient(90deg, #0A1F44, #00AEEF); color: white; padding: 20px; text-align: center; font-weight: bold; font-size: 28px; letter-spacing:1px;">
-    WHO WE ARE
-  </div>
-<!-- Company Overview -->
-<div style="display: flex; flex-wrap: wrap; align-items: center; padding: 40px 20px; gap: 25px; background:#f9f9f9;">
-  <div style="flex: 1; min-width: 300px;">
-    <h2 style="color:#0A1F44; font-size:24px; margin-bottom:10px; position:relative; display:inline-block;">
-      Company Overview
-      <span style="display:block; width:50px; height:3px; background:#00AEEF; margin-top:5px; border-radius:2px;"></span>
-    </h2>
-    <p style="line-height: 1.9; color:#444; text-align:justify; font-size:16px;">
-      Choosing <b style="color:#0A1F44;">MotorPride Kenya</b> as your marketing partner means working with a team that truly 
-      understands the <span style="color:#00AEEF; font-weight:bold;">dynamics of the motor industry</span> and the 
-      <span style="color:#39FF14; font-weight:bold;">Kenyan market at large</span>.  
-      With a proven track record of connecting brands to the right audiences, MotorPride Kenya combines 
-      <b style="color:#0A1F44;">creativity</b>, <b style="color:#00AEEF;">market intelligence</b>, and 
-      <b style="color:#39FF14;">digital innovation</b> to ensure your products and services stand out in a competitive space.
-    </p>
-    <p style="line-height: 1.9; color:#444; text-align:justify; font-size:16px; margin-top:15px;">
-      Our customer-focused approach guarantees tailored strategies that align with your unique business goals—whether it is 
-      <span style="color:#0A1F44; font-weight:bold;">boosting visibility</span>, 
-      <span style="color:#00AEEF; font-weight:bold;">driving sales</span>, or 
-      <span style="color:#39FF14; font-weight:bold;">strengthening brand loyalty</span>.  
-      By leveraging our deep networks, modern marketing tools, and unwavering commitment to excellence, 
-      MotorPride Kenya offers you not just a service provider but a <b style="color:#0A1F44;">reliable partner</b> 
-      dedicated to accelerating your growth and ensuring <span style="color:#00AEEF; font-weight:bold;">long-term success</span> 
-      in the ever-evolving automotive industry.
-    </p>
-  </div>
-
-  <div style="flex: 1; min-width: 300px; text-align: center;">
-    <!-- Replace with your own image -->
-    <img src="https://i.ibb.co/QFY6wnt0/492700026-1193653429437734-7091386706403698009-n.jpg" alt="Company Overview" 
-         style="max-width:100%; border-radius:10px; box-shadow:0 6px 12px rgba(0,0,0,0.2); transition:transform 0.4s ease;">
-  </div>
-</div>
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Journey - Motorpride Kenya</title>
-<style>
-  /* Reset */
-  * {margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Motorpride Kenya</title>
+  <style>
+    /* === Base Styles === */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f4f8;
+      color: #333;
+    }
+    section {
+      padding: 3rem 1.5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
 
-  body {background: #F8F9FA; color: #0A3D62; scroll-behavior: smooth;}
-  a {text-decoration:none; color: inherit;}
+    /* === Hero Section === */
+    .about-hero {
+      background: linear-gradient(to right, #0052cc, #007fff);
+      color: white;
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+    .animated-title {
+      font-size: 3rem;
+      font-weight: bold;
+      animation: fadeInZoom 1.5s ease-out forwards;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    @keyframes fadeInZoom {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
 
-  /* Navbar */
-  nav {position: sticky; top:0; background:#fff; z-index:999; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-  nav ul {display:flex; justify-content:center; list-style:none; padding:15px;}
-  nav ul li {margin:0 20px;}
-  nav ul li a {font-weight:bold; transition:0.3s;}
-  nav ul li a:hover {color:#E63946;}
+    /* === Story Section === */
+    .about-story {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+    }
+    .story-text {
+      flex: 1;
+    }
+    .story-image {
+      flex: 1;
+      text-align: center;
+    }
+    .story-image img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
 
-  /* Hero Section */
-  .hero {position:relative; background:url('https://images.unsplash.com/photo-1608889176720-7b1f1d8f3e3b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-4.0.3&q=80&w=1920') center/cover no-repeat; height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; color:#0A3D62;}
-  .hero h1 {font-size:3em; font-weight:bold; margin-bottom:20px;}
-  .hero p {font-size:1.5em; margin-bottom:30px;}
-  .hero button {padding:15px 30px; font-size:1.1em; font-weight:bold; border:none; background:#E63946; color:#fff; border-radius:8px; cursor:pointer; transition:0.3s;}
-  .hero button:hover {background:#d32f2f;}
+    /* === Services Section === */
+    .services {
+      background: #fff;
+    }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .service-card {
+      background: #007fff;
+      color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, background 0.3s ease;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    .service-card:hover {
+      transform: scale(1.05);
+      background: #0052cc;
+    }
+    .service-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.6s ease-out;
+    }
 
-  /* Timeline Section */
-  .timeline {padding:80px 20px; max-width:1200px; margin:0 auto;}
-  .timeline h2 {text-align:center; font-size:2.5em; margin-bottom:50px; color:#0A3D62;}
-  .timeline-container {display:flex; flex-direction:column; gap:40px;}
-  @media(min-width:768px) { .timeline-container {flex-direction:row; justify-content:space-between;} }
-  .timeline-card {background:#fff; border:2px solid #B0B0B0; border-radius:12px; padding:20px; flex:1; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform 0.3s;}
-  .timeline-card:hover {transform:translateY(-5px);}
-  .timeline-card h3 {color:#0A3D62; margin-bottom:10px;}
-  .timeline-card p {color:#E63946; font-weight:bold;}
+    /* === Why Us Section === */
+    .why-us ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 2rem;
+    }
+    .why-us li {
+      background: #e6f0ff;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      border-left: 5px solid #007fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
 
-  /* Achievements Section */
-  .achievements {background: linear-gradient(90deg, #0A3D62, #B0B0B0); padding:80px 20px; color:#FFB400; text-align:center;}
-  .achievements h2 {font-size:2.5em; margin-bottom:50px; color:#fff;}
-  .stats {display:flex; flex-wrap:wrap; justify-content:center; gap:40px;}
-  .stat {font-size:1.5em; font-weight:bold; background:rgba(255,255,255,0.1); padding:30px 20px; border-radius:12px; min-width:200px; transition:0.5s; opacity:0; transform:translateY(30px);}
-  .stat.visible {opacity:1; transform:translateY(0);}
-  .stat span {display:block; font-size:2em; margin-bottom:10px;}
+    /* === CTA Section === */
+    .cta {
+      background: #0052cc;
+      color: white;
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+    .cta-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: white;
+      color: #0052cc;
+      font-weight: bold;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .cta-button:hover {
+      background: #cce0ff;
+    }
 
-  /* Vision Section */
-  .vision {display:flex; flex-wrap:wrap; align-items:center; padding:80px 20px; max-width:1200px; margin:0 auto;}
-  .vision img {flex:1; border-radius:12px; max-width:100%; margin-bottom:20px;}
-  .vision-text {flex:1; padding:20px;}
-  .vision-text h2 {color:#0A3D62; font-size:2.5em; margin-bottom:20px;}
-  .vision-text p {color:#0A3D62; font-weight:bold; font-size:1.2em;}
-  .vision-text span {color:#E63946;}
-
-  /* Call to Action */
-  .cta {background:#0A3D62; color:#fff; padding:80px 20px; text-align:center;}
-  .cta h2 {font-size:2.5em; margin-bottom:30px;}
-  .cta button {padding:15px 30px; font-size:1.1em; font-weight:bold; margin:10px; border:none; border-radius:8px; cursor:pointer; transition:0.3s;}
-  .cta .red {background:#E63946; color:#fff;}
-  .cta .silver {background:#B0B0B0; color:#0A3D62;}
-  .cta button:hover {opacity:0.9;}
-
-  /* Contact Section */
-  .contact {background: linear-gradient(90deg, #0A3D62, #B0B0B0); padding:60px 20px; color:#fff;}
-  .contact h2 {text-align:center; font-size:2.5em; margin-bottom:40px;}
-  .contact-container {display:flex; flex-wrap:wrap; gap:40px; justify-content:center;}
-  .contact-card {background:rgba(255,255,255,0.1); padding:20px; border-radius:12px; flex:1; min-width:200px; text-align:center;}
-  .contact-card p {margin-top:10px;}
-  .contact form {max-width:500px; margin:40px auto 0; display:flex; flex-direction:column; gap:15px;}
-  .contact input, .contact textarea {padding:12px; border-radius:8px; border:none; outline:none;}
-  .contact button {padding:15px; border:none; border-radius:8px; background:#E63946; color:#fff; font-weight:bold; cursor:pointer; transition:0.3s;}
-  .contact button:hover {background:#d32f2f;}
-</style>
+    @media (max-width: 768px) {
+      .about-story {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav>
-  <ul>
-    <li><a href="#hero">Introduction</a></li>
-    <li><a href="#timeline">Timeline</a></li>
-    <li><a href="#achievements">Achievements</a></li>
-    <li><a href="#vision">Vision</a></li>
-    <li><a href="#cta">Call to Action</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- Hero Section -->
-<section class="hero" id="hero">
-  <h1>Our Journey at Motorpride Kenya 🚘</h1>
-  <p>From a dream to a trusted automotive partner in Kenya.</p>
-  <!-- Explore Section Button with Open Links -->
-<div style="text-align:center; margin:20px 0;">
-  <p style="font-size:18px; font-weight:bold; margin-bottom:10px;">Explore Our Story</p>
-  <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
-    <button onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})" 
-            style="background:#00aeef; color:#fff; padding:12px 20px; border:none; border-radius:6px; font-size:16px; cursor:pointer;">
-      Featured Vehicles
-    </button>
-    <button onclick="document.getElementById('available-units').scrollIntoView({behavior:'smooth'})" 
-            style="background:#0A1F44; color:#fff; padding:12px 20px; border:none; border-radius:6px; font-size:16px; cursor:pointer;">
-      Available Units
-    </button>
-  </div>
-</div>
-
+  <!-- Hero Section -->
+<section class="about-hero">
+  <h1 class="animated-title">Welcome to Motorpride Kenya</h1>
+  <p class="subtitle">Where Kenyan roads meet global standards.</p>
 </section>
+<style>
+/* Push hero section down */
+.about-hero {
+  margin-top: 120px; /* Adjust based on your carousel height */
+  padding: 4rem 1.5rem;
+  background: linear-gradient(to right, #0052cc, #007fff);
+  color: white;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
 
-<!-- Timeline Section -->
-<section class="timeline" id="timeline">
-  <h2>Our Milestones</h2>
-  <div class="timeline-container">
-    <div class="timeline-card">
-      <h3>2018</h3>
-      <p>Motorpride idea was born.</p>
-    </div>
-    <div class="timeline-card">
-      <h3>2019</h3>
-      <p>First office opened in Ngorika.</p>
-    </div>
-    <div class="timeline-card">
-      <h3>2020</h3>
-      <p>Introduced loan calculator & digital presence.</p>
-    </div>
-    <div class="timeline-card">
-      <h3>2022</h3>
-      <p>Expanded to more regions.</p>
-    </div>
-    <div class="timeline-card">
-      <h3>2025</h3>
-      <p>Partnering with dealerships nationwide.</p>
-    </div>
+/* Enhanced animated title */
+.animated-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-family: 'Poppins', sans-serif;
+  animation: fadeSlideUp 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+/* Subtitle styling */
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-top: 0.5rem;
+  font-family: 'Open Sans', sans-serif;
+  animation: fadeSlideUp 1.8s ease-out forwards;
+  opacity: 0;
+}
+
+/* Keyframes for smooth entrance */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+</style>
+<section class="about-story">
+  <div class="story-text">
+    <h2 class="gradient-heading">Who We Are</h2>
+    <p class="fade-in-text">
+      Motorpride Kenya began as a dream to redefine how Kenyans buy, sell, and experience vehicles.
+      From humble beginnings in Kisumu, we’ve grown into a trusted digital dealership platform—blending
+      local identity with global innovation. Our mission? To empower every Kenyan with access to
+      reliable, stylish, and affordable vehicles, backed by transparency and tech.
+    </p>
   </div>
-</section>
-
-<!-- Achievements Section -->
-<section class="achievements" id="achievements">
-  <h2>Achievements & Growth</h2>
-  <div class="stats">
-    <div class="stat"><span></span>500+ Cars Sold</div>
-    <div class="stat"><span></span>1000+ Happy Clients</div>
-    <div class="stat"><span></span>Serving Across Kenya</div>
-    <div class="stat"><span></span>5+ Years of Excellence</div>
+  <div class="story-image">
+    <img src="https://i.postimg.cc/mk01DP9B/Whats-App-Image-2025-09-09-at-1-49-20-PM.jpg" alt="Car Image">
   </div>
-</section>
-
-<!-- Vision Section -->
-<section class="vision" id="vision">
-  <img src="https://i.postimg.cc/mk01DP9B/Whats-App-Image-2025-09-09-at-1-49-20-PM.jpg" alt="Vision Cars">
-  <div class="vision-text">
-    <h2>Our Vision & Future</h2>
-    <p>We aim to <span>redefine car ownership</span> in Kenya by making vehicles more <span>affordable, accessible, and reliable</span> for everyone.</p>
-  </div>
-</section>
-
-<!-- Call to Action -->
-<section class="cta" id="cta">
-  <h2>Be part of our journey. Explore vehicles, financing, and partnerships today.</h2>
-  <!-- Explore Section Button with Open Links -->
-<div style="text-align:center; margin:20px 0;">
-  <p style="font-size:18px; font-weight:bold; margin-bottom:10px;">Explore Our Story</p>
-  <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
-    <button onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})" 
-            style="background:#00aeef; color:#fff; padding:12px 20px; border:none; border-radius:6px; font-size:16px; cursor:pointer;">
-      Featured Vehicles
-    </button>
-    <button onclick="document.getElementById('available-units').scrollIntoView({behavior:'smooth'})" 
-            style="background:#0A1F44; color:#fff; padding:12px 20px; border:none; border-radius:6px; font-size:16px; cursor:pointer;">
-      Available Units
-    </button>
-  </div>
-</div>
-
-  <button class="silver">Contact Us</button>
-</section>
-
-<!-- Contact Section -->
-<section class="contact" id="contact">
-  <h2>Get In Touch With Us 🚘</h2>
-  <div class="contact-container">
-    <div class="contact-card">
-      <h3>📞 Phone</h3>
-      <p>0723 098 206</p>
-    </div>
-    <div class="contact-card">
-      <h3> Email</h3>
-      <p>info@motorpride.co.ke</p>
-    </div>
-    <div class="contact-card">
-      <h3> Location</h3>
-      <p>Ngorika, Kiambu Road, Kenya</p>
-    </div>
-    <div class="contact-card">
-      <h3> Social</h3>
-      <p>Facebook | Instagram | Twitter</p>
-    </div>
-  </div>
-
-  <form>
-    <input type="text" placeholder="Your Name" required>
-    <input type="email" placeholder="Your Email" required>
-    <textarea rows="5" placeholder="Your Message" required></textarea>
-    <button type="submit">Submit</button>
-  </form>
-</section>
-
-<script>
-  // Animate stats on scroll
-  const stats = document.querySelectorAll('.stat');
-  window.addEventListener('scroll', () => {
-    stats.forEach(stat => {
-      const rect = stat.getBoundingClientRect();
-      if(rect.top < window.innerHeight - 50) {
-        stat.classList.add('visible');
-      }
-    });
-  });
-</script>
-
-</body>
-</html>
-<section id="about-us" style="font-family: Arial, sans-serif; margin:0; padding:0;">
-
-  <!-- Header Bar -->
-  <div style="background: linear-gradient(90deg, #0A1F44, #00AEEF); color: white; padding: 20px; font-weight: bold; font-size: 28px; text-align: center; position: relative;">
-    <a href="index.html" style="background: #ff4d4d; color: #fff; font-weight: bold; padding: 8px 16px; border-radius: 6px; text-decoration: none; position: absolute; left: 20px; top: 50%; transform: translateY(-50%);">Back to Home</a>
-    OUR STORY & SERVICES
-  </div>
-
-  <!-- Mission, Vision, Core Values -->
-  <div style="padding:50px 20px; background:#f5f7fa; text-align:center;">
-    <h2 style="color:#0A1F44; font-size:28px; margin-bottom:35px;">Our Mission, Vision & Values</h2>
-    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
-      <div class="about-card">
-        <div class="icon">🎯</div>
-        <h3>Mission</h3>
-        <p>Provide trusted, affordable, and reliable automotive solutions that empower our clients.</p>
-      </div>
-      <div class="about-card">
-        <div class="icon">👁️</div>
-        <h3>Vision</h3>
-        <p>Become Kenya's leading car dealership, known for innovation, integrity, and customer satisfaction.</p>
-      </div>
-      <div class="about-card">
-        <div class="icon">💡</div>
-        <h3>Core Values</h3>
-        <p>Integrity, Reliability, Customer Focus, Innovation, and Excellence in everything we do.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Our Services -->
-  <div style="padding:50px 20px; background:#fff; text-align:center;">
-    <h2 style="color:#0A1F44; font-size:28px; margin-bottom:35px;">What We Do</h2>
-    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
-      <div class="service-card">🚗 <h3>Car Sales</h3><p>Affordable, reliable vehicles to suit every budget and lifestyle.</p></div>
-      <div class="service-card">📦 <h3>Car Hire</h3><p>Flexible rentals for leisure, business trips, safaris, and events.</p></div>
-      <div class="service-card">💳 <h3>Financing</h3><p>Flexible loans and payment plans that make ownership simple.</p></div>
-      <div class="service-card">🛠️ <h3>After-Sales</h3><p>Reliable maintenance and support to keep your car running smoothly.</p></div>
-    </div>
-  </div>
-
-  <!-- FAQ -->
-  <div style="padding:50px 20px; background:#f5f7fa; text-align:center;">
-    <h2 style="color:#0A1F44; font-size:28px; margin-bottom:35px;">Frequently Asked Questions</h2>
-    <div style="max-width:700px; margin:auto; text-align:left;">
-      <details style="margin-bottom:15px; padding:12px; border-radius:8px; background:#fff; border:1px solid #ddd;">
-        <summary><strong>How can I reserve a car?</strong></summary>
-        <p>Click the WhatsApp reserve button under your desired car and our team will assist you.</p>
-      </details>
-      <details style="margin-bottom:15px; padding:12px; border-radius:8px; background:#fff; border:1px solid #ddd;">
-        <summary><strong>Do you offer financing?</strong></summary>
-        <p>Yes, we provide flexible financing and loan options tailored to your needs.</p>
-      </details>
-      <details style="margin-bottom:15px; padding:12px; border-radius:8px; background:#fff; border:1px solid #ddd;">
-        <summary><strong>Where are you located?</strong></summary>
-        <p>Along Kiambu Road, Nairobi, Kenya.</p>
-      </details>
-    </div>
-  </div>
-
-  <!-- Contact & WhatsApp CTA -->
-  <div style="padding:50px 20px; background:#fff; text-align:center;">
-    <h2 style="color:#0A1F44; font-size:28px; margin-bottom:25px;">Get In Touch</h2>
-    <p>📍 Kiambu Road, Nairobi | 📞 0723098206 | ✉️ kibesamson8@gmail.com</p>
-    <a href="https://wa.me/254723098206" class="whatsapp-button" target="_blank" title="Chat with Samson">
-      <img src="https://i.ibb.co/67h5sYnF/Whats-App-Image-2025-06-09-at-8-59-12-PM-1.jpg" alt="Samson Profile" class="profile-pic">
-      <div class="wa-label">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon" class="wa-icon">
-        <span>Chat with Samson</span>
-      </div>
-    </a>
-  </div>
-
 </section>
 
 <style>
-.about-card, .service-card {
-  background:#fff;
-  padding:25px;
-  width:250px;
-  border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  .about-story {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 2rem;
+    margin: 3rem auto;
+    max-width: 1200px;
+  }
+
+  .story-text {
+    flex: 1;
+    animation: fadeInLeft 1.2s ease-out forwards;
+    opacity: 0;
+  }
+
+  .story-image {
+    flex: 1;
+    text-align: center;
+    animation: fadeInRight 1.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  .story-image img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  }
+
+  .gradient-heading {
+    font-size: 2.8rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #0052cc, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    animation: slideFadeIn 1s ease-out forwards;
+    opacity: 0;
+  }
+
+  .fade-in-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-family: 'Open Sans', sans-serif;
+    animation: fadeInUp 1.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes slideFadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInLeft {
+    0% { opacity: 0; transform: translateX(-40px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes fadeInRight {
+    0% { opacity: 0; transform: translateX(40px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+
+  @media (max-width: 768px) {
+    .about-story {
+      flex-direction: column;
+    }
+    .gradient-heading {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+
+  <!-- Our Services -->
+  <section class="services">
+    <h2>Our Services</h2>
+    <div class="service-grid">
+      <div class="service-card">🚘 Buy a Car</div>
+      <div class="service-card">🔁 Sell Your Vehicle</div>
+      <div class="service-card">💳 Financing Options</div>
+      <div class="service-card">🛠️ After-Sale Support</div>
+    </div>
+  </section>
+<!-- Why Choose Us -->
+<section class="why-us">
+  <h2>Why Choose Us</h2>
+
+  <div class="reasons">
+    <li>🇰🇪 Proudly Kenyan, globally inspired</li>
+    <li>🔧 Verified listings and trusted dealers</li>
+    <li>📱 Mobile-first design for easy access</li>
+    <li>💬 Real-time support and guidance</li>
+    <li>📊 Transparent pricing and financing</li>
+  </div>
+
+  <div class="road">
+    <div class="lane"></div>
+  </div>
+</section>
+
+<style>
+.why-us {
+  text-align: center;
+  padding: 60px 20px;
+  background: #0A1F44; /* Midnight blue */
+  color: white;
+  position: relative;
 }
-.about-card .icon { font-size:36px; margin-bottom:10px; }
-.about-card:hover, .service-card:hover { transform: translateY(-6px); box-shadow:0 12px 20px rgba(0,0,0,0.15); }
-.service-card { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:10px; background: linear-gradient(135deg, #0A1F44, #00AEEF); color:#fff;}
-.service-card:hover { background: linear-gradient(135deg,#39FF14,#00AEEF);}
-.whatsapp-button { display:inline-flex; align-items:center; gap:10px; padding:12px 20px; background:#25D366; color:#fff; border-radius:50px; text-decoration:none; font-weight:600; transition:all 0.3s ease;}
-.whatsapp-button:hover { background:#1ebe57; transform:translateY(-3px);}
-.profile-pic { width:40px; height:40px; border-radius:50%; border:2px solid #fff; object-fit:cover;}
-.wa-label { display:flex; align-items:center; gap:6px;}
-.wa-icon { width:20px; height:20px;}
-@media(max-width:768px){ .about-card, .service-card { width:90%; margin:auto; } }
+
+.why-us h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5); /* Pink/Purple gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(255,110,196,0.6);
+}
+
+/* Road signs area */
+.reasons {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  list-style: none;
+  padding: 0;
+}
+
+.reasons li {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 12px;
+  text-align: center;
+  background: linear-gradient(135deg, #ff6ec4, #ff9a9e); /* Pink gradient */
+  color: #fff;
+  border: 3px solid #fff;
+  box-shadow: 0 0 12px rgba(255,110,196,0.8), 0 0 25px rgba(255,154,158,0.6);
+  margin: 10px;
+  min-width: 180px;
+  opacity: 0;
+  animation: popIn 1s ease forwards;
+}
+
+.reasons li:nth-child(1) { animation-delay: 0.3s; }
+.reasons li:nth-child(2) { animation-delay: 0.6s; }
+.reasons li:nth-child(3) { animation-delay: 0.9s; }
+.reasons li:nth-child(4) { animation-delay: 1.2s; }
+.reasons li:nth-child(5) { animation-delay: 1.5s; }
+
+@keyframes popIn {
+  0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Tarmac road */
+.road {
+  position: relative;
+  margin: 0 auto;
+  width: 90%;
+  background: #222;
+  height: 120px;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: inset 0 0 25px #000;
+}
+
+.lane {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: repeating-linear-gradient(
+    to right,
+    #fff 0,
+    #fff 30px,
+    transparent 30px,
+    transparent 60px
+  );
+  transform: translateY(-50%);
+  animation: moveLane 2s linear infinite;
+}
+
+@keyframes moveLane {
+  from { background-position: 0; }
+  to { background-position: 60px; }
+}
+</style>
+<!-- Call to Action -->
+<section class="cta">
+  <div class="cta-overlay"></div>
+  <div class="cta-content">
+    <h2>Ready to Take the Wheel?</h2>
+    <p>Browse our featured and available cars to find your perfect match today.</p>
+    <a href="ALLCARS.HTML" class="cta-button">Browse Cars</a>
+  </div>
+</section>
+
+<style>
+  .cta {
+    position: relative;
+    background: url('images/cta-bg.jpg') no-repeat center center/cover;
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding: 60px 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 40px auto;
+  }
+
+  /* Dark overlay for readability */
+  .cta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 31, 68, 0.7); /* Midnight Blue transparent overlay */
+    z-index: 0;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+
+  .cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  .cta p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    color: #E6E8EB; /* Cool gray for softer text */
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #00AEEF, #39FF14); /* Electric Blue → Neon Green */
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 174, 239, 0.5);
+  }
 </style>
 
 
+  <!-- Scroll Animation Script -->
+  <script>
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.service-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          card.classList.add('visible');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
+  
 <!-- Featured Vehicles Section -->
 <section id="featured">
   <h2 class="section-title">Featured Vehicles</h2>
@@ -1501,7 +1560,7 @@
       <p><strong>Drivetrain:</strong> ${car.drivetrain}</p>
     `;
 
-    notifyBtn.href = `https://wa.me/254724804354?text=Hi%20MotorPride%2C%20please%20notify%20me%20when%20${encodedName}%20is%20available`;
+    notifyBtn.href = `https://wa.me/254723098206?text=Hi%20MotorPride%2C%20please%20notify%20me%20when%20${encodedName}%20is%20available`;
     reserveBtn.href = reserveLink;
   }
 

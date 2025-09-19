@@ -1,202 +1,150 @@
-<!-- Featured Vehicles Section -->
-<section id="featured">
-  <h2 class="section-title">Featured Vehicles</h2>
-  <div class="card-grid" id="carGrid"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All-cars | MotorPride Kenya</title>
+<style>
+body { font-family: Arial, sans-serif; background:#f5f7fa; margin:0; padding:0; }
+h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
 
-  <div style="text-align: center; margin-top: 2rem;">
-    <a href="#home" class="wa-btn" style="background:#0A1F44;">⬅ Back to Home</a>
-  </div>
-</section>
+/* Vehicle Grid */
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+@media(max-width:992px){ .vehicle-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:600px){ .vehicle-grid { grid-template-columns: 1fr; } }
+
+.vehicle-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.vehicle-card:hover { transform: translateY(-6px); }
+.vehicle-card img { width:100%; height:200px; object-fit:cover; }
+.vehicle-info { padding:15px; text-align:center; }
+.vehicle-info h3 { margin:5px 0; font-size:18px; color:#0A1F44; }
+.vehicle-info p { margin:4px 0; color:#333; font-size:14px; }
+
+.modal { display:none; position:fixed; z-index:1000; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); overflow-y:auto; }
+.modal-content { background:#fff; margin:30px auto; padding:20px; border-radius:12px; width:90%; max-width:1000px; text-align:center; position:relative; display:flex; flex-direction: column; }
+.close { position:absolute; right:15px; top:10px; font-size:28px; cursor:pointer; }
+
+.modal-body { display:flex; flex-direction: column; }
+@media(min-width:768px){ .modal-body { flex-direction: row; gap:20px; } }
+
+#modalMainImage { width:100%; max-height:450px; object-fit:cover; border-radius:10px; margin-bottom:15px; }
+
+.thumbnails { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:15px; }
+@media(min-width:768px){ .thumbnails { flex-direction: column; max-height:450px; overflow-y:auto; margin:0; } }
+
+.thumbnails img { width:110px; height:80px; object-fit:cover; border-radius:8px; cursor:pointer; transition: transform 0.2s; }
+.thumbnails img:hover, .thumbnails img.active { transform: scale(1.08); border:2px solid #00AEEF; }
+
+#modalSpecs { text-align:left; margin-top:10px; font-size:14px; }
+#modalSpecs p { margin:5px 0; }
+.reserve-btn { display:inline-block; margin-top:10px; padding:10px 20px; background:#25D366; color:#fff; border-radius:8px; text-decoration:none; }
+
+.pagination { text-align:center; margin:30px 0; }
+.pagination button { padding:10px 16px; margin:5px; border:none; border-radius:6px; background:#0A1F44; color:#fff; cursor:pointer; }
+.pagination button:disabled { background:#ccc; cursor:default; }
+</style>
+</head>
+<body>
+
+<h2>ALL-CARS</h2>
+<div id="carGrid" class="vehicle-grid"></div>
+
+<!-- Pagination -->
+<div class="pagination">
+  <button id="prevBtn" onclick="changePage(-1)">Prev</button>
+  <button id="nextBtn" onclick="changePage(1)">Next</button>
+</div>
 
 <!-- Modal -->
-<div class="modal" id="carModal">
+<div id="carModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <div class="modal-top">
-      <div class="image-wrapper" style="position: relative;">
-        <img id="modalMainImage" class="main-image" src="" alt="">
-        <a id="reserveBtnOverlay" href="#" target="_blank" class="wa-btn reserve overlay-btn">💳 Reserve</a>
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-body">
+      <div style="flex:1;">
+        <img id="modalMainImage" src="" alt="Car" />
+        <div id="modalThumbnails" class="thumbnails"></div>
       </div>
-    </div>
-    <div class="thumbnails" id="modalThumbnails"></div>
-    <div class="specs" id="modalSpecs"></div>
-    <div class="whatsapp-buttons" style="text-align: center; margin-top: 1rem;">
-      <a id="notifyBtn" href="#" target="_blank" class="wa-btn">🔔 Notify Me</a>
-      <a id="reserveBtn" href="#" target="_blank" class="wa-btn reserve">💳 Reserve</a>
+      <div id="modalSpecs" style="flex:1;"></div>
     </div>
   </div>
 </div>
 
-<style>
-  .section-title {
-    text-align: center;
-    padding: 2rem 1rem;
-    font-size: 2rem;
-    color: #0A1F44;
-  }
-
-  .card-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    padding: 1rem;
-    align-items: stretch;
-  }
-
-  .card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    width: 280px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  .card:hover {
-    transform: scale(1.02);
-  }
-
-  .card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    background-color: #f9f9f9;
-    border-bottom: 1px solid #eee;
-  }
-
-  .card h3 {
-    font-size: 1.1rem;
-    margin: 0.5rem 1rem 0 1rem;
-    color: #0A1F44;
-  }
-
-  .card p {
-    margin: 0.3rem 1rem;
-    font-size: 0.95rem;
-    color: #333;
-  }
-
-  .reserve-in-card {
-    background: #25D366;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    padding: 0.6rem;
-    margin: 0.8rem 1rem 1rem 1rem;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    justify-content: center;
-    align-items: center;
-  }
-
-  .modal-content {
-    background: white;
-    width: 95%;
-    max-width: 850px;
-    border-radius: 10px;
-    overflow-y: auto;
-    max-height: 95%;
-    padding: 1rem;
-    position: relative;
-  }
-
-  .modal-content img.main-image {
-    width: 100%;
-    height: auto;
-    max-height: 350px;
-    border-radius: 10px;
-    object-fit: contain;
-    object-position: center;
-    background-color: #f9f9f9;
-  }
-
-  .overlay-btn {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    z-index: 10;
-    text-decoration: none;
-    padding: 10px 15px;
-    background-color: #25D366;
-    color: white;
-    border-radius: 6px;
-    font-size: 0.95rem;
-  }
-
-  .thumbnails {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 15px;
-  }
-
-  .thumbnails img {
-    width: 90px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.2s;
-    border: 2px solid transparent;
-  }
-
-  .thumbnails img:hover {
-    transform: scale(1.05);
-    border-color: #0A1F44;
-  }
-
-  .specs {
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    color: #333;
-    line-height: 1.6;
-  }
-
-  .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-
-  .wa-btn {
-    background: #25D366;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    text-decoration: none;
-    margin: 0 5px;
-    display: inline-block;
-  }
-
-  .wa-btn.reserve {
-    background: #075E54;
-  }
-</style>
-
 <script>
-  const cars = [
-    {
+const vehicles = [
+ {
+  name: "Mazda CX-5 2020",
+  images: [
+    "https://i.imgur.com/FgynEtr.jpeg",
+    "https://i.imgur.com/KTH4LRJ.jpeg",
+    "https://i.imgur.com/KH1Dlbk.jpeg",
+    "https://i.imgur.com/Tu933Ii.jpeg",
+    "https://i.imgur.com/c7lbbdJ.jpeg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 3.45M",
+  year: 2020,
+  transmission: "6-Speed Manual",
+  engine: "2000cc",
+  mileage: "39,000 km",
+  color: "Gray Exterior, Dark Leather Upholstery",
+  body: "SUV",
+  location: "Nairobi",
+  stockID: "MZ-CX520-2020",
+  features: [
+    "Multimedia Navigation Knob",
+    "Electric Handbrake with AutoHold",
+    "Multifunction Steering Wheel Controls",
+    "Apple CarPlay & Android Auto",
+    "Daytime Running Lights",
+    "Foglights",
+    "Keyless Entry",
+    "Auto Start Stop",
+    "Push to Start",
+    "260km/hr Speed Limit"
+  ]
+},
+
+  {
+    name: "Mazda 3 2019",
+    images: [
+      "https://i.imgur.com/abc1.jpeg",
+      "https://i.imgur.com/abc2.jpeg",
+      "https://i.imgur.com/abc3.jpeg",
+      "https://i.imgur.com/abc4.jpeg",
+      "https://i.imgur.com/abc5.jpeg"
+    ],
+    fuel: "Petrol",
+    price: "KSh 2.8M",
+    year: 2019,
+    transmission: "Automatic",
+    engine: "2000cc",
+    mileage: "12,000 km",
+    color: "Polymetal Gray, Gray Interior",
+    body: "Sedan",
+    location: "Nairobi",
+    stockID: "MZ-32019",
+    features: [
+      "Reversing Camera",
+      "Smart Key",
+      "LED Headlights",
+      "Heated Seats"
+    ]
+  },
+  {
     name: "2018 Mercedes Benz GLC220D 4MATIC",
     images: [
       "https://i.imgur.com/EPZ1pSd.jpeg",
@@ -754,78 +702,295 @@
         "https://i.ibb.co/4g9LkKzS/Whats-App-Image-2025-07-03-at-7-02-31-AM.jpg",
         "https://i.ibb.co/wFxrbcNw/Whats-App-Image-2025-07-03-at-7-02-25-AM.jpg"
       ]
-    }
-    // Add more cars here...
-  ];
+    },
+     { 
+    name: "Toyota Fielder 2009",
+    images: [
+      "https://i.ibb.co/0jLh8m06/Whats-App-Image-2025-06-30-at-8-47-14-PM.jpg",
+      "https://i.ibb.co/MDRNwh7N/Whats-App-Image-2025-06-30-at-8-47-17-PM.jpg",
+      "https://i.ibb.co/21VYXxzm/Whats-App-Image-2025-06-30-at-8-47-19-PM.jpg",
+      "https://i.ibb.co/0jLh8m06/Whats-App-Image-2025-06-30-at-8-47-14-PM.jpg",
+      "https://i.ibb.co/F49HVZ6Z/Whats-App-Image-2025-06-30-at-8-47-15-PM.jpg"
+    ],
+    fuel: "Petrol",
+    price: "KSh 920K",
+    year: 2009,
+    transmission: "Automatic",
+    engine: "1300cc",
+    mileage: "65,000 km",
+    color: "Silver",
+    features: ["Power Steering", "Fog Lights", "ABS"]
+  },
+  {
+    name: "TOYOTA HARRIER GS 2016 MODEL",
+    images: [
+      "https://i.ibb.co/MyBjkds3/Whats-App-Image-2025-06-27-at-7-04-30-PM.jpg",
+      "https://i.ibb.co/8DNGtkKY/Whats-App-Image-2025-06-27-at-7-04-29-PM-1.jpg",
+      "https://i.ibb.co/Q7Zw3qcp/Whats-App-Image-2025-06-27-at-7-04-29-PM.jpg",
+      "https://i.ibb.co/Jw6hkbS8/Whats-App-Image-2025-06-27-at-7-04-28-PM.jpg",
+      "https://i.ibb.co/Jw6hkbS8/Whats-App-Image-2025-06-27-at-7-04-28-PM.jpg",
+      "https://i.ibb.co/Jw6hkbS8/Whats-App-Image-2025-06-27-at-7-04-28-PM.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 1.55M",
+    year: 2016,
+    transmission: "Automatic",
+    engine: "2000cc",
+    mileage: "65,000 km",
+    color: "original paint",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+    name: "Nissan Note 2014 MODEL",
+    images: [
+      "https://i.ibb.co/8W7SBp4/Whats-App-Image-2025-06-23-at-2-34-22-PM.jpg",
+      "https://i.ibb.co/7JCKywhs/Whats-App-Image-2025-06-23-at-2-34-23-PM.jpg",
+      "https://i.ibb.co/RpcZ4syB/Whats-App-Image-2025-06-23-at-2-34-22-PM-1.jpg",
+      "https://i.ibb.co/9kKCqbSt/Whats-App-Image-2025-06-23-at-2-34-21-PM.jpg",
+      "https://i.ibb.co/9kKCqbSt/Whats-App-Image-2025-06-23-at-2-34-21-PM.jpg",
+      "https://i.ibb.co/9kKCqbSt/Whats-App-Image-2025-06-23-at-2-34-21-PM.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 750K",
+    year: 2014,
+    transmission: "Automatic",
+    engine: "1200cc",
+    mileage: "65,000 km",
+    color: "original gray",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+  name: "HONDA FIT HYBRID",
+  images: [
+    "https://i.ibb.co/vfyNZcw/Whats-App-Image-2025-07-16-at-7-34-52-PM.jpg",
+    "https://i.ibb.co/cXkN5Zm8/Whats-App-Image-2025-07-16-at-7-34-51-PM.jpg",
+    "https://i.ibb.co/v6QBzg96/Whats-App-Image-2025-07-16-at-7-34-53-PM-1.jpg",
+    "https://i.ibb.co/VYFYYB7B/Whats-App-Image-2025-07-16-at-7-34-53-PM.jpg",
+    "https://i.ibb.co/nNzPHYxM/Whats-App-Image-2025-07-16-at-7-34-54-PM.jpg",
+    "https://i.ibb.co/gb8b10NJ/Whats-App-Image-2025-07-16-at-7-34-55-PM.jpg",
+    "https://i.ibb.co/NnJF7Nfm/Whats-App-Image-2025-07-16-at-7-34-57-PM-1.jpg",
+    "https://i.ibb.co/zHt8symM/Whats-App-Image-2025-07-16-at-7-34-57-PM.jpg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 1.15M",
+  year: 2012,
+  transmission: "Automatic",
+  engine: "1500cc",
+  mileage: "72,000 km",
+  color: "PEARL WHITE",
+  features: ["Reverse Camera", "Eco Mode", "ABS Brakes", "Keyless Start"]
+},
+  {
+    name: "SUZUKI SWIFT 2013 MODEL",
+    images: [
+      "https://i.ibb.co/gZyHTCYL/Whats-App-Image-2025-06-22-at-3-48-43-AM.jpg",
+      "https://i.ibb.co/FkYP6Rb9/Whats-App-Image-2025-06-22-at-3-48-43-AM-1.jpg",
+      "https://i.ibb.co/RpC70tPr/Whats-App-Image-2025-06-22-at-3-48-44-AM.jpg",
+      "https://i.ibb.co/MDSDcfDF/Whats-App-Image-2025-06-22-at-3-48-44-AM-1.jpg",
+      "https://i.ibb.co/bgsp0sFr/Whats-App-Image-2025-06-22-at-3-48-46-AM.jpg",
+      "https://i.ibb.co/20fJzXLz/Whats-App-Image-2025-06-22-at-3-48-45-AM-1.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 800K",
+    year: 2013,
+    transmission: "Automatic",
+    engine: "1200cc",
+    mileage: "65,000 km",
+    color: "WINE RED",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+    name: "TOYOTA PROBOX 2016 MODEL",
+    images: [
+      "https://i.ibb.co/mCQSjV0k/Whats-App-Image-2025-06-21-at-1-53-02-PM.jpg",
+      "https://i.ibb.co/N6K2b4QW/Whats-App-Image-2025-06-21-at-1-53-04-PM.jpg",
+      "https://i.ibb.co/tPzGpDVb/Whats-App-Image-2025-06-21-at-1-53-06-PM.jpg",
+      "https://i.ibb.co/Jw6sVJkh/Whats-App-Image-2025-06-21-at-1-53-09-PM.jpg",
+      "https://i.ibb.co/8DHFGXbY/Whats-App-Image-2025-06-21-at-1-53-11-PM.jpg",
+      "https://i.ibb.co/8DHFGXbY/Whats-App-Image-2025-06-21-at-1-53-11-PM.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "980K",
+    year: 2016,
+    transmission: "Automatic",
+    engine: "1500cc",
+    mileage: "65,000 km",
+    color: "original gray",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+    name: "SUBARU XV 2014 MODEL",
+    images: [
+      "https://i.ibb.co/XkZK1Rp6/Whats-App-Image-2025-06-21-at-10-32-20-AM.jpg",
+      "https://i.ibb.co/6c68zvWq/Whats-App-Image-2025-06-21-at-10-32-21-AM.jpg",
+      "https://i.ibb.co/G4PbZLPC/Whats-App-Image-2025-06-21-at-10-32-22-AM.jpg",
+      "https://i.ibb.co/VYpqQdT6/Whats-App-Image-2025-06-21-at-10-32-23-AM.jpg",
+      "https://i.ibb.co/DHscM2RD/Whats-App-Image-2025-06-21-at-10-32-31-AM.jpg",
+      "https://i.ibb.co/vvwRqXd6/Whats-App-Image-2025-06-21-at-10-32-28-AM.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 1.55M",
+    year: 2016,
+    transmission: "Automatic",
+    engine: "2000cc",
+    mileage: "65,000 km",
+    color: "PEARL WHITE",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+    name: "MAZDA CX5 2014 MODEL",
+    images: [
+      "https://i.ibb.co/tpxNWL3G/Whats-App-Image-2025-06-17-at-3-29-38-AM.jpg",
+      "https://i.ibb.co/Rkr9CBdc/Whats-App-Image-2025-06-17-at-3-29-39-AM.jpg",
+      "https://i.ibb.co/ksj6xBF8/Whats-App-Image-2025-06-17-at-3-29-39-AM-1.jpg",
+      "https://i.ibb.co/Sw9jw4Cn/Whats-App-Image-2025-06-17-at-3-29-40-AM.jpg",
+      "https://i.ibb.co/v4jYTZjp/Whats-App-Image-2025-06-17-at-3-29-40-AM-1.jpg",
+      "https://i.ibb.co/BKF4pxSX/Whats-App-Image-2025-06-17-at-3-29-43-AM.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 1.65M",
+    year: 2016,
+    transmission: "Automatic",
+    engine: "2200cc",
+    mileage: "65,000 km",
+    color: "originaL BLACK",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+  name: "SUBARU FORESTER 2010 MODEL",
+  images: [
+    "https://i.ibb.co/dwSG3Tvz/Whats-App-Image-2025-07-16-at-1-54-21-PM.jpg",
+    "https://i.ibb.co/1G15ttKD/Whats-App-Image-2025-07-16-at-1-54-36-PM.jpg",
+    "https://i.ibb.co/90BThbY/Whats-App-Image-2025-07-16-at-1-54-38-PM.jpg",
+    "https://i.ibb.co/rRYy1x4g/Whats-App-Image-2025-07-16-at-1-54-40-PM.jpg",
+    "https://i.ibb.co/9kxnRYZr/Whats-App-Image-2025-07-16-at-1-54-47-PM.jpg"
+  ],
+  fuel: "Hybrid",
+  price: "KSh 1.2M",
+  year: 2010,
+  transmission: "Automatic",
+  engine: "2000cc",
+  mileage: "78,000 km",
+  color: "Pearl White",
+  features: ["Reverse Camera", "Push Start", "Fog Lights"]
+},
+  {
+    name: "MAZDA AXELA XDL2018 MODEL",
+    images: [
+      "https://i.ibb.co/Vb4hc9J/Whats-App-Image-2025-06-13-at-9-24-57-PM.jpg",
+      "https://i.ibb.co/fVwgpP2T/Whats-App-Image-2025-06-13-at-9-24-57-PM-1.jpg",
+      "https://i.ibb.co/Mk5kgjtF/Whats-App-Image-2025-06-13-at-9-24-58-PM.jpg",
+      "https://i.ibb.co/pvvTkWSK/Whats-App-Image-2025-06-13-at-9-25-02-PM.jpg",
+      "https://i.ibb.co/mFg8G14q/Whats-App-Image-2025-06-13-at-9-25-04-PM.jpg",
+      "https://i.ibb.co/Xxb4KNvq/Whats-App-Image-2025-06-13-at-9-25-04-PM-1.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 1.9M",
+    year: 2016,
+    transmission: "Automatic",
+    engine: "1500cc",
+    mileage: "65,000 km",
+    color: "original gray",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  },
+  {
+    name: "TOYOTA RAV4  ADVENTURE NEWSHAPE 2019",
+    images: [
+      "https://i.ibb.co/tP3w27rg/Whats-App-Image-2025-06-29-at-9-37-12-PM.jpg",
+      "https://i.ibb.co/XZ8DJzjH/Whats-App-Image-2025-06-29-at-2-38-36-PM.jpg",
+      "https://i.ibb.co/r2N0LrQR/Whats-App-Image-2025-06-29-at-2-38-36-PM-1.jpg",
+      "https://i.ibb.co/GfCnVC5Z/Whats-App-Image-2025-06-29-at-2-38-38-PM.jpg",
+      "https://i.ibb.co/Y7QsjSgT/Whats-App-Image-2025-06-29-at-9-37-09-PM.jpg",
+      "https://i.ibb.co/Y7QsjSgT/Whats-App-Image-2025-06-29-at-9-37-09-PM.jpg",
+      "https://i.ibb.co/Y7QsjSgT/Whats-App-Image-2025-06-29-at-9-37-09-PM.jpg"
+    ],
+    fuel: "Diesel",
+    price: "KSh 4.6M",
+    year: 2019,
+    transmission: "Automatic",
+    engine: "2000cc",
+    mileage: "65,000 km",
+    color: "Silver",
+    features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
+  }
+];
 
+let currentPage = 1;
+const carsPerPage = 13;
+
+function renderCars() {
   const carGrid = document.getElementById("carGrid");
-  const modal = document.getElementById("carModal");
-  const modalMainImage = document.getElementById("modalMainImage");
-  const modalThumbnails = document.getElementById("modalThumbnails");
-  const modalSpecs = document.getElementById("modalSpecs");
-  const notifyBtn = document.getElementById("notifyBtn");
-  const reserveBtn = document.getElementById("reserveBtn");
+  carGrid.innerHTML = "";
+  const start = (currentPage - 1) * carsPerPage;
+  const end = start + carsPerPage;
+  const paginated = vehicles.slice(start, end);
 
-  cars.forEach((car, index) => {
-    const encodedName = encodeURIComponent(car.name);
-    const reserveLink = `https://wa.me/254723098206?text=Hi%20MotorPride%2C%20I%20want%20to%20reserve%20the%20${encodedName}%20now`;
-
+  paginated.forEach(car => {
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = "vehicle-card";
+    card.onclick = () => openModal(car);
     card.innerHTML = `
       <img src="${car.images[0]}" alt="${car.name}">
-      <h3>${car.name}</h3>
-      <p>${car.fuel} | ${car.price}</p>
-      <a href="${reserveLink}" target="_blank" class="reserve-in-card">💳 Reserve</a>
+      <div class="vehicle-info">
+        <h3>${car.name}</h3>
+        <p><strong>Year:</strong> ${car.year}</p>
+        <p><strong>Price:</strong> ${car.price}</p>
+      </div>
     `;
-    card.querySelector("img").onclick = () => showModal(index);
     carGrid.appendChild(card);
   });
 
-  function showModal(index) {
-    const car = cars[index];
-    modal.style.display = "flex";
-    modalMainImage.src = car.images[0];
+  document.getElementById("prevBtn").disabled = currentPage === 1;
+  document.getElementById("nextBtn").disabled = end >= vehicles.length;
+}
 
-    const encodedName = encodeURIComponent(car.name);
-    const reserveLink = `https://wa.me/254723098206?text=Hi%20MotorPride%2C%20I%20want%20to%20reserve%20the%20${encodedName}%20now`;
+function changePage(direction) {
+  currentPage += direction;
+  renderCars();
+}
 
-    document.getElementById("reserveBtnOverlay").href = reserveLink;
+const modal = document.getElementById("carModal");
+const modalMainImage = document.getElementById("modalMainImage");
+const modalThumbnails = document.getElementById("modalThumbnails");
+const modalSpecs = document.getElementById("modalSpecs");
 
-    modalThumbnails.innerHTML = "";
-    car.images.forEach(img => {
-      const thumb = document.createElement("img");
-      thumb.src = img;
-      thumb.onclick = () => {
-        modalMainImage.src = img;
-      };
-      modalThumbnails.appendChild(thumb);
-    });
-
-    modalSpecs.innerHTML = `
-      <h3>${car.name} - ${car.reg}</h3>
-      <p><strong>Price:</strong> ${car.price}</p>
-      <p><strong>Fuel:</strong> ${car.fuel}</p>
-      <p><strong>Year:</strong> ${car.year}</p>
-      <p><strong>Transmission:</strong> ${car.transmission}</p>
-      <p><strong>Color:</strong> ${car.color}</p>
-      <p><strong>Mileage:</strong> ${car.mileage}</p>
-      <p><strong>Engine:</strong> ${car.engine}</p>
-      <p><strong>Condition:</strong> ${car.condition}</p>
-      <p><strong>Drivetrain:</strong> ${car.drivetrain}</p>
-    `;
-
-    notifyBtn.href = `https://wa.me/254723098206?text=Hi%20MotorPride%2C%20please%20notify%20me%20when%20${encodedName}%20is%20available`;
-    reserveBtn.href = reserveLink;
-  }
-
-  function closeModal() {
-    modal.style.display = "none";
-  }
-
-  window.addEventListener('click', function (e) {
-    if (e.target === modal) {
-      closeModal();
-    }
+function openModal(car) {
+  modal.style.display = "block";
+  modalMainImage.src = car.images[0];
+  modalThumbnails.innerHTML = "";
+  car.images.forEach((img, index) => {
+    const thumb = document.createElement("img");
+    thumb.src = img;
+    if(index === 0) thumb.classList.add("active");
+    thumb.onclick = () => {
+      modalMainImage.src = img;
+      document.querySelectorAll(".thumbnails img").forEach(t => t.classList.remove("active"));
+      thumb.classList.add("active");
+    };
+    modalThumbnails.appendChild(thumb);
   });
+  modalSpecs.innerHTML = `
+    <h3>${car.name}</h3>
+    <p><strong>Fuel:</strong> ${car.fuel}</p>
+    <p><strong>Year:</strong> ${car.year}</p>
+    <p><strong>Transmission:</strong> ${car.transmission}</p>
+    <p><strong>Engine:</strong> ${car.engine}</p>
+    <p><strong>Mileage:</strong> ${car.mileage}</p>
+    <p><strong>Color:</strong> ${car.color}</p>
+    <p><strong>Body Type:</strong> ${car.body}</p>
+    <p><strong>Location:</strong> ${car.location}</p>
+    <p><strong>Stock ID:</strong> ${car.stockID}</p>
+    <p><strong>Price:</strong> ${car.price}</p>
+    <p><strong>Features:</strong> ${car.features.join(", ")}</p>
+    <a href="https://wa.me/254723098206?text=I want to reserve ${encodeURIComponent(car.name)}"
+       class="reserve-btn" target="_blank">Reserve via WhatsApp</a>
+  `;
+}
+
+function closeModal() { modal.style.display = "none"; }
+
+renderCars();
 </script>
+
+</body>
+</html>

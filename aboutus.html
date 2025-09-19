@@ -2,647 +2,425 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MOTORPRIDE KENYA | Trusted Car Dealership in Kenya</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Motorpride Kenya</title>
   <style>
-    :root {
-      --navy: #0A1F44;
-      --red: #D90429;
-      --white: #ffffff;
-      --light: #f5f5f5;
-      --gray: #333;
-      --blue: #00aeef;
-      --green: #39ff14;
-    }
-
-    * {
-      box-sizing: border-box;
+    /* === Base Styles === */
+    body {
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      color: #333;
+    }
+    section {
+      padding: 3rem 1.5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 1rem;
     }
 
-    body {
-      background: var(--white);
-      color: var(--gray);
-      line-height: 1.6;
-    }
-
-    header {
-      background-color: var(--navy);
-      padding: 1.5rem 2rem;
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    header h1 {
-      font-size: 1.8rem;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    nav a {
-      color: var(--white);
-      margin-left: 1.5rem;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--red);
-    }
-
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: var(--navy);
-      min-width: 180px;
-      z-index: 1000;
-      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .dropdown-content a {
+    /* === Hero Section === */
+    .about-hero {
+      background: linear-gradient(to right, #0052cc, #007fff);
       color: white;
-      padding: 0.75rem 1rem;
-      display: block;
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+    .animated-title {
+      font-size: 3rem;
+      font-weight: bold;
+      animation: fadeInZoom 1.5s ease-out forwards;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    @keyframes fadeInZoom {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* === Story Section === */
+    .about-story {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+    }
+    .story-text {
+      flex: 1;
+    }
+    .story-image {
+      flex: 1;
+      text-align: center;
+    }
+    .story-image img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* === Services Section === */
+    .services {
+      background: #fff;
+    }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .service-card {
+      background: #007fff;
+      color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, background 0.3s ease;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    .service-card:hover {
+      transform: scale(1.05);
+      background: #0052cc;
+    }
+    .service-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.6s ease-out;
+    }
+
+    /* === Why Us Section === */
+    .why-us ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 2rem;
+    }
+    .why-us li {
+      background: #e6f0ff;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      border-left: 5px solid #007fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    /* === CTA Section === */
+    .cta {
+      background: #0052cc;
+      color: white;
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+    .cta-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: white;
+      color: #0052cc;
+      font-weight: bold;
+      border-radius: 5px;
       text-decoration: none;
+      transition: background 0.3s;
     }
-
-    .dropdown-content a:hover {
-      background-color: var(--red);
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
+    .cta-button:hover {
+      background: #cce0ff;
     }
 
     @media (max-width: 768px) {
-      nav {
-        margin-top: 1rem;
+      .about-story {
         flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav a {
-        display: block;
-        margin: 0.5rem 0;
-      }
-
-      .dropdown-content {
-        position: static;
-        box-shadow: none;
-        background: none;
-      }
-
-      .dropdown:hover .dropdown-content {
-        display: block;
-      }
-
-      .dropdown-content a {
-        padding-left: 1.5rem;
-        background-color: var(--navy);
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <h1>MOTORPRIDE KENYA</h1>
-    <nav>
-      <div class="dropdown">
-        <a href="#who">About Us</a>
-        <div class="dropdown-content">
-          <a href="#who">Who We Are</a>
-          <a href="#what">What We Do</a>
-          <a href="#mission">Mission</a>
-          <a href="#vision">Vision</a>
-          <a href="#why">Why Choose Us</a>
-          <a href="#team">Our Team</a>
-        </div>
-      </div>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-  <!-- Hero -->
-  <div class="hero">
-    <h2>Drive with Confidence</h2>
-    <p>Trusted Car Dealership • Direct Imports • Financing Options</p>
-    
-  </div>
+  <!-- Hero Section -->
+<section class="about-hero">
+  <h1 class="animated-title">Welcome to Motorpride Kenya</h1>
+  <p class="subtitle">Where Kenyan roads meet global standards.</p>
+</section>
 <style>
-  :root {
-    --navy: #0A1F44;
-    --red: #D90429;
-    --white: #ffffff;
-    --light: #f5f5f5;
-    --gray: #333;
-    --blue: #00aeef;
-    --green: #39ff14;
-    --dark: #0a1f44;
-    --gray-bg: #f9f9f9;
-  }
+/* Push hero section down */
+.about-hero {
+  margin-top: 120px; /* Adjust based on your carousel height */
+  padding: 4rem 1.5rem;
+  background: linear-gradient(to right, #0052cc, #007fff);
+  color: white;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-  }
+/* Enhanced animated title */
+.animated-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-family: 'Poppins', sans-serif;
+  animation: fadeSlideUp 1.2s ease-out forwards;
+  opacity: 0;
+}
 
-  body {
-    background: var(--white);
-    color: var(--gray);
-    line-height: 1.6;
-  }
+/* Subtitle styling */
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-top: 0.5rem;
+  font-family: 'Open Sans', sans-serif;
+  animation: fadeSlideUp 1.8s ease-out forwards;
+  opacity: 0;
+}
 
-  header {
-    background-color: var(--navy);
-    padding: 1.5rem 2rem;
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-
-  header h1 {
-    font-size: 1.8rem;
-  }
-
-  nav a {
-    color: var(--white);
-    margin-left: 1.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-
-  nav a:hover {
-    color: var(--red);
-  }
-
-  .hero {
-    background: url('https://i.ibb.co/QFY6wnt0/492700026-1193653429437734-7091386706403698009-n.jpg') no-repeat center center/cover;
-    color: white;
-    padding: 6rem 2rem;
-    text-align: center;
-    position: relative;
-  }
-
-  .hero::after {
-    content: '';
-    background: rgba(0, 0, 0, 0.65);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-
-  .hero h2,
-  .hero p,
-  .cta-buttons {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero h2 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: var(--red);
-  }
-
-  .hero p {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-  }
-
-  .cta-buttons a {
-    background: var(--red);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    margin: 0.5rem;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: background 0.3s ease;
-  }
-
-  .cta-buttons a:hover {
-    background: #b40321;
-  }
-
-  section {
-    padding: 4rem 2rem;
-    max-width: 1100px;
-    margin: auto;
-  }
-
-  section h2 {
-    font-size: 2rem;
-    color: var(--navy);
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--red);
-    display: inline-block;
-    padding-bottom: 0.5rem;
-  }
-
-  .why-choose {
-    display: grid;
-    gap: 1.2rem;
-    margin-top: 1.5rem;
-  }
-
-  .why-choose li {
-    list-style: none;
-    background: var(--light);
-    padding: 1rem;
-    border-left: 4px solid var(--red);
-  }
-
-  .about-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-    padding: 60px 20px;
-    max-width: 1100px;
-    margin: auto;
-    flex-wrap: wrap;
+/* Keyframes for smooth entrance */
+@keyframes fadeSlideUp {
+  0% {
     opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 1s ease, transform 1s ease;
-    background: linear-gradient(to right, #ffffff, #f2f9ff);
-    border-left: 5px solid var(--blue);
-    border-radius: 8px;
-    margin-bottom: 30px;
+    transform: translateY(40px) scale(0.95);
   }
-
-  .about-section.animate {
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
+}
+</style>
+<section class="about-story">
+  <div class="story-text">
+    <h2 class="gradient-heading">Who We Are</h2>
+    <p class="fade-in-text">
+      Motorpride Kenya began as a dream to redefine how Kenyans buy, sell, and experience vehicles.
+      From humble beginnings in Kisumu, we’ve grown into a trusted digital dealership platform—blending
+      local identity with global innovation. Our mission? To empower every Kenyan with access to
+      reliable, stylish, and affordable vehicles, backed by transparency and tech.
+    </p>
+  </div>
+  <div class="story-image">
+    <img src="https://i.postimg.cc/mk01DP9B/Whats-App-Image-2025-09-09-at-1-49-20-PM.jpg" alt="Car Image">
+  </div>
+</section>
 
-  .about-image {
-    flex: 1 1 300px;
-    max-width: 400px;
-  }
-
-  .about-image img {
-    width: 100%;
-    border-radius: 12px;
-  }
-
-  .about-text {
-    flex: 2 1 400px;
-  }
-
-  .about-text h2 {
-    color: var(--blue);
-    font-size: 2rem;
-    margin-bottom: 15px;
-    position: relative;
-    text-align: left;
-  }
-
-  .about-text h2::after {
-    content: "";
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(to right, var(--blue), var(--green));
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    border-radius: 5px;
-  }
-
-  .about-text p {
-    font-size: 1.05rem;
-    color: #333;
-    line-height: 1.6;
-    text-align: justify;
-  }
-
-  .team-grid {
+<style>
+  .about-story {
     display: flex;
-    justify-content: center;
-    gap: 30px;
     flex-wrap: wrap;
-    padding: 2rem 0;
+    gap: 2rem;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 2rem;
+    margin: 3rem auto;
+    max-width: 1200px;
   }
 
-  .team-member {
-    background: var(--light);
-    border-radius: 10px;
-    padding: 1rem;
+  .story-text {
+    flex: 1;
+    animation: fadeInLeft 1.2s ease-out forwards;
+    opacity: 0;
+  }
+
+  .story-image {
+    flex: 1;
     text-align: center;
-    width: 180px;
-    transition: transform 0.3s ease;
+    animation: fadeInRight 1.5s ease-out forwards;
+    opacity: 0;
   }
 
-  .team-member:hover {
-    transform: scale(1.05);
+  .story-image img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
   }
 
-  .team-member img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 0.8rem;
+  .gradient-heading {
+    font-size: 2.8rem;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #0052cc, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    animation: slideFadeIn 1s ease-out forwards;
+    opacity: 0;
   }
 
-  .team-member h4 {
-    margin: 0.5rem 0 0.2rem;
-    font-size: 1rem;
-    color: var(--navy);
+  .fade-in-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-family: 'Open Sans', sans-serif;
+    animation: fadeInUp 1.8s ease-out forwards;
+    opacity: 0;
   }
 
-  .team-member p {
-    font-size: 0.9rem;
-    color: #555;
-    margin: 0;
+  @keyframes slideFadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 
-  footer {
-    background: var(--navy);
-    color: white;
-    padding: 1.5rem 2rem;
-    text-align: center;
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInLeft {
+    0% { opacity: 0; transform: translateX(-40px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes fadeInRight {
+    0% { opacity: 0; transform: translateX(40px); }
+    100% { opacity: 1; transform: translateX(0); }
   }
 
   @media (max-width: 768px) {
-    .hero h2 {
+    .about-story {
+      flex-direction: column;
+    }
+    .gradient-heading {
       font-size: 2.2rem;
-    }
-
-    .hero p {
-      font-size: 1rem;
-    }
-
-    nav {
-      margin-top: 1rem;
-    }
-
-    nav a {
-      display: block;
-      margin: 0.5rem 0;
-    }
-
-    .about-section {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .about-text h2,
-    .about-text p {
-      text-align: center;
-    }
-
-    .team-grid {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .team-member {
-      width: 90%;
     }
   }
 </style>
 
-  <!-- Who We Are -->
-  <section class="about-section animate-on-scroll" id="who">
-    <div class="about-image">
-      <img src="https://i.ibb.co/YBnBG4ZS/Whats-App-Image-2025-07-30-at-12-17-20-PM.jpg" alt="Who We Are">
-    </div>
-    <div class="about-text">
-      <h2>Who We Are</h2>
-      <p>
-        MotorPride Kenya is a trusted motor vehicle importer and dealer based in Kenya.
-        With years of experience in the industry, we pride ourselves on delivering quality vehicles,
-        excellent customer service, and a hassle-free buying experience. We are committed to helping clients
-        find the perfect car while ensuring full transparency and trust.
-      </p>
+  <!-- Our Services -->
+  <section class="services">
+    <h2>Our Services</h2>
+    <div class="service-grid">
+      <div class="service-card">🚘 Buy a Car</div>
+      <div class="service-card">🔁 Sell Your Vehicle</div>
+      <div class="service-card">💳 Financing Options</div>
+      <div class="service-card">🛠️ After-Sale Support</div>
     </div>
   </section>
+<!-- Why Choose Us -->
+<section class="why-us">
+  <h2>Why Choose Us</h2>
 
-  <!-- What We Do -->
-  <section class="about-section animate-on-scroll" id="what">
-    <div class="about-image">
-      <img src="https://i.ibb.co/21SN32fL/468464115-18349988311134218-3734221331980260134-n.jpg" alt="What We Do">
-    </div>
-    <div class="about-text">
-      <h2>What We Do</h2>
-      <p>
-        At MotorPride Kenya, we specialize in the importation and sale of both new and pre-owned vehicles
-        sourced directly from trusted global markets including Japan, the UK, and others.
-        Our goal is to make high-quality cars accessible and affordable to all our clients.
-        We offer car financing, logbook loans, asset financing through reputable financial partners, and vehicle trade-ins.
-        For those with specific needs, we provide personalized vehicle sourcing to ensure clients receive their exact preferences.
-      </p>
-    </div>
-  </section>
-
-  <!-- Our Mission -->
-  <section class="about-section animate-on-scroll" id="mission">
-    <div class="about-image">
-      <img src="https://i.ibb.co/YBnBG4ZS/Whats-App-Image-2025-07-30-at-12-17-20-PM.jpg" alt="Mission">
-    </div>
-    <div class="about-text">
-      <h2>Our Mission</h2>
-      <p>
-        To provide reliable, affordable, and high-quality vehicles to all clients with transparency and professionalism.
-        We are driven to simplify car ownership by offering smart solutions, dependable customer support, and unmatched integrity.
-      </p>
-    </div>
-  </section>
-
-  <!-- Our Vision -->
-  <section class="about-section animate-on-scroll" id="vision">
-    <div class="about-image">
-      <img src="https://i.ibb.co/r2XbjZjg/Whats-App-Image-2025-07-30-at-12-17-21-PM.jpg" alt="Vision">
-    </div>
-    <div class="about-text">
-      <h2>Our Vision</h2>
-      <p>
-        To be Kenya’s most trusted and customer-focused car dealership—delivering value and peace of mind to every customer.
-        We envision a future where every car purchase is simple, satisfying, and transparent.
-      </p>
-    </div>
-  </section>
-
-  <!-- Why Choose Us -->
-  <section class="about-section animate-on-scroll" id="why">
-    <div class="about-image">
-      <img src="https://i.ibb.co/RTwYyhD5/Whats-App-Image-2025-07-30-at-3-18-48-PM.jpg" alt="Why Choose Us">
-    </div>
-    <div class="about-text">
-      <h2>Why Choose Us</h2>
-      <p>
-        MotorPride Kenya offers a seamless and trusted experience for car buyers and sellers by prioritizing convenience,
-        transparency, and smart technology. Trusted by thousands of happy clients across Kenya, we offer flexible and affordable
-        payment plans, direct imports from top markets like Japan and the UK, and a customer-first approach in every interaction.
-        All our vehicles are fully inspected and verified, ensuring quality, value, and peace of mind at every step.
-      </p>
-    </div>
-  </section>
-
-  <!-- Animate on Scroll Script -->
-  <script>
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.animate-on-scroll').forEach(section => {
-      observer.observe(section);
-    });
-  </script>
-  <!-- Team Section -->
-  <section id="team">
-    <h2>Meet Our Team</h2>
-    <div class="team-grid">
-      <div class="team-member">
-        <img src="https://i.ibb.co/wNrWN1Ch/Whats-App-Image-2025-07-29-at-1-54-12-PM.jpg" alt="Staff 1">
-        <h4>Samson Mahia</h4>
-        <p>Managing Director</p>
-      </div>
-      <div class="team-member">
-        <img src="https://i.ibb.co/wNrWN1Ch/Whats-App-Image-2025-07-29-at-1-54-12-PM.jpg" alt="Staff 2">
-        <h4>Jane Wanjiku</h4>
-        <p>Head of Sales</p>
-      </div>
-      <div class="team-member">
-        <img src="https://i.ibb.co/wNrWN1Ch/Whats-App-Image-2025-07-29-at-1-54-12-PM.jpg" alt="Staff 3">
-        <h4>David Otieno</h4>
-        <p>Marketing Lead</p>
-      </div>
-    </div>
-  </section>
-  
-<!-- FAQ Section -->
-<section id="faqs" style="background-color: #0A1F44; color: white; padding: 3rem 1rem;">
-  <h2 style="text-align: center; color: #39FF14; font-size: 2rem; margin-bottom: 2rem;">Frequently Asked Questions</h2>
-  
-  <div style="max-width: 800px; margin: 0 auto;">
-    <details style="margin-bottom: 1rem; background: #112B5F; padding: 1rem; border-radius: 8px;">
-      <summary style="cursor: pointer; font-weight: bold;">Do you offer car financing or loan options?</summary>
-      <p style="margin-top: 0.5rem;">Yes, we do! Use our loan calculator to estimate your monthly payments, and contact us to get pre-approved through our trusted partners.</p>
-    </details>
-
-    <details style="margin-bottom: 1rem; background: #112B5F; padding: 1rem; border-radius: 8px;">
-      <summary style="cursor: pointer; font-weight: bold;">Can I reserve a car via WhatsApp?</summary>
-      <p style="margin-top: 0.5rem;">Absolutely! Just click the WhatsApp reserve button under any car and we’ll assist you instantly.</p>
-    </details>
-
-    <details style="margin-bottom: 1rem; background: #112B5F; padding: 1rem; border-radius: 8px;">
-      <summary style="cursor: pointer; font-weight: bold;">Where are you located?</summary>
-      <p style="margin-top: 0.5rem;">We’re based in Nairobi, Kenya. See the map in our Contact Us section for directions.</p>
-    </details>
-
-    <details style="margin-bottom: 1rem; background: #112B5F; padding: 1rem; border-radius: 8px;">
-      <summary style="cursor: pointer; font-weight: bold;">Can I sell my car to MotorPride?</summary>
-      <p style="margin-top: 0.5rem;">Yes! Visit the “Sell Your Car” section, fill out the form, and we’ll get back to you quickly via WhatsApp.</p>
-    </details>
-
-    <details style="margin-bottom: 1rem; background: #112B5F; padding: 1rem; border-radius: 8px;">
-      <summary style="cursor: pointer; font-weight: bold;">Do you offer self-drive and safari hire?</summary>
-      <p style="margin-top: 0.5rem;">Yes — we offer both self-drive car rentals and guided safari tours. See the Car Hire and Safari sections for more details.</p>
-    </details>
+  <div class="reasons">
+    <li>🇰🇪 Proudly Kenyan, globally inspired</li>
+    <li>🔧 Verified listings and trusted dealers</li>
+    <li>📱 Mobile-first design for easy access</li>
+    <li>💬 Real-time support and guidance</li>
+    <li>📊 Transparent pricing and financing</li>
   </div>
-</section>
-<!-- Contact Section -->
-<section id="contact">
-  <h2>Contact Us</h2>
-  <p>
-    Email: <strong>info@autodealmotors.co.ke</strong><br>
-    WhatsApp: <strong>+254 700 000 000</strong><br>
-    Location: Nairobi | Mombasa | Nakuru
-  </p>
 
-  <!-- WhatsApp Button -->
-  <a href="https://wa.me/254723098206" class="whatsapp-button" target="_blank" title="Chat with Samson">
-    <img src="https://i.ibb.co/67h5sYnF/Whats-App-Image-2025-06-09-at-8-59-12-PM-1.jpg" alt="Samson Profile" class="profile-pic" />
-    <div class="wa-label">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon" class="wa-icon" />
-      <span>Chat with Samson</span>
-    </div>
-  </a>
+  <div class="road">
+    <div class="lane"></div>
+  </div>
 </section>
 
 <style>
-  .whatsapp-button {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background-color: #25D366;
-    color: white;
-    padding: 12px 18px;
-    border-radius: 8px;
-    text-decoration: none;
-    margin-top: 20px;
-    width: fit-content;
-    transition: background 0.3s ease;
-  }
+.why-us {
+  text-align: center;
+  padding: 60px 20px;
+  background: #0A1F44; /* Midnight blue */
+  color: white;
+  position: relative;
+}
 
-  .whatsapp-button:hover {
-    background-color: #1ebe59;
-  }
+.why-us h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5); /* Pink/Purple gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(255,110,196,0.6);
+}
 
-  .whatsapp-button .profile-pic {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
+/* Road signs area */
+.reasons {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  list-style: none;
+  padding: 0;
+}
 
-  .wa-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+.reasons li {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 12px;
+  text-align: center;
+  background: linear-gradient(135deg, #ff6ec4, #ff9a9e); /* Pink gradient */
+  color: #fff;
+  border: 3px solid #fff;
+  box-shadow: 0 0 12px rgba(255,110,196,0.8), 0 0 25px rgba(255,154,158,0.6);
+  margin: 10px;
+  min-width: 180px;
+  opacity: 0;
+  animation: popIn 1s ease forwards;
+}
 
-  .wa-icon {
-    width: 20px;
-    height: 20px;
-  }
+.reasons li:nth-child(1) { animation-delay: 0.3s; }
+.reasons li:nth-child(2) { animation-delay: 0.6s; }
+.reasons li:nth-child(3) { animation-delay: 0.9s; }
+.reasons li:nth-child(4) { animation-delay: 1.2s; }
+.reasons li:nth-child(5) { animation-delay: 1.5s; }
 
-  .wa-label span {
-    font-weight: bold;
-    color: white;
-  }
+@keyframes popIn {
+  0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
 
-  @media (max-width: 600px) {
-    .whatsapp-button {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
+/* Tarmac road */
+.road {
+  position: relative;
+  margin: 0 auto;
+  width: 90%;
+  background: #222;
+  height: 120px;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: inset 0 0 25px #000;
+}
+
+.lane {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: repeating-linear-gradient(
+    to right,
+    #fff 0,
+    #fff 30px,
+    transparent 30px,
+    transparent 60px
+  );
+  transform: translateY(-50%);
+  animation: moveLane 2s linear infinite;
+}
+
+@keyframes moveLane {
+  from { background-position: 0; }
+  to { background-position: 60px; }
+}
 </style>
 
+<!-- Call to Action -->
+<section class="cta">
+  <h2>Ready to take the wheel?</h2>
+  <a href="#available-units" class="cta-button">Explore Our Cars</a>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 AutoDeal Motors – All rights reserved.</p>
-  </footer>
+  <!-- Scroll Animation Script -->
+  <script>
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.service-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          card.classList.add('visible');
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
