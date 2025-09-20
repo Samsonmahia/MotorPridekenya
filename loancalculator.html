@@ -1,6 +1,8 @@
 <!-- LOAN CALCULATOR -->
 <section id="loan" style="padding: 60px 20px; background-color: #f5faff;">
-  <h2 style="text-align: center; color: #0a1f44; margin-bottom: 30px;">💰 Car Loan Calculator</h2>
+  <h2 style="text-align: center; color: #0a1f44; margin-bottom: 30px; font-size: clamp(24px, 6vw, 34px);">
+    💰 Car Loan Calculator
+  </h2>
   
   <div class="loan-container">
     <!-- Loan Form -->
@@ -89,15 +91,28 @@
   }
 
   /* ✅ Mobile-friendly adjustments */
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .loan-container {
-      flex-direction: column;
-      gap: 20px;
+      flex-direction: column;   /* stack items */
+      max-width: 100%;
+      padding: 0 10px;
+    }
+    .loan-form, .loan-summary {
+      width: 100%;
+      min-width: unset;
     }
     .loan-form input, 
     .loan-form button {
-      font-size: 18px;  /* Larger tap-friendly text */
-      padding: 16px;
+      font-size: 20px;  
+      padding: 20px;   
+    }
+    .loan-form label {
+      font-size: 18px;
+    }
+    .loan-summary {
+      font-size: 20px;
+      padding: 20px;
+      margin-top: 10px; /* spacing between form & summary */
     }
   }
 </style>

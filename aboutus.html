@@ -288,15 +288,73 @@
 </style>
 
   <!-- Our Services -->
-  <section class="services">
-    <h2>Our Services</h2>
-    <div class="service-grid">
-      <div class="service-card">🚘 Buy a Car</div>
-      <div class="service-card">🔁 Sell Your Vehicle</div>
-      <div class="service-card">💳 Financing Options</div>
-      <div class="service-card">🛠️ After-Sale Support</div>
-    </div>
-  </section>
+<section class="services">
+  <h2>Our Services</h2>
+  <div class="service-grid">
+    <div class="service-card">🚘 Buy a Car</div>
+    <div class="service-card">🔁 Sell Your Vehicle</div>
+    <div class="service-card">💳 Financing Options</div>
+    <div class="service-card">🛠️ After-Sale Support</div>
+  </div>
+</section>
+
+<style>
+  .services {
+    padding: 3rem 1.5rem;
+    background: #ffffff;
+    text-align: center;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .services h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0052cc;
+    margin-bottom: 2rem;
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .service-card {
+    background: #007fff;
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    text-align: center;
+  }
+
+  .service-card:hover {
+    transform: scale(1.05);
+    background: #0052cc;
+  }
+
+  /* Mobile Optimization */
+  @media (max-width: 480px) {
+    .services {
+      padding: 2rem 1rem;
+    }
+
+    .service-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .service-card {
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+</style>
 <!-- Why Choose Us -->
 <section class="why-us">
   <h2>Why Choose Us</h2>
@@ -421,6 +479,101 @@
       });
     });
   </script>
+  <!-- CUSTOMER RESPONSE SECTION -->
+<section id="response" style="background: linear-gradient(135deg, #0A1F44, #00AEEF); padding: 60px 20px; color: #fff; width: 100vw; box-sizing: border-box;">
+  <h2 style="text-align: center; font-size: clamp(26px, 7vw, 36px); margin-bottom: 20px;">💬 What Our Customers Say</h2>
+  <p style="text-align: center; color: #d0e7ff; margin-bottom: 40px; font-size: clamp(18px, 5vw, 22px);">
+    Real feedback from our happy clients
+  </p>
+
+  <!-- Carousel Container -->
+  <div style="overflow: hidden; width: 100%; margin: auto; border-radius: 12px;">
+    <div id="testimonialCarouselTrack" class="testimonial-carousel-track" style="display: flex; transition: transform 0.6s ease-in-out;">
+      
+      <!-- Slide 1 -->
+      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
+        <img src="https://i.ibb.co/MyztSZgH/Whats-App-Image-2025-07-12-at-11-09-15-AM-Copy.jpg" alt="Customer 1"
+             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
+        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Samuel Mahia</h3>
+        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
+          "MotorPride helped me get my dream car through their flexible loan options. Highly recommended!"
+        </p>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
+        <img src="https://i.ibb.co/VcDz0px0/Whats-App-Image-2025-07-12-at-11-10-56-AM.jpg" alt="Customer 2"
+             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
+        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Samson Mahia</h3>
+        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
+          "I hired a Land Cruiser Prado for my trip to Amboseli through their Safari service. The car was clean, powerful, and fuel-efficient. Great experience"
+        </p>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
+        <img src="https://i.ibb.co/FLM5PgDf/Whats-App-Image-2025-07-12-at-11-11-48-AM.jpg" alt="Customer 3"
+             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
+        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Eric Karanja</h3>
+        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
+          "Very professional and responsive team. They even helped me reserve a unit through WhatsApp before I traveled to Nairobi. Highly recommend them"
+        </p>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
+        <img src="https://i.ibb.co/Y73yDZLT/Whats-App-Image-2025-07-15-at-12-13-26-PM-1.jpg" alt="Customer 4"
+             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
+        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Elizabeth Mahia</h3>
+        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
+          "MotorPride gave me the best deal on a clean, low-mileage Toyota Axio. The process was smooth and transparent. I’ll definitely come back for my next car."
+        </p>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
+        <img src="https://i.ibb.co/FqgBR5s4/Whats-App-Image-2025-07-15-at-12-13-26-PM.jpg" alt="Customer 5"
+             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
+        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Michael Kibe</h3>
+        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
+          "They even helped me sell my car fast. The process was transparent and fair."
+        </p>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div style="text-align: center; margin-top: 20px;">
+      <button onclick="prevTestimonial()" style="margin-right: 10px; padding: 14px 24px; background: #fff; color: #0A1F44; border: none; border-radius: 6px; font-size: clamp(18px, 6vw, 22px);">◀</button>
+      <button onclick="nextTestimonial()" style="padding: 14px 24px; background: #fff; color: #0A1F44; border: none; border-radius: 6px; font-size: clamp(18px, 6vw, 22px);">▶</button>
+    </div>
+  </div>
+</section>
+
+<!-- Carousel Script -->
+<script>
+  let testimonialIndex = 0;
+  const testimonialTrack = document.getElementById('testimonialCarouselTrack');
+  const testimonialSlides = testimonialTrack.children.length;
+
+  function showTestimonial(i) {
+    testimonialIndex = (i + testimonialSlides) % testimonialSlides;
+    testimonialTrack.style.transform = `translateX(-${testimonialIndex * 100}%)`;
+  }
+
+  function nextTestimonial() {
+    showTestimonial(testimonialIndex + 1);
+  }
+
+  function prevTestimonial() {
+    showTestimonial(testimonialIndex - 1);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    showTestimonial(0);
+    setInterval(() => nextTestimonial(), 8000);
+  });
+</script>
+
 
 </body>
 </html>
