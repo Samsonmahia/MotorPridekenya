@@ -262,7 +262,7 @@
       <img src="https://i.ibb.co/M5x6w0qt/Whats-App-Image-2025-06-16-at-3-50-59-PM.jpg" alt="MotorPride Kenya Logo" />
       <div>
         <h1 style="margin: 0; font-size: 1.6rem;">MotorPride Kenya</h1>
-        <p style="margin: 0.2rem 0; font-size: 1rem;">Drive the Future — Electric, Smart, Reliable</p>
+        <p style="margin: 0.2rem 0; font-size: 1rem;">Drive the Future  ORIGINAL, SMART, RELIABLE</p>
       </div>
     </div>
   </header>
@@ -346,6 +346,73 @@
   </form>
 </div>
 
+<style>
+  /* Animation for search results */
+.vehicle-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.vehicle-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+  /* Search container styling */
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin: 40px auto;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 15px;
+  }
+
+  /* Form */
+  #carSearchForm {
+    display: flex;
+    width: 100%;
+    background: #fff;
+    border-radius: 50px;
+    box-shadow: 0 8px 25px rgba(0, 174, 239, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  #carSearchForm:hover {
+    transform: scale(1.03);
+  }
+
+  /* Input */
+  #carSearchInput {
+    flex: 1;
+    padding: 16px 20px;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    border-radius: 50px 0 0 50px;
+  }
+
+  /* Button */
+  #carSearchForm button {
+    background: linear-gradient(135deg, #00AEEF, #39FF14);
+    color: white;
+    border: none;
+    padding: 0 28px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0 50px 50px 0;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #carSearchForm button:hover {
+    box-shadow: 0 6px 20px rgba(0, 174, 239, 0.6);
+  }
+</style>
+
+
 <script>
   const form = document.getElementById("carSearchForm");
   const input = document.getElementById("carSearchInput");
@@ -361,6 +428,7 @@
     }
   });
 </script>
+
 
 
 
@@ -392,6 +460,30 @@
     box-shadow: 0 6px 20px rgba(0, 174, 239, 0.5);
   }
 </style>
+<!-- Homepage Button -->
+<div style="text-align:center; margin:40px 0;">
+  <a href="realestate.html" class="home-btn">🏡 Buy / Rent Land & Houses</a>
+</div>
+
+<!-- Styles for the button -->
+<style>
+.home-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #00AEEF, #39FF14);
+  color: #fff;
+  padding: 16px 40px;
+  border-radius: 40px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.home-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 174, 239, 0.6);
+}
+</style>
+
 
 
   
@@ -1595,73 +1687,87 @@
     }
   });
 </script>
-<!-- WhatsApp Button -->
-<a href="https://wa.me/254724804354?text=Hello%20MotorPride%20Kenya%2C%20I%20am%20interested%20in%20this%20car." 
-   target="_blank"
-   style="display:inline-flex; align-items:center; gap:10px;
-          background: linear-gradient(45deg, #25D366, #128C7E);
-          color: white; font-size:18px; font-weight:bold;
-          padding:14px 22px; border-radius:50px; 
-          text-decoration:none; box-shadow:0 4px 12px rgba(0,0,0,0.2);
-          transition: all 0.3s ease;">
-   <img src="https://i.ibb.co/MyztSZgH/Whats-App-Image-2025-07-12-at-11-09-15-AM-Copy.jpg" 
-        alt="WhatsApp" style="width:22px; height:22px;">
-   Chat on WhatsApp
+<
+  <!-- ✅ Improved WhatsApp Button with Clear Text and Larger Placeholder -->
+<a href="https://wa.me/254723098206" class="whatsapp-button" target="_blank" title="Chat with Samson">
+  <img src="https://i.ibb.co/67h5sYnF/Whats-App-Image-2025-06-09-at-8-59-12-PM-1.jpg" alt="Samson Profile" class="profile-pic" />
+  <div class="wa-label">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon" class="wa-icon" />
+    <span>Chat with Samson</span>
+  </div>
 </a>
 
-<!-- Mobile Fixes -->
 <style>
-  @media (max-width:768px) {
-    a.whatsapp-btn {
-      font-size:20px !important;
-      padding:16px 24px !important;
-      width:100% !important;
-      justify-content:center !important;
+  .whatsapp-button {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25D366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: background 0.3s ease, transform 0.2s ease;
+    z-index: 1000;
+    max-width: 280px;
+  }
+
+  .whatsapp-button:hover {
+    background-color: #1ebe5d;
+    transform: scale(1.03);
+  }
+
+  .whatsapp-button .profile-pic {
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .wa-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .wa-label .wa-icon {
+    height: 20px;
+  }
+
+  .wa-label span {
+    font-size: 16px;
+    white-space: nowrap;
+    color: #fff;
+  }
+
+  @media (max-width: 480px) {
+    .whatsapp-button {
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 14px;
+      max-width: 90vw;
+    }
+
+    .whatsapp-button .profile-pic {
+      height: 48px;
+      width: 48px;
+    }
+
+    .wa-label span {
+      font-size: 15px;
     }
   }
-  a.whatsapp-btn:hover {
-    transform: scale(1.05);
-    box-shadow:0 6px 18px rgba(0,0,0,0.25);
-  }
 </style>
 
-
-<!-- Styles for WhatsApp Button -->
-<style>
-.whatsapp-button {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: #25D366;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
-}
-.whatsapp-button:hover {
-  background: #1ebe57;
-  transform: translateY(-5px);
-}
-.profile-pic {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #fff;
-}
-.wa-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.wa-icon {
-  width: 20px;
-  height: 20px;
-}
-</style>
 
 
 <!-- Footer with Vehicle Background -->
