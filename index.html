@@ -338,6 +338,30 @@
 <section class="carousel">
   <!-- your carousel code here -->
 </section>
+<!-- Homepage Search -->
+<div class="search-container">
+  <form id="carSearchForm">
+    <input type="text" id="carSearchInput" placeholder="Search cars by brand, model, year...">
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById("carSearchForm");
+  const input = document.getElementById("carSearchInput");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const query = input.value.trim().toLowerCase();
+    if(query) {
+      // Redirect to allcars.html with search query
+      window.location.href = "allcars.html?search=" + encodeURIComponent(query);
+    } else {
+      window.location.href = "allcars.html";
+    }
+  });
+</script>
+
 
 
 <!-- Browse Cars Button (below carousel) -->

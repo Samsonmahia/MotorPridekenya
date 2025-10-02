@@ -948,6 +948,35 @@ function changePage(direction) {
   currentPage += direction;
   renderCars();
 }
+// --- Homepage Search Redirect Integration ---
+const urlParams = new URLSearchParams(window.location.search);
+const searchQuery = urlParams.get("search");
+
+// If there's a query, filter vehicles before rendering
+if (searchQuery) {
+  const filtered = vehicles.filter(car =>
+    car.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    car.year.toString().includes(searchQuery) ||
+    car.fuel.toLowerCase().includes(searchQuery) ||
+    car.transmission.toLowerCase().includes(searchQuery) ||
+    car.engine.toLowerCase().includes(searchQuery) ||
+    car.color.toLowerCase().includes(searchQuery) ||
+    car.body.toLowerCase().includes(searchQuery) ||
+    car.location.toLowerCase().includes(searchQuery) ||
+    car.stockID.toLowerCase().includes(searchQuery)
+  );
+
+  if (filtered.length > 0) {
+    // Override vehicles array temporarily with search results
+    vehicles = filtered;
+    currentPage = 1;
+    renderCars();
+  } else {
+    document.getElementById("carGrid").innerHTML =
+      `<p>No cars found matching "<strong>${searchQuery}</strong>".</p>`;
+  }
+}
+
 
 const modal = document.getElementById("carModal");
 const modalMainImage = document.getElementById("modalMainImage");

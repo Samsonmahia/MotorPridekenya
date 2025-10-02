@@ -1,50 +1,29 @@
 backend:
   name: git-gateway
-  branch: main   # or master depending on your repo default branch
+  branch: main   # or "master" if your repo uses that
 
-media_folder: "static/uploads"    # where uploaded images will go
-public_folder: "/uploads"
+media_folder: "uploads"       # folder inside repo where images are stored
+public_folder: "/uploads"     # how they are served on the site
 
 collections:
-  - name: "featured_cars"
-    label: "Featured Cars"
-    folder: "content/featured_cars"
+  - name: "cars"
+    label: "Used Cars"
+    folder: "used-cars"
     create: true
+    format: "json"
+    extension: "json"
     slug: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Image", name: "image", widget: "image" }
-
-  - name: "available_units"
-    label: "Available Units"
-    folder: "content/available_units"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Car Name", name: "car_name", widget: "string" }
+      - { label: "Car Name", name: "name", widget: "string" }
       - { label: "Price", name: "price", widget: "string" }
       - { label: "Year", name: "year", widget: "number" }
-      - { label: "Fuel Type", name: "fuel", widget: "string" }
-      - { label: "Images", name: "images", widget: "list", field: {label: Image, name: image, widget: image} }
-
-  - name: "car_hire"
-    label: "Car Hire"
-    folder: "content/car_hire"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Package Name", name: "package_name", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Price", name: "price", widget: "string" }
-      - { label: "Image", name: "image", widget: "image" }
-
-  - name: "testimonials"
-    label: "Testimonials"
-    folder: "content/testimonials"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Comment", name: "comment", widget: "text" }
-      - { label: "Photo", name: "photo", widget: "image" }
+      - { label: "Fuel", name: "fuel", widget: "string" }
+      - { label: "Transmission", name: "transmission", widget: "string" }
+      - { label: "Engine", name: "engine", widget: "string" }
+      - { label: "Mileage", name: "mileage", widget: "string" }
+      - { label: "Color", name: "color", widget: "string" }
+      - { label: "Features", name: "features", widget: "list", allow_add: true }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        field: { label: "Image URL", name: "url", widget: "string" }
