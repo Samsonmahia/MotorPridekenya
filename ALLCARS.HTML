@@ -4,17 +4,58 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>All-cars | MotorPride Kenya</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-body { font-family: Arial, sans-serif; background:#f5f7fa; margin:0; padding:0; }
-h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
+:root {
+  --primary: #00AEEF;
+  --secondary: #39FF14;
+  --dark: #0A1F44;
+  --light: #f5f7fa;
+  --accent: #FF6B6B;
+  --text: #333;
+  --text-light: #777;
+}
+
+body { 
+  font-family: 'Inter', sans-serif; 
+  background: var(--light); 
+  margin:0; 
+  padding:0; 
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Header Section */
+.section-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, var(--dark) 0%, #1a3a5f 100%);
+  color: white;
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--secondary);
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  margin: 0 auto;
+}
 
 /* Vehicle Grid */
 .vehicle-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
   padding: 20px;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: auto;
 }
 
@@ -23,11 +64,11 @@ h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
 
 .vehicle-card {
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: all 0.4s ease;
   
   /* Animation start state */
   opacity: 0;
@@ -35,7 +76,10 @@ h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
 }
 
 /* Hover effect */
-.vehicle-card:hover { transform: translateY(-6px); }
+.vehicle-card:hover { 
+  transform: translateY(-8px); 
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
 
 /* When JS adds .show → fade & slide up */
 .vehicle-card.show {
@@ -44,33 +88,230 @@ h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.vehicle-card img { width:100%; height:200px; object-fit:cover; }
-.vehicle-info { padding:15px; text-align:center; }
-.vehicle-info h3 { margin:5px 0; font-size:18px; color:#0A1F44; }
-.vehicle-info p { margin:4px 0; color:#333; font-size:14px; }
+.vehicle-card img { 
+  width:100%; 
+  height:220px; 
+  object-fit:cover;
+  transition: transform 0.5s ease;
+}
 
-.modal { display:none; position:fixed; z-index:1000; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); overflow-y:auto; }
-.modal-content { background:#fff; margin:30px auto; padding:20px; border-radius:12px; width:90%; max-width:1000px; text-align:center; position:relative; display:flex; flex-direction: column; }
-.close { position:absolute; right:15px; top:10px; font-size:28px; cursor:pointer; }
+.vehicle-card:hover img {
+  transform: scale(1.05);
+}
 
-.modal-body { display:flex; flex-direction: column; }
-@media(min-width:768px){ .modal-body { flex-direction: row; gap:20px; } }
+.vehicle-info { 
+  padding:20px; 
+  text-align:center; 
+}
 
-#modalMainImage { width:100%; max-height:450px; object-fit:cover; border-radius:10px; margin-bottom:15px; }
+.vehicle-info h3 { 
+  margin:5px 0 10px; 
+  font-size:1.3rem; 
+  color:var(--dark); 
+  font-weight: 600;
+}
 
-.thumbnails { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:15px; }
-@media(min-width:768px){ .thumbnails { flex-direction: column; max-height:450px; overflow-y:auto; margin:0; } }
+.vehicle-info p { 
+  margin:8px 0; 
+  color:var(--text-light); 
+  font-size:0.95rem;
+}
 
-.thumbnails img { width:110px; height:80px; object-fit:cover; border-radius:8px; cursor:pointer; transition: transform 0.2s; }
-.thumbnails img:hover, .thumbnails img.active { transform: scale(1.08); border:2px solid #00AEEF; }
+.vehicle-price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 10px 0;
+}
 
-#modalSpecs { text-align:left; margin-top:10px; font-size:14px; }
-#modalSpecs p { margin:5px 0; }
-.reserve-btn { display:inline-block; margin-top:10px; padding:10px 20px; background:#25D366; color:#fff; border-radius:8px; text-decoration:none; }
+/* Modal */
+.modal { 
+  display:none; 
+  position:fixed; 
+  z-index:1000; 
+  top:0; 
+  left:0; 
+  width:100%; 
+  height:100%; 
+  background:rgba(0,0,0,0.8); 
+  overflow-y:auto; 
+  backdrop-filter: blur(5px);
+}
 
-.pagination { text-align:center; margin:30px 0; }
-.pagination button { padding:10px 16px; margin:5px; border:none; border-radius:6px; background:#0A1F44; color:#fff; cursor:pointer; }
-.pagination button:disabled { background:#ccc; cursor:default; }
+.modal-content { 
+  background:#fff; 
+  margin:30px auto; 
+  padding:25px; 
+  border-radius:16px; 
+  width:95%; 
+  max-width:1000px; 
+  text-align:center; 
+  position:relative; 
+  display:flex; 
+  flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.close { 
+  position:absolute; 
+  right:20px; 
+  top:15px; 
+  font-size:28px; 
+  cursor:pointer; 
+  color: var(--text-light);
+  transition: color 0.3s ease;
+  z-index: 10;
+}
+
+.close:hover {
+  color: var(--primary);
+}
+
+.modal-body { 
+  display:flex; 
+  flex-direction: column; 
+  gap: 20px;
+}
+
+@media(min-width:768px){ 
+  .modal-body { 
+    flex-direction: row; 
+    gap:25px; 
+  } 
+}
+
+#modalMainImage { 
+  width:100%; 
+  max-height:450px; 
+  object-fit:cover; 
+  border-radius:12px; 
+  margin-bottom:15px; 
+}
+
+.thumbnails { 
+  display:flex; 
+  flex-wrap:wrap; 
+  gap:10px; 
+  justify-content:center; 
+  margin-bottom:15px; 
+}
+
+@media(min-width:768px){ 
+  .thumbnails { 
+    flex-direction: column; 
+    max-height:450px; 
+    overflow-y:auto; 
+    margin:0; 
+  } 
+}
+
+.thumbnails img { 
+  width:110px; 
+  height:80px; 
+  object-fit:cover; 
+  border-radius:8px; 
+  cursor:pointer; 
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.thumbnails img:hover, .thumbnails img.active { 
+  transform: scale(1.08); 
+  border:2px solid var(--primary); 
+}
+
+#modalSpecs { 
+  text-align:left; 
+  margin-top:10px; 
+  font-size:15px; 
+  flex: 1;
+}
+
+#modalSpecs h3 {
+  font-size: 1.8rem;
+  color: var(--dark);
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--light);
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.spec-label {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.spec-value {
+  color: var(--text-light);
+}
+
+.features-list {
+  margin: 15px 0;
+  padding-left: 20px;
+}
+
+.features-list li {
+  margin-bottom: 8px;
+  color: var(--text-light);
+}
+
+.reserve-btn { 
+  display:inline-block; 
+  margin-top:20px; 
+  padding:14px 30px; 
+  background:#25D366; 
+  color:#fff; 
+  border-radius:10px; 
+  text-decoration:none; 
+  font-weight:600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+.reserve-btn:hover {
+  background: #1da851;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+}
+
+.pagination { 
+  text-align:center; 
+  margin:40px 0; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination button { 
+  padding:12px 20px; 
+  margin:5px; 
+  border:none; 
+  border-radius:8px; 
+  background:var(--dark); 
+  color:#fff; 
+  cursor:pointer; 
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+.pagination button:disabled { 
+  background:#ccc; 
+  cursor:default; 
+  transform: none;
+}
+
 /* Smooth slow fade-in + slide-up animation for search results */
 .vehicle-card {
   animation: fadeInSlow 1.5s ease forwards;
@@ -92,18 +333,129 @@ h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
   }
 }
 
-</style>
+/* Search Results Message */
+.search-results-message {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2rem;
+  color: var(--text);
+  max-width: 800px;
+  margin: 0 auto;
+}
 
+.search-results-message strong {
+  color: var(--primary);
+}
+
+/* No Results Styling */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-light);
+}
+
+.no-results i {
+  font-size: 3rem;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+/* Mobile Responsiveness Improvements */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2.2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .vehicle-grid {
+    padding: 15px;
+    gap: 20px;
+  }
+  
+  .modal-content {
+    padding: 20px 15px;
+    margin: 20px auto;
+  }
+  
+  .thumbnails {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  
+  .spec-item {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .pagination {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .vehicle-info h3 {
+    font-size: 1.2rem;
+  }
+  
+  .vehicle-price {
+    font-size: 1.3rem;
+  }
+  
+  .modal-body {
+    gap: 15px;
+  }
+  
+  #modalSpecs h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Loading Animation */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
 </head>
 <body>
 
-<h2>ALL-CARS</h2>
+<!-- Enhanced Header Section -->
+<div class="section-header">
+  <h1 class="section-title">ALL CARS</h1>
+  <p class="section-subtitle">Discover our premium selection of quality vehicles</p>
+</div>
+
+<!-- Vehicle Grid -->
 <div id="carGrid" class="vehicle-grid"></div>
+
+<!-- Search Results Message -->
+<div id="searchResultsMessage" class="search-results-message" style="display: none;"></div>
 
 <!-- Pagination -->
 <div class="pagination">
-  <button id="prevBtn" onclick="changePage(-1)">Prev</button>
-  <button id="nextBtn" onclick="changePage(1)">Next</button>
+  <button id="prevBtn" onclick="changePage(-1)">
+    <i class="fas fa-chevron-left"></i> Previous
+  </button>
+  <button id="nextBtn" onclick="changePage(1)">
+    Next <i class="fas fa-chevron-right"></i>
+  </button>
 </div>
 
 <!-- Modal -->
@@ -122,94 +474,195 @@ h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
 
 <script>
 const vehicles = [
- {
-  name: "Mazda CX-5 2020",
+  {
+    name: "Mazda CX-5 2020",
+    images: [
+      "https://i.imgur.com/FgynEtr.jpeg",
+      "https://i.imgur.com/KTH4LRJ.jpeg",
+      "https://i.imgur.com/KH1Dlbk.jpeg",
+      "https://i.imgur.com/Tu933Ii.jpeg",
+      "https://i.imgur.com/c7lbbdJ.jpeg"
+    ],
+    fuel: "Petrol",
+    price: "KSh 3.45M",
+    year: 2020,
+    transmission: "6-Speed Manual",
+    engine: "2000cc",
+    mileage: "39,000 km",
+    color: "Gray Exterior, Dark Leather Upholstery",
+    body: "SUV",
+    location: "Nairobi",
+    stockID: "MZ-CX520-2020",
+    features: [
+      "Multimedia Navigation Knob",
+      "Electric Handbrake with AutoHold",
+      "Multifunction Steering Wheel Controls",
+      "Apple CarPlay & Android Auto",
+      "Daytime Running Lights",
+      "Foglights",
+      "Keyless Entry",
+      "Auto Start Stop",
+      "Push to Start",
+      "260km/hr Speed Limit"
+    ]
+  },
+  {
+  name: "2018 Mazda Demio",
   images: [
-    "https://i.imgur.com/FgynEtr.jpeg",
-    "https://i.imgur.com/KTH4LRJ.jpeg",
-    "https://i.imgur.com/KH1Dlbk.jpeg",
-    "https://i.imgur.com/Tu933Ii.jpeg",
-    "https://i.imgur.com/c7lbbdJ.jpeg"
+    "https://i.ibb.co/pvzVmBZG/Whats-App-Image-2025-10-03-at-10-10-45-PM-1.jpg",
+    "https://i.ibb.co/hF2kgJgc/Whats-App-Image-2025-10-03-at-10-10-45-PM.jpg",
+    "https://i.ibb.co/sd1cnH3F/Whats-App-Image-2025-10-03-at-10-10-44-PM.jpg",
+    "https://i.ibb.co/99VpRnF6/Whats-App-Image-2025-10-03-at-10-10-42-PM-1.jpg",
+    "https://i.ibb.co/C5cs7VTS/Whats-App-Image-2025-10-03-at-10-10-42-PM.jpg",
+    "https://i.ibb.co/cj5Q3xF/Whats-App-Image-2025-10-03-at-10-10-43-PM.jpg"
   ],
   fuel: "Petrol",
-  price: "KSh 3.45M",
-  year: 2020,
-  transmission: "6-Speed Manual",
-  engine: "2000cc",
-  mileage: "39,000 km",
-  color: "Gray Exterior, Dark Leather Upholstery",
-  body: "SUV",
-  location: "Nairobi",
-  stockID: "MZ-CX520-2020",
+  price: "KSh 1.35M",
+  year: 2018,
+  transmission: "Automatic",
+  engine: "1300cc",
+  mileage: "N/A",
+  color: "Pearl White Exterior, Fabric Upholstery",
+  body: "Hatchback",
+  location: "N/A",
+  stockID: "MD-18",
   features: [
-    "Multimedia Navigation Knob",
-    "Electric Handbrake with AutoHold",
-    "Multifunction Steering Wheel Controls",
-    "Apple CarPlay & Android Auto",
-    "Daytime Running Lights",
-    "Foglights",
-    "Keyless Entry",
-    "Auto Start Stop",
-    "Push to Start",
-    "260km/hr Speed Limit"
+    "Multimedia steering controls",
+    "Multimedia navigation knob",
+    "Sport mode",
+    "FM/DVD/Bluetooth touchscreen player",
+    "Parking sensors",
+    "Blindspot monitoring",
+    "Lane departure alert",
+    "I-stop technology",
+    "Traction control",
+    "Alloy rims"
   ]
 },
 {
-  name: "2019 Volvo V40 T3",
+  name: "2018 Mercedes-Benz A180 (W176 with W177 Facelift)",
   images: [
-    "https://i.ibb.co/7tM71tBX/559210532-18074591519149075-2075867912142298199-n-Copy.jpg",
-    "https://i.ibb.co/YJ7Z1PG/559210532-18074591519149075-2075867912142298199-n.jpg",
-    "https://i.ibb.co/C5yxngYP/557604651-18074591498149075-5786298582331994791-n.jpg",
-    "https://i.ibb.co/ch59WfGm/558987436-18074591489149075-2730477631576446721-n.jpg",
-    "https://i.ibb.co/Z4SpZ9m/557730787-18074591462149075-47375993987870509-n.jpg",
-    "https://i.ibb.co/mQnhtGQ/558841827-18074591453149075-1420190346078821785-n.jpg"
+    "https://i.ibb.co/cX7SfRXS/Whats-App-Image-2025-10-03-at-11-50-00-PM.jpg",
+    "https://i.ibb.co/20QZdBnB/Whats-App-Image-2025-10-03-at-11-50-01-PM-1.jpg",
+    "https://i.ibb.co/V0CVzBk9/Whats-App-Image-2025-10-03-at-11-50-01-PM.jpg",
+    "https://i.ibb.co/7dX0H73G/Whats-App-Image-2025-10-03-at-11-50-02-PM-1.jpg",
+    "https://i.ibb.co/dJGLdyr6/Whats-App-Image-2025-10-03-at-11-50-02-PM.jpg",
+    "https://i.ibb.co/d4jNM0hr/Whats-App-Image-2025-10-03-at-11-50-03-PM.jpg"
   ],
-  fuel: "Petrol (T3 Turbo)",
-  price: "KSh N/A (Incoming Unit)",
-  year: 2019,
+  fuel: "Petrol",
+  price: "KSh 2.25M",
+  year: 2018,
   transmission: "Automatic",
-  engine: "1600cc Turbo",
-  mileage: "N/A (On Ship)",
-  color: "Modern Hatchback Styling, Scandinavian-Inspired Interior",
+  engine: "Turbo Petrol",
+  mileage: "Low Mileage",
+  color: "Modern Facelift (W177 Styling), Premium Interior Finish",
   body: "Hatchback",
-  location: "Expected arrival: 23rd this month",
-  stockID: "VV40-19",
+  location: "Under Customs Clearance",
+  stockID: "MBA180-18",
+  status: "Available",
   features: [
-    "T3 Turbo Petrol Engine – Smooth and powerful drive",
-    "Modern Hatchback Styling – Compact yet premium design",
-    "Scandinavian-Inspired Interior – Comfort with elegance",
-    "Infotainment System + Steering Controls – Seamless connectivity",
-    "Renowned Volvo Safety Features – Confidence behind the wheel"
+    "Efficient Turbo Petrol Engine – Smooth and responsive drive",
+    "Modern Facelift (W177 Styling) – Sporty and updated design cues",
+    "Premium Interior Finish – Comfort with sophistication",
+    "Multifunctional Steering Wheel Controls – Convenience on the go",
+    "Mercedes Safety Technology – Confidence in every drive",
+    "Compact Luxury Hatchback – Perfect balance of style and performance",
+    "Status: Under Customs Clearance – Be the first to own it!"
   ]
 },
 
 
   {
-    name: "Mazda 3 2019",
+    name: "2019 Volvo V40 T3",
     images: [
-      "https://i.imgur.com/abc1.jpeg",
-      "https://i.imgur.com/abc2.jpeg",
-      "https://i.imgur.com/abc3.jpeg",
-      "https://i.imgur.com/abc4.jpeg",
-      "https://i.imgur.com/abc5.jpeg"
+      "https://i.ibb.co/7tM71tBX/559210532-18074591519149075-2075867912142298199-n-Copy.jpg",
+      "https://i.ibb.co/YJ7Z1PG/559210532-18074591519149075-2075867912142298199-n.jpg",
+      "https://i.ibb.co/C5yxngYP/557604651-18074591498149075-5786298582331994791-n.jpg",
+      "https://i.ibb.co/ch59WfGm/558987436-18074591489149075-2730477631576446721-n.jpg",
+      "https://i.ibb.co/Z4SpZ9m/557730787-18074591462149075-47375993987870509-n.jpg",
+      "https://i.ibb.co/mQnhtGQ/558841827-18074591453149075-1420190346078821785-n.jpg"
     ],
-    fuel: "Petrol",
-    price: "KSh 2.8M",
+    fuel: "Petrol (T3 Turbo)",
+    price: "KSh N/A (Incoming Unit)",
     year: 2019,
     transmission: "Automatic",
-    engine: "2000cc",
-    mileage: "12,000 km",
-    color: "Polymetal Gray, Gray Interior",
-    body: "Sedan",
-    location: "Nairobi",
-    stockID: "MZ-32019",
+    engine: "1600cc Turbo",
+    mileage: "N/A (On Ship)",
+    color: "Modern Hatchback Styling, Scandinavian-Inspired Interior",
+    body: "Hatchback",
+    location: "Expected arrival: 23rd this month",
+    stockID: "VV40-19",
     features: [
-      "Reversing Camera",
-      "Smart Key",
-      "LED Headlights",
-      "Heated Seats"
+      "T3 Turbo Petrol Engine – Smooth and powerful drive",
+      "Modern Hatchback Styling – Compact yet premium design",
+      "Scandinavian-Inspired Interior – Comfort with elegance",
+      "Infotainment System + Steering Controls – Seamless connectivity",
+      "Renowned Volvo Safety Features – Confidence behind the wheel"
     ]
   },
+  {
+  name: "2016 Suzuki Swift",
+  images: [
+    "https://i.ibb.co/XxmHXbVL/Whats-App-Image-2025-10-03-at-11-20-37-PM-1.jpg",
+    "https://i.ibb.co/HfzXzNyn/Whats-App-Image-2025-10-03-at-11-20-37-PM.jpg",
+    "https://i.ibb.co/pjTCHvNG/Whats-App-Image-2025-10-03-at-11-20-35-PM-1.jpg",
+    "https://i.ibb.co/1Yv4p5wz/Whats-App-Image-2025-10-03-at-11-20-35-PM.jpg",
+    "https://i.ibb.co/GQsC72Xs/Whats-App-Image-2025-10-03-at-11-20-34-PM-1.jpg",
+    "https://i.ibb.co/PZtrQpCK/Whats-App-Image-2025-10-03-at-11-20-34-PM.jpg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 950,000",
+  year: 2016,
+  transmission: "Automatic",
+  engine: "1300cc",
+  mileage: "N/A",
+  color: "Silver Exterior, Fabric Upholstery",
+  body: "Hatchback",
+  location: "N/A",
+  stockID: "SS-16",
+  features: [
+    "1300cc Petrol Engine – Efficient and responsive",
+    "Silver Exterior – Sleek and timeless design",
+    "Fabric Upholstery – Comfortable and practical interior",
+    "Side Mirror Winkers – Safety with style",
+    "FM/DVD Touchscreen Player – Entertainment on the go",
+    "Dual Zone Climate Control – Comfort for driver & passengers",
+    "Extremely Clean & Accident Free – Well-maintained, ready to drive"
+  ]
+},
+{
+  name: "2020 Mazda CX-5",
+  images: [
+    "https://i.ibb.co/jvXyPrdY/Whats-App-Image-2025-10-03-at-11-38-15-PM-2-Copy.jpg",
+    "https://i.ibb.co/YBgPQLQQ/Whats-App-Image-2025-10-03-at-11-38-15-PM.jpg",
+    "https://i.ibb.co/CT78Xr6/Whats-App-Image-2025-10-03-at-11-38-15-PM-1.jpg",
+    "https://i.ibb.co/6R0MP0ty/Whats-App-Image-2025-10-03-at-11-38-14-PM.jpg",
+    "https://i.ibb.co/kVPRfhJm/Whats-App-Image-2025-10-03-at-11-38-13-PM-1.jpg",
+    "https://i.ibb.co/MkJP8pzC/Whats-App-Image-2025-10-03-at-11-38-13-PM.jpg",
+    "https://i.ibb.co/1JGXgT0J/Whats-App-Image-2025-10-03-at-11-38-14-PM-1.jpg"
+  ],
+  fuel: "Diesel",
+  price: "KSh 3.35M",
+  year: 2020,
+  transmission: "Automatic",
+  engine: "2200cc Turbo Diesel",
+  mileage: "N/A",
+  color: "Modern Stylish Exterior, Premium Interior",
+  body: "SUV",
+  location: "N/A",
+  stockID: "MCX5-20",
+  status: "Available",
+  features: [
+    "2200cc Turbo Diesel Engine – Powerful yet fuel-efficient",
+    "Modern, Stylish Exterior – Bold road presence",
+    "Spacious Premium Interior – Comfort for driver & passengers",
+    "Multimedia System with Steering Controls – Seamless connectivity",
+    "Advanced Mazda Safety Features – Confidence on every journey",
+    "Versatile SUV – Ideal for family, travel, and adventure"
+  ]
+},
+
+
   {
     name: "2018 Mercedes Benz GLC220D 4MATIC",
     images: [
@@ -242,534 +695,558 @@ const vehicles = [
     ]
   },
   {
-  name: "2011 Nissan Dualis",
+  name: "2018 Toyota Voxy",
   images: [
-    "https://i.imgur.com/QO9PXL5.jpeg",
-    "https://i.imgur.com/dESDhFL.jpeg",
-    "https://i.imgur.com/rundqIa.jpeg",
-    "https://i.imgur.com/jm96fls.jpeg",
-    "https://i.imgur.com/scmAMy8.jpeg",
-    "https://i.imgur.com/kBClZST.jpeg"
+    "https://i.ibb.co/GqydRjd/Whats-App-Image-2025-10-03-at-11-28-17-PM-Copy-Copy.jpg",
+    "https://i.ibb.co/kV1FLKr5/Whats-App-Image-2025-10-03-at-11-28-16-PM-1.jpg",
+    "https://i.ibb.co/qMZrjc8V/Whats-App-Image-2025-10-03-at-11-28-16-PM.jpg",
+    "https://i.ibb.co/LD3nV2jh/Whats-App-Image-2025-10-03-at-11-28-15-PM-2.jpg",
+    "https://i.ibb.co/LhSYDQCD/Whats-App-Image-2025-10-03-at-11-28-15-PM-1.jpg",
+    "https://i.ibb.co/tpgfDBtp/Whats-App-Image-2025-10-03-at-11-28-15-PM.jpg"
   ],
   fuel: "Petrol",
-  price: "KSh 1.03M",
-  year: 2011,
+  price: "KSh N/A (Incoming Unit)",
+  year: 2018,
   transmission: "Automatic",
-  engine: "2000cc",
-  mileage: "N/A",
-  color: "Black Exterior, Dark fabric upholstery",
-  body: "SUV",
-  location: "N/A",
-  stockID: "ND-11",
+  engine: "N/A (Likely 2000cc)",
+  mileage: "N/A (On Ship)",
+  color: "N/A",
+  body: "MPV (7/8-Seater)",
+  location: "Expected arrival: 23rd this month",
+  stockID: "TVX-18",
+  status: "Incoming",
   features: [
-    "Moonroof",
-    "Foldable side mirrors",
-    "FM/DVD/Bluetooth touchscreen player",
-    "Alloy rims",
-    "Foglights"
+    "Fuel-Efficient Petrol Engine – Smooth and reliable performance",
+    "Spacious Cabin (7/8 Seater) – Perfect for family or business use",
+    "Dual Powered Sliding Doors – Easy access for all passengers",
+    "Infotainment System – Entertainment on the go",
+    "Rear A/C Vents – Comfort across all rows",
+    "Toyota Safety Features – Confidence in every trip"
   ]
 },
 
   {
-  name: "2009 Toyota Ractis",
-  images: [
-    "https://i.imgur.com/wx2Qt16.jpeg",
-    "https://i.imgur.com/FFF6tLC.jpeg",
-    "https://i.imgur.com/UVxKA7g.jpeg",
-    "https://i.imgur.com/UAxsKPy.jpeg",
-    "https://i.imgur.com/ET5ML0N.jpeg"
-  ],
-  fuel: "Petrol",
-  price: "KSh 680K",
-  year: 2009,
-  transmission: "Automatic",
-  engine: "1300cc",
-  mileage: "N/A",
-  color: "White Exterior, Gray Fabric Interior",
-  body: "Hatchback",
-  location: "N/A",
-  stockID: "TR-09",
-  features: [
-    "Alloy Rims",
-    "New Tyres",
-    "One owner since import",
-    "Accident Free"
-  ]
-},
-{
-  name: "2016 Toyota Ractis",
-  images: [
-    "https://i.postimg.cc/XJ0FpJzc/Whats-App-Image-2025-09-06-at-9-12-30-AM.jpg",
-    "https://i.postimg.cc/wBNLqJ0j/Whats-App-Image-2025-09-06-at-9-12-40-AM.jpg",
-    "https://i.postimg.cc/RZywxG1Y/Whats-App-Image-2025-09-06-at-9-13-41-AM.jpg",
-    "https://i.postimg.cc/xTsKt9Xn/Whats-App-Image-2025-09-06-at-9-13-44-AM.jpg",
-    "https://i.postimg.cc/L64ttJ6x/Whats-App-Image-2025-09-06-at-9-13-45-AM.jpg",
-    "https://i.postimg.cc/qBxc6s0t/Whats-App-Image-2025-09-06-at-9-13-46-AM.jpg",
-    "https://i.postimg.cc/D06qVT5Q/Whats-App-Image-2025-09-06-at-9-13-52-AM.jpg",
-    "https://i.postimg.cc/zGcFXqN0/Whats-App-Image-2025-09-06-at-9-13-53-AM.jpg",
-    "https://i.postimg.cc/9fwtDsFV/Whats-App-Image-2025-09-06-at-9-13-54-AM.jpg",
-    "https://i.postimg.cc/Y9cNY8hF/Whats-App-Image-2025-09-06-at-9-13-54-AM-1.jpg",
-    "https://i.postimg.cc/W3MGnrkH/Whats-App-Image-2025-09-06-at-9-13-55-AM.jpg",
-    "https://i.postimg.cc/28TxM4Kp/Whats-App-Image-2025-09-06-at-9-13-56-AM.jpg"
-  ],
-  fuel: "Petrol",
-  price: "KSh 1.3M",
-  year: 2016,
-  transmission: "Automatic",
-  engine: "1500cc",
-  mileage: "N/A",
-  color: "Silver Exterior, Dark Fabric Interior",
-  body: "Hatchback",
-  location: "N/A",
-  stockID: "TR-16-KDM",
-  features: [
-    "FM/DVD Screen",
-    "Steering Controls",
-    "Accident Free",
-    "Original Import"
-  ]
-},
-{
-  name: "2015 Mitsubishi Mirage",
-  images: [
-    "https://i.postimg.cc/mZdrzkc3/Whats-App-Image-2025-09-06-at-9-50-12-AM.jpg",
-    "https://i.postimg.cc/fybTqnP0/Whats-App-Image-2025-09-06-at-9-50-13-AM.jpg",
-    "https://i.postimg.cc/RFdZTVgB/Whats-App-Image-2025-09-06-at-9-50-13-AM-1.jpg",
-    "https://i.postimg.cc/rmMpWtCj/Whats-App-Image-2025-09-06-at-9-50-13-AM-2.jpg",
-    "https://i.postimg.cc/KYXjGW1d/Whats-App-Image-2025-09-06-at-9-50-14-AM.jpg",
-    "https://i.postimg.cc/5N06nLck/Whats-App-Image-2025-09-06-at-9-50-14-AM-1.jpg",
-    "https://i.postimg.cc/Nj2Lwtj6/Whats-App-Image-2025-09-06-at-9-50-15-AM.jpg",
-    "https://i.postimg.cc/ncPM5rpV/Whats-App-Image-2025-09-06-at-9-50-16-AM.jpg",
-    "https://i.postimg.cc/wxF1XFrm/Whats-App-Image-2025-09-06-at-9-50-16-AM-1.jpg"
-  ],
-  fuel: "Petrol",
-  price: "KSh 650K",
-  year: 2015,
-  transmission: "Automatic",
-  engine: "1000cc",
-  mileage: "N/A",
-  color: "N/A",
-  body: "Hatchback",
-  location: "N/A",
-  stockID: "MM-15",
-  features: [
-    "Compact City Car",
-    "Fuel Efficient",
-    "Accident Free"
-  ]
-},
-{
-  name: "2017 Volvo XC60",
-  images: [
-    "https://i.postimg.cc/jSq6tLJp/Whats-App-Image-2025-09-06-at-10-07-45-AM-Copy-2.jpg",
-    "https://i.postimg.cc/cJ25vQRg/Whats-App-Image-2025-09-06-at-10-06-39-AM.jpg",
-    "https://i.postimg.cc/MHbs3NhV/Whats-App-Image-2025-09-06-at-10-06-40-AM.jpg",
-    "https://i.postimg.cc/5yM73bkf/Whats-App-Image-2025-09-06-at-10-06-43-AM.jpg",
-    "https://i.postimg.cc/0yt4sgrC/Whats-App-Image-2025-09-06-at-10-06-51-AM.jpg",
-    "https://i.postimg.cc/SKvHW0hK/Whats-App-Image-2025-09-06-at-10-07-46-AM.jpg",
-    "https://i.postimg.cc/PqxBpX0c/Whats-App-Image-2025-09-06-at-10-07-48-AM.jpg",
-    "https://i.postimg.cc/Njght7DQ/Whats-App-Image-2025-09-06-at-10-07-49-AM.jpg",
-    "https://i.postimg.cc/DfX3Pzm3/Whats-App-Image-2025-09-06-at-10-08-47-AM.jpg",
-    "https://i.postimg.cc/bdc6m8Cz/Whats-App-Image-2025-09-06-at-10-08-48-AM.jpg"
-  ],
-  fuel: "Diesel",
-  price: "KSh 3.5M",
-  year: 2017,
-  transmission: "Automatic",
-  engine: "2000cc",
-  mileage: "80,261 km",
-  color: "Original Paint",
-  body: "SUV",
-  location: "Kenya (Slightly Locally Used)",
-  stockID: "VOLVO-XC60-17",
-  features: [
-    "Functional Sunroof",
-    "Alloy Rims",
-    "Extremely Clean",
-    "Cool Music System",
-    "Well Maintained",
-    "Original Paint"
-  ]
-},
-{
-  name: "2014 Lexus RX270",
-  images: [
-    "https://i.postimg.cc/ZYBVMfG1/Whats-App-Image-2025-09-06-at-10-08-59-AM.jpg",
-    "https://i.postimg.cc/j27cn56s/Whats-App-Image-2025-09-06-at-10-08-59-AM-1.jpg",
-    "https://i.postimg.cc/V6T4NMCG/Whats-App-Image-2025-09-06-at-10-09-00-AM.jpg",
-    "https://i.postimg.cc/k4Df9wBR/Whats-App-Image-2025-09-06-at-10-09-01-AM.jpg",
-    "https://i.postimg.cc/PqXSVdH4/Whats-App-Image-2025-09-06-at-10-09-02-AM.jpg",
-    "https://i.postimg.cc/x1SxHKFB/Whats-App-Image-2025-09-06-at-10-09-05-AM.jpg",
-    "https://i.postimg.cc/YqFDhX81/Whats-App-Image-2025-09-06-at-10-09-08-AM.jpg",
-    "https://i.postimg.cc/nVgwV8KF/Whats-App-Image-2025-09-06-at-10-09-12-AM.jpg",
-    "https://i.postimg.cc/44mST492/Whats-App-Image-2025-09-06-at-10-09-18-AM.jpg",
-    "https://i.postimg.cc/tgBnk5SJ/Whats-App-Image-2025-09-06-at-10-09-24-AM.jpg"
-  ],
-  fuel: "Petrol",
-  price: "N/A", // Price not provided
-  year: 2014,
-  transmission: "Automatic",
-  engine: "2700cc",
-  mileage: "74,817 km",
-  color: "Original Paint",
-  body: "SUV",
-  location: "N/A",
-  stockID: "LEX-RX270-14",
-  features: [
-    "Extremely Clean",
-    "Well Maintained",
-    "Fully Loaded",
-    "Original Paint"
-  ]
-},
-{
-  name: "2015 Toyota Esquire",
-  images: [
-    "https://i.postimg.cc/y8r6Q84h/Whats-App-Image-2025-09-06-at-10-59-23-AM.jpg",
-    "https://i.postimg.cc/HLcYf1dq/Whats-App-Image-2025-09-06-at-10-59-23-AM-1.jpg",
-    "https://i.postimg.cc/nVvzFxBZ/Whats-App-Image-2025-09-06-at-10-59-24-AM.jpg",
-    "https://i.postimg.cc/ryWdDx6B/Whats-App-Image-2025-09-06-at-10-59-24-AM-1.jpg",
-    "https://i.postimg.cc/L63nTS8v/Whats-App-Image-2025-09-06-at-10-59-25-AM.jpg",
-    "https://i.postimg.cc/kXm2KGqB/Whats-App-Image-2025-09-06-at-10-59-25-AM-1.jpg",
-    "https://i.postimg.cc/T32hNsyx/Whats-App-Image-2025-09-06-at-10-59-25-AM-2.jpg",
-    "https://i.postimg.cc/WbgMcxbJ/Whats-App-Image-2025-09-06-at-10-59-26-AM.jpg"
-  ],
-  fuel: "Petrol",
-  price: "KSh 1.7M",
-  year: 2015,
-  transmission: "Automatic",
-  engine: "2000cc",
-  mileage: "N/A",
-  color: "N/A",
-  body: "Van",
-  location: "N/A",
-  stockID: "TESQ-15-KDJ",
-  features: [
-    "7 Seater Leather Interior",
-    "Accident Free",
-    "Spacious Family Car"
-  ]
-},
-
-
-
-
-    {
-  name: "citroen C4 2018",
-  price: "KSh 1.5M",
-  reg: " 827R",
-  fuel: "Petrol",
-  year: 2015,
-  transmission: "Automatic",
-  color: "Pearl White",
-  mileage: "48,000 km",
-  engine: "1500cc",
-  condition: "New Import",
-  drivetrain: "FWD",
-  images: [
-    "https://i.ibb.co/HLmRhyS2/Whats-App-Image-2025-07-16-at-8-21-35-PM.jpg",
-    "https://i.ibb.co/DfPKQDcY/Whats-App-Image-2025-07-16-at-8-21-34-PM.jpg",
-    "https://i.ibb.co/PZKQc5W8/Whats-App-Image-2025-07-16-at-8-21-36-PM-1.jpg",
-    "https://i.ibb.co/Z63xRpPD/Whats-App-Image-2025-07-16-at-8-21-36-PM.jpg",
-    "https://i.ibb.co/dJ4jxmLp/Whats-App-Image-2025-07-16-at-8-21-40-PM-1.jpg",
-    "https://i.ibb.co/Wp431dXk/Whats-App-Image-2025-07-16-at-8-21-40-PM.jpg",
-    "https://i.ibb.co/7tGMzMyb/Whats-App-Image-2025-07-16-at-8-21-38-PM-1.jpg",
-    "https://i.ibb.co/jZkswvHq/Whats-App-Image-2025-07-16-at-8-21-38-PM.jpg"
-  ]
-},  
+    name: "2011 Nissan Dualis",
+    images: [
+      "https://i.imgur.com/QO9PXL5.jpeg",
+      "https://i.imgur.com/dESDhFL.jpeg",
+      "https://i.imgur.com/rundqIa.jpeg",
+      "https://i.imgur.com/jm96fls.jpeg",
+      "https://i.imgur.com/scmAMy8.jpeg",
+      "https://i.imgur.com/kBClZST.jpeg"
+    ],
+    fuel: "Petrol",
+    price: "KSh 1.03M",
+    year: 2011,
+    transmission: "Automatic",
+    engine: "2000cc",
+    mileage: "N/A",
+    color: "Black Exterior, Dark fabric upholstery",
+    body: "SUV",
+    location: "N/A",
+    stockID: "ND-11",
+    features: [
+      "Moonroof",
+      "Foldable side mirrors",
+      "FM/DVD/Bluetooth touchscreen player",
+      "Alloy rims",
+      "Foglights"
+    ]
+  },
   {
-      name: "Tesla Model 3",
-      price: "KSh 5.8M",
-      reg: "KDG 320T",
-      fuel: "Electric",
-      year: 2022,
-      transmission: "Automatic",
-      color: "White",
-      mileage: "15,000 km",
-      engine: "Electric Motor",
-      condition: "New Import",
-      drivetrain: "RWD",
-      images: [
-        "https://i.ibb.co/FbfgxJJR/Whats-App-Image-2025-06-17-at-8-40-09-AM.jpg",
-        "https://i.ibb.co/LXth5wH9/Whats-App-Image-2025-06-17-at-8-40-13-AM.jpg",
-        "https://i.ibb.co/cK5449CW/Whats-App-Image-2025-06-17-at-8-40-15-AM.jpg",
-        "https://i.ibb.co/9mztxt4n/Whats-App-Image-2025-06-17-at-8-40-16-AM.jpg",
-        "https://i.ibb.co/9mztxt4n/Whats-App-Image-2025-06-17-at-8-40-16-AM.jpg",
-        "https://i.ibb.co/FbfgxJJR/Whats-App-Image-2025-06-17-at-8-40-09-AM.jpg",
-        "https://i.ibb.co/cK5449CW/Whats-App-Image-2025-06-17-at-8-40-15-AM.jpg",
-        "https://i.ibb.co/cK5449CW/Whats-App-Image-2025-06-17-at-8-40-15-AM.jpg"
-      ]
-    },
-    {
-      name: "TOYOTA PRADO J120 2004",
-      price: "KSh 2.2M",
-      reg: "KBQ 219S ",
-      fuel: "DISEL",
-      year: 2004,
-      transmission: "Automatic",
-      color: "White",
-      mileage: "15,000 km",
-      engine: "DISEL",
-      condition: "New Import",
-      drivetrain: "RWD",
-      images: [
-        "https://i.ibb.co/VWtw7M6W/Whats-App-Image-2025-07-03-at-10-43-51-AM.jpg",
-        "https://i.ibb.co/7N8xfTBh/Whats-App-Image-2025-07-03-at-10-43-51-AM-1.jpg",
-        "https://i.ibb.co/Rk7tTMrW/Whats-App-Image-2025-07-03-at-10-43-47-AM.jpg",
-        "https://i.ibb.co/kst0VnXJ/Whats-App-Image-2025-07-03-at-10-43-38-AM.jpg",
-        "https://i.ibb.co/8DGPWyf4/Whats-App-Image-2025-07-03-at-10-43-35-AM.jpg",
-        "https://i.ibb.co/k2fXf2Fn/Whats-App-Image-2025-07-03-at-10-43-34-AM.jpg",
-        "https://i.ibb.co/V0FY1JYk/Whats-App-Image-2025-07-03-at-10-43-33-AM.jpg",
-        "https://i.ibb.co/Rk7tTMrW/Whats-App-Image-2025-07-03-at-10-43-47-AM.jpg"
-      ]
-    },
-    {
-      name: "MAZDA CX8 2018 ",
-      price: "KSh 3.4M",
-      reg: " ",
-      fuel: "PETROL",
-      year: 2022,
-      transmission: "Automatic",
-      color: "PEARL WHITE",
-      mileage: "15,000 km",
-      engine: "Electric Motor",
-      condition: "New Import",
-      drivetrain: "RWD",
-      images: [
-  "https://i.ibb.co/39X739J2/Whats-App-Image-2025-07-03-at-10-41-39-AM.jpg",
-  "https://i.ibb.co/XZT5yH0H/Whats-App-Image-2025-07-03-at-10-41-31-AM.jpg",
-  "https://i.ibb.co/KpsgMhPh/Whats-App-Image-2025-07-03-at-10-41-28-AM.jpg",
-  "https://i.ibb.co/27bKTtJs/Whats-App-Image-2025-07-03-at-10-41-26-AM.jpg",
-  "https://i.ibb.co/99yFqzTb/Whats-App-Image-2025-07-03-at-10-41-25-AM.jpg",
-  "https://i.ibb.co/99JbYYx0/Whats-App-Image-2025-07-03-at-10-41-23-AM.jpg"
-]
-    },
-    {
-      name: "MAZDA CX8 2018",
-      price: "KSh 3.5M",
-      reg: "KDG 320T",
-      fuel: "PETROL",
-      year: 2018,
-      transmission: "Automatic",
-      color: "BROWN LEATHER",
-      mileage: "15,000 km",
-      engine: "Electric Motor",
-      condition: "New Import",
-      drivetrain: "RWD",
-      images: [
-        "https://i.ibb.co/s9pPF7bZ/Whats-App-Image-2025-07-03-at-10-42-01-AM.jpg",
-  "https://i.ibb.co/fd3ChNhZ/Whats-App-Image-2025-07-03-at-10-42-00-AM.jpg",
-  "https://i.ibb.co/0VhR21JR/Whats-App-Image-2025-07-03-at-10-41-56-AM.jpg",
-  "https://i.ibb.co/1ftkXMKC/Whats-App-Image-2025-07-03-at-10-41-54-AM.jpg",
-  "https://i.ibb.co/Myv4DKmj/Whats-App-Image-2025-07-03-at-10-41-53-AM.jpg",
-  "https://i.ibb.co/C3y7X7rR/Whats-App-Image-2025-07-03-at-10-41-49-AM.jpg",
-  "https://i.ibb.co/8LQ04rVJ/Whats-App-Image-2025-07-03-at-10-41-47-AM.jpg"
-      ]
-    },
-    {
-      name: "PEOGOT 2008 GTLINE ",
-      price: "KSh 1.97M",
-      reg: " ",
-      fuel: "PETROL",
-      year: 2022,
-      transmission: "Automatic",
-      color: "RED EXTERIOR",
-      mileage: "15,000 km",
-      engine: "Electric Motor",
-      condition: "New Import",
-      drivetrain: "RWD",
-      images: [
-        
-          "https://i.ibb.co/pBMjqXPB/Whats-App-Image-2025-07-03-at-6-57-07-AM.jpg",
-  "https://i.ibb.co/Gvq3DSCj/Whats-App-Image-2025-07-03-at-6-57-05-AM.jpg",
-  "https://i.ibb.co/0pyfDXP0/Whats-App-Image-2025-07-03-at-6-57-03-AM.jpg",
-  "https://i.ibb.co/ZpCgd3Tm/Whats-App-Image-2025-07-03-at-6-57-03-AM-1.jpg",
-  "https://i.ibb.co/TDxzWJqc/Whats-App-Image-2025-07-03-at-6-57-02-AM.jpg",
-  "https://i.ibb.co/Pvj8n51H/Whats-App-Image-2025-07-03-at-6-57-05-AM-1.jpg"
-      ]
-    },
-    {
-      name: "MAZDA DEMIO 2012 ",
-      price: "KSh 650K",
-      reg: "KCW ",
-      fuel: "PETROL",
-      year: 2012,
-      transmission: "Automatic",
-      color: "ORIGINAL PAINT",
-      mileage: "15,000 km",
-      engine: "PETROL ENGINE",
-      condition: "USED",
-      drivetrain: "RWD",
-      images: [
-        
-           "https://i.ibb.co/rKZRm9bD/Whats-App-Image-2025-07-14-at-9-56-12-AM.jpg",
-  "https://i.ibb.co/27939gw3/Whats-App-Image-2025-07-14-at-9-56-20-AM.jpg",
-  "https://i.ibb.co/JWHt00T4/Whats-App-Image-2025-07-14-at-9-56-21-AM.jpg",
-  "https://i.ibb.co/kVZ8Ps0y/Whats-App-Image-2025-07-14-at-9-56-22-AM.jpg",
-  "https://i.ibb.co/1t8CmXN0/Whats-App-Image-2025-07-14-at-9-56-24-AM.jpg",
-  "https://i.ibb.co/qYNRp4VK/Whats-App-Image-2025-07-14-at-9-56-40-AM.jpg",
-  "https://i.ibb.co/RTdxCwfH/Whats-App-Image-2025-07-16-at-8-44-02-AM.jpg"
-      ]
-    },
-    {
-      name: "TOYOTA FIELDER 2018",
-      price: "KSh 1.9M",
-      reg: " 320T",
-      fuel: "PETROL",
-      year: 2022,
-      transmission: "Automatic",
-      color: "BLACK EXTERIOR",
-      mileage: "15,000 km",
-      engine: "Electric Motor",
-      condition: "New Import",
-      drivetrain: "RWD",
-      images: [
-         "https://i.ibb.co/GfVMdz9j/Whats-App-Image-2025-07-03-at-6-48-39-AM.jpg",
-  "https://i.ibb.co/rRRL4mYz/Whats-App-Image-2025-07-03-at-6-48-40-AM.jpg",
-  "https://i.ibb.co/3mcjR3f4/Whats-App-Image-2025-07-03-at-6-48-41-AM-1.jpg",
-  "https://i.ibb.co/wN0kVks8/Whats-App-Image-2025-07-03-at-6-48-41-AM.jpg",
-  "https://i.ibb.co/d01Mm8SN/Whats-App-Image-2025-07-03-at-6-48-43-AM-1.jpg",
-  "https://i.ibb.co/n26JKdb/Whats-App-Image-2025-07-03-at-6-48-43-AM.jpg",
-  "https://i.ibb.co/M5M98YqF/Whats-App-Image-2025-07-03-at-6-48-44-AM-1.jpg",
-  "https://i.ibb.co/WW4h42J1/Whats-App-Image-2025-07-03-at-6-48-45-AM-1.jpg",
-  "https://i.ibb.co/dsh5SVnm/Whats-App-Image-2025-07-03-at-6-48-45-AM.jpg"
-      ]
-    },
-    {
-      name: "TOYOTA RACTIS 2011",
-      price: "KSh 850K",
-      reg: " KCQ",
-      fuel: "PETROL",
-      year: 2022,
-      transmission: "Automatic",
-      color: "PURPLE EXTERIOR",
-      mileage: "15,000 km",
-      engine: "ALLOY WHEELS",
-      condition: "USED",
-      drivetrain: "RWD",
-      images: [
-          "https://i.ibb.co/JW69NYW6/Whats-App-Image-2025-07-16-at-8-44-08-AM.jpg",
-  "https://i.ibb.co/D2Pc8s1/Whats-App-Image-2025-07-16-at-8-44-03-AM-1.jpg",
-  "https://i.ibb.co/RTdxCwfH/Whats-App-Image-2025-07-16-at-8-44-02-AM.jpg",
-  "https://i.ibb.co/mV4TsKGk/Whats-App-Image-2025-07-16-at-8-44-15-AM.jpg",
-  "https://i.ibb.co/HDmLs2LQ/Whats-App-Image-2025-07-16-at-8-44-16-AM.jpg",
-  "https://i.ibb.co/tN8ZmWm/Whats-App-Image-2025-07-16-at-8-44-03-AM.jpg"
-      ]
-    },
-    {
-      name: "MAZDA ATENZA 2014",
-      price: "KSh 1.5M",
-      reg: " 320T",
-      fuel: "PETROL",
-      year: 2022,
-      transmission: "Automatic",
-      color: "RED EXTERIOR",
-      mileage: "15,000 km",
-      engine: "Electric Motor",
-      condition: "New Import",
-      drivetrain: "RWD",
-      images: [
-         "https://i.ibb.co/WvzvfTFQ/Whats-App-Image-2025-07-02-at-9-57-51-PM.jpg",
-  "https://i.ibb.co/R4km2WfB/Whats-App-Image-2025-07-02-at-9-57-52-PM.jpg",
-  "https://i.ibb.co/sTsWTQL/Whats-App-Image-2025-07-02-at-9-57-53-PM.jpg",
-  "https://i.ibb.co/CpP1h4RZ/Whats-App-Image-2025-07-02-at-9-57-55-PM.jpg",
-  "https://i.ibb.co/prNLGYCZ/Whats-App-Image-2025-07-02-at-9-57-58-PM.jpg",
-  "https://i.ibb.co/fZt6b2s/Whats-App-Image-2025-07-02-at-9-58-04-PM.jpg"
-      ]
-    },
-    {
-  name: "MAZDA DEMIO 2016",
-  price: "KSh 1.0M",
-  reg: "KDM",
-  fuel: "PETROL",
-  year: 2016,
-  transmission: "Automatic",
-  color: "RED EXTERIOR",
-  mileage: "15,000 km",
-  engine: "PETROL ENGINE",
-  condition: "ALLOY WHEELS",
-  drivetrain: "RWD",
-  images: [
-    "https://i.ibb.co/HpGz7yrg/Whats-App-Image-2025-07-16-at-10-00-33-AM.jpg",
-    "https://i.ibb.co/YnCYNy1/Whats-App-Image-2025-07-16-at-10-03-34-AM.jpg",
-    "https://i.ibb.co/Z1kcTjLd/Whats-App-Image-2025-07-16-at-10-03-36-AM.jpg",
-    "https://i.ibb.co/DgsbMtnY/Whats-App-Image-2025-07-16-at-10-03-57-AM.jpg",
-    "https://i.ibb.co/ksFJhQPR/Whats-App-Image-2025-07-16-at-10-03-59-AM.jpg",
-    "https://i.ibb.co/Y7cKYDgN/Whats-App-Image-2025-07-16-at-10-04-15-AM.jpg"
-  ]
-},
-    {
-      name: "TOYOTA PROBOX 2013",
-      price: "KSh 810K",
-      reg: " 320T",
-      fuel: "PETROL",
-      year: 2022,
-      transmission: "Automatic",
-      color: "WHITE",
-      mileage: "15,000 km",
-      engine: "Electric Motor",
-      condition: "New Import",
-      drivetrain: "RWD",
-      images: [
-          "https://i.ibb.co/1twVvVCz/Whats-App-Image-2025-07-02-at-4-23-30-PM.jpg",
-  "https://i.ibb.co/Z1b3WzMQ/Whats-App-Image-2025-07-02-at-4-23-32-PM.jpg",
-  "https://i.ibb.co/8DJdfFXW/Whats-App-Image-2025-07-02-at-4-23-33-PM.jpg",
-  "https://i.ibb.co/0pBKBzwb/Whats-App-Image-2025-07-02-at-4-23-35-PM.jpg",
-  "https://i.ibb.co/q37xSync/Whats-App-Image-2025-07-02-at-4-23-37-PM.jpg",
-  "https://i.ibb.co/1h7C5DL/Whats-App-Image-2025-07-02-at-4-23-38-PM.jpg",
-  "https://i.ibb.co/jkbShY4b/Whats-App-Image-2025-07-02-at-4-23-39-PM.jpg",
-  "https://i.ibb.co/Hpkd8tHd/Whats-App-Image-2025-07-02-at-4-23-41-PM.jpg",
-  "https://i.ibb.co/HpfQ4Bc2/Whats-App-Image-2025-07-02-at-4-23-42-PM.jpg",
-  "https://i.ibb.co/7N2sfSPh/Whats-App-Image-2025-07-02-at-4-23-43-PM.jpg"
-      ]
-    },
-    {
-      name: "TOYOTA FIELDER 2018",
-      price: "KSh 1.9M",
-      reg: " 320T",
-      fuel: "PETROL",
-      year: 2022,
-      transmission: "Automatic",
-      color: "BLACK EXTERIOR",
-      mileage: "15,000 km",
-      engine: "Electric Motor",
-      condition: "New Import",
-      drivetrain: "RWD",
-      images: [
-         "https://i.ibb.co/GfVMdz9j/Whats-App-Image-2025-07-03-at-6-48-39-AM.jpg",
-  "https://i.ibb.co/rRRL4mYz/Whats-App-Image-2025-07-03-at-6-48-40-AM.jpg",
-  "https://i.ibb.co/3mcjR3f4/Whats-App-Image-2025-07-03-at-6-48-41-AM-1.jpg",
-  "https://i.ibb.co/wN0kVks8/Whats-App-Image-2025-07-03-at-6-48-41-AM.jpg",
-  "https://i.ibb.co/d01Mm8SN/Whats-App-Image-2025-07-03-at-6-48-43-AM-1.jpg",
-  "https://i.ibb.co/n26JKdb/Whats-App-Image-2025-07-03-at-6-48-43-AM.jpg",
-  "https://i.ibb.co/M5M98YqF/Whats-App-Image-2025-07-03-at-6-48-44-AM-1.jpg",
-  "https://i.ibb.co/WW4h42J1/Whats-App-Image-2025-07-03-at-6-48-45-AM-1.jpg",
-  "https://i.ibb.co/dsh5SVnm/Whats-App-Image-2025-07-03-at-6-48-45-AM.jpg"
-      ]
-    },
-    {
-      name: "SUZUKI ESCUDO ALLGRIP 2018",
-      price: "KSh 2.65M",
-      reg: "",
-      fuel: "Electric",
-      year: 2021,
-      transmission: "Auto",
-      color: "Black",
-      mileage: "22,000 km",
-      engine: "PETROL Motor",
-      condition: "NEW",
-      drivetrain: "RWD",
-      images: [
-        "https://i.ibb.co/4g9LkKzS/Whats-App-Image-2025-07-03-at-7-02-31-AM.jpg",
-        "https://i.ibb.co/4R4wBWb4/Whats-App-Image-2025-07-03-at-7-02-27-AM.jpg",
-        "https://i.ibb.co/wDMSv3z/Whats-App-Image-2025-07-03-at-7-02-26-AM.jpg",
-        "https://i.ibb.co/kVLz32Dj/Whats-App-Image-2025-07-03-at-7-02-26-AM-1.jpg",
-        "https://i.ibb.co/wFxrbcNw/Whats-App-Image-2025-07-03-at-7-02-25-AM.jpg",
-        "https://i.ibb.co/4g9LkKzS/Whats-App-Image-2025-07-03-at-7-02-31-AM.jpg",
-        "https://i.ibb.co/wFxrbcNw/Whats-App-Image-2025-07-03-at-7-02-25-AM.jpg"
-      ]
-    },
-     { 
+    name: "2009 Toyota Ractis",
+    images: [
+      "https://i.imgur.com/wx2Qt16.jpeg",
+      "https://i.imgur.com/FFF6tLC.jpeg",
+      "https://i.imgur.com/UVxKA7g.jpeg",
+      "https://i.imgur.com/UAxsKPy.jpeg",
+      "https://i.imgur.com/ET5ML0N.jpeg"
+    ],
+    fuel: "Petrol",
+    price: "KSh 680K",
+    year: 2009,
+    transmission: "Automatic",
+    engine: "1300cc",
+    mileage: "N/A",
+    color: "White Exterior, Gray Fabric Interior",
+    body: "Hatchback",
+    location: "N/A",
+    stockID: "TR-09",
+    features: [
+      "Alloy Rims",
+      "New Tyres",
+      "One owner since import",
+      "Accident Free"
+    ]
+  },
+  {
+    name: "2016 Toyota Ractis",
+    images: [
+      "https://i.postimg.cc/XJ0FpJzc/Whats-App-Image-2025-09-06-at-9-12-30-AM.jpg",
+      "https://i.postimg.cc/wBNLqJ0j/Whats-App-Image-2025-09-06-at-9-12-40-AM.jpg",
+      "https://i.postimg.cc/RZywxG1Y/Whats-App-Image-2025-09-06-at-9-13-41-AM.jpg",
+      "https://i.postimg.cc/xTsKt9Xn/Whats-App-Image-2025-09-06-at-9-13-44-AM.jpg",
+      "https://i.postimg.cc/L64ttJ6x/Whats-App-Image-2025-09-06-at-9-13-45-AM.jpg",
+      "https://i.postimg.cc/qBxc6s0t/Whats-App-Image-2025-09-06-at-9-13-46-AM.jpg",
+      "https://i.postimg.cc/D06qVT5Q/Whats-App-Image-2025-09-06-at-9-13-52-AM.jpg",
+      "https://i.postimg.cc/zGcFXqN0/Whats-App-Image-2025-09-06-at-9-13-53-AM.jpg",
+      "https://i.postimg.cc/9fwtDsFV/Whats-App-Image-2025-09-06-at-9-13-54-AM.jpg",
+      "https://i.postimg.cc/Y9cNY8hF/Whats-App-Image-2025-09-06-at-9-13-54-AM-1.jpg",
+      "https://i.postimg.cc/W3MGnrkH/Whats-App-Image-2025-09-06-at-9-13-55-AM.jpg",
+      "https://i.postimg.cc/28TxM4Kp/Whats-App-Image-2025-09-06-at-9-13-56-AM.jpg"
+    ],
+    fuel: "Petrol",
+    price: "KSh 1.3M",
+    year: 2016,
+    transmission: "Automatic",
+    engine: "1500cc",
+    mileage: "N/A",
+    color: "Silver Exterior, Dark Fabric Interior",
+    body: "Hatchback",
+    location: "N/A",
+    stockID: "TR-16-KDM",
+    features: [
+      "FM/DVD Screen",
+      "Steering Controls",
+      "Accident Free",
+      "Original Import"
+    ]
+  },
+  {
+    name: "2015 Mitsubishi Mirage",
+    images: [
+      "https://i.postimg.cc/mZdrzkc3/Whats-App-Image-2025-09-06-at-9-50-12-AM.jpg",
+      "https://i.postimg.cc/fybTqnP0/Whats-App-Image-2025-09-06-at-9-50-13-AM.jpg",
+      "https://i.postimg.cc/RFdZTVgB/Whats-App-Image-2025-09-06-at-9-50-13-AM-1.jpg",
+      "https://i.postimg.cc/rmMpWtCj/Whats-App-Image-2025-09-06-at-9-50-13-AM-2.jpg",
+      "https://i.postimg.cc/KYXjGW1d/Whats-App-Image-2025-09-06-at-9-50-14-AM.jpg",
+      "https://i.postimg.cc/5N06nLck/Whats-App-Image-2025-09-06-at-9-50-14-AM-1.jpg",
+      "https://i.postimg.cc/Nj2Lwtj6/Whats-App-Image-2025-09-06-at-9-50-15-AM.jpg",
+      "https://i.postimg.cc/ncPM5rpV/Whats-App-Image-2025-09-06-at-9-50-16-AM.jpg",
+      "https://i.postimg.cc/wxF1XFrm/Whats-App-Image-2025-09-06-at-9-50-16-AM-1.jpg"
+    ],
+    fuel: "Petrol",
+    price: "KSh 650K",
+    year: 2015,
+    transmission: "Automatic",
+    engine: "1000cc",
+    mileage: "N/A",
+    color: "N/A",
+    body: "Hatchback",
+    location: "N/A",
+    stockID: "MM-15",
+    features: [
+      "Compact City Car",
+      "Fuel Efficient",
+      "Accident Free"
+    ]
+  },
+  {
+    name: "2017 Volvo XC60",
+    images: [
+      "https://i.postimg.cc/jSq6tLJp/Whats-App-Image-2025-09-06-at-10-07-45-AM-Copy-2.jpg",
+      "https://i.postimg.cc/cJ25vQRg/Whats-App-Image-2025-09-06-at-10-06-39-AM.jpg",
+      "https://i.postimg.cc/MHbs3NhV/Whats-App-Image-2025-09-06-at-10-06-40-AM.jpg",
+      "https://i.postimg.cc/5yM73bkf/Whats-App-Image-2025-09-06-at-10-06-43-AM.jpg",
+      "https://i.postimg.cc/0yt4sgrC/Whats-App-Image-2025-09-06-at-10-06-51-AM.jpg",
+      "https://i.postimg.cc/SKvHW0hK/Whats-App-Image-2025-09-06-at-10-07-46-AM.jpg",
+      "https://i.postimg.cc/PqxBpX0c/Whats-App-Image-2025-09-06-at-10-07-48-AM.jpg",
+      "https://i.postimg.cc/Njght7DQ/Whats-App-Image-2025-09-06-at-10-07-49-AM.jpg",
+      "https://i.postimg.cc/DfX3Pzm3/Whats-App-Image-2025-09-06-at-10-08-47-AM.jpg",
+      "https://i.postimg.cc/bdc6m8Cz/Whats-App-Image-2025-09-06-at-10-08-48-AM.jpg"
+    ],
+    fuel: "Diesel",
+    price: "KSh 3.5M",
+    year: 2017,
+    transmission: "Automatic",
+    engine: "2000cc",
+    mileage: "80,261 km",
+    color: "Original Paint",
+    body: "SUV",
+    location: "Kenya (Slightly Locally Used)",
+    stockID: "VOLVO-XC60-17",
+    features: [
+      "Functional Sunroof",
+      "Alloy Rims",
+      "Extremely Clean",
+      "Cool Music System",
+      "Well Maintained",
+      "Original Paint"
+    ]
+  },
+  {
+    name: "2014 Lexus RX270",
+    images: [
+      "https://i.postimg.cc/ZYBVMfG1/Whats-App-Image-2025-09-06-at-10-08-59-AM.jpg",
+      "https://i.postimg.cc/j27cn56s/Whats-App-Image-2025-09-06-at-10-08-59-AM-1.jpg",
+      "https://i.postimg.cc/V6T4NMCG/Whats-App-Image-2025-09-06-at-10-09-00-AM.jpg",
+      "https://i.postimg.cc/k4Df9wBR/Whats-App-Image-2025-09-06-at-10-09-01-AM.jpg",
+      "https://i.postimg.cc/PqXSVdH4/Whats-App-Image-2025-09-06-at-10-09-02-AM.jpg",
+      "https://i.postimg.cc/x1SxHKFB/Whats-App-Image-2025-09-06-at-10-09-05-AM.jpg",
+      "https://i.postimg.cc/YqFDhX81/Whats-App-Image-2025-09-06-at-10-09-08-AM.jpg",
+      "https://i.postimg.cc/nVgwV8KF/Whats-App-Image-2025-09-06-at-10-09-12-AM.jpg",
+      "https://i.postimg.cc/44mST492/Whats-App-Image-2025-09-06-at-10-09-18-AM.jpg",
+      "https://i.postimg.cc/tgBnk5SJ/Whats-App-Image-2025-09-06-at-10-09-24-AM.jpg"
+    ],
+    fuel: "Petrol",
+    price: "N/A", // Price not provided
+    year: 2014,
+    transmission: "Automatic",
+    engine: "2700cc",
+    mileage: "74,817 km",
+    color: "Original Paint",
+    body: "SUV",
+    location: "N/A",
+    stockID: "LEX-RX270-14",
+    features: [
+      "Extremely Clean",
+      "Well Maintained",
+      "Fully Loaded",
+      "Original Paint"
+    ]
+  },
+  {
+    name: "2015 Toyota Esquire",
+    images: [
+      "https://i.postimg.cc/y8r6Q84h/Whats-App-Image-2025-09-06-at-10-59-23-AM.jpg",
+      "https://i.postimg.cc/HLcYf1dq/Whats-App-Image-2025-09-06-at-10-59-23-AM-1.jpg",
+      "https://i.postimg.cc/nVvzFxBZ/Whats-App-Image-2025-09-06-at-10-59-24-AM.jpg",
+      "https://i.postimg.cc/ryWdDx6B/Whats-App-Image-2025-09-06-at-10-59-24-AM-1.jpg",
+      "https://i.postimg.cc/L63nTS8v/Whats-App-Image-2025-09-06-at-10-59-25-AM.jpg",
+      "https://i.postimg.cc/kXm2KGqB/Whats-App-Image-2025-09-06-at-10-59-25-AM-1.jpg",
+      "https://i.postimg.cc/T32hNsyx/Whats-App-Image-2025-09-06-at-10-59-25-AM-2.jpg",
+      "https://i.postimg.cc/WbgMcxbJ/Whats-App-Image-2025-09-06-at-10-59-26-AM.jpg"
+    ],
+    fuel: "Petrol",
+    price: "KSh 1.7M",
+    year: 2015,
+    transmission: "Automatic",
+    engine: "2000cc",
+    mileage: "N/A",
+    color: "N/A",
+    body: "Van",
+    location: "N/A",
+    stockID: "TESQ-15-KDJ",
+    features: [
+      "7 Seater Leather Interior",
+      "Accident Free",
+      "Spacious Family Car"
+    ]
+  },
+  {
+    name: "citroen C4 2018",
+    price: "KSh 1.5M",
+    reg: " 827R",
+    fuel: "Petrol",
+    year: 2015,
+    transmission: "Automatic",
+    color: "Pearl White",
+    mileage: "48,000 km",
+    engine: "1500cc",
+    condition: "New Import",
+    drivetrain: "FWD",
+    images: [
+      "https://i.ibb.co/HLmRhyS2/Whats-App-Image-2025-07-16-at-8-21-35-PM.jpg",
+      "https://i.ibb.co/DfPKQDcY/Whats-App-Image-2025-07-16-at-8-21-34-PM.jpg",
+      "https://i.ibb.co/PZKQc5W8/Whats-App-Image-2025-07-16-at-8-21-36-PM-1.jpg",
+      "https://i.ibb.co/Z63xRpPD/Whats-App-Image-2025-07-16-at-8-21-36-PM.jpg",
+      "https://i.ibb.co/dJ4jxmLp/Whats-App-Image-2025-07-16-at-8-21-40-PM-1.jpg",
+      "https://i.ibb.co/Wp431dXk/Whats-App-Image-2025-07-16-at-8-21-40-PM.jpg",
+      "https://i.ibb.co/7tGMzMyb/Whats-App-Image-2025-07-16-at-8-21-38-PM-1.jpg",
+      "https://i.ibb.co/jZkswvHq/Whats-App-Image-2025-07-16-at-8-21-38-PM.jpg"
+    ]
+  },  
+  {
+    name: "Tesla Model 3",
+    price: "KSh 5.8M",
+    reg: "KDG 320T",
+    fuel: "Electric",
+    year: 2022,
+    transmission: "Automatic",
+    color: "White",
+    mileage: "15,000 km",
+    engine: "Electric Motor",
+    condition: "New Import",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/FbfgxJJR/Whats-App-Image-2025-06-17-at-8-40-09-AM.jpg",
+      "https://i.ibb.co/LXth5wH9/Whats-App-Image-2025-06-17-at-8-40-13-AM.jpg",
+      "https://i.ibb.co/cK5449CW/Whats-App-Image-2025-06-17-at-8-40-15-AM.jpg",
+      "https://i.ibb.co/9mztxt4n/Whats-App-Image-2025-06-17-at-8-40-16-AM.jpg",
+      "https://i.ibb.co/9mztxt4n/Whats-App-Image-2025-06-17-at-8-40-16-AM.jpg",
+      "https://i.ibb.co/FbfgxJJR/Whats-App-Image-2025-06-17-at-8-40-09-AM.jpg",
+      "https://i.ibb.co/cK5449CW/Whats-App-Image-2025-06-17-at-8-40-15-AM.jpg",
+      "https://i.ibb.co/cK5449CW/Whats-App-Image-2025-06-17-at-8-40-15-AM.jpg"
+    ]
+  },
+  {
+    name: "TOYOTA PRADO J120 2004",
+    price: "KSh 2.2M",
+    reg: "KBQ 219S ",
+    fuel: "DISEL",
+    year: 2004,
+    transmission: "Automatic",
+    color: "White",
+    mileage: "15,000 km",
+    engine: "DISEL",
+    condition: "New Import",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/VWtw7M6W/Whats-App-Image-2025-07-03-at-10-43-51-AM.jpg",
+      "https://i.ibb.co/7N8xfTBh/Whats-App-Image-2025-07-03-at-10-43-51-AM-1.jpg",
+      "https://i.ibb.co/Rk7tTMrW/Whats-App-Image-2025-07-03-at-10-43-47-AM.jpg",
+      "https://i.ibb.co/kst0VnXJ/Whats-App-Image-2025-07-03-at-10-43-38-AM.jpg",
+      "https://i.ibb.co/8DGPWyf4/Whats-App-Image-2025-07-03-at-10-43-35-AM.jpg",
+      "https://i.ibb.co/k2fXf2Fn/Whats-App-Image-2025-07-03-at-10-43-34-AM.jpg",
+      "https://i.ibb.co/V0FY1JYk/Whats-App-Image-2025-07-03-at-10-43-33-AM.jpg",
+      "https://i.ibb.co/Rk7tTMrW/Whats-App-Image-2025-07-03-at-10-43-47-AM.jpg"
+    ]
+  },
+  {
+    name: "MAZDA CX8 2018 ",
+    price: "KSh 3.4M",
+    reg: " ",
+    fuel: "PETROL",
+    year: 2022,
+    transmission: "Automatic",
+    color: "PEARL WHITE",
+    mileage: "15,000 km",
+    engine: "Electric Motor",
+    condition: "New Import",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/39X739J2/Whats-App-Image-2025-07-03-at-10-41-39-AM.jpg",
+      "https://i.ibb.co/XZT5yH0H/Whats-App-Image-2025-07-03-at-10-41-31-AM.jpg",
+      "https://i.ibb.co/KpsgMhPh/Whats-App-Image-2025-07-03-at-10-41-28-AM.jpg",
+      "https://i.ibb.co/27bKTtJs/Whats-App-Image-2025-07-03-at-10-41-26-AM.jpg",
+      "https://i.ibb.co/99yFqzTb/Whats-App-Image-2025-07-03-at-10-41-25-AM.jpg",
+      "https://i.ibb.co/99JbYYx0/Whats-App-Image-2025-07-03-at-10-41-23-AM.jpg"
+    ]
+  },
+  {
+    name: "MAZDA CX8 2018",
+    price: "KSh 3.5M",
+    reg: "KDG 320T",
+    fuel: "PETROL",
+    year: 2018,
+    transmission: "Automatic",
+    color: "BROWN LEATHER",
+    mileage: "15,000 km",
+    engine: "Electric Motor",
+    condition: "New Import",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/s9pPF7bZ/Whats-App-Image-2025-07-03-at-10-42-01-AM.jpg",
+      "https://i.ibb.co/fd3ChNhZ/Whats-App-Image-2025-07-03-at-10-42-00-AM.jpg",
+      "https://i.ibb.co/0VhR21JR/Whats-App-Image-2025-07-03-at-10-41-56-AM.jpg",
+      "https://i.ibb.co/1ftkXMKC/Whats-App-Image-2025-07-03-at-10-41-54-AM.jpg",
+      "https://i.ibb.co/Myv4DKmj/Whats-App-Image-2025-07-03-at-10-41-53-AM.jpg",
+      "https://i.ibb.co/C3y7X7rR/Whats-App-Image-2025-07-03-at-10-41-49-AM.jpg",
+      "https://i.ibb.co/8LQ04rVJ/Whats-App-Image-2025-07-03-at-10-41-47-AM.jpg"
+    ]
+  },
+  {
+    name: "PEOGOT 2008 GTLINE ",
+    price: "KSh 1.97M",
+    reg: " ",
+    fuel: "PETROL",
+    year: 2022,
+    transmission: "Automatic",
+    color: "RED EXTERIOR",
+    mileage: "15,000 km",
+    engine: "Electric Motor",
+    condition: "New Import",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/pBMjqXPB/Whats-App-Image-2025-07-03-at-6-57-07-AM.jpg",
+      "https://i.ibb.co/Gvq3DSCj/Whats-App-Image-2025-07-03-at-6-57-05-AM.jpg",
+      "https://i.ibb.co/0pyfDXP0/Whats-App-Image-2025-07-03-at-6-57-03-AM.jpg",
+      "https://i.ibb.co/ZpCgd3Tm/Whats-App-Image-2025-07-03-at-6-57-03-AM-1.jpg",
+      "https://i.ibb.co/TDxzWJqc/Whats-App-Image-2025-07-03-at-6-57-02-AM.jpg",
+      "https://i.ibb.co/Pvj8n51H/Whats-App-Image-2025-07-03-at-6-57-05-AM-1.jpg"
+    ]
+  },
+  {
+    name: "MAZDA DEMIO 2012 ",
+    price: "KSh 650K",
+    reg: "KCW ",
+    fuel: "PETROL",
+    year: 2012,
+    transmission: "Automatic",
+    color: "ORIGINAL PAINT",
+    mileage: "15,000 km",
+    engine: "PETROL ENGINE",
+    condition: "USED",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/rKZRm9bD/Whats-App-Image-2025-07-14-at-9-56-12-AM.jpg",
+      "https://i.ibb.co/27939gw3/Whats-App-Image-2025-07-14-at-9-56-20-AM.jpg",
+      "https://i.ibb.co/JWHt00T4/Whats-App-Image-2025-07-14-at-9-56-21-AM.jpg",
+      "https://i.ibb.co/kVZ8Ps0y/Whats-App-Image-2025-07-14-at-9-56-22-AM.jpg",
+      "https://i.ibb.co/1t8CmXN0/Whats-App-Image-2025-07-14-at-9-56-24-AM.jpg",
+      "https://i.ibb.co/qYNRp4VK/Whats-App-Image-2025-07-14-at-9-56-40-AM.jpg",
+      "https://i.ibb.co/RTdxCwfH/Whats-App-Image-2025-07-16-at-8-44-02-AM.jpg"
+    ]
+  },
+  {
+    name: "TOYOTA FIELDER 2018",
+    price: "KSh 1.9M",
+    reg: " 320T",
+    fuel: "PETROL",
+    year: 2022,
+    transmission: "Automatic",
+    color: "BLACK EXTERIOR",
+    mileage: "15,000 km",
+    engine: "Electric Motor",
+    condition: "New Import",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/GfVMdz9j/Whats-App-Image-2025-07-03-at-6-48-39-AM.jpg",
+      "https://i.ibb.co/rRRL4mYz/Whats-App-Image-2025-07-03-at-6-48-40-AM.jpg",
+      "https://i.ibb.co/3mcjR3f4/Whats-App-Image-2025-07-03-at-6-48-41-AM-1.jpg",
+      "https://i.ibb.co/wN0kVks8/Whats-App-Image-2025-07-03-at-6-48-41-AM.jpg",
+      "https://i.ibb.co/d01Mm8SN/Whats-App-Image-2025-07-03-at-6-48-43-AM-1.jpg",
+      "https://i.ibb.co/n26JKdb/Whats-App-Image-2025-07-03-at-6-48-43-AM.jpg",
+      "https://i.ibb.co/M5M98YqF/Whats-App-Image-2025-07-03-at-6-48-44-AM-1.jpg",
+      "https://i.ibb.co/WW4h42J1/Whats-App-Image-2025-07-03-at-6-48-45-AM-1.jpg",
+      "https://i.ibb.co/dsh5SVnm/Whats-App-Image-2025-07-03-at-6-48-45-AM.jpg"
+    ]
+  },
+  {
+    name: "TOYOTA RACTIS 2011",
+    price: "KSh 850K",
+    reg: " KCQ",
+    fuel: "PETROL",
+    year: 2022,
+    transmission: "Automatic",
+    color: "PURPLE EXTERIOR",
+    mileage: "15,000 km",
+    engine: "ALLOY WHEELS",
+    condition: "USED",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/JW69NYW6/Whats-App-Image-2025-07-16-at-8-44-08-AM.jpg",
+      "https://i.ibb.co/D2Pc8s1/Whats-App-Image-2025-07-16-at-8-44-03-AM-1.jpg",
+      "https://i.ibb.co/RTdxCwfH/Whats-App-Image-2025-07-16-at-8-44-02-AM.jpg",
+      "https://i.ibb.co/mV4TsKGk/Whats-App-Image-2025-07-16-at-8-44-15-AM.jpg",
+      "https://i.ibb.co/HDmLs2LQ/Whats-App-Image-2025-07-16-at-8-44-16-AM.jpg",
+      "https://i.ibb.co/tN8ZmWm/Whats-App-Image-2025-07-16-at-8-44-03-AM.jpg"
+    ]
+  },
+  {
+    name: "MAZDA ATENZA 2014",
+    price: "KSh 1.5M",
+    reg: " 320T",
+    fuel: "PETROL",
+    year: 2022,
+    transmission: "Automatic",
+    color: "RED EXTERIOR",
+    mileage: "15,000 km",
+    engine: "Electric Motor",
+    condition: "New Import",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/WvzvfTFQ/Whats-App-Image-2025-07-02-at-9-57-51-PM.jpg",
+      "https://i.ibb.co/R4km2WfB/Whats-App-Image-2025-07-02-at-9-57-52-PM.jpg",
+      "https://i.ibb.co/sTsWTQL/Whats-App-Image-2025-07-02-at-9-57-53-PM.jpg",
+      "https://i.ibb.co/CpP1h4RZ/Whats-App-Image-2025-07-02-at-9-57-55-PM.jpg",
+      "https://i.ibb.co/prNLGYCZ/Whats-App-Image-2025-07-02-at-9-57-58-PM.jpg",
+      "https://i.ibb.co/fZt6b2s/Whats-App-Image-2025-07-02-at-9-58-04-PM.jpg"
+    ]
+  },
+  {
+    name: "MAZDA DEMIO 2016",
+    price: "KSh 1.0M",
+    reg: "KDM",
+    fuel: "PETROL",
+    year: 2016,
+    transmission: "Automatic",
+    color: "RED EXTERIOR",
+    mileage: "15,000 km",
+    engine: "PETROL ENGINE",
+    condition: "ALLOY WHEELS",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/HpGz7yrg/Whats-App-Image-2025-07-16-at-10-00-33-AM.jpg",
+      "https://i.ibb.co/YnCYNy1/Whats-App-Image-2025-07-16-at-10-03-34-AM.jpg",
+      "https://i.ibb.co/Z1kcTjLd/Whats-App-Image-2025-07-16-at-10-03-36-AM.jpg",
+      "https://i.ibb.co/DgsbMtnY/Whats-App-Image-2025-07-16-at-10-03-57-AM.jpg",
+      "https://i.ibb.co/ksFJhQPR/Whats-App-Image-2025-07-16-at-10-03-59-AM.jpg",
+      "https://i.ibb.co/Y7cKYDgN/Whats-App-Image-2025-07-16-at-10-04-15-AM.jpg"
+    ]
+  },
+  {
+    name: "TOYOTA PROBOX 2013",
+    price: "KSh 810K",
+    reg: " 320T",
+    fuel: "PETROL",
+    year: 2022,
+    transmission: "Automatic",
+    color: "WHITE",
+    mileage: "15,000 km",
+    engine: "Electric Motor",
+    condition: "New Import",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/1twVvVCz/Whats-App-Image-2025-07-02-at-4-23-30-PM.jpg",
+      "https://i.ibb.co/Z1b3WzMQ/Whats-App-Image-2025-07-02-at-4-23-32-PM.jpg",
+      "https://i.ibb.co/8DJdfFXW/Whats-App-Image-2025-07-02-at-4-23-33-PM.jpg",
+      "https://i.ibb.co/0pBKBzwb/Whats-App-Image-2025-07-02-at-4-23-35-PM.jpg",
+      "https://i.ibb.co/q37xSync/Whats-App-Image-2025-07-02-at-4-23-37-PM.jpg",
+      "https://i.ibb.co/1h7C5DL/Whats-App-Image-2025-07-02-at-4-23-38-PM.jpg",
+      "https://i.ibb.co/jkbShY4b/Whats-App-Image-2025-07-02-at-4-23-39-PM.jpg",
+      "https://i.ibb.co/Hpkd8tHd/Whats-App-Image-2025-07-02-at-4-23-41-PM.jpg",
+      "https://i.ibb.co/HpfQ4Bc2/Whats-App-Image-2025-07-02-at-4-23-42-PM.jpg",
+      "https://i.ibb.co/7N2sfSPh/Whats-App-Image-2025-07-02-at-4-23-43-PM.jpg"
+    ]
+  },
+  {
+    name: "TOYOTA FIELDER 2018",
+    price: "KSh 1.9M",
+    reg: " 320T",
+    fuel: "PETROL",
+    year: 2022,
+    transmission: "Automatic",
+    color: "BLACK EXTERIOR",
+    mileage: "15,000 km",
+    engine: "Electric Motor",
+    condition: "New Import",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/GfVMdz9j/Whats-App-Image-2025-07-03-at-6-48-39-AM.jpg",
+      "https://i.ibb.co/rRRL4mYz/Whats-App-Image-2025-07-03-at-6-48-40-AM.jpg",
+      "https://i.ibb.co/3mcjR3f4/Whats-App-Image-2025-07-03-at-6-48-41-AM-1.jpg",
+      "https://i.ibb.co/wN0kVks8/Whats-App-Image-2025-07-03-at-6-48-41-AM.jpg",
+      "https://i.ibb.co/d01Mm8SN/Whats-App-Image-2025-07-03-at-6-48-43-AM-1.jpg",
+      "https://i.ibb.co/n26JKdb/Whats-App-Image-2025-07-03-at-6-48-43-AM.jpg",
+      "https://i.ibb.co/M5M98YqF/Whats-App-Image-2025-07-03-at-6-48-44-AM-1.jpg",
+      "https://i.ibb.co/WW4h42J1/Whats-App-Image-2025-07-03-at-6-48-45-AM-1.jpg",
+      "https://i.ibb.co/dsh5SVnm/Whats-App-Image-2025-07-03-at-6-48-45-AM.jpg"
+    ]
+  },
+  {
+    name: "SUZUKI ESCUDO ALLGRIP 2018",
+    price: "KSh 2.65M",
+    reg: "",
+    fuel: "Electric",
+    year: 2021,
+    transmission: "Auto",
+    color: "Black",
+    mileage: "22,000 km",
+    engine: "PETROL Motor",
+    condition: "NEW",
+    drivetrain: "RWD",
+    images: [
+      "https://i.ibb.co/4g9LkKzS/Whats-App-Image-2025-07-03-at-7-02-31-AM.jpg",
+      "https://i.ibb.co/4R4wBWb4/Whats-App-Image-2025-07-03-at-7-02-27-AM.jpg",
+      "https://i.ibb.co/wDMSv3z/Whats-App-Image-2025-07-03-at-7-02-26-AM.jpg",
+      "https://i.ibb.co/kVLz32Dj/Whats-App-Image-2025-07-03-at-7-02-26-AM-1.jpg",
+      "https://i.ibb.co/wFxrbcNw/Whats-App-Image-2025-07-03-at-7-02-25-AM.jpg",
+      "https://i.ibb.co/4g9LkKzS/Whats-App-Image-2025-07-03-at-7-02-31-AM.jpg",
+      "https://i.ibb.co/wFxrbcNw/Whats-App-Image-2025-07-03-at-7-02-25-AM.jpg"
+    ]
+  },
+  { 
     name: "Toyota Fielder 2009",
     images: [
       "https://i.ibb.co/0jLh8m06/Whats-App-Image-2025-06-30-at-8-47-14-PM.jpg",
@@ -826,26 +1303,26 @@ const vehicles = [
     features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
   },
   {
-  name: "HONDA FIT HYBRID",
-  images: [
-    "https://i.ibb.co/vfyNZcw/Whats-App-Image-2025-07-16-at-7-34-52-PM.jpg",
-    "https://i.ibb.co/cXkN5Zm8/Whats-App-Image-2025-07-16-at-7-34-51-PM.jpg",
-    "https://i.ibb.co/v6QBzg96/Whats-App-Image-2025-07-16-at-7-34-53-PM-1.jpg",
-    "https://i.ibb.co/VYFYYB7B/Whats-App-Image-2025-07-16-at-7-34-53-PM.jpg",
-    "https://i.ibb.co/nNzPHYxM/Whats-App-Image-2025-07-16-at-7-34-54-PM.jpg",
-    "https://i.ibb.co/gb8b10NJ/Whats-App-Image-2025-07-16-at-7-34-55-PM.jpg",
-    "https://i.ibb.co/NnJF7Nfm/Whats-App-Image-2025-07-16-at-7-34-57-PM-1.jpg",
-    "https://i.ibb.co/zHt8symM/Whats-App-Image-2025-07-16-at-7-34-57-PM.jpg"
-  ],
-  fuel: "Petrol",
-  price: "KSh 1.15M",
-  year: 2012,
-  transmission: "Automatic",
-  engine: "1500cc",
-  mileage: "72,000 km",
-  color: "PEARL WHITE",
-  features: ["Reverse Camera", "Eco Mode", "ABS Brakes", "Keyless Start"]
-},
+    name: "HONDA FIT HYBRID",
+    images: [
+      "https://i.ibb.co/vfyNZcw/Whats-App-Image-2025-07-16-at-7-34-52-PM.jpg",
+      "https://i.ibb.co/cXkN5Zm8/Whats-App-Image-2025-07-16-at-7-34-51-PM.jpg",
+      "https://i.ibb.co/v6QBzg96/Whats-App-Image-2025-07-16-at-7-34-53-PM-1.jpg",
+      "https://i.ibb.co/VYFYYB7B/Whats-App-Image-2025-07-16-at-7-34-53-PM.jpg",
+      "https://i.ibb.co/nNzPHYxM/Whats-App-Image-2025-07-16-at-7-34-54-PM.jpg",
+      "https://i.ibb.co/gb8b10NJ/Whats-App-Image-2025-07-16-at-7-34-55-PM.jpg",
+      "https://i.ibb.co/NnJF7Nfm/Whats-App-Image-2025-07-16-at-7-34-57-PM-1.jpg",
+      "https://i.ibb.co/zHt8symM/Whats-App-Image-2025-07-16-at-7-34-57-PM.jpg"
+    ],
+    fuel: "Petrol",
+    price: "KSh 1.15M",
+    year: 2012,
+    transmission: "Automatic",
+    engine: "1500cc",
+    mileage: "72,000 km",
+    color: "PEARL WHITE",
+    features: ["Reverse Camera", "Eco Mode", "ABS Brakes", "Keyless Start"]
+  },
   {
     name: "SUZUKI SWIFT 2013 MODEL",
     images: [
@@ -923,23 +1400,23 @@ const vehicles = [
     features: ["Reverse Camera", "Alloy Rims", "Keyless Entry"]
   },
   {
-  name: "SUBARU FORESTER 2010 MODEL",
-  images: [
-    "https://i.ibb.co/dwSG3Tvz/Whats-App-Image-2025-07-16-at-1-54-21-PM.jpg",
-    "https://i.ibb.co/1G15ttKD/Whats-App-Image-2025-07-16-at-1-54-36-PM.jpg",
-    "https://i.ibb.co/90BThbY/Whats-App-Image-2025-07-16-at-1-54-38-PM.jpg",
-    "https://i.ibb.co/rRYy1x4g/Whats-App-Image-2025-07-16-at-1-54-40-PM.jpg",
-    "https://i.ibb.co/9kxnRYZr/Whats-App-Image-2025-07-16-at-1-54-47-PM.jpg"
-  ],
-  fuel: "Hybrid",
-  price: "KSh 1.2M",
-  year: 2010,
-  transmission: "Automatic",
-  engine: "2000cc",
-  mileage: "78,000 km",
-  color: "Pearl White",
-  features: ["Reverse Camera", "Push Start", "Fog Lights"]
-},
+    name: "SUBARU FORESTER 2010 MODEL",
+    images: [
+      "https://i.ibb.co/dwSG3Tvz/Whats-App-Image-2025-07-16-at-1-54-21-PM.jpg",
+      "https://i.ibb.co/1G15ttKD/Whats-App-Image-2025-07-16-at-1-54-36-PM.jpg",
+      "https://i.ibb.co/90BThbY/Whats-App-Image-2025-07-16-at-1-54-38-PM.jpg",
+      "https://i.ibb.co/rRYy1x4g/Whats-App-Image-2025-07-16-at-1-54-40-PM.jpg",
+      "https://i.ibb.co/9kxnRYZr/Whats-App-Image-2025-07-16-at-1-54-47-PM.jpg"
+    ],
+    fuel: "Hybrid",
+    price: "KSh 1.2M",
+    year: 2010,
+    transmission: "Automatic",
+    engine: "2000cc",
+    mileage: "78,000 km",
+    color: "Pearl White",
+    features: ["Reverse Camera", "Push Start", "Fog Lights"]
+  },
   {
     name: "MAZDA AXELA XDL2018 MODEL",
     images: [
@@ -997,7 +1474,13 @@ function renderCars() {
   const paginated = filteredVehicles.slice(start, end);
 
   if (paginated.length === 0) {
-    carGrid.innerHTML = `<p>No cars found.</p>`;
+    carGrid.innerHTML = `
+      <div class="no-results">
+        <i class="fas fa-car-crash"></i>
+        <h3>No cars found</h3>
+        <p>Try adjusting your search criteria or browse all our vehicles</p>
+      </div>
+    `;
     return;
   }
 
@@ -1010,7 +1493,7 @@ function renderCars() {
       <div class="vehicle-info">
         <h3>${car.name}</h3>
         <p><strong>Year:</strong> ${car.year}</p>
-        <p><strong>Price:</strong> ${car.price}</p>
+        <p class="vehicle-price">${car.price}</p>
       </div>
     `;
     carGrid.appendChild(card);
@@ -1028,6 +1511,7 @@ function renderCars() {
 function changePage(direction) {
   currentPage += direction;
   renderCars();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // --- Homepage Search Redirect Integration ---
@@ -1045,13 +1529,18 @@ if (searchQuery) {
     (car.features && car.features.some(f => f.toLowerCase().includes(searchQuery.toLowerCase())))
   );
 
+  // Show search results message
+  const searchResultsMessage = document.getElementById("searchResultsMessage");
   if (filteredVehicles.length === 0) {
-    document.getElementById("carGrid").innerHTML =
-      `<p>No cars found matching "<strong>${searchQuery}</strong>".</p>`;
+    searchResultsMessage.innerHTML = `No cars found matching "<strong>${searchQuery}</strong>". Showing all vehicles instead.`;
+    filteredVehicles = allVehicles;
   } else {
-    currentPage = 1;
-    renderCars();
+    searchResultsMessage.innerHTML = `Showing ${filteredVehicles.length} results for "<strong>${searchQuery}</strong>"`;
   }
+  searchResultsMessage.style.display = 'block';
+
+  currentPage = 1;
+  renderCars();
 } else {
   // no search, show everything
   filteredVehicles = allVehicles;  
@@ -1078,28 +1567,80 @@ function openModal(car) {
     };
     modalThumbnails.appendChild(thumb);
   });
+  
+  // Enhanced modal specs with better formatting
   modalSpecs.innerHTML = `
     <h3>${car.name}</h3>
-    <p><strong>Fuel:</strong> ${car.fuel}</p>
-    <p><strong>Year:</strong> ${car.year}</p>
-    <p><strong>Transmission:</strong> ${car.transmission}</p>
-    <p><strong>Engine:</strong> ${car.engine}</p>
-    <p><strong>Mileage:</strong> ${car.mileage}</p>
-    <p><strong>Color:</strong> ${car.color}</p>
-    <p><strong>Body Type:</strong> ${car.body}</p>
-    <p><strong>Location:</strong> ${car.location}</p>
-    <p><strong>Stock ID:</strong> ${car.stockID}</p>
-    <p><strong>Price:</strong> ${car.price}</p>
-    <p><strong>Features:</strong> ${car.features.join(", ")}</p>
+    <div class="spec-item">
+      <span class="spec-label">Fuel:</span>
+      <span class="spec-value">${car.fuel}</span>
+    </div>
+    <div class="spec-item">
+      <span class="spec-label">Year:</span>
+      <span class="spec-value">${car.year}</span>
+    </div>
+    <div class="spec-item">
+      <span class="spec-label">Transmission:</span>
+      <span class="spec-value">${car.transmission}</span>
+    </div>
+    <div class="spec-item">
+      <span class="spec-label">Engine:</span>
+      <span class="spec-value">${car.engine}</span>
+    </div>
+    <div class="spec-item">
+      <span class="spec-label">Mileage:</span>
+      <span class="spec-value">${car.mileage}</span>
+    </div>
+    <div class="spec-item">
+      <span class="spec-label">Color:</span>
+      <span class="spec-value">${car.color}</span>
+    </div>
+    ${car.body ? `<div class="spec-item">
+      <span class="spec-label">Body Type:</span>
+      <span class="spec-value">${car.body}</span>
+    </div>` : ''}
+    ${car.location ? `<div class="spec-item">
+      <span class="spec-label">Location:</span>
+      <span class="spec-value">${car.location}</span>
+    </div>` : ''}
+    ${car.stockID ? `<div class="spec-item">
+      <span class="spec-label">Stock ID:</span>
+      <span class="spec-value">${car.stockID}</span>
+    </div>` : ''}
+    <div class="spec-item">
+      <span class="spec-label">Price:</span>
+      <span class="spec-value" style="color: var(--primary); font-weight: 700; font-size: 1.2rem;">${car.price}</span>
+    </div>
+    ${car.features && car.features.length > 0 ? `
+    <div class="spec-item" style="flex-direction: column; align-items: flex-start;">
+      <span class="spec-label">Features:</span>
+      <ul class="features-list">
+        ${car.features.map(feature => `<li>${feature}</li>`).join('')}
+      </ul>
+    </div>
+    ` : ''}
     <a href="https://wa.me/254723098206?text=I want to reserve ${encodeURIComponent(car.name)}"
-       class="reserve-btn" target="_blank">Reserve via WhatsApp</a>
+       class="reserve-btn" target="_blank">
+       <i class="fab fa-whatsapp"></i> Reserve via WhatsApp
+    </a>
   `;
 }
 
-function closeModal() { modal.style.display = "none"; }
+function closeModal() { 
+  modal.style.display = "none"; 
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+  if (event.target == modal) {
+    closeModal();
+  }
+}
+
+// Initialize the page
+document.addEventListener('DOMContentLoaded', function() {
+  renderCars();
+});
 </script>
-
-
-
 </body>
 </html>
