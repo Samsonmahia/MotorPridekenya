@@ -1,78 +1,600 @@
-<!-- Tourist & Safaris Section -->
-<section id="safaris" style="padding:80px 20px; background:#f4f1ea; position:relative;">
-  <div style="text-align:center; margin-bottom:50px;">
-    <h2 style="font-size:36px; color:#0A1F44; font-weight:800; margin-bottom:15px;">
-      Welcome to MotorPride Tourist & Safari Adventures
-    </h2>
-    <p style="max-width:850px; margin:0 auto; font-size:18px; color:#333;">
-      Discover Kenya’s breathtaking beauty with our tailored safari packages. 
-      From the golden plains of Maasai Mara to the turquoise waters of Diani Beach, 
-      we bring you unforgettable experiences in comfort, style, and safety.
-    </p>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotorPride | Safari Adventures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- Safari Packages Grid -->
-  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:30px;">
+        :root {
+            --primary: #00AEEF;
+            --secondary: #39FF14;
+            --dark: #0c1a2d;
+            --light: #f5f7fa;
+            --accent: #FF6B6B;
+            --text: #333;
+            --text-light: #777;
+            --safari-bg: #f4f1ea;
+        }
 
-    <!-- Package 1 -->
-    <div style="background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.1); transition:transform .3s;">
-      <img src="https://i.ibb.co/1sJcTdn/maasai-mara.jpg" alt="Maasai Mara Safari" style="width:100%; height:200px; object-fit:cover;">
-      <div style="padding:20px;">
-        <h3 style="color:#0A1F44; font-size:22px; font-weight:700;">3-Day Maasai Mara Safari</h3>
-        <p style="color:#555; font-size:16px; margin:10px 0;">
-          Explore the Big Five with expert guides in a 4x4 Land Cruiser. Includes accommodation & meals.
-        </p>
-        <p style="font-size:18px; font-weight:700; color:#00AEEF;">KES 45,000 per person</p>
-        <a href="https://wa.me/254723098206?text=I%20want%20to%20book%20the%203-Day%20Maasai%20Mara%20Safari" 
-           style="display:inline-block; margin-top:10px; background:#00AEEF; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:600;">
-           Book Now
-        </a>
-      </div>
-    </div>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    <!-- Package 2 -->
-    <div style="background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.1); transition:transform .3s;">
-      <img src="https://i.ibb.co/vHwYg1n/diani-beach.jpg" alt="Diani Beach Getaway" style="width:100%; height:200px; object-fit:cover;">
-      <div style="padding:20px;">
-        <h3 style="color:#0A1F44; font-size:22px; font-weight:700;">2-Day Diani Beach Getaway</h3>
-        <p style="color:#555; font-size:16px; margin:10px 0;">
-          Relax by the ocean with luxury transport, driver, and hotel stay included.
-        </p>
-        <p style="font-size:18px; font-weight:700; color:#00AEEF;">KES 35,000 per person</p>
-        <a href="https://wa.me/254723098206?text=I%20want%20to%20book%20the%202-Day%20Diani%20Beach%20Getaway" 
-           style="display:inline-block; margin-top:10px; background:#00AEEF; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:600;">
-           Book Now
-        </a>
-      </div>
-    </div>
+        /* Safari Section */
+        .safari-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--safari-bg) 0%, #e8e4d9 100%);
+            position: relative;
+            overflow: hidden;
+        }
 
-    <!-- Package 3 -->
-    <div style="background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.1); transition:transform .3s;">
-      <img src="https://i.ibb.co/8NrwM5c/amboseli.jpg" alt="Amboseli Safari" style="width:100%; height:200px; object-fit:cover;">
-      <div style="padding:20px;">
-        <h3 style="color:#0A1F44; font-size:22px; font-weight:700;">Amboseli National Park Adventure</h3>
-        <p style="color:#555; font-size:16px; margin:10px 0;">
-          Witness elephants against the backdrop of Mt. Kilimanjaro in our guided safari tours.
-        </p>
-        <p style="font-size:18px; font-weight:700; color:#00AEEF;">KES 28,000 per person</p>
-        <a href="https://wa.me/254723098206?text=I%20want%20to%20book%20the%20Amboseli%20National%20Park%20Adventure" 
-           style="display:inline-block; margin-top:10px; background:#00AEEF; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:600;">
-           Book Now
-        </a>
-      </div>
-    </div>
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-  </div>
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
 
-  <!-- CTA -->
-  <div style="margin-top:70px; text-align:center; padding:40px; background:#0A1F44; border-radius:15px; color:#fff;">
-    <h2 style="font-size:28px; font-weight:800;">Plan Your Safari Today</h2>
-    <p style="max-width:700px; margin:15px auto; font-size:18px; color:#ddd;">
-      Whether it’s a weekend escape or a full safari adventure, MotorPride makes it seamless and memorable.
-    </p>
-    <a href="https://wa.me/254723098206?text=I%20am%20interested%20in%20booking%20a%20safari%20with%20MotorPride" 
-       style="display:inline-block; background:#39FF14; color:#0A1F44; padding:12px 25px; border-radius:10px; font-weight:700; text-decoration:none;">
-       Chat on WhatsApp
-    </a>
-  </div>
-</section>
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 850px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Safari Packages Grid */
+        .safari-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            margin-bottom: 80px;
+        }
+
+        .safari-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .safari-card.animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .safari-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .safari-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 250px;
+        }
+
+        .safari-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .safari-card:hover .safari-image {
+            transform: scale(1.1);
+        }
+
+        .safari-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            color: white;
+        }
+
+        .safari-duration {
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .safari-content {
+            padding: 30px;
+        }
+
+        .safari-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .safari-description {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .safari-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .safari-feature {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            background: #f5f7fa;
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        .safari-feature i {
+            color: var(--primary);
+        }
+
+        .safari-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .safari-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .safari-btn {
+            flex: 1;
+            padding: 14px;
+            text-align: center;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .book-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .book-btn:hover {
+            background: #009ad6;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 174, 239, 0.4);
+        }
+
+        .details-btn {
+            background: var(--dark);
+            color: white;
+        }
+
+        .details-btn:hover {
+            background: #1a2d4a;
+            transform: translateY(-3px);
+        }
+
+        /* CTA Section */
+        .safari-cta {
+            background: linear-gradient(135deg, var(--dark) 0%, #1a3a5f 100%);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .safari-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.ibb.co/QFY6wnt0/492700026-1193653429437734-7091386706403698009-n.jpg') center/cover no-repeat;
+            opacity: 0.1;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: #ddd;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 16px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(57, 255, 20, 0.3);
+        }
+
+        .cta-btn:hover {
+            background: #2ee000;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(57, 255, 20, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 1200px) {
+            .safari-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .safari-section {
+                padding: 70px 15px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+                padding: 0 10px;
+            }
+            
+            .safari-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .safari-image-container {
+                height: 220px;
+            }
+            
+            .safari-content {
+                padding: 25px;
+            }
+            
+            .safari-title {
+                font-size: 1.4rem;
+            }
+            
+            .safari-actions {
+                flex-direction: column;
+            }
+            
+            .safari-cta {
+                padding: 40px 25px;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+            
+            .cta-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
+            
+            .safari-content {
+                padding: 20px;
+            }
+            
+            .safari-title {
+                font-size: 1.3rem;
+            }
+            
+            .safari-price {
+                font-size: 1.6rem;
+            }
+            
+            .cta-title {
+                font-size: 1.7rem;
+            }
+            
+            .cta-btn {
+                padding: 14px 30px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tourist & Safaris Section -->
+    <section class="safari-section" id="safaris">
+        <div class="section-container">
+            <div class="section-header">
+                <h1 class="section-title">Welcome to MotorPride Tourist & Safari Adventures</h1>
+                <p class="section-subtitle">
+                    Discover Kenya's breathtaking beauty with our tailored safari packages. 
+                    From the golden plains of Maasai Mara to the turquoise waters of Diani Beach, 
+                    we bring you unforgettable experiences in comfort, style, and safety.
+                </p>
+            </div>
+
+            <!-- Safari Packages Grid -->
+            <div class="safari-grid">
+                <!-- Package 1 -->
+                <div class="safari-card">
+                    <div class="safari-image-container">
+                        <img src="https://i.ibb.co/1sJcTdn/maasai-mara.jpg" alt="Maasai Mara Safari" class="safari-image">
+                        <div class="safari-overlay">
+                            <div class="safari-duration">3 Days / 2 Nights</div>
+                        </div>
+                    </div>
+                    <div class="safari-content">
+                        <h3 class="safari-title">3-Day Maasai Mara Safari</h3>
+                        <p class="safari-description">
+                            Explore the Big Five with expert guides in a 4x4 Land Cruiser. Includes accommodation & meals.
+                        </p>
+                        <div class="safari-features">
+                            <div class="safari-feature">
+                                <i class="fas fa-car"></i>
+                                <span>4x4 Land Cruiser</span>
+                            </div>
+                            <div class="safari-feature">
+                                <i class="fas fa-hotel"></i>
+                                <span>Lodge Accommodation</span>
+                            </div>
+                            <div class="safari-feature">
+                                <i class="fas fa-utensils"></i>
+                                <span>All Meals</span>
+                            </div>
+                            <div class="safari-feature">
+                                <i class="fas fa-binoculars"></i>
+                                <span>Game Drives</span>
+                            </div>
+                        </div>
+                        <p class="safari-price">KES 45,000 per person</p>
+                        <div class="safari-actions">
+                            <a href="https://wa.me/254723098206?text=I%20want%20to%20book%20the%203-Day%20Maasai%20Mara%20Safari" 
+                               target="_blank" class="safari-btn book-btn">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                            <div class="safari-btn details-btn">
+                                <i class="fas fa-info-circle"></i> Details
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 2 -->
+                <div class="safari-card">
+                    <div class="safari-image-container">
+                        <img src="https://i.ibb.co/vHwYg1n/diani-beach.jpg" alt="Diani Beach Getaway" class="safari-image">
+                        <div class="safari-overlay">
+                            <div class="safari-duration">2 Days / 1 Night</div>
+                        </div>
+                    </div>
+                    <div class="safari-content">
+                        <h3 class="safari-title">2-Day Diani Beach Getaway</h3>
+                        <p class="safari-description">
+                            Relax by the ocean with luxury transport, driver, and hotel stay included.
+                        </p>
+                        <div class="safari-features">
+                            <div class="safari-feature">
+                                <i class="fas fa-car"></i>
+                                <span>Luxury Transport</span>
+                            </div>
+                            <div class="safari-feature">
+                                <i class="fas fa-hotel"></i>
+                                <span>Beach Resort</span>
+                            </div>
+                            <div class="safari-feature">
+                                <i class="fas fa-umbrella-beach"></i>
+                                <span>Beach Access</span>
+                            </div>
+                            <div class="safari-feature">
+                                <i class="fas fa-user-tie"></i>
+                                <span>Professional Driver</span>
+                            </div>
+                        </div>
+                        <p class="safari-price">KES 35,000 per person</p>
+                        <div class="safari-actions">
+                            <a href="https://wa.me/254723098206?text=I%20want%20to%20book%20the%202-Day%20Diani%20Beach%20Getaway" 
+                               target="_blank" class="safari-btn book-btn">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                            <div class="safari-btn details-btn">
+                                <i class="fas fa-info-circle"></i> Details
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="safari-card">
+                    <div class="safari-image-container">
+                        <img src="https://i.ibb.co/8NrwM5c/amboseli.jpg" alt="Amboseli Safari" class="safari-image">
+                        <div class="safari-overlay">
+                            <div class="safari-duration">2 Days / 1 Night</div>
+                        </div>
+                    </div>
+                    <div class="safari-content">
+                        <h3 class="safari-title">Amboseli National Park Adventure</h3>
+                        <p class="safari-description">
+                            Witness elephants against the backdrop of Mt. Kilimanjaro in our guided safari tours.
+                        </p>
+                        <div class="safari-features">
+                            <div class="safari-feature">
+                                <i class="fas fa-car"></i>
+                                <span>4x4 Safari Vehicle</span>
+                            </div>
+                            <div class="safari-feature">
+                                <i class="fas fa-mountain"></i>
+                                <span>Kilimanjaro Views</span>
+                            </div>
+                            <div class="safari-feature">
+                                <i class="fas fa-elephant"></i>
+                                <span>Elephant Sightings</span>
+                            </div>
+                            <div class="safari-feature">
+                                <i class="fas fa-camera"></i>
+                                <span>Photo Opportunities</span>
+                            </div>
+                        </div>
+                        <p class="safari-price">KES 28,000 per person</p>
+                        <div class="safari-actions">
+                            <a href="https://wa.me/254723098206?text=I%20want%20to%20book%20the%20Amboseli%20National%20Park%20Adventure" 
+                               target="_blank" class="safari-btn book-btn">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                            <div class="safari-btn details-btn">
+                                <i class="fas fa-info-circle"></i> Details
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="safari-cta">
+                <div class="cta-content">
+                    <h2 class="cta-title">Plan Your Safari Today</h2>
+                    <p class="cta-subtitle">
+                        Whether it's a weekend escape or a full safari adventure, MotorPride makes it seamless and memorable.
+                    </p>
+                    <a href="https://wa.me/254723098206?text=I%20am%20interested%20in%20booking%20a%20safari%20with%20MotorPride" 
+                       target="_blank" class="cta-btn">
+                        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            animateOnScroll();
+        });
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.safari-card:not(.animate)');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+    </script>
+</body>
+</html>

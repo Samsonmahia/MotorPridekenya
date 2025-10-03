@@ -1,118 +1,569 @@
-<!-- LOAN CALCULATOR -->
-<section id="loan" style="padding: 60px 20px; background-color: #f5faff;">
-  <h2 style="text-align: center; color: #0a1f44; margin-bottom: 30px; font-size: clamp(24px, 6vw, 34px);">
-    💰 Car Loan Calculator
-  </h2>
-  
-  <div class="loan-container">
-    <!-- Loan Form -->
-    <div class="loan-form">
-      <label>Vehicle Price (Ksh)</label>
-      <input type="number" id="loan-amount" placeholder="e.g. 1500000">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Loan Calculator | MotorPride Kenya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      <label>Down Payment (Ksh)</label>
-      <input type="number" id="down-payment" placeholder="e.g. 300000">
+        :root {
+            --primary: #00AEEF;
+            --secondary: #39FF14;
+            --dark: #0c1a2d;
+            --light: #f5faff;
+            --accent: #FF6B6B;
+            --text: #333;
+            --text-light: #777;
+        }
 
-      <label>Loan Term (Months)</label>
-      <input type="number" id="loan-term" placeholder="e.g. 36">
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
 
-      <label>Interest Rate (%)</label>
-      <input type="number" id="interest-rate" placeholder="e.g. 13" step="0.1">
+        /* Loan Calculator Section */
+        .loan-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--light) 0%, #e8f4ff 100%);
+            position: relative;
+        }
 
-      <button onclick="calculateLoan()">Calculate</button>
-    </div>
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    <!-- Loan Summary -->
-    <div class="loan-summary">
-      <h3>📊 Loan Summary</h3>
-      <p><strong>Monthly Payment:</strong> <span id="monthly-payment">--</span></p>
-      <p><strong>Total Interest:</strong> <span id="total-interest">--</span></p>
-      <p><strong>Total Amount Payable:</strong> <span id="total-cost">--</span></p>
-    </div>
-  </div>
-</section>
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
 
-<style>
-  .loan-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    max-width: 900px;
-    margin: auto;
-  }
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
 
-  .loan-form, .loan-summary {
-    flex: 1 1 300px;
-    min-width: 280px;
-    box-sizing: border-box;
-  }
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-  .loan-form label {
-    display: block;
-    margin: 10px 0 5px;
-    font-weight: bold;
-    color: #0a1f44;
-  }
+        /* Loan Container */
+        .loan-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            align-items: flex-start;
+        }
 
-  .loan-form input {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1em;
-  }
+        /* Loan Form */
+        .loan-form {
+            flex: 1;
+            min-width: 320px;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: fadeInLeft 1s ease forwards 0.3s;
+        }
 
-  .loan-form button {
-    width: 100%;
-    background-color: #00aeef;
-    color: white;
-    padding: 14px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  .loan-form button:hover {
-    background-color: #008ec0;
-  }
+        .form-group {
+            margin-bottom: 25px;
+        }
 
-  .loan-summary {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  }
-  .loan-summary h3 {
-    margin-bottom: 20px;
-    color: #0a1f44;
-  }
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
 
-  /* ✅ Mobile-friendly adjustments */
-  @media (max-width: 768px) {
-    .loan-container {
-      flex-direction: column;   /* stack items */
-      max-width: 100%;
-      padding: 0 10px;
-    }
-    .loan-form, .loan-summary {
-      width: 100%;
-      min-width: unset;
-    }
-    .loan-form input, 
-    .loan-form button {
-      font-size: 20px;  
-      padding: 20px;   
-    }
-    .loan-form label {
-      font-size: 18px;
-    }
-    .loan-summary {
-      font-size: 20px;
-      padding: 20px;
-      margin-top: 10px; /* spacing between form & summary */
-    }
-  }
-</style>
+        .form-input {
+            width: 100%;
+            padding: 18px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0, 174, 239, 0.1);
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+
+        .input-with-icon .form-input {
+            padding-left: 55px;
+        }
+
+        .range-container {
+            margin-top: 10px;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), #008ec0);
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 8px 20px rgba(0, 174, 239, 0.3);
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 174, 239, 0.4);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Loan Summary */
+        .loan-summary {
+            flex: 1;
+            min-width: 320px;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(30px);
+            animation: fadeInRight 1s ease forwards 0.5s;
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            font-weight: 500;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+
+        .summary-value {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .summary-note {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        /* Results Animation */
+        .result-animate {
+            animation: pulse 0.6s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .loan-section {
+                padding: 60px 15px;
+            }
+            
+            .loan-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .loan-form, .loan-summary {
+                min-width: 100%;
+                padding: 25px;
+            }
+            
+            .form-input {
+                padding: 20px;
+                font-size: 1.1rem;
+            }
+            
+            .input-with-icon .form-input {
+                padding-left: 60px;
+            }
+            
+            .input-icon {
+                left: 25px;
+                font-size: 1.3rem;
+            }
+            
+            .calculate-btn {
+                padding: 22px;
+                font-size: 1.3rem;
+            }
+            
+            .summary-item {
+                padding: 18px 0;
+            }
+            
+            .summary-label {
+                font-size: 1.1rem;
+            }
+            
+            .summary-value {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .loan-section {
+                padding: 40px 10px;
+            }
+            
+            .loan-form, .loan-summary {
+                padding: 20px;
+            }
+            
+            .form-input {
+                padding: 18px;
+                font-size: 1rem;
+            }
+            
+            .calculate-btn {
+                padding: 20px;
+                font-size: 1.2rem;
+            }
+            
+            .summary-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .summary-value {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Extra Small Devices */
+        @media (max-width: 360px) {
+            .form-input {
+                padding: 16px;
+            }
+            
+            .calculate-btn {
+                padding: 18px;
+            }
+            
+            .summary-item {
+                padding: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loan Calculator Section -->
+    <section class="loan-section" id="loan">
+        <div class="section-container">
+            <div class="section-header">
+                <h1 class="section-title">
+                    <i class="fas fa-calculator"></i> Car Loan Calculator
+                </h1>
+                <p class="section-subtitle">
+                    Calculate your monthly payments and find the perfect financing plan for your dream car
+                </p>
+            </div>
+
+            <div class="loan-container">
+                <!-- Loan Form -->
+                <div class="loan-form">
+                    <div class="form-group">
+                        <label class="form-label">Vehicle Price (Ksh)</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-tag input-icon"></i>
+                            <input type="number" id="loan-amount" class="form-input" placeholder="1,500,000" min="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Down Payment (Ksh)</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-hand-holding-usd input-icon"></i>
+                            <input type="number" id="down-payment" class="form-input" placeholder="300,000" min="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Loan Term (Months)</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-calendar-alt input-icon"></i>
+                            <input type="number" id="loan-term" class="form-input" placeholder="36" min="1" max="84">
+                        </div>
+                        <div class="range-container">
+                            <input type="range" id="loan-term-range" min="12" max="84" value="36" class="form-range">
+                            <div class="range-labels">
+                                <span>12</span>
+                                <span>84</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Interest Rate (%)</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-percentage input-icon"></i>
+                            <input type="number" id="interest-rate" class="form-input" placeholder="13.0" step="0.1" min="0" max="30">
+                        </div>
+                        <div class="range-container">
+                            <input type="range" id="interest-rate-range" min="5" max="25" value="13" step="0.5" class="form-range">
+                            <div class="range-labels">
+                                <span>5%</span>
+                                <span>25%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="calculate-btn" onclick="calculateLoan()">
+                        <i class="fas fa-calculator"></i> Calculate Loan
+                    </button>
+                </div>
+
+                <!-- Loan Summary -->
+                <div class="loan-summary">
+                    <h3 class="summary-title">
+                        <i class="fas fa-chart-bar"></i> Loan Summary
+                    </h3>
+                    
+                    <div class="summary-item">
+                        <span class="summary-label">Monthly Payment</span>
+                        <span class="summary-value" id="monthly-payment">--</span>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <span class="summary-label">Total Interest</span>
+                        <span class="summary-value" id="total-interest">--</span>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <span class="summary-label">Total Amount Payable</span>
+                        <span class="summary-value" id="total-cost">--</span>
+                    </div>
+                    
+                    <div class="summary-item">
+                        <span class="summary-label">Loan Amount</span>
+                        <span class="summary-value" id="loan-amount-display">--</span>
+                    </div>
+                    
+                    <div class="summary-note">
+                        <i class="fas fa-info-circle"></i> 
+                        These calculations are estimates. Actual terms may vary based on credit assessment.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize the calculator
+        document.addEventListener('DOMContentLoaded', function() {
+            setupRangeInputs();
+            // Set default values
+            document.getElementById('loan-amount').value = '1500000';
+            document.getElementById('down-payment').value = '300000';
+            document.getElementById('loan-term').value = '36';
+            document.getElementById('interest-rate').value = '13';
+        });
+
+        // Setup range inputs to sync with number inputs
+        function setupRangeInputs() {
+            const loanTermInput = document.getElementById('loan-term');
+            const loanTermRange = document.getElementById('loan-term-range');
+            const interestRateInput = document.getElementById('interest-rate');
+            const interestRateRange = document.getElementById('interest-rate-range');
+
+            // Loan term sync
+            loanTermInput.addEventListener('input', function() {
+                loanTermRange.value = this.value;
+            });
+
+            loanTermRange.addEventListener('input', function() {
+                loanTermInput.value = this.value;
+            });
+
+            // Interest rate sync
+            interestRateInput.addEventListener('input', function() {
+                interestRateRange.value = this.value;
+            });
+
+            interestRateRange.addEventListener('input', function() {
+                interestRateInput.value = this.value;
+            });
+        }
+
+        // Calculate loan function
+        function calculateLoan() {
+            // Get input values
+            const loanAmount = parseFloat(document.getElementById('loan-amount').value) || 0;
+            const downPayment = parseFloat(document.getElementById('down-payment').value) || 0;
+            const loanTerm = parseInt(document.getElementById('loan-term').value) || 1;
+            const interestRate = parseFloat(document.getElementById('interest-rate').value) || 0;
+
+            // Validate inputs
+            if (loanAmount <= 0) {
+                alert('Please enter a valid vehicle price');
+                return;
+            }
+
+            if (downPayment >= loanAmount) {
+                alert('Down payment cannot be greater than vehicle price');
+                return;
+            }
+
+            // Calculate loan details
+            const principal = loanAmount - downPayment;
+            const monthlyInterestRate = (interestRate / 100) / 12;
+            
+            // Calculate monthly payment using loan formula
+            let monthlyPayment;
+            if (monthlyInterestRate === 0) {
+                monthlyPayment = principal / loanTerm;
+            } else {
+                monthlyPayment = principal * 
+                    (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, loanTerm)) / 
+                    (Math.pow(1 + monthlyInterestRate, loanTerm) - 1);
+            }
+
+            const totalCost = monthlyPayment * loanTerm;
+            const totalInterest = totalCost - principal;
+
+            // Format currency
+            const formatCurrency = (amount) => {
+                return 'Ksh ' + amount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            };
+
+            // Update display with animation
+            const monthlyPaymentElement = document.getElementById('monthly-payment');
+            const totalInterestElement = document.getElementById('total-interest');
+            const totalCostElement = document.getElementById('total-cost');
+            const loanAmountElement = document.getElementById('loan-amount-display');
+
+            // Add animation class
+            [monthlyPaymentElement, totalInterestElement, totalCostElement, loanAmountElement].forEach(el => {
+                el.classList.remove('result-animate');
+                void el.offsetWidth; // Trigger reflow
+                el.classList.add('result-animate');
+            });
+
+            // Update values
+            monthlyPaymentElement.textContent = formatCurrency(monthlyPayment);
+            totalInterestElement.textContent = formatCurrency(totalInterest);
+            totalCostElement.textContent = formatCurrency(totalCost);
+            loanAmountElement.textContent = formatCurrency(principal);
+        }
+
+        // Auto-calculate when inputs change
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('#loan-amount, #down-payment, #loan-term, #interest-rate')) {
+                // Add a small delay to prevent excessive calculations
+                clearTimeout(window.calculationTimeout);
+                window.calculationTimeout = setTimeout(calculateLoan, 500);
+            }
+        });
+    </script>
+</body>
+</html>
