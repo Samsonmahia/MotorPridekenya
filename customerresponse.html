@@ -1,94 +1,742 @@
-<!-- CUSTOMER RESPONSE SECTION -->
-<section id="response" style="background: linear-gradient(135deg, #0A1F44, #00AEEF); padding: 60px 20px; color: #fff; width: 100vw; box-sizing: border-box;">
-  <h2 style="text-align: center; font-size: clamp(26px, 7vw, 36px); margin-bottom: 20px;">💬 What Our Customers Say</h2>
-  <p style="text-align: center; color: #d0e7ff; margin-bottom: 40px; font-size: clamp(18px, 5vw, 22px);">
-    Real feedback from our happy clients
-  </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Testimonials - MotorPride Kenya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .testimonials-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #0A1F44, #00AEEF);
+            color: #fff;
+            width: 100%;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: clamp(28px, 6vw, 42px);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #39FF14, #00AEEF);
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            font-size: clamp(16px, 4vw, 20px);
+            color: #d0e7ff;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Testimonial Carousel */
+        .testimonial-carousel {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+        }
+        
+        .testimonial-slide {
+            flex: 0 0 100%;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 500px;
+        }
+        
+        /* Testimonial Content */
+        .testimonial-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .customer-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        
+        .customer-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .customer-avatar:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+            border-color: #39FF14;
+        }
+        
+        .customer-name {
+            font-size: clamp(20px, 5vw, 26px);
+            margin-bottom: 5px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .customer-role {
+            font-size: clamp(14px, 3.5vw, 18px);
+            color: #d0e7ff;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        /* Car and Comment Layout */
+        .testimonial-details {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 30px;
+        }
+        
+        .car-image-container {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        
+        .car-image-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        
+        .car-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .car-image:hover {
+            transform: scale(1.08);
+        }
+        
+        .car-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10,31,68,0.85);
+            padding: 15px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .car-image-container:hover .car-info {
+            background: rgba(57,255,20,0.85);
+        }
+        
+        .car-model {
+            font-size: clamp(18px, 4.5vw, 22px);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .car-specs {
+            font-size: clamp(14px, 3.5vw, 16px);
+            opacity: 0.9;
+        }
+        
+        .customer-comment {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .customer-comment:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: rgba(57,255,20,0.5);
+        }
+        
+        .comment-text {
+            font-size: clamp(16px, 4vw, 20px);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+            transition: all 0.3s ease;
+        }
+        
+        .customer-comment:hover .comment-text {
+            color: #fff;
+        }
+        
+        .comment-text:before {
+            content: """;
+            font-size: 60px;
+            color: rgba(255,255,255,0.3);
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-family: Georgia, serif;
+            transition: color 0.3s ease;
+        }
+        
+        .customer-comment:hover .comment-text:before {
+            color: rgba(57,255,20,0.5);
+        }
+        
+        .comment-rating {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .customer-comment:hover .comment-rating {
+            transform: scale(1.1);
+        }
+        
+        .rating-star {
+            color: #FFD700;
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .rating-star:hover {
+            transform: scale(1.3);
+        }
+        
+        /* Carousel Controls */
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .carousel-btn {
+            background: rgba(255,255,255,0.9);
+            color: #0A1F44;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .carousel-btn:hover {
+            background: #39FF14;
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(57,255,20,0.4);
+        }
+        
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            background: #39FF14;
+            transform: scale(1.2);
+        }
+        
+        .dot:hover {
+            background: #39FF14;
+            transform: scale(1.3);
+        }
+        
+        /* Auto-slide progress bar */
+        .progress-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #39FF14;
+            width: 0%;
+            transition: width 0.1s linear;
+            border-radius: 2px;
+        }
+        
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .testimonial-slide {
+                padding: 50px 40px;
+            }
+            
+            .testimonial-details {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .customer-info {
+                margin-bottom: 40px;
+            }
+            
+            .customer-avatar {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .car-image {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .testimonial-slide {
+                padding: 30px 15px;
+                min-height: auto;
+            }
+            
+            .customer-avatar {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .car-image {
+                height: 200px;
+            }
+            
+            .customer-comment {
+                padding: 20px;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .testimonial-slide {
+            animation: fadeIn 0.8s ease;
+        }
+        
+        /* Hover effects for the entire slide */
+        .testimonial-slide:hover .customer-name {
+            color: #39FF14;
+        }
+        
+        .testimonial-slide:hover .customer-role {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- CUSTOMER TESTIMONIALS SECTION -->
+    <section class="testimonials-section">
+        <div class="section-header">
+            <h2>💬 What Our Customers Say</h2>
+            <p>Real feedback from our happy clients</p>
+        </div>
+        
+        <div class="testimonial-carousel">
+            <div class="testimonial-track" id="testimonialTrack">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="customer-info">
+                            <img src="https://i.ibb.co/MyztSZgH/Whats-App-Image-2025-07-12-at-11-09-15-AM-Copy.jpg" alt="Samuel Mahia" class="customer-avatar">
+                            <h3 class="customer-name">Samuel Mahia</h3>
+                            <p class="customer-role">Business Owner</p>
+                        </div>
+                        
+                        <div class="testimonial-details">
+                            <div class="car-image-container">
+                                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Toyota Ractis" class="car-image">
+                                <div class="car-info">
+                                    <div class="car-model">Toyota Ractis</div>
+                                    <div class="car-specs">2016 • Automatic • 1500cc</div>
+                                </div>
+                            </div>
+                            
+                            <div class="customer-comment">
+                                <p class="comment-text">"MotorPride helped me get my dream car through their flexible loan options. The process was smooth and transparent. Highly recommended!"</p>
+                                <div class="comment-rating">
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="customer-info">
+                            <img src="https://i.ibb.co/VcDz0px0/Whats-App-Image-2025-07-12-at-11-10-56-AM.jpg" alt="Samson Mahia" class="customer-avatar">
+                            <h3 class="customer-name">Samson Mahia</h3>
+                            <p class="customer-role">Tour Guide</p>
+                        </div>
+                        
+                        <div class="testimonial-details">
+                            <div class="car-image-container">
+                                <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Toyota Land Cruiser Prado" class="car-image">
+                                <div class="car-info">
+                                    <div class="car-model">Toyota Land Cruiser Prado</div>
+                                    <div class="car-specs">2018 • Automatic • 3000cc</div>
+                                </div>
+                            </div>
+                            
+                            <div class="customer-comment">
+                                <p class="comment-text">"I hired a Land Cruiser Prado for my trip to Amboseli through their Safari service. The car was clean, powerful, and fuel-efficient. Great experience overall!"</p>
+                                <div class="comment-rating">
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="customer-info">
+                            <img src="https://i.ibb.co/FLM5PgDf/Whats-App-Image-2025-07-12-at-11-11-48-AM.jpg" alt="Eric Karanja" class="customer-avatar">
+                            <h3 class="customer-name">Eric Karanja</h3>
+                            <p class="customer-role">Software Developer</p>
+                        </div>
+                        
+                        <div class="testimonial-details">
+                            <div class="car-image-container">
+                                <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Nissan Dualis" class="car-image">
+                                <div class="car-info">
+                                    <div class="car-model">Nissan Dualis</div>
+                                    <div class="car-specs">2011 • Automatic • 2000cc</div>
+                                </div>
+                            </div>
+                            
+                            <div class="customer-comment">
+                                <p class="comment-text">"Very professional and responsive team. They even helped me reserve a unit through WhatsApp before I traveled to Nairobi. Highly recommend them!"</p>
+                                <div class="comment-rating">
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 4 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="customer-info">
+                            <img src="https://i.ibb.co/Y73yDZLT/Whats-App-Image-2025-07-15-at-12-13-26-PM-1.jpg" alt="Elizabeth Mahia" class="customer-avatar">
+                            <h3 class="customer-name">Elizabeth Mahia</h3>
+                            <p class="customer-role">Teacher</p>
+                        </div>
+                        
+                        <div class="testimonial-details">
+                            <div class="car-image-container">
+                                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Toyota Axio" class="car-image">
+                                <div class="car-info">
+                                    <div class="car-model">Toyota Axio</div>
+                                    <div class="car-specs">2015 • Automatic • 1500cc</div>
+                                </div>
+                            </div>
+                            
+                            <div class="customer-comment">
+                                <p class="comment-text">"MotorPride gave me the best deal on a clean, low-mileage Toyota Axio. The process was smooth and transparent. I'll definitely come back for my next car."</p>
+                                <div class="comment-rating">
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="far fa-star rating-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 5 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        <div class="customer-info">
+                            <img src="https://i.ibb.co/FqgBR5s4/Whats-App-Image-2025-07-15-at-12-13-26-PM.jpg" alt="Michael Kibe" class="customer-avatar">
+                            <h3 class="customer-name">Michael Kibe</h3>
+                            <p class="customer-role">Sales Manager</p>
+                        </div>
+                        
+                        <div class="testimonial-details">
+                            <div class="car-image-container">
+                                <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Mitsubishi Mirage" class="car-image">
+                                <div class="car-info">
+                                    <div class="car-model">Mitsubishi Mirage</div>
+                                    <div class="car-specs">2015 • Automatic • 1000cc</div>
+                                </div>
+                            </div>
+                            
+                            <div class="customer-comment">
+                                <p class="comment-text">"They even helped me sell my car fast. The process was transparent and fair. Excellent customer service from start to finish!"</p>
+                                <div class="comment-rating">
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star rating-star"></i>
+                                    <i class="fas fa-star-half-alt rating-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Auto-slide progress bar -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <!-- Carousel Controls -->
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <!-- Carousel Dots -->
+            <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+    </section>
 
-  <!-- Carousel Container -->
-  <div style="overflow: hidden; width: 100%; margin: auto; border-radius: 12px;">
-    <div id="testimonialCarouselTrack" class="testimonial-carousel-track" style="display: flex; transition: transform 0.6s ease-in-out;">
-      
-      <!-- Slide 1 -->
-      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
-        <img src="https://i.ibb.co/MyztSZgH/Whats-App-Image-2025-07-12-at-11-09-15-AM-Copy.jpg" alt="Customer 1"
-             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
-        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Samuel Mahia</h3>
-        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
-          "MotorPride helped me get my dream car through their flexible loan options. Highly recommended!"
-        </p>
-      </div>
-
-      <!-- Slide 2 -->
-      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
-        <img src="https://i.ibb.co/VcDz0px0/Whats-App-Image-2025-07-12-at-11-10-56-AM.jpg" alt="Customer 2"
-             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
-        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Samson Mahia</h3>
-        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
-          "I hired a Land Cruiser Prado for my trip to Amboseli through their Safari service. The car was clean, powerful, and fuel-efficient. Great experience"
-        </p>
-      </div>
-
-      <!-- Slide 3 -->
-      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
-        <img src="https://i.ibb.co/FLM5PgDf/Whats-App-Image-2025-07-12-at-11-11-48-AM.jpg" alt="Customer 3"
-             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
-        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Eric Karanja</h3>
-        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
-          "Very professional and responsive team. They even helped me reserve a unit through WhatsApp before I traveled to Nairobi. Highly recommend them"
-        </p>
-      </div>
-
-      <!-- Slide 4 -->
-      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
-        <img src="https://i.ibb.co/Y73yDZLT/Whats-App-Image-2025-07-15-at-12-13-26-PM-1.jpg" alt="Customer 4"
-             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
-        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Elizabeth Mahia</h3>
-        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
-          "MotorPride gave me the best deal on a clean, low-mileage Toyota Axio. The process was smooth and transparent. I’ll definitely come back for my next car."
-        </p>
-      </div>
-
-      <!-- Slide 5 -->
-      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
-        <img src="https://i.ibb.co/FqgBR5s4/Whats-App-Image-2025-07-15-at-12-13-26-PM.jpg" alt="Customer 5"
-             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
-        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Michael Kibe</h3>
-        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
-          "They even helped me sell my car fast. The process was transparent and fair."
-        </p>
-      </div>
-    </div>
-
-    <!-- Controls -->
-    <div style="text-align: center; margin-top: 20px;">
-      <button onclick="prevTestimonial()" style="margin-right: 10px; padding: 14px 24px; background: #fff; color: #0A1F44; border: none; border-radius: 6px; font-size: clamp(18px, 6vw, 22px);">◀</button>
-      <button onclick="nextTestimonial()" style="padding: 14px 24px; background: #fff; color: #0A1F44; border: none; border-radius: 6px; font-size: clamp(18px, 6vw, 22px);">▶</button>
-    </div>
-  </div>
-</section>
-
-<!-- Carousel Script -->
-<script>
-  let testimonialIndex = 0;
-  const testimonialTrack = document.getElementById('testimonialCarouselTrack');
-  const testimonialSlides = testimonialTrack.children.length;
-
-  function showTestimonial(i) {
-    testimonialIndex = (i + testimonialSlides) % testimonialSlides;
-    testimonialTrack.style.transform = `translateX(-${testimonialIndex * 100}%)`;
-  }
-
-  function nextTestimonial() {
-    showTestimonial(testimonialIndex + 1);
-  }
-
-  function prevTestimonial() {
-    showTestimonial(testimonialIndex - 1);
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    showTestimonial(0);
-    setInterval(() => nextTestimonial(), 8000);
-  });
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.getElementById('testimonialTrack');
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dotsContainer = document.getElementById('carouselDots');
+            const progressFill = document.getElementById('progressFill');
+            
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            let slideInterval;
+            let progressInterval;
+            let isPaused = false;
+            
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+            
+            // Update carousel position
+            function updateCarousel() {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update dots
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+                
+                // Reset progress bar
+                resetProgressBar();
+            }
+            
+            // Go to specific slide
+            function goToSlide(index) {
+                currentIndex = index;
+                updateCarousel();
+            }
+            
+            // Next slide
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateCarousel();
+            }
+            
+            // Previous slide
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateCarousel();
+            }
+            
+            // Auto slide progress bar
+            function startProgressBar() {
+                let width = 0;
+                clearInterval(progressInterval);
+                
+                progressInterval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(progressInterval);
+                        nextSlide();
+                        startProgressBar();
+                    } else if (!isPaused) {
+                        width += 100 / (3000 / 50); // 3 seconds total, update every 50ms
+                        progressFill.style.width = width + '%';
+                    }
+                }, 50);
+            }
+            
+            function resetProgressBar() {
+                progressFill.style.width = '0%';
+            }
+            
+            // Event listeners
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoSlide();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoSlide();
+            });
+            
+            // Auto-advance slides every 5 seconds
+            function startAutoSlide() {
+                slideInterval = setInterval(nextSlide, 3000);
+            }
+            
+            function resetAutoSlide() {
+                clearInterval(slideInterval);
+                clearInterval(progressInterval);
+                startAutoSlide();
+                startProgressBar();
+            }
+            
+            // Pause auto-advance on hover
+            const carousel = document.querySelector('.testimonial-carousel');
+            carousel.addEventListener('mouseenter', () => {
+                isPaused = true;
+                clearInterval(slideInterval);
+                clearInterval(progressInterval);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                isPaused = false;
+                startAutoSlide();
+                startProgressBar();
+            });
+            
+            // Touch swipe support for mobile
+            let startX = 0;
+            let endX = 0;
+            
+            track.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isPaused = true;
+                clearInterval(slideInterval);
+                clearInterval(progressInterval);
+            });
+            
+            track.addEventListener('touchmove', (e) => {
+                endX = e.touches[0].clientX;
+            });
+            
+            track.addEventListener('touchend', () => {
+                if (startX - endX > 50) {
+                    nextSlide(); // Swipe left
+                } else if (endX - startX > 50) {
+                    prevSlide(); // Swipe right
+                }
+                
+                // Resume auto-slide after a delay
+                setTimeout(() => {
+                    isPaused = false;
+                    startAutoSlide();
+                    startProgressBar();
+                }, 3000);
+            });
+            
+            // Initialize
+            updateCarousel();
+            startAutoSlide();
+            startProgressBar();
+        });
+    </script>
+</body>
+</html>

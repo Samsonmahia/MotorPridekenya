@@ -1,944 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Used Cars | MotorPride Kenya</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #00AEEF;
-            --secondary: #39FF14;
-            --dark: #0c1a2d;
-            --light: #f5f7fa;
-            --accent: #FF6B6B;
-            --text: #333;
-            --text-light: #777;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Used Cars Section */
-        .used-cars-section {
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-            position: relative;
-        }
-
-        .section-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, var(--dark), var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Filter Section */
-        .filter-section {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 40px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards 0.3s;
-        }
-
-        .filter-btn {
-            padding: 12px 25px;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 50px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-
-        .filter-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .filter-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            box-shadow: 0 6px 15px rgba(0, 174, 239, 0.3);
-        }
-
-        /* Vehicle Grid */
-        .vehicle-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .vehicle-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .vehicle-card.animate {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .vehicle-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .vehicle-image-container {
-            position: relative;
-            overflow: hidden;
-            height: 220px;
-        }
-
-        .vehicle-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .vehicle-card:hover .vehicle-image {
-            transform: scale(1.05);
-        }
-
-        .vehicle-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--primary);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .vehicle-info {
-            padding: 25px;
-        }
-
-        .vehicle-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-
-        .vehicle-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .detail {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        .detail i {
-            color: var(--primary);
-        }
-
-        .vehicle-price {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .vehicle-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .action-btn {
-            flex: 1;
-            padding: 12px;
-            text-align: center;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .view-details {
-            background: var(--dark);
-            color: white;
-        }
-
-        .view-details:hover {
-            background: #1a2d4a;
-            transform: translateY(-3px);
-        }
-
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
-        }
-
-        .whatsapp-btn:hover {
-            background: #1da851;
-            transform: translateY(-3px);
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 50px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards 0.5s;
-        }
-
-        .page-btn {
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: white;
-            border: 2px solid #e0e0e0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .page-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .page-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .page-btn.next {
-            width: auto;
-            padding: 0 20px;
-            border-radius: 25px;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 16px;
-            width: 100%;
-            max-width: 1000px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .modal.active .modal-content {
-            transform: scale(1);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal:hover {
-            background: rgba(0, 0, 0, 0.7);
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            padding: 30px;
-        }
-
-        @media (min-width: 768px) {
-            .modal-body {
-                flex-direction: row;
-            }
-        }
-
-        .modal-images {
-            flex: 1;
-        }
-
-        .main-image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-
-        .image-thumbnails {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-        }
-
-        @media (min-width: 768px) {
-            .image-thumbnails {
-                flex-direction: column;
-                max-height: 400px;
-                overflow-y: auto;
-            }
-        }
-
-        .thumbnail {
-            width: 100px;
-            height: 70px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0.7;
-        }
-
-        .thumbnail:hover, .thumbnail.active {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-        .modal-details {
-            flex: 1;
-        }
-
-        .modal-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-
-        .modal-price {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .property-specs {
-            margin-bottom: 25px;
-        }
-
-        .spec-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .spec-label {
-            font-weight: 500;
-        }
-
-        .spec-value {
-            color: var(--text-light);
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        .modal-action-btn {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .modal-whatsapp {
-            background: #25D366;
-            color: white;
-        }
-
-        .modal-whatsapp:hover {
-            background: #1da851;
-        }
-
-        .modal-call {
-            background: var(--primary);
-            color: white;
-        }
-
-        .modal-call:hover {
-            background: #009ad6;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .section-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .vehicle-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .vehicle-actions {
-                flex-direction: column;
-            }
-            
-            .modal-body {
-                flex-direction: column;
-            }
-            
-            .modal-actions {
-                flex-direction: column;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>used cars| MotorPride Kenya</title>
+<style>
+body { font-family: Arial, sans-serif; background:#f5f7fa; margin:0; padding:0; }
+h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
+
+/* Vehicle Grid */
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+@media(max-width:992px){ .vehicle-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:600px){ .vehicle-grid { grid-template-columns: 1fr; } }
+
+.vehicle-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.vehicle-card:hover { transform: translateY(-6px); }
+.vehicle-card img { width:100%; height:200px; object-fit:cover; }
+.vehicle-info { padding:15px; text-align:center; }
+.vehicle-info h3 { margin:5px 0; font-size:18px; color:#0A1F44; }
+.vehicle-info p { margin:4px 0; color:#333; font-size:14px; }
+
+/* Modal */
+.modal { display:none; position:fixed; z-index:1000; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); overflow-y:auto; }
+.modal-content { background:#fff; margin:30px auto; padding:20px; border-radius:12px; width:90%; max-width:1000px; text-align:center; position:relative; display:flex; flex-direction: column; }
+.close { position:absolute; right:15px; top:10px; font-size:28px; cursor:pointer; }
+
+.modal-body { display:flex; flex-direction: column; }
+@media(min-width:768px){ .modal-body { flex-direction: row; gap:20px; } }
+
+#modalMainImage { width:100%; max-height:450px; object-fit:cover; border-radius:10px; margin-bottom:15px; }
+
+.thumbnails { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:15px; }
+@media(min-width:768px){ .thumbnails { flex-direction: column; max-height:450px; overflow-y:auto; margin:0; } }
+
+.thumbnails img { width:110px; height:80px; object-fit:cover; border-radius:8px; cursor:pointer; transition: transform 0.2s; }
+.thumbnails img:hover, .thumbnails img.active { transform: scale(1.08); border:2px solid #00AEEF; }
+
+#modalSpecs { text-align:left; margin-top:10px; font-size:14px; }
+#modalSpecs p { margin:5px 0; }
+.reserve-btn { display:inline-block; margin-top:10px; padding:10px 20px; background:#25D366; color:#fff; border-radius:8px; text-decoration:none; }
+
+/* Pagination */
+.pagination { text-align:center; margin:30px 0; }
+.pagination button { padding:10px 16px; margin:5px; border:none; border-radius:6px; background:#0A1F44; color:#fff; cursor:pointer; }
+.pagination button:disabled { background:#ccc; cursor:default; }
+</style>
 </head>
 <body>
-    <!-- Used Cars Section -->
-    <section class="used-cars-section">
-        <div class="section-container">
-            <div class="section-header">
-                <h1 class="section-title">Premium Used Cars</h1>
-                <p class="section-subtitle">Discover quality pre-owned vehicles with comprehensive inspections and competitive pricing</p>
-            </div>
 
-            <!-- Filter Section -->
-            <div class="filter-section">
-                <button class="filter-btn active" data-filter="all">
-                    <i class="fas fa-th"></i> All Cars
-                </button>
-                <button class="filter-btn" data-filter="sedan">
-                    <i class="fas fa-car"></i> Sedans
-                </button>
-                <button class="filter-btn" data-filter="suv">
-                    <i class="fas fa-truck"></i> SUVs
-                </button>
-                <button class="filter-btn" data-filter="hatchback">
-                    <i class="fas fa-car-side"></i> Hatchbacks
-                </button>
-                <button class="filter-btn" data-filter="luxury">
-                    <i class="fas fa-gem"></i> Luxury
-                </button>
-            </div>
+<h2>USED CARS</h2>
+<div id="carGrid" class="vehicle-grid"></div>
 
-            <!-- Vehicle Grid -->
-            <div class="vehicle-grid" id="carGrid">
-                <!-- Vehicle cards will be dynamically inserted here -->
-            </div>
+<!-- Pagination -->
+<div class="pagination">
+  <button id="prevBtn" onclick="changePage(-1)">Prev</button>
+  <button id="nextBtn" onclick="changePage(1)">Next</button>
+</div>
 
-            <!-- Pagination -->
-            <div class="pagination">
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <button class="page-btn next">Next <i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modal -->
-    <div class="modal" id="carModal">
-        <div class="modal-content">
-            <div class="close-modal">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="modal-body">
-                <div class="modal-images">
-                    <img id="modalMainImage" class="main-image" src="" alt="Car Image">
-                    <div class="image-thumbnails" id="modalThumbnails">
-                        <!-- Thumbnails will be dynamically inserted here -->
-                    </div>
-                </div>
-                <div class="modal-details">
-                    <h2 id="modalTitle" class="modal-title"></h2>
-                    <p id="modalPrice" class="modal-price"></p>
-                    <div class="property-specs" id="modalSpecs">
-                        <!-- Car specs will be dynamically inserted here -->
-                    </div>
-                    <div class="modal-actions">
-                        <a id="modalWhatsapp" class="modal-action-btn modal-whatsapp" href="#" target="_blank">
-                            <i class="fab fa-whatsapp"></i> WhatsApp
-                        </a>
-                        <a id="modalCall" class="modal-action-btn modal-call" href="tel:+254723098206">
-                            <i class="fas fa-phone"></i> Call Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- Modal -->
+<div id="carModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-body">
+      <div style="flex:1;">
+        <img id="modalMainImage" src="" alt="Car" />
+        <div id="modalThumbnails" class="thumbnails"></div>
+      </div>
+      <div id="modalSpecs" style="flex:1;"></div>
     </div>
+  </div>
+</div>
 
-    <script>
-        // Sample vehicle data (replace with your JSON fetch)
-        const vehicles = [
-            {
-                id: "car1",
-                title: "Toyota Premio 2018",
-                price: "KES 1,850,000",
-                image: "https://via.placeholder.com/800x450?text=Toyota+Premio",
-                category: "sedan",
-                details: [
-                    { icon: "fas fa-calendar", text: "2018" },
-                    { icon: "fas fa-gas-pump", text: "Petrol" },
-                    { icon: "fas fa-cog", text: "Automatic" },
-                    { icon: "fas fa-tachometer-alt", text: "45,000 km" }
-                ],
-                badge: "Low Mileage",
-                specs: [
-                    { label: "Fuel Type", value: "Petrol" },
-                    { label: "Year", value: "2018" },
-                    { label: "Transmission", value: "Automatic" },
-                    { label: "Engine", value: "1500cc" },
-                    { label: "Mileage", value: "45,000 km" },
-                    { label: "Color", value: "White" },
-                    { label: "Features", value: "AC, Power Steering, Bluetooth, Rear Camera" }
-                ],
-                images: [
-                    "https://via.placeholder.com/800x450?text=Toyota+Premio+1",
-                    "https://via.placeholder.com/800x450?text=Toyota+Premio+2",
-                    "https://via.placeholder.com/800x450?text=Toyota+Premio+3"
-                ]
-            },
-            {
-  name: "2016 Suzuki Swift",
+<script>
+const vehicles = [
+   {
+  name: "2011 Nissan Dualis",
   images: [
-    "https://i.ibb.co/XxmHXbVL/Whats-App-Image-2025-10-03-at-11-20-37-PM-1.jpg",
-    "https://i.ibb.co/HfzXzNyn/Whats-App-Image-2025-10-03-at-11-20-37-PM.jpg",
-    "https://i.ibb.co/pjTCHvNG/Whats-App-Image-2025-10-03-at-11-20-35-PM-1.jpg",
-    "https://i.ibb.co/1Yv4p5wz/Whats-App-Image-2025-10-03-at-11-20-35-PM.jpg",
-    "https://i.ibb.co/GQsC72Xs/Whats-App-Image-2025-10-03-at-11-20-34-PM-1.jpg",
-    "https://i.ibb.co/PZtrQpCK/Whats-App-Image-2025-10-03-at-11-20-34-PM.jpg"
+    "https://i.imgur.com/aAnfUXg.jpeg",
+    "https://i.imgur.com/2Qk9NMP.jpeg",
+    "https://i.imgur.com/WGemfSR.jpeg",
+    "https://i.imgur.com/c47G8p5.jpeg",
+    "https://i.imgur.com/IXKTGVO.jpeg"
   ],
   fuel: "Petrol",
-  price: "KSh 950,000",
+  price: "KSh 1.03M",
+  year: 2011,
+  transmission: "Automatic",
+  engine: "2000cc",
+  mileage: "N/A",
+  color: "Black Exterior, Dark fabric upholstery",
+  body: "SUV",
+  location: "N/A",
+  stockID: "ND-11",
+  features: [
+    "Moonroof",
+    "Foldable side mirrors",
+    "FM/DVD/Bluetooth touchscreen player",
+    "Alloy rims",
+    "Foglights"
+  ]
+},
+{
+  name: "2016 Nissan Note Medalist",
+  images: [
+    "https://i.postimg.cc/J4RMqBgH/Whats-App-Image-2025-09-06-at-11-00-32-AM.jpg",
+    "https://i.postimg.cc/ZY8JpLfh/Whats-App-Image-2025-09-06-at-11-00-32-AM-1.jpg",
+    "https://i.postimg.cc/wMQHz6tB/Whats-App-Image-2025-09-06-at-11-00-33-AM.jpg",
+    "https://i.postimg.cc/g01GqtFG/Whats-App-Image-2025-09-06-at-11-00-34-AM.jpg",
+    "https://i.postimg.cc/yd9sfhsc/Whats-App-Image-2025-09-06-at-11-00-35-AM.jpg",
+    "https://i.postimg.cc/hGXSmWYC/Whats-App-Image-2025-09-06-at-11-00-35-AM-1.jpg",
+    "https://i.postimg.cc/Jz6rt4pD/Whats-App-Image-2025-09-06-at-11-00-35-AM-2.jpg",
+    "https://i.postimg.cc/Jz471B5C/Whats-App-Image-2025-09-06-at-11-00-36-AM.jpg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 850K",
   year: 2016,
   transmission: "Automatic",
-  engine: "1300cc",
+  engine: "1200cc",
   mileage: "N/A",
-  color: "Silver Exterior, Fabric Upholstery",
+  color: "N/A",
   body: "Hatchback",
-  location: "N/A",
-  stockID: "SS-16",
+  location: "Kiambu Rd",
+  stockID: "NN-16-MED",
   features: [
-    "1300cc Petrol Engine – Efficient and responsive",
-    "Silver Exterior – Sleek and timeless design",
-    "Fabric Upholstery – Comfortable and practical interior",
-    "Side Mirror Winkers – Safety with style",
-    "FM/DVD Touchscreen Player – Entertainment on the go",
-    "Dual Zone Climate Control – Comfort for driver & passengers",
-    "Extremely Clean & Accident Free – Well-maintained, ready to drive"
+    "Half Leather Seats",
+    "Alloy Rims",
+    "Fog Lights",
+    "DVD Player",
+    "Reverse Camera",
+    "Armrests & Cupholders",
+    "360° Camera",
+    "Parking Sensors"
   ]
 },
 
-            {
-                id: "car3",
-                title: "Toyota Vitz 2017",
-                price: "KES 850,000",
-                image: "https://via.placeholder.com/800x450?text=Toyota+Vitz",
-                category: "hatchback",
-                details: [
-                    { icon: "fas fa-calendar", text: "2017" },
-                    { icon: "fas fa-gas-pump", text: "Petrol" },
-                    { icon: "fas fa-cog", text: "Automatic" },
-                    { icon: "fas fa-tachometer-alt", text: "75,000 km" }
-                ],
-                badge: "Economy",
-                specs: [
-                    { label: "Fuel Type", value: "Petrol" },
-                    { label: "Year", value: "2017" },
-                    { label: "Transmission", value: "Automatic" },
-                    { label: "Engine", value: "1000cc" },
-                    { label: "Mileage", value: "75,000 km" },
-                    { label: "Color", value: "Red" },
-                    { label: "Features", value: "AC, Power Windows, CD Player" }
-                ],
-                images: [
-                    "https://via.placeholder.com/800x450?text=Toyota+Vitz+1",
-                    "https://via.placeholder.com/800x450?text=Toyota+Vitz+2",
-                    "https://via.placeholder.com/800x450?text=Toyota+Vitz+3"
-                ]
-            },
-            {
-                id: "car4",
-                title: "Mercedes C-Class 2020",
-                price: "KES 4,500,000",
-                image: "https://via.placeholder.com/800x450?text=Mercedes+C-Class",
-                category: "luxury",
-                details: [
-                    { icon: "fas fa-calendar", text: "2020" },
-                    { icon: "fas fa-gas-pump", text: "Petrol" },
-                    { icon: "fas fa-cog", text: "Automatic" },
-                    { icon: "fas fa-tachometer-alt", text: "25,000 km" }
-                ],
-                badge: "Premium",
-                specs: [
-                    { label: "Fuel Type", value: "Petrol" },
-                    { label: "Year", value: "2020" },
-                    { label: "Transmission", value: "Automatic" },
-                    { label: "Engine", value: "2000cc" },
-                    { label: "Mileage", value: "25,000 km" },
-                    { label: "Color", value: "Silver" },
-                    { label: "Features", value: "Leather Seats, Sunroof, Premium Sound, Navigation" }
-                ],
-                images: [
-                    "https://via.placeholder.com/800x450?text=Mercedes+C-Class+1",
-                    "https://via.placeholder.com/800x450?text=Mercedes+C-Class+2",
-                    "https://via.placeholder.com/800x450?text=Mercedes+C-Class+3"
-                ]
-            }
-        ];
+];
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            renderVehicles();
-            setupEventListeners();
-            animateOnScroll();
-        });
+let currentPage = 1;
+const carsPerPage = 13;
 
-        // Render vehicles to the page
-        function renderVehicles() {
-            const container = document.getElementById('carGrid');
-            if (!container) return;
-            
-            container.innerHTML = '';
-            
-            vehicles.forEach((vehicle, index) => {
-                const card = createVehicleCard(vehicle);
-                container.appendChild(card);
-                
-                // Add animation delay for staggered effect
-                setTimeout(() => {
-                    card.classList.add('animate');
-                }, index * 100);
-            });
-        }
+function renderCars() {
+  const carGrid = document.getElementById("carGrid");
+  carGrid.innerHTML = "";
+  const start = (currentPage - 1) * carsPerPage;
+  const end = start + carsPerPage;
+  const paginated = vehicles.slice(start, end);
 
-        // Create a vehicle card element
-        function createVehicleCard(vehicle) {
-            const card = document.createElement('div');
-            card.className = 'vehicle-card';
-            card.setAttribute('data-category', vehicle.category);
-            
-            card.innerHTML = `
-                <div class="vehicle-image-container">
-                    <img src="${vehicle.image}" alt="${vehicle.title}" class="vehicle-image">
-                    ${vehicle.badge ? `<div class="vehicle-badge">${vehicle.badge}</div>` : ''}
-                </div>
-                <div class="vehicle-info">
-                    <h3 class="vehicle-title">${vehicle.title}</h3>
-                    <div class="vehicle-details">
-                        ${vehicle.details.map(detail => `
-                            <div class="detail">
-                                <i class="${detail.icon}"></i>
-                                <span>${detail.text}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <p class="vehicle-price">${vehicle.price}</p>
-                    <div class="vehicle-actions">
-                        <div class="action-btn view-details" data-id="${vehicle.id}">
-                            <i class="fas fa-eye"></i> View Details
-                        </div>
-                        <a href="https://wa.me/254723098206?text=Hi, I'm interested in ${vehicle.title} (${vehicle.price})" 
-                           class="action-btn whatsapp-btn" target="_blank">
-                            <i class="fab fa-whatsapp"></i> WhatsApp
-                        </a>
-                    </div>
-                </div>
-            `;
-            
-            return card;
-        }
+  paginated.forEach(car => {
+    const card = document.createElement("div");
+    card.className = "vehicle-card";
+    card.onclick = () => openModal(car);
+    card.innerHTML = `
+      <img src="${car.images[0]}" alt="${car.name}">
+      <div class="vehicle-info">
+        <h3>${car.name}</h3>
+        <p><strong>Year:</strong> ${car.year}</p>
+        <p><strong>Price:</strong> ${car.price}</p>
+      </div>
+    `;
+    carGrid.appendChild(card);
+  });
 
-        // Set up event listeners
-        function setupEventListeners() {
-            // Filter buttons
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const filter = this.getAttribute('data-filter');
-                    
-                    // Update active button
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Filter vehicles
-                    filterVehicles(filter);
-                });
-            });
-            
-            // View details buttons
-            document.addEventListener('click', function(e) {
-                if (e.target.closest('.view-details')) {
-                    const vehicleId = e.target.closest('.view-details').getAttribute('data-id');
-                    openVehicleModal(vehicleId);
-                }
-            });
-            
-            // Close modal
-            document.querySelector('.close-modal').addEventListener('click', closeModal);
-            document.getElementById('carModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeModal();
-                }
-            });
-            
-            // Pagination buttons
-            const pageButtons = document.querySelectorAll('.page-btn');
-            pageButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    if (this.classList.contains('next')) return;
-                    
-                    // Update active page button
-                    pageButtons.forEach(btn => {
-                        if (!btn.classList.contains('next')) {
-                            btn.classList.remove('active');
-                        }
-                    });
-                    this.classList.add('active');
-                });
-            });
-        }
+  document.getElementById("prevBtn").disabled = currentPage === 1;
+  document.getElementById("nextBtn").disabled = end >= vehicles.length;
+}
 
-        // Filter vehicles based on selection
-        function filterVehicles(filter) {
-            const vehicleCards = document.querySelectorAll('.vehicle-card');
-            
-            if (filter === 'all') {
-                vehicleCards.forEach(card => {
-                    card.style.display = 'block';
-                });
-            } else {
-                vehicleCards.forEach(card => {
-                    if (card.getAttribute('data-category') === filter) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            }
-            
-            // Re-trigger animations
-            animateOnScroll();
-        }
+function changePage(direction) {
+  currentPage += direction;
+  renderCars();
+}
 
-        // Open vehicle modal
-        function openVehicleModal(vehicleId) {
-            const vehicle = vehicles.find(v => v.id === vehicleId);
-            if (!vehicle) return;
-            
-            // Update modal content
-            document.getElementById('modalTitle').textContent = vehicle.title;
-            document.getElementById('modalPrice').textContent = vehicle.price;
-            
-            // Update main image
-            const mainImage = document.getElementById('modalMainImage');
-            mainImage.src = vehicle.images[0];
-            mainImage.alt = vehicle.title;
-            
-            // Update thumbnails
-            const thumbnailsContainer = document.getElementById('modalThumbnails');
-            thumbnailsContainer.innerHTML = '';
-            
-            vehicle.images.forEach((image, index) => {
-                const thumbnail = document.createElement('img');
-                thumbnail.src = image;
-                thumbnail.alt = `${vehicle.title} - Image ${index + 1}`;
-                thumbnail.className = 'thumbnail' + (index === 0 ? ' active' : '');
-                thumbnail.addEventListener('click', function() {
-                    // Update main image
-                    mainImage.src = image;
-                    
-                    // Update active thumbnail
-                    document.querySelectorAll('.thumbnail').forEach(thumb => {
-                        thumb.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                });
-                
-                thumbnailsContainer.appendChild(thumbnail);
-            });
-            
-            // Update specs
-            const specsContainer = document.getElementById('modalSpecs');
-            specsContainer.innerHTML = '';
-            
-            vehicle.specs.forEach(spec => {
-                const specItem = document.createElement('div');
-                specItem.className = 'spec-item';
-                specItem.innerHTML = `
-                    <span class="spec-label">${spec.label}</span>
-                    <span class="spec-value">${spec.value}</span>
-                `;
-                specsContainer.appendChild(specItem);
-            });
-            
-            // Update WhatsApp link
-            const whatsappLink = document.getElementById('modalWhatsapp');
-            whatsappLink.href = `https://wa.me/254723098206?text=Hi, I'm interested in ${vehicle.title} (${vehicle.price})`;
-            
-            // Show modal
-            document.getElementById('carModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+const modal = document.getElementById("carModal");
+const modalMainImage = document.getElementById("modalMainImage");
+const modalThumbnails = document.getElementById("modalThumbnails");
+const modalSpecs = document.getElementById("modalSpecs");
 
-        // Close modal
-        function closeModal() {
-            document.getElementById('carModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
+function openModal(car) {
+  modal.style.display = "block";
+  modalMainImage.src = car.images[0];
+  modalThumbnails.innerHTML = "";
+  car.images.forEach((img, index) => {
+    const thumb = document.createElement("img");
+    thumb.src = img;
+    if(index === 0) thumb.classList.add("active");
+    thumb.onclick = () => {
+      modalMainImage.src = img;
+      document.querySelectorAll(".thumbnails img").forEach(t => t.classList.remove("active"));
+      thumb.classList.add("active");
+    };
+    modalThumbnails.appendChild(thumb);
+  });
+  modalSpecs.innerHTML = `
+    <h3>${car.name}</h3>
+    <p><strong>Fuel:</strong> ${car.fuel}</p>
+    <p><strong>Year:</strong> ${car.year}</p>
+    <p><strong>Transmission:</strong> ${car.transmission}</p>
+    <p><strong>Engine:</strong> ${car.engine}</p>
+    <p><strong>Mileage:</strong> ${car.mileage}</p>
+    <p><strong>Color:</strong> ${car.color}</p>
+    <p><strong>Body Type:</strong> ${car.body}</p>
+    <p><strong>Location:</strong> ${car.location}</p>
+    <p><strong>Stock ID:</strong> ${car.stockID}</p>
+    <p><strong>Price:</strong> ${car.price}</p>
+    <p><strong>Features:</strong> ${car.features.join(", ")}</p>
+    <a href="https://wa.me/254723098206?text=I want to reserve ${encodeURIComponent(car.name)}"
+       class="reserve-btn" target="_blank">Reserve via WhatsApp</a>
+  `;
+}
 
-        // Animate elements on scroll
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.vehicle-card:not(.animate)');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            elements.forEach(element => {
-                observer.observe(element);
-            });
-        }
-    </script>
+function closeModal() { modal.style.display = "none"; }
+
+renderCars();
+</script>
+
 </body>
 </html>
