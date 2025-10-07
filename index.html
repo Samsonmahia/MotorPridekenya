@@ -247,7 +247,7 @@
 
   <!-- Top Bar -->
   <div class="top-bar">
-    <div class="working-hours">🕒 Mon - Sat: 8:00 AM - 6:00 PM</div>
+    <div class="working-hours"> Mon - Sat: 8:00 AM - 6:00 PM</div>
     <div class="social-icons">
       <a href="https://www.facebook.com/profile.php?id=100063669245498" target="_blank"><i class="fab fa-facebook-f"></i></a>
       <a href="https://www.instagram.com/samson.kibe.5015" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -267,41 +267,53 @@
 </header>
 
 <style>
-/* Header Styling */
+/* Enhanced Header Styling */
 .site-header {
   background: linear-gradient(90deg, #0A1F44, #00AEEF); /* Midnight Blue → Electric Blue */
-  padding: 15px 30px;
+  padding: 20px 40px;
   color: #fff;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s ease-in-out;
 }
 
 .header-container {
   display: flex;
   align-items: center;
-  gap: 15px;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .logo {
-  height: 60px;  /* Adjust logo size */
+  height: 64px;
   width: auto;
-  border-radius: 12px; /* soft rounded edges */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  border-radius: 14px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .header-text h1 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin: 0;
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .header-text p {
-  margin: 0.2rem 0 0;
-  font-size: 1rem;
+  margin-top: 0.3rem;
+  font-size: 1.05rem;
   font-weight: 400;
   font-family: 'Open Sans', sans-serif;
-  color: #E6E8EB; /* Cool gray for contrast */
+  color: #DDE2E6;
+  text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* Mobile Adjustments */
@@ -747,7 +759,7 @@ body {
     <div class="story-text">
       <h2 class="gradient-heading">Our Inventory</h2>
       <p class="fade-in-text">
-       Motorpride Kenya began as a dream to redefine how Kenyans buy, sell, and experience vehicles. From humble beginnings on Kiambu Road, we’ve grown into a trusted digital dealership platform—blending local identity with global innovation. Our mission? To empower every Kenyan with access to reliable, stylish, and affordable vehicles, backed by transparency and technology.
+       Motorpride Kenya began as a dream to redefine how Kenyans buy, sell, and experience vehicles. From humble beginnings on Kiambu Road, we’ve grown into a trusted digital dealership platform blending local identity with global innovation. Our mission is to To empower every Kenyan with access to reliable, stylish, and affordable vehicles, backed by transparency and technology.
       </p>
     </div>
     <div class="story-image">
@@ -889,7 +901,7 @@ body {
 <section class="cta">
   <div class="cta-overlay"></div>
   <div class="cta-content">
-    <h2>Ready to Take the Wheel?</h2>
+    <h2>Drive Your Dream Today</h2>
     <p>Browse our cars to find your perfect match today.</p>
     <a href="ALLCARS.HTML" class="cta-button">Browse Cars</a>
   </div>

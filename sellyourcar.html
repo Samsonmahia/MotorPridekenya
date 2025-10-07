@@ -1,89 +1,528 @@
-<!-- Sell Your Car Autofill Form -->
-<section id="sell-car" style="padding: 3rem 1rem; background: #0A1F44; color: white; text-align: center;">
-  <h2 style="font-size: 2.5rem; color: #39FF14;">Sell Your Car with MotorPride</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Car | MotorPride</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  <form id="sellForm" style="max-width: 600px; margin: 2rem auto; background: #fff; color: #0A1F44; padding: 2rem; border-radius: 10px;">
-    <div style="margin-bottom: 1rem;">
-      <label>Car Make & Model</label>
-      <input type="text" id="makeModel" required style="width: 100%; padding: 10px;" placeholder="e.g. Toyota Axio">
-    </div>
-    <div style="margin-bottom: 1rem;">
-      <label>Year of Manufacture</label>
-      <input type="number" id="year" required style="width: 100%; padding: 10px;" placeholder="e.g. 2017">
-    </div>
-    <div style="margin-bottom: 1rem;">
-      <label>Mileage (KM)</label>
-      <input type="number" id="mileage" required style="width: 100%; padding: 10px;" placeholder="e.g. 45000">
-    </div>
-    <div style="margin-bottom: 1rem;">
-      <label>Transmission</label>
-      <select id="transmission" style="width: 100%; padding: 10px;">
-        <option>Automatic</option>
-        <option>Manual</option>
-      </select>
-    </div>
-    <div style="margin-bottom: 1rem;">
-      <label>Fuel Type</label>
-      <select id="fuel" style="width: 100%; padding: 10px;">
-        <option>Petrol</option>
-        <option>Diesel</option>
-        <option>Hybrid</option>
-        <option>Electric</option>
-      </select>
-    </div>
-    <div style="margin-bottom: 1rem;">
-      <label>Condition</label>
-      <select id="condition" style="width: 100%; padding: 10px;">
-        <option>Excellent</option>
-        <option>Good</option>
-        <option>Needs Work</option>
-      </select>
-    </div>
-    <div style="margin-bottom: 1rem;">
-      <label>Asking Price (KES)</label>
-      <input type="text" id="price" required style="width: 100%; padding: 10px;" placeholder="e.g. 980000">
-    </div>
-    <div style="margin-bottom: 1.5rem;">
-      <label>Your Name & WhatsApp Number</label>
-      <input type="text" id="contact" required style="width: 100%; padding: 10px;" placeholder="e.g. John +254712345678">
-    </div>
+        :root {
+            --primary: #0A1F44;
+            --secondary: #39FF14;
+            --accent: #25D366;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
 
-    <button type="button" onclick="sendToWhatsApp()" style="background: #25D366; color: white; padding: 1rem 2rem; font-size: 1.2rem; border: none; border-radius: 10px; cursor: pointer;">
-      📲 Send via WhatsApp
-    </button>
-  </form>
-</section>
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
 
-<script>
-  function sendToWhatsApp() {
-    const makeModel = document.getElementById("makeModel").value.trim();
-    const year = document.getElementById("year").value.trim();
-    const mileage = document.getElementById("mileage").value.trim();
-    const transmission = document.getElementById("transmission").value.trim();
-    const fuel = document.getElementById("fuel").value.trim();
-    const condition = document.getElementById("condition").value.trim();
-    const price = document.getElementById("price").value.trim();
-    const contact = document.getElementById("contact").value.trim();
+        .sell-car-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #1a3a6e 100%);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
 
-    // Basic validation
-    if (!makeModel || !year || !mileage || !price || !contact) {
-      alert("Please fill in all required fields.");
-      return;
-    }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
 
-    const message = `Hi MotorPride, I want to sell my car. Here are the details:%0A%0A` +
-      `🚗 Make & Model: ${makeModel}%0A` +
-      `📅 Year: ${year}` +
-      `📏 Mileage: ${mileage} ` +
-      `⚙️ Transmission: ${transmission}` +
-      `⛽ Fuel: ${fuel}` +
-      `🛠️ Condition: ${condition}` +
-      `💰 Asking Price: KSh ${price}` +
-      `📞 Contact: ${contact}` +
-      `📸 I'll send photos too.`;
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
 
-    const whatsappURL = `https://wa.me/254723098206?text=${encodeURIComponent(message)}`;
-    window.open(whatsappURL, "_blank");
-  }
-</script>
+        .section-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
 
+        .sell-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            color: var(--dark);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group label i {
+            margin-right: 8px;
+            color: var(--accent);
+        }
+
+        .form-control {
+            padding: 12px 15px;
+            border: 1px solid #e1e5eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
+        }
+
+        /* Image Upload Styles */
+        .image-upload-container {
+            grid-column: 1 / -1;
+            margin-top: 1rem;
+        }
+
+        .upload-area {
+            border: 2px dashed #e1e5eb;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background-color: #f8f9fa;
+        }
+
+        .upload-area:hover {
+            border-color: var(--accent);
+            background-color: rgba(37, 211, 102, 0.05);
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .upload-area p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .upload-btn {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background: #1a3a6e;
+        }
+
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .preview-item {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .btn-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background: linear-gradient(to right, var(--accent), #128C7E);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            margin-top: 2rem;
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-whatsapp i {
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+
+        .form-note {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .benefits {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            gap: 1.5rem;
+        }
+
+        .benefit-card {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .benefit-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .sell-car-section {
+                padding: 2rem 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits {
+                flex-direction: column;
+            }
+            
+            .image-upload-container {
+                grid-column: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="sell-car-section">
+        <div class="section-header">
+            <h2>Sell Your Car with MotorPride</h2>
+            <p>Fill out the form below and we'll connect you with potential buyers in minutes. Fast, easy, and completely free!</p>
+        </div>
+
+        <form id="sellForm" class="sell-form">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="makeModel"><i class="fas fa-car"></i> Car Make & Model</label>
+                    <input type="text" id="makeModel" class="form-control" required placeholder="e.g. Toyota Axio">
+                </div>
+                
+                <div class="form-group">
+                    <label for="year"><i class="fas fa-calendar-alt"></i> Year of Manufacture</label>
+                    <input type="number" id="year" class="form-control" required placeholder="e.g. 2017" min="1990" max="2024">
+                </div>
+                
+                <div class="form-group">
+                    <label for="mileage"><i class="fas fa-tachometer-alt"></i> Mileage (KM)</label>
+                    <input type="number" id="mileage" class="form-control" required placeholder="e.g. 45000" min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="transmission"><i class="fas fa-cogs"></i> Transmission</label>
+                    <select id="transmission" class="form-control">
+                        <option>Automatic</option>
+                        <option>Manual</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fuel"><i class="fas fa-gas-pump"></i> Fuel Type</label>
+                    <select id="fuel" class="form-control">
+                        <option>Petrol</option>
+                        <option>Diesel</option>
+                        <option>Hybrid</option>
+                        <option>Electric</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="condition"><i class="fas fa-clipboard-check"></i> Condition</label>
+                    <select id="condition" class="form-control">
+                        <option>Excellent</option>
+                        <option>Good</option>
+                        <option>Needs Work</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="price"><i class="fas fa-tag"></i> Asking Price (KES)</label>
+                    <input type="text" id="price" class="form-control" required placeholder="e.g. 980,000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact"><i class="fas fa-user"></i> Your Name & WhatsApp Number</label>
+                    <input type="text" id="contact" class="form-control" required placeholder="e.g. John +254712345678">
+                </div>
+                
+                <!-- Image Upload Section -->
+                <div class="form-group image-upload-container">
+                    <label><i class="fas fa-images"></i> Car Photos</label>
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & drop images here or click to browse</p>
+                        <button type="button" class="upload-btn" id="uploadBtn">Select Images</button>
+                        <input type="file" id="imageInput" multiple accept="image/*" style="display: none;">
+                    </div>
+                    <div class="image-preview" id="imagePreview"></div>
+                </div>
+            </div>
+
+            <button type="button" onclick="sendToWhatsApp()" class="btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> Send via WhatsApp
+            </button>
+            
+            <p class="form-note">We respect your privacy. Your information will only be used to connect you with potential buyers.</p>
+        </form>
+
+        <div class="benefits">
+            <div class="benefit-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Quick Sale</h3>
+                <p>Connect with verified buyers in minutes</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Safe & Secure</h3>
+                <p>Verified buyers and secure transactions</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-hand-holding-usd"></i>
+                <h3>Best Price</h3>
+                <p>Get competitive offers for your vehicle</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Image Upload Functionality
+        const uploadArea = document.getElementById('uploadArea');
+        const imageInput = document.getElementById('imageInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const uploadBtn = document.getElementById('uploadBtn');
+        
+        let uploadedImages = [];
+        
+        // Open file selector when clicking the upload area or button
+        uploadArea.addEventListener('click', () => imageInput.click());
+        uploadBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            imageInput.click();
+        });
+        
+        // Handle drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#25D366';
+            uploadArea.style.backgroundColor = 'rgba(37, 211, 102, 0.1)';
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '#e1e5eb';
+            uploadArea.style.backgroundColor = '#f8f9fa';
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#e1e5eb';
+            uploadArea.style.backgroundColor = '#f8f9fa';
+            
+            if (e.dataTransfer.files.length) {
+                handleFiles(e.dataTransfer.files);
+            }
+        });
+        
+        // Handle file selection
+        imageInput.addEventListener('change', () => {
+            if (imageInput.files.length) {
+                handleFiles(imageInput.files);
+            }
+        });
+        
+        function handleFiles(files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                // Check if file is an image
+                if (!file.type.match('image.*')) continue;
+                
+                // Check if we haven't reached the limit (let's set a limit of 10 images)
+                if (uploadedImages.length >= 10) {
+                    alert('You can upload a maximum of 10 images.');
+                    break;
+                }
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const imageData = {
+                        id: Date.now() + i,
+                        name: file.name,
+                        dataUrl: e.target.result
+                    };
+                    
+                    uploadedImages.push(imageData);
+                    renderPreview(imageData);
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        function renderPreview(imageData) {
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+            previewItem.setAttribute('data-id', imageData.id);
+            
+            const img = document.createElement('img');
+            img.src = imageData.dataUrl;
+            img.alt = 'Car preview';
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'remove-btn';
+            removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            removeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                removeImage(imageData.id);
+            });
+            
+            previewItem.appendChild(img);
+            previewItem.appendChild(removeBtn);
+            imagePreview.appendChild(previewItem);
+        }
+        
+        function removeImage(id) {
+            uploadedImages = uploadedImages.filter(img => img.id !== id);
+            const previewItem = document.querySelector(`.preview-item[data-id="${id}"]`);
+            if (previewItem) {
+                previewItem.remove();
+            }
+        }
+        
+        // WhatsApp Function
+        function sendToWhatsApp() {
+            const makeModel = document.getElementById("makeModel").value.trim();
+            const year = document.getElementById("year").value.trim();
+            const mileage = document.getElementById("mileage").value.trim();
+            const transmission = document.getElementById("transmission").value.trim();
+            const fuel = document.getElementById("fuel").value.trim();
+            const condition = document.getElementById("condition").value.trim();
+            const price = document.getElementById("price").value.trim();
+            const contact = document.getElementById("contact").value.trim();
+
+            // Basic validation
+            if (!makeModel || !year || !mileage || !price || !contact) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            const message = `Hi MotorPride, I want to sell my car. Here are the details:%0A%0A` +
+                `🚗 *Make & Model:* ${makeModel}%0A` +
+                `📅 *Year:* ${year}%0A` +
+                `📏 *Mileage:* ${mileage} km%0A` +
+                `⚙️ *Transmission:* ${transmission}%0A` +
+                `⛽ *Fuel Type:* ${fuel}%0A` +
+                `🛠️ *Condition:* ${condition}%0A` +
+                `💰 *Asking Price:* KSh ${price}%0A` +
+                `📞 *Contact:* ${contact}%0A%0A` +
+                `📸 I have ${uploadedImages.length} photo(s) of the car that I will send now.`;
+
+            const whatsappURL = `https://wa.me/254723098206?text=${message}`;
+            window.open(whatsappURL, "_blank");
+            
+            // Note: In a real application, you would need to upload images to a server
+            // and then share the links via WhatsApp, or send them separately
+            alert(`Your car details have been prepared for WhatsApp. After sending the message, please send the ${uploadedImages.length} car photos separately.`);
+        }
+    </script>
+</body>
+</html>
