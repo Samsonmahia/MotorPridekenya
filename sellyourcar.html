@@ -505,23 +505,33 @@
                 return;
             }
 
-            const message = `Hi MotorPride, I want to sell my car. Here are the details:%0A%0A` +
-                `🚗 *Make & Model:* ${makeModel}%0A` +
-                `📅 *Year:* ${year}%0A` +
-                `📏 *Mileage:* ${mileage} km%0A` +
-                `⚙️ *Transmission:* ${transmission}%0A` +
-                `⛽ *Fuel Type:* ${fuel}%0A` +
-                `🛠️ *Condition:* ${condition}%0A` +
-                `💰 *Asking Price:* KSh ${price}%0A` +
-                `📞 *Contact:* ${contact}%0A%0A` +
-                `📸 I have ${uploadedImages.length} photo(s) of the car that I will send now.`;
+            // Build the WhatsApp message
+            let message = "Hi MotorPride, I want to sell my car. Here are the details:\n\n";
+            message += `🚗 *Make & Model:* ${makeModel}\n`;
+            message += `📅 *Year:* ${year}\n`;
+            message += `📏 *Mileage:* ${mileage} km\n`;
+            message += `⚙️ *Transmission:* ${transmission}\n`;
+            message += `⛽ *Fuel Type:* ${fuel}\n`;
+            message += `🛠️ *Condition:* ${condition}\n`;
+            message += `💰 *Asking Price:* KSh ${price}\n`;
+            message += `📞 *Contact:* ${contact}\n\n`;
+            message += `📸 I have ${uploadedImages.length} photo(s) of the car that I will send now.`;
 
-            const whatsappURL = `https://wa.me/254723098206?text=${message}`;
+            // Encode the message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/254723098206?text=${encodedMessage}`;
+            
+            // Open WhatsApp
             window.open(whatsappURL, "_blank");
             
-            // Note: In a real application, you would need to upload images to a server
-            // and then share the links via WhatsApp, or send them separately
-            alert(`Your car details have been prepared for WhatsApp. After sending the message, please send the ${uploadedImages.length} car photos separately.`);
+            // Show reminder about images
+            if (uploadedImages.length > 0) {
+                alert(`Your car details have been sent to WhatsApp. Please send the ${uploadedImages.length} car photo(s) separately by selecting them in the WhatsApp chat.`);
+            } else {
+                alert("Your car details have been sent to WhatsApp. Don't forget to send photos of your car in the chat!");
+            }
         }
     </script>
 </body>

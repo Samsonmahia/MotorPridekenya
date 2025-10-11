@@ -1,1 +1,1926 @@
-# MotorPridekenya
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AUTOLINK KENYA</title>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --neon-green: #39ff14;
+      --electric-blue: #00aeef;
+      --cool-gray: #ffffff;
+      --midnight-blue: #0a1F44;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: var(--cool-gray);
+      color: var(--midnight-blue);
+    }
+
+    header {
+      background: var(--midnight-blue);
+      color: white;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    header img {
+      height: 80px;
+      margin-right: 15px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--midnight-blue);
+      color: white;
+      padding: 10px 30px;
+      font-size: 20px;
+      flex-wrap: wrap;
+    }
+
+    .working-hours {
+      font-weight: 500;
+    }
+
+    .social-icons {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .social-icons a {
+      color: var(--electric-blue);
+      font-size: 25px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: var(--neon-green);
+    }
+
+    nav {
+      background: var(--electric-blue);
+      padding: 0.8rem;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      text-align: right;
+      padding: 0 16px;
+    }
+
+    .nav-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--electric-blue);
+      min-width: 180px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 6px;
+      text-align: left;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 10px 16px;
+      text-decoration: none;
+      display: block;
+      font-weight: normal;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #007bbd;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-height: 400px;
+      overflow: hidden;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      display: none;
+    }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    .carousel-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.4);
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      color: #fff;
+      text-align: center;
+      font-weight: 500;
+      font-size: 1.5rem;
+      max-width: 90%;
+      z-index: 10;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--midnight-blue);
+      color: white;
+    }
+
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-container {
+        display: none;
+        flex-direction: column;
+        background-color: var(--electric-blue);
+        padding: 1rem;
+      }
+
+      .nav-container.show {
+        display: flex;
+      }
+
+      .dropdown-content {
+        position: static;
+        box-shadow: none;
+        background-color: transparent;
+      }
+
+      .dropdown-content a {
+        padding-left: 24px;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: none;
+      }
+
+      .dropdown.open .dropdown-content {
+        display: block;
+      }
+
+      .top-bar {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px 20px;
+      }
+
+      .social-icons {
+        margin-top: 10px;
+        justify-content: center;
+      }
+
+      .carousel-overlay {
+        font-size: 1.1rem;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="working-hours"> Mon - Sat: 8:00 AM - 6:00 PM</div>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/profile.php?id=100063669245498" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/samson.kibe.5015" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://vm.tiktok.com/ZMSGtT6Ra/" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-x-twitter"></i></a>
+    </div>
+  </div>
+<!-- Header -->
+<header class="site-header">
+  <div class="header-container">
+    <img src="https://i.ibb.co/M5x6w0qt/Whats-App-Image-2025-06-16-at-3-50-59-PM.jpg" alt="MotorPride Kenya Logo" class="logo" />
+    <div class="header-text">
+      <h1>AUTOLINK KENYA</h1>
+      <p>Drive the Future • ORIGINAL • SMART • RELIABLE</p>
+    </div>
+  </div>
+</header>
+
+<style>
+/* Header Styling */
+.site-header {
+  background: linear-gradient(90deg, #0A1F44, #00AEEF); /* Midnight Blue → Electric Blue */
+  padding: 15px 30px;
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  height: 60px;  /* Adjust logo size */
+  width: auto;
+  border-radius: 12px; /* soft rounded edges */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.header-text h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+}
+
+.header-text p {
+  margin: 0.2rem 0 0;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
+  color: #E6E8EB; /* Cool gray for contrast */
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+  .header-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo {
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .header-text h1 {
+    font-size: 1.4rem;
+  }
+
+  .header-text p {
+    font-size: 0.9rem;
+  }
+}
+</style>
+
+  </header>
+<!-- Navigation -->
+<nav>
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <div class="nav-container">
+
+   <!-- About Us Link -->
+<div class="nav-item">
+  <a href="../aboutus.html">About Us</a>
+</div>
+
+
+    <!-- Other Navigation Links -->
+    <a href="../customerresponse.html">Customer Response</a>
+<!-- Units in Stock -->
+<div class="dropdown">
+  <a href="#">Units in Stock</a>
+  <div class="dropdown-content">
+    <a href="../featuredcars.html">Featured Cars</a>
+    <a href="../used-cars.html">Used Cars</a>
+     <a href="../sellyourcar.html">sell your car</a>
+  </div>
+</div>
+
+
+
+    <div class="dropdown">
+      <a href="../brands.html">Brands</a>
+      <div class="dropdown-content">
+        <a href="../Toyota.html">Toyota</a>
+        <a href="../Nissan.html">Nissan</a>
+        <a href="../Mazda.html">Mazda</a>
+        <a href="../Mercedes.html">Mercedes</a>
+        <a href="../Subaru.html">Subaru</a>
+      </div>
+    </div>
+
+    <!--<a href="brands.html">Car Brands</a>
+    <a href="../morecars.html">More Cars</a>
+    <a href="../sellyourcar.html">Sell Your Car</a> removed for now -->
+
+    <!-- Car Hire Dropdown -->
+    <div class="dropdown">
+      <a href="../carhiresections.html">Car Hire</a>
+      <div class="dropdown-content">
+        <a href="selfdrive.html">Self Drive</a>
+        <a href="nonselfdrive.html">Non Self Drive</a>
+        <a href="touristsafari.html">Tourist and Safaris</a>
+        <a href="Eventsfleet.html">Events Fleet</a>
+      </div>
+    </div>
+
+    <a href="../loancalculator.html">Loan Calculator</a>
+    <a href="../location.html">Location</a>
+    
+  </div>
+</nav>
+
+
+
+  <!-- Carousel -->
+  <div class="carousel">
+    <div class="carousel-overlay">
+     <h2 style="color:#FFFFFF;">Drive the Future with <span style="color:#FFFFFF;">AUTOLINK KENYA</span></h2>
+
+      <p style="margin: 0.5rem 0 0;">Original. Reliable. Affordable.</p>
+    </div>
+    <img src="https://i.ibb.co/QFY6wnt0/492700026-1193653429437734-7091386706403698009-n.jpg" class="active" alt="CX-5">
+    <img src="https://i.ibb.co/qYzjKX70/Whats-App-Image-2025-10-04-at-12-43-53-AM-Copy.jpg" alt="Car 2">
+    <img src="https://i.ibb.co/0yngnffS/Whats-App-Image-2025-10-04-at-12-48-43-AM.jpg" alt="Car 3">
+  </div>
+  <!-- Carousel -->
+<section class="carousel">
+  <!-- your carousel code here -->
+</section>
+<!-- ===== Search Bar & Home Buttons Section ===== -->
+<div class="search-container">
+  <form id="carSearchForm">
+    <input type="text" id="carSearchInput" placeholder="Search cars by brand, model, year...">
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+<div class="home-buttons">
+  <a href="ALLCARS.HTML" class="cta-button">🚗 Browse Cars</a>
+  <a href="realestate.html" class="cta-button">🏡 Buy / Rent Land & Houses</a>
+</div>
+
+<!-- ===== Styling ===== -->
+<style>
+/* ===== Shared Spacing (uniform for search + buttons) ===== */
+.search-container,
+.home-buttons {
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* ===== Overlap Effect: push section up toward carousel ===== */
+.search-container {
+  margin-top: -55px; /* stronger upward pull for overlap */
+  position: relative;
+  z-index: 5; /* ensures it appears above carousel edge */
+}
+
+/* ===== Search Bar ===== */
+#carSearchForm {
+  display: flex;
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto 12px auto;
+  background: linear-gradient(135deg, #00AEEF, #39FF14);
+  border-radius: 35px;
+  box-shadow: 0 6px 18px rgba(0, 174, 239, 0.25);
+  overflow: hidden;
+}
+
+#carSearchInput {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #ff69b4;
+  color: #fff;
+}
+
+#carSearchInput::placeholder {
+  color: rgba(255,255,255,0.8);
+}
+
+#carSearchForm button {
+  background: linear-gradient(135deg, #00AEEF, #39FF14);
+  color: white;
+  border: none;
+  padding: 0 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#carSearchForm button:hover {
+  box-shadow: 0 4px 12px rgba(0, 174, 239, 0.6);
+}
+
+/* ===== Buttons Under Carousel ===== */
+.home-buttons {
+  margin-top: 10px; /* equal spacing below search bar */
+}
+
+.home-buttons .cta-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #00AEEF, #39FF14);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  margin: 8px 0; /* uniform gap between buttons */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-buttons .cta-button:nth-child(2) {
+  background: linear-gradient(135deg, #dcdcdc, #e6e8eb);
+  color: #333;
+}
+
+.home-buttons .cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 174, 239, 0.5);
+}
+
+/* ===== Mobile Adjustments ===== */
+@media(max-width:600px) {
+  .search-container {
+    margin-top: -45px; /* slightly less overlap for mobile */
+  }
+
+  #carSearchForm {
+    border-radius: 25px;
+  }
+
+  #carSearchInput {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  #carSearchForm button {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+  }
+
+  .home-buttons .cta-button {
+    display: block;
+    margin: 10px auto; /* even spacing on mobile */
+    width: 85%;
+  }
+}
+</style>
+
+<script>
+  const form = document.getElementById("carSearchForm");
+  const input = document.getElementById("carSearchInput");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const query = input.value.trim().toLowerCase();
+    if(query) {
+      window.location.href = "allcars.html?search=" + encodeURIComponent(query);
+    } else {
+      window.location.href = "allcars.html";
+    }
+  });
+</script>
+
+
+
+  
+
+  
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/254700000000" class="whatsapp-button" target="_blank" title="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- JavaScript for Carousel and Menu --> 
+  <script>
+    // Carousel functionality
+    let index = 0;
+    const slides = document.querySelectorAll(".carousel img");
+    setInterval(() => {
+      slides[index].classList.remove("active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+    }, 4000);
+
+    // Hamburger menu toggle
+    function toggleMenu() {
+      const nav = document.querySelector('.nav-container');
+      nav.classList.toggle('show');
+    }
+
+    // Mobile dropdown toggle
+    document.querySelectorAll('.dropdown > a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          this.parentElement.classList.toggle('open');
+        }
+      });
+    });
+  </script>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | motorpride kenya</title>
+  <style>
+
+  /* === Base Styles === */
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f0f4f8;
+    color: #333;
+  }
+
+  section {
+    padding: 3rem 1.5rem;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  h1, h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.6rem; /* reduced size for smart look */
+    font-weight: 600;
+  }
+
+
+    /* === Hero Section === */
+    .about-hero {
+  background: linear-gradient(to right, #0052cc, #007fff);
+  color: white;
+  padding: 1.5rem 1rem;  /* reduced top & bottom padding */
+  text-align: center;
+}
+
+/* Enhanced animated title */
+.animated-title {
+  font-size: 2.5rem;   /* slightly smaller for tighter fit */
+  font-weight: bold;
+  animation: fadeInZoom 1.5s ease-out forwards;
+}
+
+/* Subtitle styling */
+.subtitle {
+  font-size: 1rem;
+  margin-top: 0.3rem;  /* reduced spacing */
+}
+
+/* Keyframes */
+@keyframes fadeInZoom {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Remove white body background globally */
+body {
+  margin: 0;
+  background: #0052cc;  /* fallback in case gradient doesn't fill */
+}
+
+    /* === Story Section === */
+    .about-story {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+    }
+    .story-text {
+      flex: 1;
+    }
+    .story-image {
+      flex: 1;
+      text-align: center;
+    }
+    .story-image img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* === Services Section === */
+    .services {
+      background: #fff;
+    }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .service-card {
+      background: #007fff;
+      color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, background 0.3s ease;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    .service-card:hover {
+      transform: scale(1.05);
+      background: #0052cc;
+    }
+    .service-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.6s ease-out;
+    }
+
+    /* === Why Us Section === */
+    .why-us ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 2rem;
+    }
+    .why-us li {
+      background: #e6f0ff;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      border-left: 5px solid #007fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    /* === CTA Section === */
+    .cta {
+      background: #0052cc;
+      color: white;
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+    .cta-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: white;
+      color: #0052cc;
+      font-weight: bold;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .cta-button:hover {
+      background: #cce0ff;
+    }
+
+    @media (max-width: 768px) {
+      .about-story {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Hero + About Story Combined Section -->
+<section class="about-hero-story">
+  <div class="hero-content">
+    <h1 class="animated-title">Welcome to motorpride kenya</h1>
+    <p class="subtitle">Where Kenyan roads meet global standards.</p>
+  </div>
+
+  <div class="story-container">
+    <div class="story-text">
+      <h2 class="gradient-heading">Our Inventory</h2>
+      <p class="fade-in-text">
+       Motorpride Kenya began as a dream to redefine how Kenyans buy, sell, and experience vehicles. From humble beginnings on Kiambu Road, we’ve grown into a trusted digital dealership platform blending local identity with global innovation. Our mission is to To empower every Kenyan with access to reliable, stylish, and affordable vehicles, backed by transparency and technology.
+      </p>
+    </div>
+    <div class="story-image">
+      <img src="https://i.postimg.cc/mk01DP9B/Whats-App-Image-2025-09-09-at-1-49-20-PM.jpg" alt="Car Image">
+    </div>
+  </div>
+</section>
+
+<style>
+/* === Combined Section Styling === */
+.about-hero-story {
+  background: linear-gradient(to right, #0052cc, #007fff);
+  color: white;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Hero Text */
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  animation: fadeSlideUp 1s ease-out forwards;
+  opacity: 0;
+}
+
+.animated-title {
+  font-size: 2.2rem; /* Smaller balanced title */
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-family: 'Poppins', sans-serif;
+}
+.subtitle {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-top: 0.3rem;
+  font-family: 'Open Sans', sans-serif;
+  color: #f5f5f5;
+}
+
+/* Story Container */
+.story-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background: #ffffff;
+  color: #111;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeInUp 1.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Text Section */
+.story-text {
+  flex: 1;
+  text-align: left;
+  padding: 1rem 2rem;
+}
+
+.gradient-heading {
+  font-size: 2.5rem;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #0052cc, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.fade-in-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+}
+
+/* Image Section */
+.story-image {
+  flex: 1;
+  text-align: center;
+}
+
+.story-image img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.4s ease;
+}
+
+.story-image img:hover {
+  transform: scale(1.03);
+}
+
+/* === Animations === */
+@keyframes fadeSlideUp {
+  0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* === Responsive Design === */
+@media (max-width: 900px) {
+  .story-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .story-text {
+    padding: 0;
+  }
+
+  .gradient-heading {
+    font-size: 2rem;
+  }
+
+  .animated-title {
+    font-size: 1.9rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+}
+</style>
+
+<!-- Call to Action -->
+<section class="cta">
+  <div class="cta-overlay"></div>
+  <div class="cta-content">
+    <h2>Drive Your Dream Today</h2>
+    <p>Browse our cars to find your perfect match today.</p>
+    <a href="ALLCARS.HTML" class="cta-button">Browse Cars</a>
+  </div>
+</section>
+
+<style>
+  .cta {
+    position: relative;
+    background: url('images/cta-bg.jpg') no-repeat center center/cover;
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding: 60px 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 40px auto;
+  }
+
+  /* Dark overlay for readability */
+  .cta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 31, 68, 0.7); /* Midnight Blue transparent overlay */
+    z-index: 0;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+
+  .cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  .cta p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    color: #E6E8EB; /* Cool gray for softer text */
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #00AEEF, #39FF14); /* Electric Blue → Neon Green */
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 174, 239, 0.5);
+  }
+</style>
+
+
+  <!-- Scroll Animation Script -->
+  <script>
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.service-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          card.classList.add('visible');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
+  
+<!-- Featured Vehicles Section -->
+<section id="featured">
+  <h2 class="section-title">Featured Vehicles</h2>
+  <div class="card-grid" id="carGrid"></div>
+
+  <div style="text-align: center; margin-top: 2rem;">
+    <a href="#home" class="wa-btn" style="background:#0A1F44;">⬅ Back to Home</a>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal" id="carModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div class="modal-top">
+      <div class="image-wrapper" style="position: relative;">
+        <img id="modalMainImage" class="main-image" src="" alt="">
+        <a id="reserveBtnOverlay" href="#" target="_blank" class="wa-btn reserve overlay-btn">💳 Reserve</a>
+      </div>
+    </div>
+    <div class="thumbnails" id="modalThumbnails"></div>
+    <div class="specs" id="modalSpecs"></div>
+    <div class="whatsapp-buttons" style="text-align: center; margin-top: 1rem;">
+      <a id="notifyBtn" href="#" target="_blank" class="wa-btn">🔔 Notify Me</a>
+      <a id="reserveBtn" href="#" target="_blank" class="wa-btn reserve">💳 Reserve</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .section-title {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 2rem;
+    color: #0A1F44;
+  }
+
+  .card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 1rem;
+    align-items: stretch;
+  }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 280px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .card:hover {
+    transform: scale(1.02);
+  }
+
+  .card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #eee;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+    margin: 0.5rem 1rem 0 1rem;
+    color: #0A1F44;
+  }
+
+  .card p {
+    margin: 0.3rem 1rem;
+    font-size: 0.95rem;
+    color: #333;
+  }
+
+  .reserve-in-card {
+    background: #25D366;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.6rem;
+    margin: 0.8rem 1rem 1rem 1rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    background: white;
+    width: 95%;
+    max-width: 850px;
+    border-radius: 10px;
+    overflow-y: auto;
+    max-height: 95%;
+    padding: 1rem;
+    position: relative;
+  }
+
+  .modal-content img.main-image {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    border-radius: 10px;
+    object-fit: contain;
+    object-position: center;
+    background-color: #f9f9f9;
+  }
+
+  .overlay-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 10;
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+
+  .thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+  }
+
+  .thumbnails img {
+    width: 90px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: 2px solid transparent;
+  }
+
+  .thumbnails img:hover {
+    transform: scale(1.05);
+    border-color: #0A1F44;
+  }
+
+  .specs {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .wa-btn {
+    background: #25D366;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 0 5px;
+    display: inline-block;
+  }
+
+  .wa-btn.reserve {
+    background: #075E54;
+  }
+</style>
+
+<script>
+  const cars = [
+    {
+    name: "2018 Mercedes Benz GLC220D 4MATIC",
+    images: [
+      "https://i.imgur.com/EPZ1pSd.jpeg",
+      "https://i.imgur.com/PMnvkfF.jpeg",
+      "https://i.imgur.com/X05JCL0.jpeg",
+      "https://i.imgur.com/lRekYQ1.jpeg",
+      "https://i.imgur.com/mvmRbeM.jpeg",
+      "https://i.imgur.com/hejOc7s.jpeg"
+    ],
+    fuel: "Diesel",
+    price: "KSh 6.3M",
+    year: 2018,
+    transmission: "Automatic",
+    engine: "2200cc",
+    mileage: "N/A",
+    color: "Polar White Exterior, Black Leather Interior",
+    body: "SUV",
+    location: "N/A",
+    stockID: "MB-GLC18",
+    features: [
+      "Sunroof",
+      "Lane Assist",
+      "Heads-up Display",
+      "Blind Monitoring System",
+      "Traffic Sign Recognition System",
+      "Dual Exhaust",
+      "Parking Sensors",
+      "Steering Wheel Controls"
+    ]
+  },
+  {
+  name: "2018 Mazda Demio",
+  images: [
+    "https://i.ibb.co/pvzVmBZG/Whats-App-Image-2025-10-03-at-10-10-45-PM-1.jpg",
+    "https://i.ibb.co/hF2kgJgc/Whats-App-Image-2025-10-03-at-10-10-45-PM.jpg",
+    "https://i.ibb.co/sd1cnH3F/Whats-App-Image-2025-10-03-at-10-10-44-PM.jpg",
+    "https://i.ibb.co/99VpRnF6/Whats-App-Image-2025-10-03-at-10-10-42-PM-1.jpg",
+    "https://i.ibb.co/C5cs7VTS/Whats-App-Image-2025-10-03-at-10-10-42-PM.jpg",
+    "https://i.ibb.co/cj5Q3xF/Whats-App-Image-2025-10-03-at-10-10-43-PM.jpg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 1.35M",
+  year: 2018,
+  transmission: "Automatic",
+  engine: "1300cc",
+  mileage: "N/A",
+  color: "Pearl White Exterior, Fabric Upholstery",
+  body: "Hatchback",
+  location: "N/A",
+  stockID: "MD-18",
+  features: [
+    "Multimedia steering controls",
+    "Multimedia navigation knob",
+    "Sport mode",
+    "FM/DVD/Bluetooth touchscreen player",
+    "Parking sensors",
+    "Blindspot monitoring",
+    "Lane departure alert",
+    "I-stop technology",
+    "Traction control",
+    "Alloy rims"
+  ]
+},
+{
+  name: "2018 Mercedes-Benz A180 (W176 with W177 Facelift)",
+  images: [
+    "https://i.ibb.co/cX7SfRXS/Whats-App-Image-2025-10-03-at-11-50-00-PM.jpg",
+    "https://i.ibb.co/20QZdBnB/Whats-App-Image-2025-10-03-at-11-50-01-PM-1.jpg",
+    "https://i.ibb.co/V0CVzBk9/Whats-App-Image-2025-10-03-at-11-50-01-PM.jpg",
+    "https://i.ibb.co/7dX0H73G/Whats-App-Image-2025-10-03-at-11-50-02-PM-1.jpg",
+    "https://i.ibb.co/dJGLdyr6/Whats-App-Image-2025-10-03-at-11-50-02-PM.jpg",
+    "https://i.ibb.co/d4jNM0hr/Whats-App-Image-2025-10-03-at-11-50-03-PM.jpg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 2.25M",
+  year: 2018,
+  transmission: "Automatic",
+  engine: "Turbo Petrol",
+  mileage: "Low Mileage",
+  color: "Modern Facelift (W177 Styling), Premium Interior Finish",
+  body: "Hatchback",
+  location: "Under Customs Clearance",
+  stockID: "MBA180-18",
+  status: "Available",
+  features: [
+    "Efficient Turbo Petrol Engine – Smooth and responsive drive",
+    "Modern Facelift (W177 Styling) – Sporty and updated design cues",
+    "Premium Interior Finish – Comfort with sophistication",
+    "Multifunctional Steering Wheel Controls – Convenience on the go",
+    "Mercedes Safety Technology – Confidence in every drive",
+    "Compact Luxury Hatchback – Perfect balance of style and performance",
+    "Status: Under Customs Clearance – Be the first to own it!"
+  ]
+},
+
+
+  {
+    name: "2019 Volvo V40 T3",
+    images: [
+      "https://i.ibb.co/7tM71tBX/559210532-18074591519149075-2075867912142298199-n-Copy.jpg",
+      "https://i.ibb.co/YJ7Z1PG/559210532-18074591519149075-2075867912142298199-n.jpg",
+      "https://i.ibb.co/C5yxngYP/557604651-18074591498149075-5786298582331994791-n.jpg",
+      "https://i.ibb.co/ch59WfGm/558987436-18074591489149075-2730477631576446721-n.jpg",
+      "https://i.ibb.co/Z4SpZ9m/557730787-18074591462149075-47375993987870509-n.jpg",
+      "https://i.ibb.co/mQnhtGQ/558841827-18074591453149075-1420190346078821785-n.jpg"
+    ],
+    fuel: "Petrol (T3 Turbo)",
+    price: "KSh N/A (Incoming Unit)",
+    year: 2019,
+    transmission: "Automatic",
+    engine: "1600cc Turbo",
+    mileage: "N/A (On Ship)",
+    color: "Modern Hatchback Styling, Scandinavian-Inspired Interior",
+    body: "Hatchback",
+    location: "Expected arrival: 23rd this month",
+    stockID: "VV40-19",
+    features: [
+      "T3 Turbo Petrol Engine – Smooth and powerful drive",
+      "Modern Hatchback Styling – Compact yet premium design",
+      "Scandinavian-Inspired Interior – Comfort with elegance",
+      "Infotainment System + Steering Controls – Seamless connectivity",
+      "Renowned Volvo Safety Features – Confidence behind the wheel"
+    ]
+  },
+  {
+  name: "2016 Suzuki Swift",
+  images: [
+    "https://i.ibb.co/XxmHXbVL/Whats-App-Image-2025-10-03-at-11-20-37-PM-1.jpg",
+    "https://i.ibb.co/HfzXzNyn/Whats-App-Image-2025-10-03-at-11-20-37-PM.jpg",
+    "https://i.ibb.co/pjTCHvNG/Whats-App-Image-2025-10-03-at-11-20-35-PM-1.jpg",
+    "https://i.ibb.co/1Yv4p5wz/Whats-App-Image-2025-10-03-at-11-20-35-PM.jpg",
+    "https://i.ibb.co/GQsC72Xs/Whats-App-Image-2025-10-03-at-11-20-34-PM-1.jpg",
+    "https://i.ibb.co/PZtrQpCK/Whats-App-Image-2025-10-03-at-11-20-34-PM.jpg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 950,000",
+  year: 2016,
+  transmission: "Automatic",
+  engine: "1300cc",
+  mileage: "N/A",
+  color: "Silver Exterior, Fabric Upholstery",
+  body: "Hatchback",
+  location: "N/A",
+  stockID: "SS-16",
+  features: [
+    "1300cc Petrol Engine – Efficient and responsive",
+    "Silver Exterior – Sleek and timeless design",
+    "Fabric Upholstery – Comfortable and practical interior",
+    "Side Mirror Winkers – Safety with style",
+    "FM/DVD Touchscreen Player – Entertainment on the go",
+    "Dual Zone Climate Control – Comfort for driver & passengers",
+    "Extremely Clean & Accident Free – Well-maintained, ready to drive"
+  ]
+},
+  {
+  name: "2011 Nissan Dualis",
+  images: [
+    "https://i.imgur.com/QO9PXL5.jpeg",
+    "https://i.imgur.com/dESDhFL.jpeg",
+    "https://i.imgur.com/rundqIa.jpeg",
+    "https://i.imgur.com/jm96fls.jpeg",
+    "https://i.imgur.com/scmAMy8.jpeg",
+    "https://i.imgur.com/kBClZST.jpeg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 1.03M",
+  year: 2011,
+  transmission: "Automatic",
+  engine: "2000cc",
+  mileage: "N/A",
+  color: "Black Exterior, Dark fabric upholstery",
+  body: "SUV",
+  location: "N/A",
+  stockID: "ND-11",
+  features: [
+    "Moonroof",
+    "Foldable side mirrors",
+    "FM/DVD/Bluetooth touchscreen player",
+    "Alloy rims",
+    "Foglights"
+  ]
+},
+
+  {
+  name: "2009 Toyota Ractis",
+  images: [
+    "https://i.imgur.com/wx2Qt16.jpeg",
+    "https://i.imgur.com/FFF6tLC.jpeg",
+    "https://i.imgur.com/UVxKA7g.jpeg",
+    "https://i.imgur.com/UAxsKPy.jpeg",
+    "https://i.imgur.com/ET5ML0N.jpeg"
+  ],
+  fuel: "Petrol",
+  price: "KSh 680K",
+  year: 2009,
+  transmission: "Automatic",
+  engine: "1300cc",
+  mileage: "N/A",
+  color: "White Exterior, Gray Fabric Interior",
+  body: "Hatchback",
+  location: "N/A",
+  stockID: "TR-09",
+  features: [
+    "Alloy Rims",
+    "New Tyres",
+    "One owner since import",
+    "Accident Free"
+  ]
+},
+    {
+  name: "citroen C4 2018",
+  price: "KSh 1.5M",
+  reg: " 827R",
+  fuel: "Petrol",
+  year: 2015,
+  transmission: "Automatic",
+  color: "Pearl White",
+  mileage: "48,000 km",
+  engine: "1500cc",
+  condition: "New Import",
+  drivetrain: "FWD",
+  images: [
+    "https://i.ibb.co/HLmRhyS2/Whats-App-Image-2025-07-16-at-8-21-35-PM.jpg",
+    "https://i.ibb.co/DfPKQDcY/Whats-App-Image-2025-07-16-at-8-21-34-PM.jpg",
+    "https://i.ibb.co/PZKQc5W8/Whats-App-Image-2025-07-16-at-8-21-36-PM-1.jpg",
+    "https://i.ibb.co/Z63xRpPD/Whats-App-Image-2025-07-16-at-8-21-36-PM.jpg",
+    "https://i.ibb.co/dJ4jxmLp/Whats-App-Image-2025-07-16-at-8-21-40-PM-1.jpg",
+    "https://i.ibb.co/Wp431dXk/Whats-App-Image-2025-07-16-at-8-21-40-PM.jpg",
+    "https://i.ibb.co/7tGMzMyb/Whats-App-Image-2025-07-16-at-8-21-38-PM-1.jpg",
+    "https://i.ibb.co/jZkswvHq/Whats-App-Image-2025-07-16-at-8-21-38-PM.jpg"
+  ]
+},  
+  {
+      name: "Tesla Model 3",
+      price: "KSh 5.8M",
+      reg: "KDG 320T",
+      fuel: "Electric",
+      year: 2022,
+      transmission: "Automatic",
+      color: "White",
+      mileage: "15,000 km",
+      engine: "Electric Motor",
+      condition: "New Import",
+      drivetrain: "RWD",
+      images: [
+        "https://i.ibb.co/FbfgxJJR/Whats-App-Image-2025-06-17-at-8-40-09-AM.jpg",
+        "https://i.ibb.co/LXth5wH9/Whats-App-Image-2025-06-17-at-8-40-13-AM.jpg",
+        "https://i.ibb.co/cK5449CW/Whats-App-Image-2025-06-17-at-8-40-15-AM.jpg",
+        "https://i.ibb.co/9mztxt4n/Whats-App-Image-2025-06-17-at-8-40-16-AM.jpg",
+        "https://i.ibb.co/9mztxt4n/Whats-App-Image-2025-06-17-at-8-40-16-AM.jpg",
+        "https://i.ibb.co/FbfgxJJR/Whats-App-Image-2025-06-17-at-8-40-09-AM.jpg",
+        "https://i.ibb.co/cK5449CW/Whats-App-Image-2025-06-17-at-8-40-15-AM.jpg",
+        "https://i.ibb.co/cK5449CW/Whats-App-Image-2025-06-17-at-8-40-15-AM.jpg"
+      ]
+    },
+    {
+      name: "TOYOTA PRADO J120 2004",
+      price: "KSh 2.2M",
+      reg: "KBQ 219S ",
+      fuel: "DISEL",
+      year: 2004,
+      transmission: "Automatic",
+      color: "White",
+      mileage: "15,000 km",
+      engine: "DISEL",
+      condition: "New Import",
+      drivetrain: "RWD",
+      images: [
+        "https://i.ibb.co/VWtw7M6W/Whats-App-Image-2025-07-03-at-10-43-51-AM.jpg",
+        "https://i.ibb.co/7N8xfTBh/Whats-App-Image-2025-07-03-at-10-43-51-AM-1.jpg",
+        "https://i.ibb.co/Rk7tTMrW/Whats-App-Image-2025-07-03-at-10-43-47-AM.jpg",
+        "https://i.ibb.co/kst0VnXJ/Whats-App-Image-2025-07-03-at-10-43-38-AM.jpg",
+        "https://i.ibb.co/8DGPWyf4/Whats-App-Image-2025-07-03-at-10-43-35-AM.jpg",
+        "https://i.ibb.co/k2fXf2Fn/Whats-App-Image-2025-07-03-at-10-43-34-AM.jpg",
+        "https://i.ibb.co/V0FY1JYk/Whats-App-Image-2025-07-03-at-10-43-33-AM.jpg",
+        "https://i.ibb.co/Rk7tTMrW/Whats-App-Image-2025-07-03-at-10-43-47-AM.jpg"
+      ]
+    },
+    {
+      name: "MAZDA CX8 2018 ",
+      price: "KSh 3.4M",
+      reg: " ",
+      fuel: "PETROL",
+      year: 2022,
+      transmission: "Automatic",
+      color: "PEARL WHITE",
+      mileage: "15,000 km",
+      engine: "Electric Motor",
+      condition: "New Import",
+      drivetrain: "RWD",
+      images: [
+  "https://i.ibb.co/39X739J2/Whats-App-Image-2025-07-03-at-10-41-39-AM.jpg",
+  "https://i.ibb.co/XZT5yH0H/Whats-App-Image-2025-07-03-at-10-41-31-AM.jpg",
+  "https://i.ibb.co/KpsgMhPh/Whats-App-Image-2025-07-03-at-10-41-28-AM.jpg",
+  "https://i.ibb.co/27bKTtJs/Whats-App-Image-2025-07-03-at-10-41-26-AM.jpg",
+  "https://i.ibb.co/99yFqzTb/Whats-App-Image-2025-07-03-at-10-41-25-AM.jpg",
+  "https://i.ibb.co/99JbYYx0/Whats-App-Image-2025-07-03-at-10-41-23-AM.jpg"
+]
+    },
+    {
+      name: "MAZDA CX8 2018",
+      price: "KSh 3.5M",
+      reg: "KDG 320T",
+      fuel: "PETROL",
+      year: 2018,
+      transmission: "Automatic",
+      color: "BROWN LEATHER",
+      mileage: "15,000 km",
+      engine: "Electric Motor",
+      condition: "New Import",
+      drivetrain: "RWD",
+      images: [
+        "https://i.ibb.co/s9pPF7bZ/Whats-App-Image-2025-07-03-at-10-42-01-AM.jpg",
+  "https://i.ibb.co/fd3ChNhZ/Whats-App-Image-2025-07-03-at-10-42-00-AM.jpg",
+  "https://i.ibb.co/0VhR21JR/Whats-App-Image-2025-07-03-at-10-41-56-AM.jpg",
+  "https://i.ibb.co/1ftkXMKC/Whats-App-Image-2025-07-03-at-10-41-54-AM.jpg",
+  "https://i.ibb.co/Myv4DKmj/Whats-App-Image-2025-07-03-at-10-41-53-AM.jpg",
+  "https://i.ibb.co/C3y7X7rR/Whats-App-Image-2025-07-03-at-10-41-49-AM.jpg",
+  "https://i.ibb.co/8LQ04rVJ/Whats-App-Image-2025-07-03-at-10-41-47-AM.jpg"
+      ]
+    },
+    {
+      name: "PEOGOT 2008 GTLINE ",
+      price: "KSh 1.97M",
+      reg: " ",
+      fuel: "PETROL",
+      year: 2022,
+      transmission: "Automatic",
+      color: "RED EXTERIOR",
+      mileage: "15,000 km",
+      engine: "Electric Motor",
+      condition: "New Import",
+      drivetrain: "RWD",
+      images: [
+        
+          "https://i.ibb.co/pBMjqXPB/Whats-App-Image-2025-07-03-at-6-57-07-AM.jpg",
+  "https://i.ibb.co/Gvq3DSCj/Whats-App-Image-2025-07-03-at-6-57-05-AM.jpg",
+  "https://i.ibb.co/0pyfDXP0/Whats-App-Image-2025-07-03-at-6-57-03-AM.jpg",
+  "https://i.ibb.co/ZpCgd3Tm/Whats-App-Image-2025-07-03-at-6-57-03-AM-1.jpg",
+  "https://i.ibb.co/TDxzWJqc/Whats-App-Image-2025-07-03-at-6-57-02-AM.jpg",
+  "https://i.ibb.co/Pvj8n51H/Whats-App-Image-2025-07-03-at-6-57-05-AM-1.jpg"
+      ]
+    },
+    {
+      name: "MAZDA DEMIO 2012 ",
+      price: "KSh 650K",
+      reg: "KCW ",
+      fuel: "PETROL",
+      year: 2012,
+      transmission: "Automatic",
+      color: "ORIGINAL PAINT",
+      mileage: "15,000 km",
+      engine: "PETROL ENGINE",
+      condition: "USED",
+      drivetrain: "RWD",
+      images: [
+        
+           "https://i.ibb.co/rKZRm9bD/Whats-App-Image-2025-07-14-at-9-56-12-AM.jpg",
+  "https://i.ibb.co/27939gw3/Whats-App-Image-2025-07-14-at-9-56-20-AM.jpg",
+  "https://i.ibb.co/JWHt00T4/Whats-App-Image-2025-07-14-at-9-56-21-AM.jpg",
+  "https://i.ibb.co/kVZ8Ps0y/Whats-App-Image-2025-07-14-at-9-56-22-AM.jpg",
+  "https://i.ibb.co/1t8CmXN0/Whats-App-Image-2025-07-14-at-9-56-24-AM.jpg",
+  "https://i.ibb.co/qYNRp4VK/Whats-App-Image-2025-07-14-at-9-56-40-AM.jpg",
+  "https://i.ibb.co/RTdxCwfH/Whats-App-Image-2025-07-16-at-8-44-02-AM.jpg"
+      ]
+    },
+    {
+      name: "TOYOTA FIELDER 2018",
+      price: "KSh 1.9M",
+      reg: " 320T",
+      fuel: "PETROL",
+      year: 2022,
+      transmission: "Automatic",
+      color: "BLACK EXTERIOR",
+      mileage: "15,000 km",
+      engine: "Electric Motor",
+      condition: "New Import",
+      drivetrain: "RWD",
+      images: [
+         "https://i.ibb.co/GfVMdz9j/Whats-App-Image-2025-07-03-at-6-48-39-AM.jpg",
+  "https://i.ibb.co/rRRL4mYz/Whats-App-Image-2025-07-03-at-6-48-40-AM.jpg",
+  "https://i.ibb.co/3mcjR3f4/Whats-App-Image-2025-07-03-at-6-48-41-AM-1.jpg",
+  "https://i.ibb.co/wN0kVks8/Whats-App-Image-2025-07-03-at-6-48-41-AM.jpg",
+  "https://i.ibb.co/d01Mm8SN/Whats-App-Image-2025-07-03-at-6-48-43-AM-1.jpg",
+  "https://i.ibb.co/n26JKdb/Whats-App-Image-2025-07-03-at-6-48-43-AM.jpg",
+  "https://i.ibb.co/M5M98YqF/Whats-App-Image-2025-07-03-at-6-48-44-AM-1.jpg",
+  "https://i.ibb.co/WW4h42J1/Whats-App-Image-2025-07-03-at-6-48-45-AM-1.jpg",
+  "https://i.ibb.co/dsh5SVnm/Whats-App-Image-2025-07-03-at-6-48-45-AM.jpg"
+      ]
+    },
+    {
+      name: "TOYOTA RACTIS 2011",
+      price: "KSh 850K",
+      reg: " KCQ",
+      fuel: "PETROL",
+      year: 2022,
+      transmission: "Automatic",
+      color: "PURPLE EXTERIOR",
+      mileage: "15,000 km",
+      engine: "ALLOY WHEELS",
+      condition: "USED",
+      drivetrain: "RWD",
+      images: [
+          "https://i.ibb.co/JW69NYW6/Whats-App-Image-2025-07-16-at-8-44-08-AM.jpg",
+  "https://i.ibb.co/D2Pc8s1/Whats-App-Image-2025-07-16-at-8-44-03-AM-1.jpg",
+  "https://i.ibb.co/RTdxCwfH/Whats-App-Image-2025-07-16-at-8-44-02-AM.jpg",
+  "https://i.ibb.co/mV4TsKGk/Whats-App-Image-2025-07-16-at-8-44-15-AM.jpg",
+  "https://i.ibb.co/HDmLs2LQ/Whats-App-Image-2025-07-16-at-8-44-16-AM.jpg",
+  "https://i.ibb.co/tN8ZmWm/Whats-App-Image-2025-07-16-at-8-44-03-AM.jpg"
+      ]
+    },
+    {
+      name: "MAZDA ATENZA 2014",
+      price: "KSh 1.5M",
+      reg: " 320T",
+      fuel: "PETROL",
+      year: 2022,
+      transmission: "Automatic",
+      color: "RED EXTERIOR",
+      mileage: "15,000 km",
+      engine: "Electric Motor",
+      condition: "New Import",
+      drivetrain: "RWD",
+      images: [
+         "https://i.ibb.co/WvzvfTFQ/Whats-App-Image-2025-07-02-at-9-57-51-PM.jpg",
+  "https://i.ibb.co/R4km2WfB/Whats-App-Image-2025-07-02-at-9-57-52-PM.jpg",
+  "https://i.ibb.co/sTsWTQL/Whats-App-Image-2025-07-02-at-9-57-53-PM.jpg",
+  "https://i.ibb.co/CpP1h4RZ/Whats-App-Image-2025-07-02-at-9-57-55-PM.jpg",
+  "https://i.ibb.co/prNLGYCZ/Whats-App-Image-2025-07-02-at-9-57-58-PM.jpg",
+  "https://i.ibb.co/fZt6b2s/Whats-App-Image-2025-07-02-at-9-58-04-PM.jpg"
+      ]
+    },
+    {
+  name: "MAZDA DEMIO 2016",
+  price: "KSh 1.0M",
+  reg: "KDM",
+  fuel: "PETROL",
+  year: 2016,
+  transmission: "Automatic",
+  color: "RED EXTERIOR",
+  mileage: "15,000 km",
+  engine: "PETROL ENGINE",
+  condition: "ALLOY WHEELS",
+  drivetrain: "RWD",
+  images: [
+    "https://i.ibb.co/HpGz7yrg/Whats-App-Image-2025-07-16-at-10-00-33-AM.jpg",
+    "https://i.ibb.co/YnCYNy1/Whats-App-Image-2025-07-16-at-10-03-34-AM.jpg",
+    "https://i.ibb.co/Z1kcTjLd/Whats-App-Image-2025-07-16-at-10-03-36-AM.jpg",
+    "https://i.ibb.co/DgsbMtnY/Whats-App-Image-2025-07-16-at-10-03-57-AM.jpg",
+    "https://i.ibb.co/ksFJhQPR/Whats-App-Image-2025-07-16-at-10-03-59-AM.jpg",
+    "https://i.ibb.co/Y7cKYDgN/Whats-App-Image-2025-07-16-at-10-04-15-AM.jpg"
+  ]
+},
+    {
+      name: "TOYOTA PROBOX 2013",
+      price: "KSh 810K",
+      reg: " 320T",
+      fuel: "PETROL",
+      year: 2022,
+      transmission: "Automatic",
+      color: "WHITE",
+      mileage: "15,000 km",
+      engine: "Electric Motor",
+      condition: "New Import",
+      drivetrain: "RWD",
+      images: [
+          "https://i.ibb.co/1twVvVCz/Whats-App-Image-2025-07-02-at-4-23-30-PM.jpg",
+  "https://i.ibb.co/Z1b3WzMQ/Whats-App-Image-2025-07-02-at-4-23-32-PM.jpg",
+  "https://i.ibb.co/8DJdfFXW/Whats-App-Image-2025-07-02-at-4-23-33-PM.jpg",
+  "https://i.ibb.co/0pBKBzwb/Whats-App-Image-2025-07-02-at-4-23-35-PM.jpg",
+  "https://i.ibb.co/q37xSync/Whats-App-Image-2025-07-02-at-4-23-37-PM.jpg",
+  "https://i.ibb.co/1h7C5DL/Whats-App-Image-2025-07-02-at-4-23-38-PM.jpg",
+  "https://i.ibb.co/jkbShY4b/Whats-App-Image-2025-07-02-at-4-23-39-PM.jpg",
+  "https://i.ibb.co/Hpkd8tHd/Whats-App-Image-2025-07-02-at-4-23-41-PM.jpg",
+  "https://i.ibb.co/HpfQ4Bc2/Whats-App-Image-2025-07-02-at-4-23-42-PM.jpg",
+  "https://i.ibb.co/7N2sfSPh/Whats-App-Image-2025-07-02-at-4-23-43-PM.jpg"
+      ]
+    },
+    {
+      name: "TOYOTA FIELDER 2018",
+      price: "KSh 1.9M",
+      reg: " 320T",
+      fuel: "PETROL",
+      year: 2022,
+      transmission: "Automatic",
+      color: "BLACK EXTERIOR",
+      mileage: "15,000 km",
+      engine: "Electric Motor",
+      condition: "New Import",
+      drivetrain: "RWD",
+      images: [
+         "https://i.ibb.co/GfVMdz9j/Whats-App-Image-2025-07-03-at-6-48-39-AM.jpg",
+  "https://i.ibb.co/rRRL4mYz/Whats-App-Image-2025-07-03-at-6-48-40-AM.jpg",
+  "https://i.ibb.co/3mcjR3f4/Whats-App-Image-2025-07-03-at-6-48-41-AM-1.jpg",
+  "https://i.ibb.co/wN0kVks8/Whats-App-Image-2025-07-03-at-6-48-41-AM.jpg",
+  "https://i.ibb.co/d01Mm8SN/Whats-App-Image-2025-07-03-at-6-48-43-AM-1.jpg",
+  "https://i.ibb.co/n26JKdb/Whats-App-Image-2025-07-03-at-6-48-43-AM.jpg",
+  "https://i.ibb.co/M5M98YqF/Whats-App-Image-2025-07-03-at-6-48-44-AM-1.jpg",
+  "https://i.ibb.co/WW4h42J1/Whats-App-Image-2025-07-03-at-6-48-45-AM-1.jpg",
+  "https://i.ibb.co/dsh5SVnm/Whats-App-Image-2025-07-03-at-6-48-45-AM.jpg"
+      ]
+    },
+    {
+      name: "SUZUKI ESCUDO ALLGRIP 2018",
+      price: "KSh 2.65M",
+      reg: "",
+      fuel: "Electric",
+      year: 2021,
+      transmission: "Auto",
+      color: "Black",
+      mileage: "22,000 km",
+      engine: "PETROL Motor",
+      condition: "NEW",
+      drivetrain: "RWD",
+      images: [
+        "https://i.ibb.co/4g9LkKzS/Whats-App-Image-2025-07-03-at-7-02-31-AM.jpg",
+        "https://i.ibb.co/4R4wBWb4/Whats-App-Image-2025-07-03-at-7-02-27-AM.jpg",
+        "https://i.ibb.co/wDMSv3z/Whats-App-Image-2025-07-03-at-7-02-26-AM.jpg",
+        "https://i.ibb.co/kVLz32Dj/Whats-App-Image-2025-07-03-at-7-02-26-AM-1.jpg",
+        "https://i.ibb.co/wFxrbcNw/Whats-App-Image-2025-07-03-at-7-02-25-AM.jpg",
+        "https://i.ibb.co/4g9LkKzS/Whats-App-Image-2025-07-03-at-7-02-31-AM.jpg",
+        "https://i.ibb.co/wFxrbcNw/Whats-App-Image-2025-07-03-at-7-02-25-AM.jpg"
+      ]
+    }
+    // Add more cars here...
+  ];
+
+  const carGrid = document.getElementById("carGrid");
+  const modal = document.getElementById("carModal");
+  const modalMainImage = document.getElementById("modalMainImage");
+  const modalThumbnails = document.getElementById("modalThumbnails");
+  const modalSpecs = document.getElementById("modalSpecs");
+  const notifyBtn = document.getElementById("notifyBtn");
+  const reserveBtn = document.getElementById("reserveBtn");
+
+  cars.forEach((car, index) => {
+    const encodedName = encodeURIComponent(car.name);
+    const reserveLink = `https://wa.me/254723098206?text=Hi%20MotorPride%2C%20I%20want%20to%20reserve%20the%20${encodedName}%20now`;
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <img src="${car.images[0]}" alt="${car.name}">
+      <h3>${car.name}</h3>
+      <p>${car.fuel} | ${car.price}</p>
+      <a href="${reserveLink}" target="_blank" class="reserve-in-card">💳 Reserve</a>
+    `;
+    card.querySelector("img").onclick = () => showModal(index);
+    carGrid.appendChild(card);
+  });
+
+  function showModal(index) {
+    const car = cars[index];
+    modal.style.display = "flex";
+    modalMainImage.src = car.images[0];
+
+    const encodedName = encodeURIComponent(car.name);
+    const reserveLink = `https://wa.me/254723098206?text=Hi%20MotorPride%2C%20I%20want%20to%20reserve%20the%20${encodedName}%20now`;
+
+    document.getElementById("reserveBtnOverlay").href = reserveLink;
+
+    modalThumbnails.innerHTML = "";
+    car.images.forEach(img => {
+      const thumb = document.createElement("img");
+      thumb.src = img;
+      thumb.onclick = () => {
+        modalMainImage.src = img;
+      };
+      modalThumbnails.appendChild(thumb);
+    });
+
+    modalSpecs.innerHTML = `
+      <h3>${car.name} - ${car.reg}</h3>
+      <p><strong>Price:</strong> ${car.price}</p>
+      <p><strong>Fuel:</strong> ${car.fuel}</p>
+      <p><strong>Year:</strong> ${car.year}</p>
+      <p><strong>Transmission:</strong> ${car.transmission}</p>
+      <p><strong>Color:</strong> ${car.color}</p>
+      <p><strong>Mileage:</strong> ${car.mileage}</p>
+      <p><strong>Engine:</strong> ${car.engine}</p>
+      <p><strong>Condition:</strong> ${car.condition}</p>
+      <p><strong>Drivetrain:</strong> ${car.drivetrain}</p>
+    `;
+
+    notifyBtn.href = `https://wa.me/254723098206?text=Hi%20MotorPride%2C%20please%20notify%20me%20when%20${encodedName}%20is%20available`;
+    reserveBtn.href = reserveLink;
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+  }
+
+  window.addEventListener('click', function (e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+</script>
+<
+  <!-- ✅ Improved WhatsApp Button with Clear Text and Larger Placeholder -->
+<a href="https://wa.me/254723098206" class="whatsapp-button" target="_blank" title="Chat with Samson">
+  <img src="https://i.ibb.co/67h5sYnF/Whats-App-Image-2025-06-09-at-8-59-12-PM-1.jpg" alt="Samson Profile" class="profile-pic" />
+  <div class="wa-label">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon" class="wa-icon" />
+    <span>Chat with Samson</span>
+  </div>
+</a>
+
+<style>
+  .whatsapp-button {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25D366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: background 0.3s ease, transform 0.2s ease;
+    z-index: 1000;
+    max-width: 280px;
+  }
+
+  .whatsapp-button:hover {
+    background-color: #1ebe5d;
+    transform: scale(1.03);
+  }
+
+  .whatsapp-button .profile-pic {
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .wa-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .wa-label .wa-icon {
+    height: 20px;
+  }
+
+  .wa-label span {
+    font-size: 16px;
+    white-space: nowrap;
+    color: #fff;
+  }
+
+  @media (max-width: 480px) {
+    .whatsapp-button {
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 14px;
+      max-width: 90vw;
+    }
+
+    .whatsapp-button .profile-pic {
+      height: 48px;
+      width: 48px;
+    }
+
+    .wa-label span {
+      font-size: 15px;
+    }
+  }
+</style>
+
+
+
+<!-- Footer with Vehicle Background -->
+<div style="position:relative; background:url('https://i.ibb.co/QFY6wnt0/492700026-1193653429437734-7091386706403698009-n.jpg') center/cover no-repeat; color:#fff; text-align:center; padding:60px 20px;">
+  <div style="position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(10,31,68,0.85);"></div>
+  <div style="position:relative; z-index:1;">
+    <h2 style="margin-bottom:20px;">MotorPride Kenya</h2>
+    <p style="max-width:600px; margin:auto; margin-bottom:25px;">Driving Excellence, Trust, and Reliability Across Kenya</p>
+    <div style="display:flex; justify-content:center; gap:20px; margin-bottom:30px;">
+      <a href="#" class="social">🌐</a>
+      <a href="#" class="social">📘</a>
+      <a href="#" class="social">🐦</a>
+      <a href="#" class="social">📸</a>
+    </div>
+    <p style="font-size:14px;">&copy; 2025 MotorPride Kenya. All Rights Reserved.</p>
+  </div>
+</div>
+
+<!-- Styles -->
+<style>
+.about-card {
+  background:#fff;
+  padding:25px;
+  width:280px;
+  text-align:center;
+  border-radius:15px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  transition:all 0.4s ease;
+  cursor:pointer;
+}
+.about-card .icon {font-size:40px; margin-bottom:15px; transition:transform 0.4s ease;}
+.about-card:hover {transform:translateY(-10px); box-shadow:0 12px 24px rgba(0,0,0,0.15); background:#00AEEF; color:#fff;}
+.about-card:hover .icon {transform:scale(1.2) rotate(10deg);}
+.about-card:hover h3, .about-card:hover p {color:#fff;}
+
+.service-card {
+  background: linear-gradient(135deg, #0A1F44, #00AEEF);
+  color: #fff;
+  width: 250px;
+  height: 250px;
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  gap: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  transition: all 0.4s ease; cursor: pointer;
+}
+.service-card:hover {transform: translateY(-12px) scale(1.05); background: linear-gradient(135deg, #39FF14, #00AEEF);}
+
+.bar {margin-bottom:25px;}
+.bar p {margin:0 0 8px; font-weight:600; color:#0A1F44; display:flex; justify-content:space-between;}
+.progress {background:#e6e8eb; border-radius:10px; overflow:hidden; height:12px;}
+.progress-fill {background:linear-gradient(90deg, #00AEEF, #39FF14); height:100%; width:0; animation: fillBar 2s forwards;}
+@keyframes fillBar {from {width:0;} to {width: var(--percent);}}
+
+.social {
+  background:#00AEEF; color:#fff; padding:10px 14px; border-radius:50%; text-decoration:none; font-size:18px;
+  transition:all 0.3s ease;
+}
+.social:hover {background:#39FF14; transform:translateY(-5px) scale(1.1);}
+</style>
+
+
+
+</body>
+</html>
+
+
