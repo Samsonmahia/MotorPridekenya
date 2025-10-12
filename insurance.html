@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> motorpride Insurance Partners | Global Auto Imports</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a365d;
+            --secondary: #d4af37;
+            --accent: #2ecc71;
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --gray: #718096;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Insurance Section Styles */
+        .insurance-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Insurance Cards Grid */
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .insurance-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .insurance-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .insurance-header {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .insurance-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .insurance-card:hover .insurance-header img {
+            transform: scale(1.05);
+        }
+
+        .insurance-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(26, 54, 93, 0.2), rgba(26, 54, 93, 0.7));
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .insurance-logo {
+            background: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-right: 15px;
+        }
+
+        .insurance-logo img {
+            width: 70%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .insurance-title {
+            color: white;
+        }
+
+        .insurance-title h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .insurance-title p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .insurance-content {
+            padding: 25px;
+        }
+
+        .insurance-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .insurance-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .insurance-features li:last-child {
+            border-bottom: none;
+        }
+
+        .insurance-features i {
+            color: var(--accent);
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .insurance-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .insurance-button:hover {
+            background: #2d4a7c;
+        }
+
+        /* Insurance Benefits Section */
+        .insurance-benefits {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .benefits-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .benefit-item h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .benefit-item p {
+            color: var(--gray);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .insurance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .insurance-header {
+                height: 180px;
+            }
+
+            .insurance-benefits {
+                padding: 25px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Insurance Partners Section -->
+    <section class="insurance-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Insurance Partners</h2>
+                <p>Protect your investment with our trusted insurance partners. Comprehensive coverage tailored for imported vehicles.</p>
+            </div>
+
+            <div class="insurance-grid">
+                <!-- Partner 1: Motor Pride Kenya -->
+                <div class="insurance-card">
+                    <div class="insurance-header">
+                        <img src="https://images.unsplash.com/photo-1533478589333-c45ceb8f87ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Motor Pride Kenya">
+                        <div class="insurance-overlay">
+                            <div class="insurance-logo">
+                                <i class="fas fa-shield-alt" style="color: #2ecc71; font-size: 2rem;"></i>
+                            </div>
+                            <div class="insurance-title">
+                                <h3>Motor Pride Kenya</h3>
+                                <p>Comprehensive Vehicle Protection</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insurance-content">
+                        <ul class="insurance-features">
+                            <li><i class="fas fa-check-circle"></i> Specialized import vehicle coverage</li>
+                            <li><i class="fas fa-check-circle"></i> 24/7 roadside assistance across East Africa</li>
+                            <li><i class="fas fa-check-circle"></i> Fast claims processing within 48 hours</li>
+                            <li><i class="fas fa-check-circle"></i> Flexible payment plans available</li>
+                            <li><i class="fas fa-check-circle"></i> Coverage for parts imported for repairs</li>
+                        </ul>
+                        <a href="#" class="insurance-button">Get Quote</a>
+                    </div>
+                </div>
+
+                <!-- Partner 2: Global Shield Insurance -->
+                <div class="insurance-card">
+                    <div class="insurance-header">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Global Shield Insurance">
+                        <div class="insurance-overlay">
+                            <div class="insurance-logo">
+                                <i class="fas fa-globe" style="color: #3498db; font-size: 2rem;"></i>
+                            </div>
+                            <div class="insurance-title">
+                                <h3>Global Shield Insurance</h3>
+                                <p>Worldwide Coverage Experts</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insurance-content">
+                        <ul class="insurance-features">
+                            <li><i class="fas fa-check-circle"></i> International coverage for cross-border travel</li>
+                            <li><i class="fas fa-check-circle"></i> Multi-currency claim settlements</li>
+                            <li><i class="fas fa-check-circle"></i> Specialized exotic and luxury vehicle policies</li>
+                            <li><i class="fas fa-check-circle"></i> Agreed value policies for collector imports</li>
+                            <li><i class="fas fa-check-circle"></i> 24/7 multilingual customer support</li>
+                        </ul>
+                        <a href="#" class="insurance-button">Get Quote</a>
+                    </div>
+                </div>
+
+                <!-- Partner 3: SafeDrive Assurance -->
+                <div class="insurance-card">
+                    <div class="insurance-header">
+                        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="SafeDrive Assurance">
+                        <div class="insurance-overlay">
+                            <div class="insurance-logo">
+                                <i class="fas fa-car" style="color: #e74c3c; font-size: 2rem;"></i>
+                            </div>
+                            <div class="insurance-title">
+                                <h3>SafeDrive Assurance</h3>
+                                <p>Budget-Friendly Protection</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insurance-content">
+                        <ul class="insurance-features">
+                            <li><i class="fas fa-check-circle"></i> Affordable premiums with flexible deductibles</li>
+                            <li><i class="fas fa-check-circle"></i> Special discounts for multiple vehicle policies</li>
+                            <li><i class="fas fa-check-circle"></i> Easy monthly payment options</li>
+                            <li><i class="fas fa-check-circle"></i> Quick online claims filing</li>
+                            <li><i class="fas fa-check-circle"></i> Network of certified repair shops nationwide</li>
+                        </ul>
+                        <a href="#" class="insurance-button">Get Quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insurance Benefits Section -->
+            <div class="insurance-benefits">
+                <div class="benefits-title">
+                    <h3>Why Choose Our Insurance Partners?</h3>
+                </div>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Trusted Partnerships</h4>
+                        <p>We've carefully selected insurance providers with proven track records in import vehicle coverage.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h4>Competitive Rates</h4>
+                        <p>Exclusive discounted rates for our customers through our partnership agreements.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4>Dedicated Support</h4>
+                        <p>Our team assists with claims and acts as your advocate with insurance providers.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Specialized Coverage</h4>
+                        <p>Policies specifically designed for the unique needs of imported vehicles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add interactivity to insurance cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const insuranceCards = document.querySelectorAll('.insurance-card');
+            const insuranceButtons = document.querySelectorAll('.insurance-button');
+            
+            // Add click event to insurance buttons
+            insuranceButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const insuranceProvider = this.closest('.insurance-card').querySelector('h3').textContent;
+                    alert(`Thank you for your interest in ${insuranceProvider}! Our insurance specialist will contact you shortly with a customized quote.`);
+                });
+            });
+            
+            // Add animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe insurance cards and benefits
+            insuranceCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            const benefitItems = document.querySelectorAll('.benefit-item');
+            benefitItems.forEach(item => {
+                item.style.opacity = 0;
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>

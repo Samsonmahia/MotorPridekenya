@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>motorpride Vehicle Imports | Global Luxury Cars</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a365d;
+            --secondary: #d4af37;
+            --accent: #e53e3e;
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --gray: #718096;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            background-color: #e6c34c;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover .feature-img img {
+            transform: scale(1.1);
+        }
+
+        .feature-content {
+            padding: 25px;
+        }
+
+        .feature-content h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .feature-content p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Process Section */
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background-color: var(--secondary);
+            z-index: 1;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            min-width: 200px;
+            padding: 0 15px;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            border: 5px solid white;
+            box-shadow: 0 0 0 3px var(--secondary);
+        }
+
+        .step h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: var(--gray);
+        }
+
+        /* Inventory Section */
+        .inventory-filters {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 150px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .filter-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .vehicle-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .vehicle-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .vehicle-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .vehicle-card:hover .vehicle-img img {
+            transform: scale(1.1);
+        }
+
+        .vehicle-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .vehicle-content {
+            padding: 20px;
+        }
+
+        .vehicle-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .vehicle-title h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .vehicle-price {
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .vehicle-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .vehicle-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .vehicle-features li {
+            padding: 5px 0;
+            color: var(--gray);
+            border-bottom: 1px solid #eee;
+        }
+
+        .vehicle-features li:last-child {
+            border-bottom: none;
+        }
+
+        .vehicle-features i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+
+        .vehicle-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .vehicle-button:hover {
+            background: #2d4a7c;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .footer-column p, .footer-column a {
+            color: #cbd5e0;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .process-steps::before {
+                display: none;
+            }
+
+            .step {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .features-grid, .inventory-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .inventory-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-group {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Premium Vehicle Imports</h1>
+                <p>Discover exclusive vehicles from around the world with our hassle-free import service. Luxury, performance, and reliability delivered to your doorstep.</p>
+                <a href="#inventory" class="cta-button">Browse Our Inventory</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Why Choose Us Section -->
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Our Import Service</h2>
+                <p>We make international vehicle importing simple, transparent, and secure</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1563720223485-8d84f13a82e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Global Sourcing">
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h3>Global Sourcing</h3>
+                        <p>We have established partnerships with trusted suppliers in Japan, Germany, UK, and USA to source the best vehicles.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Quality Assurance">
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3>Quality Assurance</h3>
+                        <p>Every vehicle undergoes a rigorous 150-point inspection to ensure it meets our high standards before shipping.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1581093458791-8a6c6b8d6e6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Transparent Pricing">
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <h3>Transparent Pricing</h3>
+                        <p>No hidden fees. You see the complete breakdown of costs upfront with our all-inclusive pricing model.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Import Process Section -->
+    <section style="background-color: var(--light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Simple Import Process</h2>
+                <p>Four easy steps to owning your dream imported vehicle</p>
+            </div>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Select Vehicle</h3>
+                    <p>Browse our inventory or request a specific model</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Secure Purchase</h3>
+                    <p>We handle bidding, purchase, and all documentation</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Shipping & Customs</h3>
+                    <p>We manage ocean freight, insurance, and customs clearance</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Delivery</h3>
+                    <p>Your vehicle arrives at your chosen destination</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inventory Section -->
+    <section id="inventory">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Inventory</h2>
+                <p>Explore our selection of premium imported vehicles</p>
+            </div>
+            
+            <div class="inventory-filters">
+                <div class="filter-group">
+                    <label for="make">Make</label>
+                    <select id="make">
+                        <option value="all">All Makes</option>
+                        <option value="toyota">Toyota</option>
+                        <option value="nissan">Nissan</option>
+                        <option value="bmw">BMW</option>
+                        <option value="mercedes">Mercedes-Benz</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="type">Vehicle Type</label>
+                    <select id="type">
+                        <option value="all">All Types</option>
+                        <option value="suv">SUV</option>
+                        <option value="sedan">Sedan</option>
+                        <option value="sports">Sports Car</option>
+                        <option value="luxury">Luxury</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="origin">Country of Origin</label>
+                    <select id="origin">
+                        <option value="all">All Countries</option>
+                        <option value="japan">Japan</option>
+                        <option value="germany">Germany</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="usa">USA</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price">Price Range</label>
+                    <select id="price">
+                        <option value="all">Any Price</option>
+                        <option value="low">Under $30,000</option>
+                        <option value="medium">$30,000 - $60,000</option>
+                        <option value="high">Over $60,000</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="inventory-grid">
+                <!-- Vehicle 1 -->
+                <div class="vehicle-card" data-make="toyota" data-type="suv" data-origin="japan" data-price="medium">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Toyota Land Cruiser">
+                        <div class="vehicle-badge">Just Arrived</div>
+                    </div>
+                    <div class="vehicle-content">
+                        <div class="vehicle-title">
+                            <h3>Toyota Land Cruiser</h3>
+                            <div class="vehicle-price">$49,999</div>
+                        </div>
+                        <div class="vehicle-details">
+                            <span>2021 • 18,500 mi</span>
+                            <span>Japan Import</span>
+                        </div>
+                        <ul class="vehicle-features">
+                            <li><i class="fas fa-gas-pump"></i> Diesel</li>
+                            <li><i class="fas fa-cog"></i> Automatic</li>
+                            <li><i class="fas fa-tachometer-alt"></i> 4WD</li>
+                            <li><i class="fas fa-palette"></i> White Pearl</li>
+                        </ul>
+                        <button class="vehicle-button">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Vehicle 2 -->
+                <div class="vehicle-card" data-make="nissan" data-type="sports" data-origin="japan" data-price="high">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1626668893635-06ed59e08b8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nissan GT-R">
+                        <div class="vehicle-badge">Limited</div>
+                    </div>
+                    <div class="vehicle-content">
+                        <div class="vehicle-title">
+                            <h3>Nissan GT-R</h3>
+                            <div class="vehicle-price">$89,999</div>
+                        </div>
+                        <div class="vehicle-details">
+                            <span>2020 • 12,300 mi</span>
+                            <span>Japan Import</span>
+                        </div>
+                        <ul class="vehicle-features">
+                            <li><i class="fas fa-gas-pump"></i> Premium</li>
+                            <li><i class="fas fa-cog"></i> Automatic</li>
+                            <li><i class="fas fa-tachometer-alt"></i> 565 HP</li>
+                            <li><i class="fas fa-palette"></i> Gun Metallic</li>
+                        </ul>
+                        <button class="vehicle-button">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Vehicle 3 -->
+                <div class="vehicle-card" data-make="bmw" data-type="luxury" data-origin="germany" data-price="high">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="BMW 7 Series">
+                        <div class="vehicle-badge">Luxury</div>
+                    </div>
+                    <div class="vehicle-content">
+                        <div class="vehicle-title">
+                            <h3>BMW 740i</h3>
+                            <div class="vehicle-price">$72,500</div>
+                        </div>
+                        <div class="vehicle-details">
+                            <span>2022 • 8,700 mi</span>
+                            <span>Germany Import</span>
+                        </div>
+                        <ul class="vehicle-features">
+                            <li><i class="fas fa-gas-pump"></i> Premium</li>
+                            <li><i class="fas fa-cog"></i> Automatic</li>
+                            <li><i class="fas fa-tachometer-alt"></i> 335 HP</li>
+                            <li><i class="fas fa-palette"></i> Black Sapphire</li>
+                        </ul>
+                        <button class="vehicle-button">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Can't Find What You're Looking For?</h2>
+            <p>We specialize in sourcing specific vehicles upon request. Tell us your dream car and we'll find it for you.</p>
+            <a href="#contact" class="cta-button">Request a Vehicle</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Global Auto Imports</h3>
+                    <p>Your trusted partner for premium vehicle imports from around the world. We make international car buying simple and secure.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="#">Home</a>
+                    <a href="#inventory">Inventory</a>
+                    <a href="#">Import Process</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <a href="#">Vehicle Sourcing</a>
+                    <a href="#">Inspection Services</a>
+                    <a href="#">Shipping & Logistics</a>
+                    <a href="#">Customs Clearance</a>
+                    <a href="#">After-Sales Support</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Import Avenue, Auto City</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@globalautoimports.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 9am-6pm</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Global Auto Imports. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality for the inventory
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterSelects = document.querySelectorAll('.inventory-filters select');
+            const vehicleCards = document.querySelectorAll('.vehicle-card');
+            
+            filterSelects.forEach(select => {
+                select.addEventListener('change', filterVehicles);
+            });
+            
+            function filterVehicles() {
+                const makeFilter = document.getElementById('make').value;
+                const typeFilter = document.getElementById('type').value;
+                const originFilter = document.getElementById('origin').value;
+                const priceFilter = document.getElementById('price').value;
+                
+                vehicleCards.forEach(card => {
+                    const make = card.getAttribute('data-make');
+                    const type = card.getAttribute('data-type');
+                    const origin = card.getAttribute('data-origin');
+                    const price = card.getAttribute('data-price');
+                    
+                    const makeMatch = makeFilter === 'all' || make === makeFilter;
+                    const typeMatch = typeFilter === 'all' || type === typeFilter;
+                    const originMatch = originFilter === 'all' || origin === originFilter;
+                    const priceMatch = priceFilter === 'all' || price === priceFilter;
+                    
+                    if (makeMatch && typeMatch && originMatch && priceMatch) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Add click event to vehicle buttons
+            const vehicleButtons = document.querySelectorAll('.vehicle-button');
+            vehicleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const vehicleTitle = this.closest('.vehicle-card').querySelector('h3').textContent;
+                    alert(`Thank you for your interest in the ${vehicleTitle}! Our team will contact you with more details.`);
+                });
+            });
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

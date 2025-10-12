@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motorpride Financing | Affordable Vehicle Financing Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a365d;
+            --secondary: #d4af37;
+            --accent: #2ecc71;
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --gray: #718096;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Finance Hero Section */
+        .finance-hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin: 0 10px;
+        }
+
+        .cta-button:hover {
+            background-color: #e6c34c;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button.secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid var(--secondary);
+        }
+
+        .cta-button.secondary:hover {
+            background-color: rgba(212, 175, 55, 0.2);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Finance Options Section */
+        .finance-options {
+            background-color: white;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .option-card {
+            background: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--primary);
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .option-card.featured {
+            border-top: 5px solid var(--secondary);
+            position: relative;
+            transform: scale(1.05);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .option-header {
+            padding: 25px;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+        }
+
+        .option-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .option-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .option-content {
+            padding: 25px;
+        }
+
+        .option-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .option-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-features li:last-child {
+            border-bottom: none;
+        }
+
+        .option-features i {
+            color: var(--accent);
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .option-price {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .price-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .price-period {
+            color: var(--gray);
+        }
+
+        .option-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .option-button:hover {
+            background: #2d4a7c;
+        }
+
+        /* Calculator Section */
+        .calculator-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .calculator-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .range-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .range-container input {
+            flex: 1;
+        }
+
+        .range-value {
+            margin-left: 15px;
+            font-weight: bold;
+            color: var(--primary);
+            min-width: 60px;
+        }
+
+        .calculator-results {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .result-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .result-value.highlight {
+            color: var(--accent);
+        }
+
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .benefit-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .benefit-card p {
+            color: var(--gray);
+        }
+
+        /* Application Process */
+        .process-section {
+            background-color: var(--light);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background-color: var(--secondary);
+            z-index: 1;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            min-width: 200px;
+            padding: 0 15px;
+            margin-bottom: 30px;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            border: 5px solid white;
+            box-shadow: 0 0 0 3px var(--secondary);
+        }
+
+        .step h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: var(--gray);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .step {
+                margin-bottom: 30px;
+            }
+
+            .option-card.featured {
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .cta-button {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Finance Hero Section -->
+    <section class="finance-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Motorpride Financing Solutions</h1>
+                <p>Drive your dream vehicle today with our flexible and affordable financing options. Competitive rates, quick approvals, and personalized payment plans tailored to your budget.</p>
+                <div class="cta-buttons">
+                    <a href="#calculator" class="cta-button">Calculate Payments</a>
+                    <a href="#apply" class="cta-button secondary">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Finance Options Section -->
+    <section class="finance-options">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Financing Plans</h2>
+                <p>Choose from our range of flexible financing options designed to fit your budget and needs</p>
+            </div>
+            <div class="options-grid">
+                <!-- Standard Financing -->
+                <div class="option-card">
+                    <div class="option-header">
+                        <div class="option-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3>Standard Financing</h3>
+                        <p>For most customers</p>
+                    </div>
+                    <div class="option-content">
+                        <ul class="option-features">
+                            <li><i class="fas fa-check"></i> Competitive interest rates</li>
+                            <li><i class="fas fa-check"></i> 12-72 month terms</li>
+                            <li><i class="fas fa-check"></i> 10-20% down payment</li>
+                            <li><i class="fas fa-check"></i> Fixed monthly payments</li>
+                            <li><i class="fas fa-check"></i> No prepayment penalties</li>
+                        </ul>
+                        <div class="option-price">
+                            <div class="price-amount">From 6.5% APR</div>
+                            <div class="price-period">Interest rate</div>
+                        </div>
+                        <a href="#" class="option-button">Learn More</a>
+                    </div>
+                </div>
+
+                <!-- Premium Financing -->
+                <div class="option-card featured">
+                    <div class="featured-badge">Most Popular</div>
+                    <div class="option-header">
+                        <div class="option-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3>Premium Financing</h3>
+                        <p>For qualified buyers</p>
+                    </div>
+                    <div class="option-content">
+                        <ul class="option-features">
+                            <li><i class="fas fa-check"></i> Lower interest rates</li>
+                            <li><i class="fas fa-check"></i> 5% minimum down payment</li>
+                            <li><i class="fas fa-check"></i> Extended 84-month terms</li>
+                            <li><i class="fas fa-check"></i> Payment holiday options</li>
+                            <li><i class="fas fa-check"></i> Free insurance for 3 months</li>
+                        </ul>
+                        <div class="option-price">
+                            <div class="price-amount">From 4.9% APR</div>
+                            <div class="price-period">Interest rate</div>
+                        </div>
+                        <a href="#" class="option-button">Apply Now</a>
+                    </div>
+                </div>
+
+                <!-- First-Time Buyer -->
+                <div class="option-card">
+                    <div class="option-header">
+                        <div class="option-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>First-Time Buyer</h3>
+                        <p>Special program for new buyers</p>
+                    </div>
+                    <div class="option-content">
+                        <ul class="option-features">
+                            <li><i class="fas fa-check"></i> Low credit score considered</li>
+                            <li><i class="fas fa-check"></i> 5% down payment</li>
+                            <li><i class="fas fa-check"></i> Credit building program</li>
+                            <li><i class="fas fa-check"></i> Financial education resources</li>
+                            <li><i class="fas fa-check"></i> Co-signer options available</li>
+                        </ul>
+                        <div class="option-price">
+                            <div class="price-amount">From 7.9% APR</div>
+                            <div class="price-period">Interest rate</div>
+                        </div>
+                        <a href="#" class="option-button">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calculator-section" id="calculator">
+        <div class="container">
+            <div class="section-title">
+                <h2>Payment Calculator</h2>
+                <p>Estimate your monthly payments with our easy-to-use calculator</p>
+            </div>
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <h3>Enter Your Details</h3>
+                    <form id="finance-calculator">
+                        <div class="form-group">
+                            <label for="vehicle-price">Vehicle Price ($)</label>
+                            <input type="number" id="vehicle-price" value="25000" min="5000" max="100000" step="1000">
+                        </div>
+                        <div class="form-group">
+                            <label for="down-payment">Down Payment ($)</label>
+                            <input type="number" id="down-payment" value="5000" min="0" max="50000" step="500">
+                        </div>
+                        <div class="form-group">
+                            <label for="loan-term">Loan Term (Months)</label>
+                            <div class="range-container">
+                                <input type="range" id="loan-term" min="12" max="84" value="60" step="12">
+                                <span class="range-value" id="term-value">60 months</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="interest-rate">Interest Rate (%)</label>
+                            <div class="range-container">
+                                <input type="range" id="interest-rate" min="3" max="15" value="6.5" step="0.1">
+                                <span class="range-value" id="rate-value">6.5%</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="calculator-results">
+                    <h3>Your Estimated Payment</h3>
+                    <div class="result-item">
+                        <div class="result-label">Monthly Payment</div>
+                        <div class="result-value highlight" id="monthly-payment">$402.50</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Total Loan Amount</div>
+                        <div class="result-value" id="total-loan">$20,000</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Total Interest</div>
+                        <div class="result-value" id="total-interest">$4,150</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Total Payment</div>
+                        <div class="result-value" id="total-payment">$24,150</div>
+                    </div>
+                    <a href="#apply" class="option-button" style="margin-top: 20px;">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Motorpride Financing?</h2>
+                <p>We make vehicle financing simple, transparent, and affordable</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Quick Approval</h3>
+                    <p>Get pre-approved in as little as 24 hours with our streamlined application process.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Competitive Rates</h3>
+                    <p>We offer some of the most competitive interest rates in the industry.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Flexible Terms</h3>
+                    <p>Choose from a variety of loan terms that fit your budget and financial goals.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Dedicated Support</h3>
+                    <p>Our finance specialists are here to guide you through every step of the process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Simple Application Process</h2>
+                <p>Get financed in just a few easy steps</p>
+            </div>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Apply Online</h3>
+                    <p>Fill out our simple online application in minutes</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Get Pre-Approved</h3>
+                    <p>Receive a decision within 24 hours in most cases</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Choose Your Vehicle</h3>
+                    <p>Select from our extensive inventory of quality vehicles</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Complete Purchase</h3>
+                    <p>Finalize paperwork and drive away in your new vehicle</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="apply">
+        <div class="container">
+            <h2>Ready to Drive Your Dream Vehicle?</h2>
+            <p>Apply for Motorpride financing today and get behind the wheel sooner than you think.</p>
+            <a href="#" class="cta-button">Start Application</a>
+        </div>
+    </section>
+
+    <script>
+        // Finance Calculator Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculatorForm = document.getElementById('finance-calculator');
+            const vehiclePrice = document.getElementById('vehicle-price');
+            const downPayment = document.getElementById('down-payment');
+            const loanTerm = document.getElementById('loan-term');
+            const interestRate = document.getElementById('interest-rate');
+            const termValue = document.getElementById('term-value');
+            const rateValue = document.getElementById('rate-value');
+            
+            // Update range value displays
+            loanTerm.addEventListener('input', function() {
+                termValue.textContent = `${this.value} months`;
+                calculatePayment();
+            });
+            
+            interestRate.addEventListener('input', function() {
+                rateValue.textContent = `${this.value}%`;
+                calculatePayment();
+            });
+            
+            // Calculate payment when any input changes
+            calculatorForm.addEventListener('input', calculatePayment);
+            
+            // Initial calculation
+            calculatePayment();
+            
+            function calculatePayment() {
+                const price = parseFloat(vehiclePrice.value);
+                const down = parseFloat(downPayment.value);
+                const term = parseFloat(loanTerm.value);
+                const rate = parseFloat(interestRate.value) / 100 / 12; // Monthly interest rate
+                
+                const loanAmount = price - down;
+                const monthlyPayment = (loanAmount * rate * Math.pow(1 + rate, term)) / (Math.pow(1 + rate, term) - 1);
+                const totalPayment = monthlyPayment * term;
+                const totalInterest = totalPayment - loanAmount;
+                
+                // Update results
+                document.getElementById('monthly-payment').textContent = `$${monthlyPayment.toFixed(2)}`;
+                document.getElementById('total-loan').textContent = `$${loanAmount.toFixed(2)}`;
+                document.getElementById('total-interest').textContent = `$${totalInterest.toFixed(2)}`;
+                document.getElementById('total-payment').textContent = `$${totalPayment.toFixed(2)}`;
+            }
+            
+            // Add animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements for animation
+            const optionCards = document.querySelectorAll('.option-card');
+            optionCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            const benefitCards = document.querySelectorAll('.benefit-card');
+            benefitCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            const steps = document.querySelectorAll('.step');
+            steps.forEach(step => {
+                step.style.opacity = 0;
+                step.style.transform = 'translateY(20px)';
+                step.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(step);
+            });
+            
+            // Add click events to buttons
+            const applyButtons = document.querySelectorAll('.option-button, .cta-button');
+            applyButtons.forEach(button => {
+                if (button.getAttribute('href') === '#apply') {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        alert('Thank you for your interest in Motorpride Financing! Our finance specialist will contact you shortly to begin your application.');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

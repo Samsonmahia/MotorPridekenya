@@ -124,6 +124,91 @@ body {
   margin: 10px 0;
 }
 
+/* Reserve Button Styles */
+.reserve-btn-container {
+  margin-top: 15px;
+  position: relative;
+}
+
+.reserve-btn {
+  background: #25D366;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.reserve-btn:hover {
+  background: #128C7E;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  z-index: 100;
+  margin-top: 5px;
+  display: none;
+  overflow: hidden;
+}
+
+.whatsapp-options.show {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+.whatsapp-option {
+  display: block;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: var(--text);
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s ease;
+  text-align: left;
+}
+
+.whatsapp-option:last-child {
+  border-bottom: none;
+}
+
+.whatsapp-option:hover {
+  background: #f8f9fa;
+}
+
+.whatsapp-option i {
+  color: #25D366;
+  margin-right: 8px;
+}
+
+.contact-name {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.contact-number {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Modal */
 .modal { 
   display:none; 
@@ -261,7 +346,7 @@ body {
   color: var(--text-light);
 }
 
-.reserve-btn { 
+.reserve-btn-modal { 
   display:inline-block; 
   margin-top:20px; 
   padding:14px 30px; 
@@ -274,7 +359,7 @@ body {
   box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
 }
 
-.reserve-btn:hover {
+.reserve-btn-modal:hover {
   background: #1da851;
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
@@ -394,6 +479,15 @@ body {
   .pagination {
     flex-wrap: wrap;
   }
+  
+  .whatsapp-options {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    top: auto;
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 480px) {
@@ -458,7 +552,7 @@ body {
   </button>
 </div>
 
-<!-- Modal -->
+<!-- Car Details Modal -->
 <div id="carModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
@@ -1465,6 +1559,14 @@ const carsPerPage = 13;
 const allVehicles = vehicles.slice();  
 let filteredVehicles = allVehicles;    
 
+// WhatsApp contacts data
+const whatsappContacts = [
+  { name: "Sam", number: "254723098206" },
+  { name: "Samuel", number: "254724804354" },
+  { name: "Grace", number: "254711223344" },
+  { name: "Michael", number: "254733445566" }
+];
+
 function renderCars() {
   const carGrid = document.getElementById("carGrid");
   carGrid.innerHTML = "";
@@ -1487,13 +1589,35 @@ function renderCars() {
   paginated.forEach((car, index) => {
     const card = document.createElement("div");
     card.className = "vehicle-card";
-    card.onclick = () => openModal(car);
     card.innerHTML = `
       <img src="${car.images[0]}" alt="${car.name}">
       <div class="vehicle-info">
         <h3>${car.name}</h3>
         <p><strong>Year:</strong> ${car.year}</p>
         <p class="vehicle-price">${car.price}</p>
+        
+        <!-- Reserve Button with WhatsApp Options -->
+        <div class="reserve-btn-container">
+          <button class="reserve-btn" onclick="toggleWhatsappOptions(this, '${car.name}', '${car.price}', '${car.stockID || ''}')">
+            <i class="fab fa-whatsapp"></i> Reserve Now
+          </button>
+          <div class="whatsapp-options" id="whatsappOptions-${index}">
+            ${whatsappContacts.map(contact => `
+              <a href="https://wa.me/${contact.number}?text=${encodeURIComponent(`Hello ${contact.name}, I'm interested in reserving the ${car.name} (${car.price}). Stock ID: ${car.stockID || 'N/A'}. Please provide more details.`)}" 
+                 class="whatsapp-option" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                <div>
+                  <div class="contact-name">${contact.name}</div>
+                  <div class="contact-number">${contact.number.replace('254', '0')}</div>
+                </div>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+        
+        <button class="view-details-btn" onclick="openModal(${JSON.stringify(car).replace(/"/g, '&quot;')})">
+          View Details
+        </button>
       </div>
     `;
     carGrid.appendChild(card);
@@ -1506,6 +1630,30 @@ function renderCars() {
 
   document.getElementById("prevBtn").disabled = currentPage === 1;
   document.getElementById("nextBtn").disabled = end >= filteredVehicles.length;
+}
+
+// Toggle WhatsApp options dropdown
+function toggleWhatsappOptions(button, carName, carPrice, stockID) {
+  // Close all other open dropdowns
+  document.querySelectorAll('.whatsapp-options.show').forEach(dropdown => {
+    if (dropdown !== button.nextElementSibling) {
+      dropdown.classList.remove('show');
+    }
+  });
+  
+  // Toggle current dropdown
+  const options = button.nextElementSibling;
+  options.classList.toggle('show');
+  
+  // Close dropdown when clicking outside
+  const closeDropdown = (e) => {
+    if (!button.contains(e.target) && !options.contains(e.target)) {
+      options.classList.remove('show');
+      document.removeEventListener('click', closeDropdown);
+    }
+  };
+  
+  document.addEventListener('click', closeDropdown);
 }
 
 function changePage(direction) {
@@ -1619,10 +1767,12 @@ function openModal(car) {
       </ul>
     </div>
     ` : ''}
-    <a href="https://wa.me/254723098206?text=I want to reserve ${encodeURIComponent(car.name)}"
-       class="reserve-btn" target="_blank">
-       <i class="fab fa-whatsapp"></i> Reserve via WhatsApp
-    </a>
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="https://wa.me/${whatsappContacts[0].number}?text=${encodeURIComponent(`Hello ${whatsappContacts[0].name}, I'm interested in reserving the ${car.name} (${car.price}). Stock ID: ${car.stockID || 'N/A'}. Please provide more details.`)}"
+         class="reserve-btn-modal" target="_blank">
+         <i class="fab fa-whatsapp"></i> Reserve via WhatsApp
+      </a>
+    </div>
   `;
 }
 
