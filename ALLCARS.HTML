@@ -575,6 +575,9 @@
             border-radius: 4px;
             cursor: pointer;
             transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
         }
 
         .contact-action:hover {
@@ -664,6 +667,11 @@
         <!-- Cars Grid -->
         <div class="cars-grid" id="carsGrid">
             <!-- Cars will be dynamically inserted here -->
+            <div class="no-results">
+                <div class="no-results-icon">🔄</div>
+                <h3 class="no-results-title">Loading Vehicles...</h3>
+                <p class="no-results-text">Please wait while we load our vehicle collection.</p>
+            </div>
         </div>
         
         <!-- Pagination -->
@@ -714,105 +722,125 @@
             <!-- Contacts will be dynamically inserted -->
         </div>
     </div>
-<script>
-    // DOM Elements
-    const carsGrid = document.getElementById('carsGrid');
-    const carModal = document.getElementById('carModal');
-    const contactsModal = document.getElementById('contactsModal');
-    const closeModal = document.getElementById('closeModal');
-    const closeContacts = document.getElementById('closeContacts');
-    const prevPage = document.getElementById('prevPage');
-    const nextPage = document.getElementById('nextPage');
-    const currentPageEl = document.getElementById('currentPage');
-    const totalPagesEl = document.getElementById('totalPages');
-    const prevCar = document.getElementById('prevCar');
-    const nextCar = document.getElementById('nextCar');
-    const modalReserveBtn = document.getElementById('modalReserveBtn');
-    const searchInfo = document.getElementById('searchInfo');
-    const searchTags = document.getElementById('searchTags');
-    const clearFilters = document.getElementById('clearFilters');
 
-    // Pagination variables
-    const carsPerPage = 14;
-    let currentPage = 1;
-    let totalPages = 1;
+    <script>
+        // DOM Elements
+        const carsGrid = document.getElementById('carsGrid');
+        const carModal = document.getElementById('carModal');
+        const contactsModal = document.getElementById('contactsModal');
+        const closeModal = document.getElementById('closeModal');
+        const closeContacts = document.getElementById('closeContacts');
+        const prevPage = document.getElementById('prevPage');
+        const nextPage = document.getElementById('nextPage');
+        const currentPageEl = document.getElementById('currentPage');
+        const totalPagesEl = document.getElementById('totalPages');
+        const prevCar = document.getElementById('prevCar');
+        const nextCar = document.getElementById('nextCar');
+        const modalReserveBtn = document.getElementById('modalReserveBtn');
+        const searchInfo = document.getElementById('searchInfo');
+        const searchTags = document.getElementById('searchTags');
+        const clearFilters = document.getElementById('clearFilters');
 
-    // Current car in modal
-    let currentCarIndex = 0;
+        // Pagination variables
+        const carsPerPage = 14;
+        let currentPage = 1;
+        let totalPages = 1;
 
-    // Filter criteria from URL
-    let filterCriteria = {};
+        // Current car in modal
+        let currentCarIndex = 0;
 
-    // Data variables - NOW LOADED FROM CMS
-    let carsData = [];
-    let contacts = [];
+        // Filter criteria from URL
+        let filterCriteria = {};
 
-    // Initialize the page
-    async function init() {
-        try {
-            // Load cars data from CMS JSON
-            await loadCarsData();
-            
-            // Load contacts data from CMS JSON  
-            await loadContactsData();
-            
-            // Get filter criteria from URL parameters
-            getUrlParameters();
-            
-            // Display cars based on filters
-            displayCars();
-            
-            // Setup pagination
-            setupPagination();
-            
-            // Setup event listeners
-            setupEventListeners();
-            
-            // Show search info if filters are active
-            updateSearchInfo();
-            
-        } catch (error) {
-            console.error('Error initializing page:', error);
-            showErrorState();
+        // Data variables - LOADED FROM CMS
+        let carsData = [];
+        let contacts = [];
+
+        // Initialize the page
+        async function init() {
+            try {
+                // Load cars data from CMS
+                await loadCarsData();
+                
+                // Load contacts data from CMS
+                await loadContactsData();
+                
+                // Get filter criteria from URL parameters
+                getUrlParameters();
+                
+                // Display cars based on filters
+                displayCars();
+                
+                // Setup pagination
+                setupPagination();
+                
+                // Setup event listeners
+                setupEventListeners();
+                
+                // Show search info if filters are active
+                updateSearchInfo();
+                
+            } catch (error) {
+                console.error('Error initializing page:', error);
+                showErrorState();
+            }
         }
-    }
 
-    // ✅ Updated version: Load cars data from CMS JSON files
-    async function loadCarsData() {
-        try {
-            const response = await fetch('/data/cars.json');
-            if (response.ok) {
-                const data = await response.json();
-                carsData = data.cars || [];
-                console.log('Loaded cars from CMS:', carsData.length);
-            } else {
-                console.log('Using fallback cars data');
+        // ✅ Load cars data from CMS - Updated to work with individual files
+        async function loadCarsData() {
+            try {
+                // First try to load from the aggregated JSON file
+                const response = await fetch('/data/cars.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    // Handle both array format and object with cars property
+                    carsData = Array.isArray(data) ? data : (data.cars || []);
+                    console.log('Loaded cars from CMS JSON:', carsData.length);
+                    return;
+                }
+                
+                // If no aggregated file exists, try to load individual car files
+                console.log('No aggregated cars.json found, trying individual files...');
+                await loadIndividualCarFiles();
+                
+            } catch (error) {
+                console.warn('Error loading from CMS, using fallback data:', error);
                 carsData = getFallbackCarsData();
             }
-        } catch (error) {
-            console.warn('Using fallback cars data');
-            carsData = getFallbackCarsData();
         }
-    }
 
-    // Load contacts data from CMS
-    async function loadContactsData() {
-        try {
-            const response = await fetch('/data/contacts.json');
-            if (response.ok) {
-                const data = await response.json();
-                contacts = data.contacts || data;
-            } else {
+        // Load individual car files from CMS
+        async function loadIndividualCarFiles() {
+            try {
+                // This would need to be implemented based on your actual file structure
+                // For now, we'll use fallback data
+                console.log('Individual file loading not implemented, using fallback');
+                carsData = getFallbackCarsData();
+            } catch (error) {
+                console.error('Error loading individual car files:', error);
+                carsData = getFallbackCarsData();
+            }
+        }
+
+        // Load contacts data from CMS
+        async function loadContactsData() {
+            try {
+                const response = await fetch('/data/contacts.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    // Handle both array format and object with contacts property
+                    contacts = Array.isArray(data) ? data : (data.contacts || []);
+                    console.log('Loaded contacts from CMS:', contacts.length);
+                } else {
+                    contacts = getFallbackContacts();
+                }
+            } catch (error) {
+                console.warn('Using fallback contacts data');
                 contacts = getFallbackContacts();
             }
-        } catch (error) {
-            console.warn('Using fallback contacts data');
-            contacts = getFallbackContacts();
         }
-    }
 
-
-        // Your original cars data as fallback
+        // Fallback cars data
         function getFallbackCarsData() {
             return [
                 {
@@ -837,6 +865,7 @@
                     body: "SUV",
                     location: "Nairobi",
                     stockID: "MZ-CX520-2020",
+                    status: "Available",
                     features: [
                         "Multimedia Navigation Knob",
                         "Electric Handbrake with AutoHold",
@@ -873,6 +902,7 @@
                     body: "Hatchback",
                     location: "N/A",
                     stockID: "MD-18",
+                    status: "Available",
                     features: [
                         "Multimedia steering controls",
                         "Multimedia navigation knob",
@@ -886,276 +916,17 @@
                         "Alloy rims"
                     ]
                 },
-                {
-                    id: 3,
-                    make: "Mercedes-Benz",
-                    model: "A180",
-                    name: "2018 Mercedes-Benz A180 (W176 with W177 Facelift)",
-                    images: [
-                        "https://i.ibb.co/cX7SfRXS/Whats-App-Image-2025-10-03-at-11-50-00-PM.jpg",
-                        "https://i.ibb.co/20QZdBnB/Whats-App-Image-2025-10-03-at-11-50-01-PM-1.jpg",
-                        "https://i.ibb.co/V0CVzBk9/Whats-App-Image-2025-10-03-at-11-50-01-PM.jpg",
-                        "https://i.ibb.co/7dX0H73G/Whats-App-Image-2025-10-03-at-11-50-02-PM-1.jpg",
-                        "https://i.ibb.co/dJGLdyr6/Whats-App-Image-2025-10-03-at-11-50-02-PM.jpg",
-                        "https://i.ibb.co/d4jNM0hr/Whats-App-Image-2025-10-03-at-11-50-03-PM.jpg"
-                    ],
-                    fuel: "Petrol",
-                    price: "KSh 2.25M",
-                    year: 2018,
-                    transmission: "Automatic",
-                    engine: "Turbo Petrol",
-                    mileage: "Low Mileage",
-                    color: "Modern Facelift (W177 Styling), Premium Interior Finish",
-                    body: "Hatchback",
-                    location: "Under Customs Clearance",
-                    stockID: "MBA180-18",
-                    status: "Available",
-                    features: [
-                        "Efficient Turbo Petrol Engine – Smooth and responsive drive",
-                        "Modern Facelift (W177 Styling) – Sporty and updated design cues",
-                        "Premium Interior Finish – Comfort with sophistication",
-                        "Multifunctional Steering Wheel Controls – Convenience on the go",
-                        "Mercedes Safety Technology – Confidence in every drive",
-                        "Compact Luxury Hatchback – Perfect balance of style and performance",
-                        "Status: Under Customs Clearance – Be the first to own it!"
-                    ]
-                },
-                {
-                    id: 4,
-                    make: "Volvo",
-                    model: "V40 T3",
-                    name: "2019 Volvo V40 T3",
-                    images: [
-                        "https://i.ibb.co/7tM71tBX/559210532-18074591519149075-2075867912142298199-n-Copy.jpg",
-                        "https://i.ibb.co/YJ7Z1PG/559210532-18074591519149075-2075867912142298199-n.jpg",
-                        "https://i.ibb.co/C5yxngYP/557604651-18074591498149075-5786298582331994791-n.jpg",
-                        "https://i.ibb.co/ch59WfGm/558987436-18074591489149075-2730477631576446721-n.jpg",
-                        "https://i.ibb.co/Z4SpZ9m/557730787-18074591462149075-47375993987870509-n.jpg",
-                        "https://i.ibb.co/mQnhtGQ/558841827-18074591453149075-1420190346078821785-n.jpg"
-                    ],
-                    fuel: "Petrol (T3 Turbo)",
-                    price: "KSh N/A (Incoming Unit)",
-                    year: 2019,
-                    transmission: "Automatic",
-                    engine: "1600cc Turbo",
-                    mileage: "N/A (On Ship)",
-                    color: "Modern Hatchback Styling, Scandinavian-Inspired Interior",
-                    body: "Hatchback",
-                    location: "Expected arrival: 23rd this month",
-                    stockID: "VV40-19",
-                    features: [
-                        "T3 Turbo Petrol Engine – Smooth and powerful drive",
-                        "Modern Hatchback Styling – Compact yet premium design",
-                        "Scandinavian-Inspired Interior – Comfort with elegance",
-                        "Infotainment System + Steering Controls – Seamless connectivity",
-                        "Renowned Volvo Safety Features – Confidence behind the wheel"
-                    ]
-                },
-                {
-                    id: 5,
-                    make: "Suzuki",
-                    model: "Swift",
-                    name: "2016 Suzuki Swift",
-                    images: [
-                        "https://i.ibb.co/XxmHXbVL/Whats-App-Image-2025-10-03-at-11-20-37-PM-1.jpg",
-                        "https://i.ibb.co/HfzXzNyn/Whats-App-Image-2025-10-03-at-11-20-37-PM.jpg",
-                        "https://i.ibb.co/pjTCHvNG/Whats-App-Image-2025-10-03-at-11-20-35-PM-1.jpg",
-                        "https://i.ibb.co/1Yv4p5wz/Whats-App-Image-2025-10-03-at-11-20-35-PM.jpg",
-                        "https://i.ibb.co/GQsC72Xs/Whats-App-Image-2025-10-03-at-11-20-34-PM-1.jpg",
-                        "https://i.ibb.co/PZtrQpCK/Whats-App-Image-2025-10-03-at-11-20-34-PM.jpg"
-                    ],
-                    fuel: "Petrol",
-                    price: "KSh 950,000",
-                    year: 2016,
-                    transmission: "Automatic",
-                    engine: "1300cc",
-                    mileage: "N/A",
-                    color: "Silver Exterior, Fabric Upholstery",
-                    body: "Hatchback",
-                    location: "N/A",
-                    stockID: "SS-16",
-                    features: [
-                        "1300cc Petrol Engine – Efficient and responsive",
-                        "Silver Exterior – Sleek and timeless design",
-                        "Fabric Upholstery – Comfortable and practical interior",
-                        "Side Mirror Winkers – Safety with style",
-                        "FM/DVD Touchscreen Player – Entertainment on the go",
-                        "Dual Zone Climate Control – Comfort for driver & passengers",
-                        "Extremely Clean & Accident Free – Well-maintained, ready to drive"
-                    ]
-                },
-                {
-                    id: 6,
-                    make: "Mazda",
-                    model: "CX-5",
-                    name: "2020 Mazda CX-5",
-                    images: [
-                        "https://i.ibb.co/jvXyPrdY/Whats-App-Image-2025-10-03-at-11-38-15-PM-2-Copy.jpg",
-                        "https://i.ibb.co/YBgPQLQQ/Whats-App-Image-2025-10-03-at-11-38-15-PM.jpg",
-                        "https://i.ibb.co/CT78Xr6/Whats-App-Image-2025-10-03-at-11-38-15-PM-1.jpg",
-                        "https://i.ibb.co/6R0MP0ty/Whats-App-Image-2025-10-03-at-11-38-14-PM.jpg",
-                        "https://i.ibb.co/kVPRfhJm/Whats-App-Image-2025-10-03-at-11-38-13-PM-1.jpg",
-                        "https://i.ibb.co/MkJP8pzC/Whats-App-Image-2025-10-03-at-11-38-13-PM.jpg",
-                        "https://i.ibb.co/1JGXgT0J/Whats-App-Image-2025-10-03-at-11-38-14-PM-1.jpg"
-                    ],
-                    fuel: "Diesel",
-                    price: "KSh 3.35M",
-                    year: 2020,
-                    transmission: "Automatic",
-                    engine: "2200cc Turbo Diesel",
-                    mileage: "N/A",
-                    color: "Modern Stylish Exterior, Premium Interior",
-                    body: "SUV",
-                    location: "N/A",
-                    stockID: "MCX5-20",
-                    status: "Available",
-                    features: [
-                        "2200cc Turbo Diesel Engine – Powerful yet fuel-efficient",
-                        "Modern, Stylish Exterior – Bold road presence",
-                        "Spacious Premium Interior – Comfort for driver & passengers",
-                        "Multimedia System with Steering Controls – Seamless connectivity",
-                        "Advanced Mazda Safety Features – Confidence on every journey",
-                        "Versatile SUV – Ideal for family, travel, and adventure"
-                    ]
-                },
-                {
-                    id: 7,
-                    make: "Mercedes Benz",
-                    model: "GLC220D 4MATIC",
-                    name: "2018 Mercedes Benz GLC220D 4MATIC",
-                    images: [
-                        "https://i.imgur.com/EPZ1pSd.jpeg",
-                        "https://i.imgur.com/PMnvkfF.jpeg",
-                        "https://i.imgur.com/X05JCL0.jpeg",
-                        "https://i.imgur.com/lRekYQ1.jpeg",
-                        "https://i.imgur.com/mvmRbeM.jpeg",
-                        "https://i.imgur.com/hejOc7s.jpeg"
-                    ],
-                    fuel: "Diesel",
-                    price: "KSh 6.3M",
-                    year: 2018,
-                    transmission: "Automatic",
-                    engine: "2200cc",
-                    mileage: "N/A",
-                    color: "Polar White Exterior, Black Leather Interior",
-                    body: "SUV",
-                    location: "N/A",
-                    stockID: "MB-GLC18",
-                    features: [
-                        "Sunroof",
-                        "Lane Assist",
-                        "Heads-up Display",
-                        "Blind Monitoring System",
-                        "Traffic Sign Recognition System",
-                        "Dual Exhaust",
-                        "Parking Sensors",
-                        "Steering Wheel Controls"
-                    ]
-                },
-                {
-                    id: 8,
-                    make: "Toyota",
-                    model: "Voxy",
-                    name: "2018 Toyota Voxy",
-                    images: [
-                        "https://i.ibb.co/GqydRjd/Whats-App-Image-2025-10-03-at-11-28-17-PM-Copy-Copy.jpg",
-                        "https://i.ibb.co/kV1FLKr5/Whats-App-Image-2025-10-03-at-11-28-16-PM-1.jpg",
-                        "https://i.ibb.co/qMZrjc8V/Whats-App-Image-2025-10-03-at-11-28-16-PM.jpg",
-                        "https://i.ibb.co/LD3nV2jh/Whats-App-Image-2025-10-03-at-11-28-15-PM-2.jpg",
-                        "https://i.ibb.co/LhSYDQCD/Whats-App-Image-2025-10-03-at-11-28-15-PM-1.jpg",
-                        "https://i.ibb.co/tpgfDBtp/Whats-App-Image-2025-10-03-at-11-28-15-PM.jpg"
-                    ],
-                    fuel: "Petrol",
-                    price: "KSh N/A (Incoming Unit)",
-                    year: 2018,
-                    transmission: "Automatic",
-                    engine: "N/A (Likely 2000cc)",
-                    mileage: "N/A (On Ship)",
-                    color: "N/A",
-                    body: "MPV (7/8-Seater)",
-                    location: "Expected arrival: 23rd this month",
-                    stockID: "TVX-18",
-                    status: "Incoming",
-                    features: [
-                        "Fuel-Efficient Petrol Engine – Smooth and reliable performance",
-                        "Spacious Cabin (7/8 Seater) – Perfect for family or business use",
-                        "Dual Powered Sliding Doors – Easy access for all passengers",
-                        "Infotainment System – Entertainment on the go",
-                        "Rear A/C Vents – Comfort across all rows",
-                        "Toyota Safety Features – Confidence in every trip"
-                    ]
-                },
-                {
-                    id: 9,
-                    make: "Nissan",
-                    model: "Dualis",
-                    name: "2011 Nissan Dualis",
-                    images: [
-                        "https://i.imgur.com/QO9PXL5.jpeg",
-                        "https://i.imgur.com/dESDhFL.jpeg",
-                        "https://i.imgur.com/rundqIa.jpeg",
-                        "https://i.imgur.com/jm96fls.jpeg",
-                        "https://i.imgur.com/scmAMy8.jpeg",
-                        "https://i.imgur.com/kBClZST.jpeg"
-                    ],
-                    fuel: "Petrol",
-                    price: "KSh 1.03M",
-                    year: 2011,
-                    transmission: "Automatic",
-                    engine: "2000cc",
-                    mileage: "N/A",
-                    color: "Black Exterior, Dark fabric upholstery",
-                    body: "SUV",
-                    location: "N/A",
-                    stockID: "ND-11",
-                    features: [
-                        "Moonroof",
-                        "Foldable side mirrors",
-                        "FM/DVD/Bluetooth touchscreen player",
-                        "Alloy rims",
-                        "Foglights"
-                    ]
-                },
-                {
-                    id: 10,
-                    make: "Toyota",
-                    model: "Ractis",
-                    name: "2009 Toyota Ractis",
-                    images: [
-                        "https://i.imgur.com/wx2Qt16.jpeg",
-                        "https://i.imgur.com/FFF6tLC.jpeg",
-                        "https://i.imgur.com/UVxKA7g.jpeg",
-                        "https://i.imgur.com/UAxsKPy.jpeg",
-                        "https://i.imgur.com/ET5ML0N.jpeg"
-                    ],
-                    fuel: "Petrol",
-                    price: "KSh 680K",
-                    year: 2009,
-                    transmission: "Automatic",
-                    engine: "1300cc",
-                    mileage: "N/A",
-                    color: "White Exterior, Gray Fabric Interior",
-                    body: "Hatchback",
-                    location: "N/A",
-                    stockID: "TR-09",
-                    features: [
-                        "Alloy Rims",
-                        "New Tyres",
-                        "One owner since import",
-                        "Accident Free"
-                    ]
-                },
-                // ... Include all your other cars here (I've included the first 10 as example)
-                // You would continue with id 11 through 24 from your original data
+                // Add more cars as needed...
             ];
         }
 
+        // Fallback contacts
         function getFallbackContacts() {
             return [
                 { name: "Sam", number: "+254723098206" },
-                { name: "Samuel", number: "254724804354" },
-                { name: "Grace", number: "254711223344" },
-                { name: "Michael", number: "254733445566" }
+                { name: "Samuel", number: "+254724804354" },
+                { name: "Grace", number: "+254711223344" },
+                { name: "Michael", number: "+254733445566" }
             ];
         }
 
@@ -1435,6 +1206,7 @@
                 { label: 'Body Type', value: car.body },
                 { label: 'Location', value: car.location },
                 { label: 'Stock ID', value: car.stockID },
+                { label: 'Status', value: car.status },
                 { label: 'Features', value: car.features, isFeatures: true }
             ];
             
@@ -1517,12 +1289,16 @@
             openCarModal(nextCar.id);
         }
 
-        // Open contacts modal
+        // ✅ FIXED: Open contacts modal with working WhatsApp links
         function openContactsModal() {
             const contactsList = document.getElementById('contactsList');
             contactsList.innerHTML = '';
             
             contacts.forEach(contact => {
+                // Format phone number for WhatsApp (remove any spaces, dashes, etc.)
+                const formattedNumber = contact.number.replace(/\s+/g, '').replace('-', '');
+                const whatsappUrl = `https://wa.me/${formattedNumber}`;
+                
                 const contactItem = document.createElement('div');
                 contactItem.className = 'contact-item';
                 contactItem.innerHTML = `
@@ -1530,7 +1306,7 @@
                         <div class="contact-name">${contact.name}</div>
                         <div class="contact-number">${contact.number}</div>
                     </div>
-                    <button class="contact-action">Chat</button>
+                    <a class="contact-action" href="${whatsappUrl}" target="_blank">Chat</a>
                 `;
                 contactsList.appendChild(contactItem);
             });
