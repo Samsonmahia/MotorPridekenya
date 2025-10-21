@@ -1,0 +1,20 @@
+{
+  "contacts": [
+    {
+      "name": "Sam",
+      "number": "254723098206"
+    },
+    {
+      "name": "Samuel", 
+      "number": "254724804354"
+    },
+    {
+      "name": "Grace",
+      "number": "254711223344"
+    },
+    {
+      "name": "Michael",
+      "number": "254733445566"
+    }
+  ]
+}

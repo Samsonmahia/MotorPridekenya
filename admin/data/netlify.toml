@@ -1,0 +1,20 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/data/*"
+  to = "/data/:splat"
+  status = 200
+
+# Enable Netlify Identity
+[build.environment]
+  NODE_VERSION = "18"
+
+# Netlify CMS specific settings
+[context.production.environment]
+  URL = "https://yoursite.netlify.app"  # Replace with your actual Netlify URL

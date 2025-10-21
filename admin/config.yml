@@ -1,29 +1,46 @@
 backend:
   name: git-gateway
-  branch: main   # or "master" if your repo uses that
+  branch: main
+  commit_messages:
+    create: 'Create {{collection}} “{{slug}}”'
+    update: 'Update {{collection}} “{{slug}}”'
+    delete: 'Delete {{collection}} “{{slug}}”'
+    uploadMedia: '[skip ci] Upload “{{path}}”'
+    deleteMedia: '[skip ci] Delete “{{path}}”'
 
-media_folder: "uploads"       # folder inside repo where images are stored
-public_folder: "/uploads"     # how they are served on the site
+media_folder: "images/cars"
+public_folder: "/images/cars"
 
 collections:
   - name: "cars"
-    label: "Used Cars"
-    folder: "used-cars"
+    label: "Cars"
+    folder: "data/cars"
     create: true
-    format: "json"
-    extension: "json"
     slug: "{{slug}}"
     fields:
-      - { label: "Car Name", name: "name", widget: "string" }
-      - { label: "Price", name: "price", widget: "string" }
+      - { label: "ID", name: "id", widget: "number", value_type: "int" }
+      - { label: "Make", name: "make", widget: "string" }
+      - { label: "Model", name: "model", widget: "string" }
+      - { label: "Name", name: "name", widget: "string" }
       - { label: "Year", name: "year", widget: "number" }
-      - { label: "Fuel", name: "fuel", widget: "string" }
+      - { label: "Price", name: "price", widget: "string" }
+      - { label: "Fuel Type", name: "fuel", widget: "select", options: ["Petrol", "Diesel", "Hybrid", "Electric"] }
       - { label: "Transmission", name: "transmission", widget: "string" }
       - { label: "Engine", name: "engine", widget: "string" }
       - { label: "Mileage", name: "mileage", widget: "string" }
       - { label: "Color", name: "color", widget: "string" }
-      - { label: "Features", name: "features", widget: "list", allow_add: true }
-      - label: "Images"
-        name: "images"
-        widget: "list"
-        field: { label: "Image URL", name: "url", widget: "string" }
+      - { label: "Body Type", name: "body", widget: "select", options: ["SUV", "Sedan", "Hatchback", "MPV", "Van"] }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Stock ID", name: "stockID", widget: "string" }
+      - { label: "Status", name: "status", widget: "select", options: ["Available", "Incoming", "Sold"], required: false }
+      - { label: "Images", name: "images", widget: "list", fields: [{label: "Image URL", name: "url", widget: "string"}] }
+      - { label: "Features", name: "features", widget: "list" }
+
+  - name: "contacts"
+    label: "Contacts"
+    folder: "data/contacts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Number", name: "number", widget: "string" }
