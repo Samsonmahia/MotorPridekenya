@@ -3,316 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoHub | All Cars</title>
+    <title>MotorPride - All Cars</title>
     <style>
-        /* Your existing CSS - I'll keep it shorter for this example */
-        :root {
-            --primary-color: #1a73e8;
-            --secondary-color: #f8f9fa;
-            --accent-color: #ff6b35;
-            --text-color: #333;
-            --light-text: #666;
-            --border-color: #e0e0e0;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: #f5f5f5; 
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
         }
-
-        body {
-            background-color: #f5f5f5;
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background-color: white;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 25px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-        }
-
-        .page-title {
-            font-size: 32px;
-            margin: 30px 0;
-        }
-
         .cars-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            gap: 20px;
+            margin-top: 20px;
         }
-
         .car-card {
-            background-color: white;
-            border-radius: 8px;
+            background: white;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
         }
-
-        .car-image-container {
-            position: relative;
-            height: 200px;
-            overflow: hidden;
+        .car-card:hover {
+            transform: translateY(-5px);
         }
-
         .car-image {
             width: 100%;
-            height: 100%;
+            height: 200px;
             object-fit: cover;
         }
-
-        .reserve-btn {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
         .car-info {
             padding: 15px;
         }
-
         .car-name {
             font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
+            font-weight: bold;
+            margin-bottom: 8px;
         }
-
-        .car-year-price {
-            display: flex;
-            justify-content: space-between;
-            color: var(--light-text);
+        .car-price {
+            color: #e74c3c;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .car-details {
+            color: #666;
+            font-size: 14px;
             margin-bottom: 10px;
         }
-
-        .car-price {
-            font-weight: 600;
-            color: var(--accent-color);
+        .reserve-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
         }
-
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            grid-column: 1 / -1;
-        }
-
-        .debug-info {
-            background: #f0f8ff;
+        .debug {
+            background: #e3f2fd;
             padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
+            border-radius: 5px;
+            margin: 10px 0;
             font-family: monospace;
-            font-size: 14px;
+        }
+        .success { color: #27ae60; }
+        .error { color: #e74c3c; }
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #3498db;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">motorpride</div>
-                <nav>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="#" class="active">All Cars</a></li>
-                    </ul>
-                </nav>
-            </div>
+    <div class="container">
+        <h1>🚗 MotorPride Cars</h1>
+        
+        <div class="debug" id="debug">
+            Loading cars from CMS...
         </div>
-    </header>
 
-    <main class="container">
-        <h1 class="page-title">Our Vehicle Collection</h1>
-        
-        <!-- Debug Info -->
-        <div class="debug-info" id="debugInfo">
-            Loading... Please wait
-        </div>
-        
-        <!-- Cars Grid -->
         <div class="cars-grid" id="carsGrid">
-            <div class="no-results">
-                <div>🔄</div>
-                <h3>Loading Vehicles...</h3>
-                <p>Please wait while we load our vehicle collection.</p>
-            </div>
+            <!-- Cars will appear here -->
         </div>
-    </main>
+    </div>
 
     <script>
-        // Simple debug function
-        function updateDebugInfo(message) {
-            document.getElementById('debugInfo').textContent = message;
-            console.log(message);
-        }
+        // Known car files - we'll try to load these
+        const knownCarFiles = [
+            'map-body-hatchback-n-engine-petro-color-white-transmission-automatic-price-654700-model-demio-mileage-564333-name-mazda-make-mazda-stockid-2-status-available-location-kiambu-fuel.md'
+            // Add more filenames as you create more cars in CMS
+        ];
 
-        // Load cars data
-        async function loadCarsData() {
-            updateDebugInfo('Starting to load car data...');
-            
-            // Try multiple possible locations for car data
-            const possiblePaths = [
-                '/data/cars.json',
-                '/cars.json',
-                '/data/cars/index.json',
-                'data/cars.json',
-                'cars.json'
-            ];
-            
-            for (const path of possiblePaths) {
-                updateDebugInfo(`Trying to load from: ${path}`);
+        async function loadCars() {
+            const debug = document.getElementById('debug');
+            let allCars = [];
+
+            debug.innerHTML = "🔍 Loading cars from CMS...<br>";
+
+            // Try to load known car files
+            for (const filename of knownCarFiles) {
                 try {
-                    const response = await fetch(path);
+                    debug.innerHTML += `Trying: ${filename}<br>`;
+                    const response = await fetch(`./data/cars/${filename}`);
+                    
                     if (response.ok) {
-                        const data = await response.json();
-                        updateDebugInfo(`✅ SUCCESS: Found data at ${path} with ${Array.isArray(data) ? data.length : 'unknown'} cars`);
-                        return Array.isArray(data) ? data : (data.cars || []);
+                        const content = await response.text();
+                        const carData = parseMarkdownCarData(content);
+                        if (carData) {
+                            allCars.push(carData);
+                            debug.innerHTML += `✅ Loaded: ${carData.make} ${carData.model}<br>`;
+                        }
                     }
                 } catch (error) {
-                    updateDebugInfo(`❌ Failed to load from ${path}: ${error.message}`);
+                    debug.innerHTML += `❌ Failed: ${filename}<br>`;
                 }
             }
-            
-            // If all fails, use fallback data
-            updateDebugInfo('❌ No car data found in any location. Using sample data.');
-            return getSampleCars();
+
+            if (allCars.length > 0) {
+                debug.innerHTML = `<span class="success">✅ SUCCESS! Loaded ${allCars.length} cars from CMS</span>`;
+                return allCars;
+            } else {
+                // Fallback to sample data
+                debug.innerHTML = `<span class="error">❌ No cars found in CMS. Using sample data.</span>`;
+                return getSampleCars();
+            }
         }
 
-        // Sample car data
+        function parseMarkdownCarData(markdownContent) {
+            try {
+                // Extract YAML frontmatter between --- and ---
+                const frontmatterMatch = markdownContent.match(/---\n([\s\S]*?)\n---/);
+                if (!frontmatterMatch) return null;
+
+                const yamlContent = frontmatterMatch[1];
+                const lines = yamlContent.split('\n');
+                const carData = {};
+
+                lines.forEach(line => {
+                    const colonIndex = line.indexOf(':');
+                    if (colonIndex > -1) {
+                        let key = line.substring(0, colonIndex).trim();
+                        let value = line.substring(colonIndex + 1).trim();
+
+                        // Remove quotes if present
+                        value = value.replace(/^['"](.*)['"]$/, '$1');
+
+                        // Handle arrays (images, features)
+                        if (key === 'images' || key === 'features') {
+                            // Extract list items
+                            const listMatch = markdownContent.match(new RegExp(`${key}:\\s*\\n((?:\\s*-\\s*.*\\n)*)`));
+                            if (listMatch) {
+                                const listItems = listMatch[1].split('\n')
+                                    .filter(item => item.trim().startsWith('-'))
+                                    .map(item => item.replace(/^\s*-\s*/, '').trim())
+                                    .filter(item => item.length > 0);
+                                carData[key] = listItems;
+                            }
+                        } else {
+                            carData[key] = value;
+                        }
+                    }
+                });
+
+                // Ensure we have required fields
+                if (!carData.make || !carData.model) return null;
+
+                // Create a name if not provided
+                if (!carData.name) {
+                    carData.name = `${carData.make} ${carData.model} ${carData.year || ''}`.trim();
+                }
+
+                return carData;
+            } catch (error) {
+                console.error('Error parsing markdown:', error);
+                return null;
+            }
+        }
+
         function getSampleCars() {
             return [
                 {
                     id: 1,
                     make: "Mazda",
-                    model: "CX-5", 
-                    name: "Mazda CX-5 2020",
-                    images: ["https://i.imgur.com/FgynEtr.jpeg"],
+                    model: "Demio",
+                    name: "Mazda Demio",
+                    images: ["https://via.placeholder.com/300x200?text=Mazda+Demio"],
+                    price: "KSh 654,700",
+                    year: "2020",
                     fuel: "Petrol",
-                    price: "KSh 3.45M",
-                    year: 2020,
-                    transmission: "Manual",
-                    mileage: "39,000 km"
+                    transmission: "Automatic",
+                    mileage: "56,433 km",
+                    color: "White",
+                    body: "Hatchback",
+                    location: "Kiambu",
+                    stockID: "2",
+                    status: "Available",
+                    features: ["Good Condition", "Low Mileage"]
                 },
                 {
                     id: 2,
-                    make: "Mazda",
-                    model: "Demio",
-                    name: "2018 Mazda Demio", 
-                    images: ["https://i.ibb.co/pvzVmBZG/Whats-App-Image-2025-10-03-at-10-10-45-PM-1.jpg"],
+                    make: "Toyota",
+                    model: "Premio", 
+                    name: "Toyota Premio 2018",
+                    images: ["https://via.placeholder.com/300x200?text=Toyota+Premio"],
+                    price: "KSh 1,200,000",
+                    year: "2018",
                     fuel: "Petrol",
-                    price: "KSh 1.35M",
-                    year: 2018,
-                    transmission: "Automatic",
-                    mileage: "N/A"
+                    transmission: "Automatic", 
+                    mileage: "45,000 km",
+                    color: "Black",
+                    body: "Sedan",
+                    location: "Nairobi",
+                    status: "Available",
+                    features: ["Leather Seats", "Sunroof", "Navigation"]
                 }
             ];
         }
 
-        // Display cars
         function displayCars(cars) {
-            const carsGrid = document.getElementById('carsGrid');
+            const grid = document.getElementById('carsGrid');
             
             if (!cars || cars.length === 0) {
-                carsGrid.innerHTML = `
-                    <div class="no-results">
-                        <div>🚗</div>
-                        <h3>No vehicles found</h3>
-                        <p>We couldn't find any vehicles in our system.</p>
-                        <button onclick="location.reload()">Try Again</button>
-                    </div>
-                `;
+                grid.innerHTML = '<div>No cars found</div>';
                 return;
             }
-            
-            carsGrid.innerHTML = '';
-            
-            cars.forEach(car => {
-                const carCard = document.createElement('div');
-                carCard.className = 'car-card';
-                carCard.innerHTML = `
-                    <div class="car-image-container">
-                        <img src="${car.images[0]}" alt="${car.name}" class="car-image">
-                        <button class="reserve-btn">Reserve</button>
+
+            grid.innerHTML = cars.map(car => `
+                <div class="car-card">
+                    <div style="position: relative;">
+                        ${car.status ? `<div class="status-badge">${car.status}</div>` : ''}
+                        <img src="${car.images && car.images[0] ? car.images[0] : 'https://via.placeholder.com/300x200?text=Car+Image'}" 
+                             alt="${car.name}" 
+                             class="car-image">
                     </div>
                     <div class="car-info">
                         <div class="car-name">${car.name}</div>
-                        <div class="car-year-price">
-                            <span>${car.year}</span>
-                            <span class="car-price">${car.price}</span>
+                        <div class="car-price">${car.price || 'Contact for price'}</div>
+                        <div class="car-details">
+                            <div>📍 ${car.location || 'Nairobi'}</div>
+                            <div>🎨 ${car.color || 'N/A'}</div>
+                            <div>⛽ ${car.fuel || 'N/A'}</div>
+                            <div>📏 ${car.mileage || 'N/A'}</div>
+                            <div>⚙️ ${car.transmission || 'Automatic'}</div>
                         </div>
-                        <div style="font-size: 14px; color: #666;">
-                            <span>${car.transmission}</span> • 
-                            <span>${car.fuel}</span> • 
-                            <span>${car.mileage}</span>
-                        </div>
+                        ${car.features && car.features.length > 0 ? `
+                            <div style="margin: 10px 0; font-size: 12px; color: #666;">
+                                <strong>Features:</strong> ${car.features.slice(0, 3).join(', ')}
+                                ${car.features.length > 3 ? '...' : ''}
+                            </div>
+                        ` : ''}
+                        <button class="reserve-btn" onclick="reserveCar('${car.name}')">
+                            📱 Reserve on WhatsApp
+                        </button>
                     </div>
-                `;
-                carsGrid.appendChild(carCard);
-            });
-            
-            updateDebugInfo(`✅ Displaying ${cars.length} cars`);
+                </div>
+            `).join('');
         }
 
-        // Initialize the page
-        async function init() {
-            try {
-                const cars = await loadCarsData();
-                displayCars(cars);
-            } catch (error) {
-                updateDebugInfo(`❌ Error: ${error.message}`);
-                displayCars(getSampleCars());
-            }
+        function reserveCar(carName) {
+            const message = `Hello MotorPride! I'm interested in the ${carName}. Please provide more information.`;
+            window.open(`https://wa.me/254723098206?text=${encodeURIComponent(message)}`, '_blank');
         }
 
         // Start when page loads
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', async function() {
+            const cars = await loadCars();
+            displayCars(cars);
+        });
     </script>
 </body>
 </html>
