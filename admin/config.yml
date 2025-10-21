@@ -2,12 +2,6 @@ backend:
   name: git-gateway
   branch: main
 
-# Enable media library for file uploads
-media_library:
-  name: uploadcare
-  config:
-    publicKey: demopublickey
-
 media_folder: "static/images/cars"
 public_folder: "/images/cars"
 
@@ -33,12 +27,12 @@ collections:
       - { label: "Location", name: "location", widget: "string" }
       - { label: "Stock ID", name: "stockID", widget: "string" }
       - { label: "Status", name: "status", widget: "select", options: ["Available", "Incoming", "Sold"], required: false }
-      - { label: "Images", name: "images", widget: "list", field: {label: "Image", name: "image", widget: "image"} }
+      - { label: "Images", name: "images", widget: "list", field: {label: "Image URL", name: "url", widget: "string"} }
       - { label: "Features", name: "features", widget: "list" }
 
   - name: "contacts"
     label: "Contacts"
-    folder: "data/contacts"
+    file: "data/contacts.json"
     create: true
     slug: "{{slug}}"
     fields:

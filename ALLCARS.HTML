@@ -714,105 +714,103 @@
             <!-- Contacts will be dynamically inserted -->
         </div>
     </div>
+<script>
+    // DOM Elements
+    const carsGrid = document.getElementById('carsGrid');
+    const carModal = document.getElementById('carModal');
+    const contactsModal = document.getElementById('contactsModal');
+    const closeModal = document.getElementById('closeModal');
+    const closeContacts = document.getElementById('closeContacts');
+    const prevPage = document.getElementById('prevPage');
+    const nextPage = document.getElementById('nextPage');
+    const currentPageEl = document.getElementById('currentPage');
+    const totalPagesEl = document.getElementById('totalPages');
+    const prevCar = document.getElementById('prevCar');
+    const nextCar = document.getElementById('nextCar');
+    const modalReserveBtn = document.getElementById('modalReserveBtn');
+    const searchInfo = document.getElementById('searchInfo');
+    const searchTags = document.getElementById('searchTags');
+    const clearFilters = document.getElementById('clearFilters');
 
-    <script>
-        // DOM Elements
-        const carsGrid = document.getElementById('carsGrid');
-        const carModal = document.getElementById('carModal');
-        const contactsModal = document.getElementById('contactsModal');
-        const closeModal = document.getElementById('closeModal');
-        const closeContacts = document.getElementById('closeContacts');
-        const prevPage = document.getElementById('prevPage');
-        const nextPage = document.getElementById('nextPage');
-        const currentPageEl = document.getElementById('currentPage');
-        const totalPagesEl = document.getElementById('totalPages');
-        const prevCar = document.getElementById('prevCar');
-        const nextCar = document.getElementById('nextCar');
-        const modalReserveBtn = document.getElementById('modalReserveBtn');
-        const searchInfo = document.getElementById('searchInfo');
-        const searchTags = document.getElementById('searchTags');
-        const clearFilters = document.getElementById('clearFilters');
+    // Pagination variables
+    const carsPerPage = 14;
+    let currentPage = 1;
+    let totalPages = 1;
 
-        // Pagination variables
-        const carsPerPage = 14;
-        let currentPage = 1;
-        let totalPages = 1;
+    // Current car in modal
+    let currentCarIndex = 0;
 
-        // Current car in modal
-        let currentCarIndex = 0;
+    // Filter criteria from URL
+    let filterCriteria = {};
 
-        // Filter criteria from URL
-        let filterCriteria = {};
+    // Data variables - NOW LOADED FROM CMS
+    let carsData = [];
+    let contacts = [];
 
-        // Data variables - NOW LOADED FROM CMS
-        let carsData = [];
-        let contacts = [];
-
-        // Initialize the page
-        async function init() {
-            try {
-                // Load cars data from CMS JSON
-                await loadCarsData();
-                
-                // Load contacts data from CMS JSON  
-                await loadContactsData();
-                
-                // Get filter criteria from URL parameters
-                getUrlParameters();
-                
-                // Display cars based on filters
-                displayCars();
-                
-                // Setup pagination
-                setupPagination();
-                
-                // Setup event listeners
-                setupEventListeners();
-                
-                // Show search info if filters are active
-                updateSearchInfo();
-                
-            } catch (error) {
-                console.error('Error initializing page:', error);
-                showErrorState();
-            }
+    // Initialize the page
+    async function init() {
+        try {
+            // Load cars data from CMS JSON
+            await loadCarsData();
+            
+            // Load contacts data from CMS JSON  
+            await loadContactsData();
+            
+            // Get filter criteria from URL parameters
+            getUrlParameters();
+            
+            // Display cars based on filters
+            displayCars();
+            
+            // Setup pagination
+            setupPagination();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Show search info if filters are active
+            updateSearchInfo();
+            
+        } catch (error) {
+            console.error('Error initializing page:', error);
+            showErrorState();
         }
+    }
 
-        // Load cars data from CMS JSON files
-        async function loadCarsData() {
-            try {
-                // Try to load from CMS-generated JSON
-                const response = await fetch('/data/cars.json');
-                if (response.ok) {
-                    const data = await response.json();
-                    carsData = data.cars || data;
-                    console.log('Loaded cars from CMS:', carsData.length);
-                } else {
-                    // Fallback to your original data
-                    console.log('Using fallback cars data');
-                    carsData = getFallbackCarsData();
-                }
-            } catch (error) {
-                console.warn('Using fallback cars data');
+    // ✅ Updated version: Load cars data from CMS JSON files
+    async function loadCarsData() {
+        try {
+            const response = await fetch('/data/cars.json');
+            if (response.ok) {
+                const data = await response.json();
+                carsData = data.cars || [];
+                console.log('Loaded cars from CMS:', carsData.length);
+            } else {
+                console.log('Using fallback cars data');
                 carsData = getFallbackCarsData();
             }
+        } catch (error) {
+            console.warn('Using fallback cars data');
+            carsData = getFallbackCarsData();
         }
+    }
 
-        // Load contacts data from CMS
-        async function loadContactsData() {
-            try {
-                const response = await fetch('/data/contacts.json');
-                if (response.ok) {
-                    const data = await response.json();
-                    contacts = data.contacts || data;
-                } else {
-                    contacts = getFallbackContacts();
-                }
-            } catch (error) {
-                console.warn('Using fallback contacts data');
+    // Load contacts data from CMS
+    async function loadContactsData() {
+        try {
+            const response = await fetch('/data/contacts.json');
+            if (response.ok) {
+                const data = await response.json();
+                contacts = data.contacts || data;
+            } else {
                 contacts = getFallbackContacts();
             }
+        } catch (error) {
+            console.warn('Using fallback contacts data');
+            contacts = getFallbackContacts();
         }
+    }
+
 
         // Your original cars data as fallback
         function getFallbackCarsData() {
@@ -1154,7 +1152,7 @@
 
         function getFallbackContacts() {
             return [
-                { name: "Sam", number: "254723098206" },
+                { name: "Sam", number: "+254723098206" },
                 { name: "Samuel", number: "254724804354" },
                 { name: "Grace", number: "254711223344" },
                 { name: "Michael", number: "254733445566" }
