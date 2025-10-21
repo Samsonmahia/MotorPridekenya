@@ -2692,5 +2692,21 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   </script>
+
+  <!-- ========== NETLIFY IDENTITY SCRIPT - ADDED FOR CMS AUTHENTICATION ========== -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+  <!-- ========== END NETLIFY IDENTITY SCRIPT ========== -->
+  
 </body>
 </html>
