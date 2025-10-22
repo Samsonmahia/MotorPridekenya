@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MotorPride | All Cars</title>
     <style>
-        /* CSS remains exactly the same - it's already well organized */
         :root {
             --primary-color: #1a73e8;
             --secondary-color: #f8f9fa;
@@ -24,7 +23,571 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* ... (all your existing CSS remains exactly the same) ... */
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .page-title {
+            font-size: 32px;
+            margin: 30px 0;
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .car-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .car-image-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .car-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .car-card:hover .car-image {
+            transform: scale(1.05);
+        }
+
+        .reserve-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .reserve-btn:hover {
+            background-color: #e55a2b;
+        }
+
+        .car-info {
+            padding: 15px;
+        }
+
+        .car-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .car-year-price {
+            display: flex;
+            justify-content: space-between;
+            color: var(--light-text);
+            margin-bottom: 10px;
+        }
+
+        .car-price {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .car-specs {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--light-text);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            grid-column: 1 / -1;
+        }
+
+        .no-results-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: var(--light-text);
+        }
+
+        .no-results-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .no-results-text {
+            color: var(--light-text);
+            margin-bottom: 25px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .browse-all {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .browse-all:hover {
+            background-color: #0d5bb9;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .pagination button {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-numbers {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .car-detail-modal {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(50px);
+            transition: transform 0.4s ease;
+        }
+
+        .modal-overlay.active .car-detail-modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--light-text);
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--text-color);
+        }
+
+        .modal-content {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .car-images {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .primary-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .thumbnail:hover {
+            opacity: 0.8;
+        }
+
+        .car-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideIn 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .detail-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-item::before {
+            content: "✓";
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover {
+            background-color: #0d5bb9;
+        }
+
+        .modal-reserve-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-reserve-btn:hover {
+            background-color: #e55a2b;
+        }
+
+        .contacts-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: var(--shadow);
+            z-index: 1100;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .contacts-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .contacts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contacts-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .close-contacts {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .contacts-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            background-color: #e9ecef;
+        }
+
+        .contact-name {
+            font-weight: 600;
+        }
+
+        .contact-number {
+            color: var(--primary-color);
+        }
+
+        .contact-action {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .contact-action:hover {
+            background-color: #0d5bb9;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 5;
+        }
+
+        .status-available {
+            background-color: #28a745;
+        }
+
+        .status-incoming {
+            background-color: #ffc107;
+            color: #000;
+        }
+
+        .status-sold {
+            background-color: #6c757d;
+        }
+
+        .debug-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                margin-top: 10px;
+            }
+            
+            .cars-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .cars-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -98,219 +661,412 @@
         </div>
         <div class="contacts-list" id="contactsList"></div>
     </div>
-<script>
-/* ===============================
-   CONFIGURATION
-================================= */
-const CONFIG = {
-  carsPerPage: 12,
-  maxThumbnails: 7,
-  animationDelay: 100
-};
 
-const ENDPOINTS = {
-  cars: [
-    './data/cars/mazda.json',
-    './data/cars/cx-5.json',
-    './data/cars/mercedes-benz.json',
-    './data/cars/suzuki.json',
-    './data/cars/volvo.json'
-  ],
-  contacts: [
-    './data/contacts/sam.json',
-    './data/contacts/kiarie.json'
-  ]
-};
+    <script>
+        // Configuration
+        const CONFIG = {
+            carsPerPage: 12,
+            maxThumbnails: 7,
+            animationDelay: 100
+        };
 
-/* ===============================
-   STATE MANAGEMENT
-================================= */
-const state = {
-  cars: [],
-  contacts: [],
-  currentPage: 1,
-  totalPages: 1,
-  currentCarIndex: 0
-};
+        // Data endpoints - Using individual JSON files
+        const CAR_FILES = [
+            './data/cars/ox-5.json',
+            './data/cars/mazda.json',
+            './data/cars/mercedes-benz.json', 
+            './data/cars/suzuki.json',
+            './data/cars/volvo.json'
+        ];
 
-/* ===============================
-   DOM ELEMENTS
-================================= */
-const elements = {
-  carsGrid: document.getElementById('carsGrid'),
-  carModal: document.getElementById('carModal'),
-  contactsModal: document.getElementById('contactsModal'),
-  closeModal: document.getElementById('closeModal'),
-  closeContacts: document.getElementById('closeContacts'),
-  prevPage: document.getElementById('prevPage'),
-  nextPage: document.getElementById('nextPage'),
-  currentPageEl: document.getElementById('currentPage'),
-  totalPagesEl: document.getElementById('totalPages'),
-  prevCar: document.getElementById('prevCar'),
-  nextCar: document.getElementById('nextCar'),
-  modalReserveBtn: document.getElementById('modalReserveBtn'),
-  debugInfo: document.getElementById('debugInfo'),
-  modalCarTitle: document.getElementById('modalCarTitle'),
-  modalPrimaryImage: document.getElementById('modalPrimaryImage'),
-  modalThumbnails: document.getElementById('modalThumbnails'),
-  carDetails: document.getElementById('carDetails'),
-  contactsList: document.getElementById('contactsList')
-};
+        const CONTACT_FILES = [
+            './data/contacts/kiarie.json',
+            './data/contacts/sam.json'
+        ];
 
-/* ===============================
-   UTILITIES
-================================= */
-const utils = {
-  showLoadingState() {
-    elements.carsGrid.innerHTML = `
-      <div class="no-results">
-        <div class="no-results-icon">🚗</div>
-        <h3 class="no-results-title">Loading Vehicles...</h3>
-        <p class="no-results-text">Please wait while we load our car listings.</p>
-      </div>
-    `;
-  },
-  showErrorState(msg = 'Failed to load cars') {
-    elements.carsGrid.innerHTML = `
-      <div class="no-results">
-        <div class="no-results-icon">⚠️</div>
-        <h3 class="no-results-title">${msg}</h3>
-        <p class="no-results-text">Please check back later.</p>
-      </div>
-    `;
-  },
-  formatWhatsApp(number) {
-    return number.replace(/\s+/g, '').replace(/[^0-9]/g, '');
-  }
-};
+        // State management
+        const state = {
+            cars: [],
+            contacts: [],
+            currentPage: 1,
+            currentCarIndex: 0,
+            totalPages: 1
+        };
 
-/* ===============================
-   DATA MANAGEMENT
-================================= */
-const dataManager = {
-  async loadCars() {
-    try {
-      const responses = await Promise.all(
-        ENDPOINTS.cars.map(url => fetch(url).then(res => res.ok ? res.json() : null))
-      );
-      // Combine all arrays or single car objects
-      state.cars = responses
-        .filter(Boolean)
-        .flatMap(car => Array.isArray(car) ? car : [car]);
-      
-      elements.debugInfo.textContent = `✅ Successfully loaded ${state.cars.length} cars from CMS`;
-      console.log('Loaded cars:', state.cars);
-    } catch (err) {
-      console.error('Error loading cars:', err);
-      utils.showErrorState();
-    }
-  },
-  async loadContacts() {
-    try {
-      const responses = await Promise.all(
-        ENDPOINTS.contacts.map(url => fetch(url).then(res => res.ok ? res.json() : null))
-      );
-      state.contacts = responses.filter(Boolean);
-    } catch {
-      console.warn('Failed to load contacts');
-    }
-  }
-};
+        // DOM Elements
+        const elements = {
+            carsGrid: document.getElementById('carsGrid'),
+            carModal: document.getElementById('carModal'),
+            contactsModal: document.getElementById('contactsModal'),
+            closeModal: document.getElementById('closeModal'),
+            closeContacts: document.getElementById('closeContacts'),
+            prevPage: document.getElementById('prevPage'),
+            nextPage: document.getElementById('nextPage'),
+            currentPageEl: document.getElementById('currentPage'),
+            totalPagesEl: document.getElementById('totalPages'),
+            prevCar: document.getElementById('prevCar'),
+            nextCar: document.getElementById('nextCar'),
+            modalReserveBtn: document.getElementById('modalReserveBtn'),
+            debugInfo: document.getElementById('debugInfo'),
+            modalCarTitle: document.getElementById('modalCarTitle'),
+            modalPrimaryImage: document.getElementById('modalPrimaryImage'),
+            modalThumbnails: document.getElementById('modalThumbnails'),
+            carDetails: document.getElementById('carDetails'),
+            contactsList: document.getElementById('contactsList')
+        };
 
-/* ===============================
-   RENDERING
-================================= */
-const renderer = {
-  displayCars() {
-    const start = (state.currentPage - 1) * CONFIG.carsPerPage;
-    const end = start + CONFIG.carsPerPage;
-    const carsToShow = state.cars.slice(start, end);
+        // Utility functions
+        const utils = {
+            showLoadingState() {
+                elements.carsGrid.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">🔄</div>
+                        <h3 class="no-results-title">Loading Vehicles...</h3>
+                        <p class="no-results-text">Please wait while we load our vehicle collection.</p>
+                    </div>
+                `;
+            },
 
-    if (!carsToShow.length) {
-      utils.showErrorState('No cars found.');
-      return;
-    }
+            showErrorState(message = 'Temporary Unavailable') {
+                elements.carsGrid.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">⚠️</div>
+                        <h3 class="no-results-title">${message}</h3>
+                        <p class="no-results-text">Our vehicle catalog is currently being updated. Please check back shortly.</p>
+                        <button class="browse-all" onclick="location.reload()">Try Again</button>
+                    </div>
+                `;
+            },
 
-    elements.carsGrid.innerHTML = carsToShow.map(car => `
-      <div class="car-card" onclick="modalManager.openCarModal(${car.id})">
-        <img src="${car.images?.[0] || 'https://via.placeholder.com/400x300?text=No+Image'}" alt="${car.name}">
-        <div class="car-info">
-          <h3>${car.name}</h3>
-          <p>${car.price || 'Price: N/A'}</p>
-          <p>${car.fuel || ''} | ${car.year || ''}</p>
-        </div>
-      </div>
-    `).join('');
+            formatWhatsAppNumber(number) {
+                return number.replace(/\s+/g, '').replace('-', '');
+            }
+        };
 
-    state.totalPages = Math.ceil(state.cars.length / CONFIG.carsPerPage);
-    this.updatePagination();
-  },
-  updatePagination() {
-    elements.currentPageEl.textContent = state.currentPage;
-    elements.totalPagesEl.textContent = state.totalPages;
-  }
-};
+        // Data management
+        const dataManager = {
+            async loadCarsData() {
+                try {
+                    elements.debugInfo.textContent = 'Loading cars from CMS...';
+                    
+                    // Load all individual car files
+                    const carPromises = CAR_FILES.map(url => 
+                        fetch(url)
+                            .then(response => {
+                                if (!response.ok) throw new Error(`Failed to load ${url}`);
+                                return response.json();
+                            })
+                            .catch(error => {
+                                console.warn(`Could not load ${url}:`, error);
+                                return null;
+                            })
+                    );
 
-/* ===============================
-   MODALS
-================================= */
-const modalManager = {
-  openCarModal(carId) {
-    const car = state.cars.find(c => c.id === carId);
-    if (!car) return;
+                    const carData = await Promise.all(carPromises);
+                    
+                    // Combine all car data, filtering out null responses
+                    state.cars = carData
+                        .filter(car => car !== null)
+                        .flatMap(car => Array.isArray(car) ? car : [car]);
+                    
+                    elements.debugInfo.textContent = `✅ Successfully loaded ${state.cars.length} cars from CMS`;
+                    console.log('Loaded cars from CMS:', state.cars);
+                } catch (error) {
+                    elements.debugInfo.textContent = `❌ Error loading cars: ${error.message}`;
+                    console.error('Error loading cars:', error);
+                    utils.showErrorState();
+                }
+            },
 
-    elements.modalCarTitle.textContent = car.name;
-    elements.modalPrimaryImage.src = car.images[0];
+            async loadContactsData() {
+                try {
+                    const contactPromises = CONTACT_FILES.map(url =>
+                        fetch(url)
+                            .then(response => {
+                                if (!response.ok) throw new Error(`Failed to load ${url}`);
+                                return response.json();
+                            })
+                            .catch(error => {
+                                console.warn(`Could not load ${url}:`, error);
+                                return null;
+                            })
+                    );
 
-    // Render thumbnails
-    elements.modalThumbnails.innerHTML = car.images
-      .slice(0, CONFIG.maxThumbnails)
-      .map((img, i) => `<img src="${img}" class="thumbnail" alt="Image ${i + 1}" onclick="elements.modalPrimaryImage.src='${img}'">`)
-      .join('');
+                    const contactData = await Promise.all(contactPromises);
+                    state.contacts = contactData.filter(contact => contact !== null);
+                    console.log('Loaded contacts from CMS:', state.contacts);
+                } catch (error) {
+                    console.warn('Error loading contacts:', error);
+                    state.contacts = [];
+                }
+            }
+        };
 
-    // Render details
-    elements.carDetails.innerHTML = `
-      <div class="detail"><strong>Price:</strong> ${car.price}</div>
-      <div class="detail"><strong>Year:</strong> ${car.year}</div>
-      <div class="detail"><strong>Fuel:</strong> ${car.fuel}</div>
-      <div class="detail"><strong>Transmission:</strong> ${car.transmission}</div>
-      <div class="detail"><strong>Engine:</strong> ${car.engine}</div>
-      <div class="detail"><strong>Mileage:</strong> ${car.mileage}</div>
-      <div class="detail"><strong>Features:</strong> 
-        <ul>${car.features?.map(f => `<li>${f}</li>`).join('') || 'N/A'}</ul>
-      </div>
-    `;
-    elements.carModal.classList.add('active');
-  },
-  closeCarModal() {
-    elements.carModal.classList.remove('active');
-  }
-};
+        // UI rendering
+        const renderer = {
+            displayCars() {
+                elements.carsGrid.innerHTML = '';
+                
+                const startIndex = (state.currentPage - 1) * CONFIG.carsPerPage;
+                const endIndex = startIndex + CONFIG.carsPerPage;
+                const currentCars = state.cars.slice(startIndex, endIndex);
+                
+                if (currentCars.length === 0) {
+                    utils.showErrorState('No vehicles found');
+                    return;
+                }
+                
+                currentCars.forEach(car => {
+                    const statusClass = car.status ? `status-${car.status.toLowerCase()}` : '';
+                    
+                    const carCard = document.createElement('div');
+                    carCard.className = 'car-card';
+                    carCard.innerHTML = `
+                        <div class="car-image-container" data-car-id="${car.id}">
+                            ${car.status ? `<div class="status-badge ${statusClass}">${car.status}</div>` : ''}
+                            <img src="${car.images?.[0] || 'https://via.placeholder.com/400x300?text=No+Image'}" alt="${car.name}" class="car-image">
+                            <button class="reserve-btn">Reserve</button>
+                        </div>
+                        <div class="car-info">
+                            <div class="car-name">${car.name}</div>
+                            <div class="car-year-price">
+                                <span>${car.year || 'N/A'}</span>
+                                <span class="car-price">${car.price || 'Price N/A'}</span>
+                            </div>
+                            <div class="car-specs">
+                                <span>${car.transmission || 'N/A'}</span>
+                                <span>${car.fuel || 'N/A'}</span>
+                                <span>${car.mileage || 'N/A'}</span>
+                            </div>
+                        </div>
+                    `;
+                    elements.carsGrid.appendChild(carCard);
+                });
+                
+                this.attachCarEventListeners();
+            },
 
-/* ===============================
-   EVENTS
-================================= */
-document.addEventListener('DOMContentLoaded', async () => {
-  utils.showLoadingState();
-  await dataManager.loadCars();
-  await dataManager.loadContacts();
-  renderer.displayCars();
-});
+            attachCarEventListeners() {
+                document.querySelectorAll('.car-image-container').forEach(container => {
+                    const carId = parseInt(container.getAttribute('data-car-id'));
+                    
+                    // Click on image to open modal
+                    container.addEventListener('click', (e) => {
+                        if (!e.target.classList.contains('reserve-btn')) {
+                            modalManager.openCarModal(carId);
+                        }
+                    });
+                    
+                    // Click on reserve button to open contacts
+                    const reserveBtn = container.querySelector('.reserve-btn');
+                    reserveBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        modalManager.openContactsModal();
+                    });
+                });
+            },
 
-elements.closeModal?.addEventListener('click', modalManager.closeCarModal);
-elements.prevPage?.addEventListener('click', () => {
-  if (state.currentPage > 1) {
-    state.currentPage--;
-    renderer.displayCars();
-  }
-});
-elements.nextPage?.addEventListener('click', () => {
-  if (state.currentPage < state.totalPages) {
-    state.currentPage++;
-    renderer.displayCars();
-  }
-});
-</script>
+            setupPagination() {
+                state.totalPages = Math.ceil(state.cars.length / CONFIG.carsPerPage);
+                
+                elements.currentPageEl.textContent = state.currentPage;
+                elements.totalPagesEl.textContent = state.totalPages;
+                
+                elements.prevPage.disabled = state.currentPage === 1;
+                elements.nextPage.disabled = state.currentPage === state.totalPages || state.totalPages === 0;
+            }
+        };
 
+        // Modal management
+        const modalManager = {
+            openCarModal(carId) {
+                const car = state.cars.find(c => c.id === carId);
+                if (!car) return;
+                
+                state.currentCarIndex = state.cars.findIndex(c => c.id === carId);
+                
+                // Set modal title
+                elements.modalCarTitle.textContent = car.name;
+                
+                // Set primary image
+                elements.modalPrimaryImage.src = car.images?.[0] || 'https://via.placeholder.com/600x400?text=No+Image';
+                
+                // Set thumbnails
+                elements.modalThumbnails.innerHTML = '';
+                
+                if (car.images && car.images.length > 0) {
+                    car.images.slice(0, CONFIG.maxThumbnails).forEach((image, index) => {
+                        const img = document.createElement('img');
+                        img.src = image;
+                        img.alt = `${car.name} - Image ${index + 1}`;
+                        img.className = 'thumbnail';
+                        img.addEventListener('click', () => {
+                            elements.modalPrimaryImage.src = image;
+                        });
+                        elements.modalThumbnails.appendChild(img);
+                    });
+                }
+                
+                // Set car details with animation
+                elements.carDetails.innerHTML = '';
+                
+                const details = [
+                    { label: 'Price', value: car.price },
+                    { label: 'Year', value: car.year },
+                    { label: 'Make', value: car.make },
+                    { label: 'Model', value: car.model },
+                    { label: 'Transmission', value: car.transmission },
+                    { label: 'Fuel Type', value: car.fuel },
+                    { label: 'Engine', value: car.engine },
+                    { label: 'Mileage', value: car.mileage },
+                    { label: 'Color', value: car.color },
+                    { label: 'Body Type', value: car.body },
+                    { label: 'Location', value: car.location },
+                    { label: 'Stock ID', value: car.stockID },
+                    { label: 'Status', value: car.status },
+                    { label: 'Features', value: car.features, isFeatures: true }
+                ];
+                
+                details.forEach((detail, index) => {
+                    if (!detail.value || detail.value === 'N/A') return;
+                    
+                    const detailItem = document.createElement('div');
+                    detailItem.className = 'detail-item';
+                    detailItem.style.animationDelay = `${index * 0.1}s`;
+                    
+                    if (detail.isFeatures && Array.isArray(detail.value)) {
+                        const featuresList = document.createElement('div');
+                        featuresList.className = 'features-list';
+                        
+                        detail.value.forEach(feature => {
+                            const featureItem = document.createElement('div');
+                            featureItem.className = 'feature-item';
+                            featureItem.textContent = feature;
+                            featuresList.appendChild(featureItem);
+                        });
+                        
+                        detailItem.innerHTML = `
+                            <div class="detail-label">${detail.label}</div>
+                        `;
+                        detailItem.appendChild(featuresList);
+                    } else {
+                        detailItem.innerHTML = `
+                            <div class="detail-label">${detail.label}</div>
+                            <div>${detail.value}</div>
+                        `;
+                    }
+                    
+                    elements.carDetails.appendChild(detailItem);
+                });
+                
+                // Show modal
+                elements.carModal.classList.add('active');
+            },
+
+            closeCarModal() {
+                elements.carModal.classList.remove('active');
+            },
+
+            showPreviousCar() {
+                state.currentCarIndex = state.currentCarIndex > 0 ? state.currentCarIndex - 1 : state.cars.length - 1;
+                this.openCarModal(state.cars[state.currentCarIndex].id);
+            },
+
+            showNextCar() {
+                state.currentCarIndex = state.currentCarIndex < state.cars.length - 1 ? state.currentCarIndex + 1 : 0;
+                this.openCarModal(state.cars[state.currentCarIndex].id);
+            },
+
+            openContactsModal() {
+                const contactsList = document.getElementById('contactsList');
+                contactsList.innerHTML = '';
+                
+                state.contacts.forEach(contact => {
+                    // Format phone number for WhatsApp (remove any spaces, dashes, etc.)
+                    const formattedNumber = utils.formatWhatsAppNumber(contact.number);
+                    const whatsappUrl = `https://wa.me/${formattedNumber}`;
+                    
+                    const contactItem = document.createElement('div');
+                    contactItem.className = 'contact-item';
+                    contactItem.innerHTML = `
+                        <div>
+                            <div class="contact-name">${contact.name}</div>
+                            <div class="contact-number">${contact.number}</div>
+                        </div>
+                        <a class="contact-action" href="${whatsappUrl}" target="_blank">Chat</a>
+                    `;
+                    contactsList.appendChild(contactItem);
+                });
+                
+                elements.contactsModal.classList.add('active');
+            },
+
+            closeContactsModal() {
+                elements.contactsModal.classList.remove('active');
+            }
+        };
+
+        // Event handlers
+        const eventHandlers = {
+            setupPaginationEvents() {
+                elements.prevPage.addEventListener('click', () => {
+                    if (state.currentPage > 1) {
+                        state.currentPage--;
+                        renderer.displayCars();
+                        renderer.setupPagination();
+                    }
+                });
+                
+                elements.nextPage.addEventListener('click', () => {
+                    if (state.currentPage < state.totalPages) {
+                        state.currentPage++;
+                        renderer.displayCars();
+                        renderer.setupPagination();
+                    }
+                });
+            },
+
+            setupModalEvents() {
+                elements.closeModal.addEventListener('click', () => modalManager.closeCarModal());
+                elements.closeContacts.addEventListener('click', () => modalManager.closeContactsModal());
+                
+                elements.prevCar.addEventListener('click', () => modalManager.showPreviousCar());
+                elements.nextCar.addEventListener('click', () => modalManager.showNextCar());
+                elements.modalReserveBtn.addEventListener('click', () => modalManager.openContactsModal());
+                
+                elements.carModal.addEventListener('click', (e) => {
+                    if (e.target === elements.carModal) modalManager.closeCarModal();
+                });
+                
+                elements.contactsModal.addEventListener('click', (e) => {
+                    if (e.target === elements.contactsModal) modalManager.closeContactsModal();
+                });
+            }
+        };
+
+        // Main application
+        const app = {
+            async init() {
+                try {
+                    utils.showLoadingState();
+                    await dataManager.loadCarsData();
+                    await dataManager.loadContactsData();
+                    
+                    renderer.displayCars();
+                    renderer.setupPagination();
+                    
+                    eventHandlers.setupPaginationEvents();
+                    eventHandlers.setupModalEvents();
+                    
+                } catch (error) {
+                    console.error('Error initializing page:', error);
+                    utils.showErrorState();
+                }
+            }
+        };
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', () => app.init());
+    </script>
 </body>
 </html>
