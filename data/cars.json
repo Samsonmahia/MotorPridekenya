@@ -1,0 +1,36 @@
+{
+  "id": 1,
+  "make": "Mazda",
+  "model": "CX-5",
+  "name": "Mazda CX-5 2020",
+  "images": [
+    "https://i.imgur.com/FgynEtr.jpeg",
+    "https://i.imgur.com/KTH4LRJ.jpeg",
+    "https://i.imgur.com/KH1Dlbk.jpeg",
+    "https://i.imgur.com/Tu933Ii.jpeg",
+    "https://i.imgur.com/c7lbbdJ.jpeg"
+  ],
+  "fuel": "Petrol",
+  "price": "KSh 3.45M",
+  "year": 2020,
+  "transmission": "6-Speed Manual",
+  "engine": "2000cc",
+  "mileage": "39,000 km",
+  "color": "Gray Exterior, Dark Leather Upholstery",
+  "body": "SUV",
+  "location": "Nairobi",
+  "stockID": "MZ-CX520-2020",
+  "status": "Available",
+  "features": [
+    "Multimedia Navigation Knob",
+    "Electric Handbrake with AutoHold",
+    "Multifunction Steering Wheel Controls",
+    "Apple CarPlay & Android Auto",
+    "Daytime Running Lights",
+    "Foglights",
+    "Keyless Entry",
+    "Auto Start Stop",
+    "Push to Start",
+    "260km/hr Speed Limit"
+  ]
+}
