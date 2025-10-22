@@ -10,35 +10,35 @@ collections:
     label: "Cars"
     folder: "data/cars"
     create: true
-    slug: "{{make}}-{{model}}-{{year}}"  # ← CHANGED THIS LINE
+    slug: "{{make}}-{{model}}-{{year}}"
     extension: "json"
     format: "json"
     fields:
-      - { label: "ID", name: "id", widget: "number" }
-      - { label: "Make", name: "make", widget: "string" }
-      - { label: "Model", name: "model", widget: "string" }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Year", name: "year", widget: "number" }
-      - { label: "Price", name: "price", widget: "string" }
-      - { label: "Fuel Type", name: "fuel", widget: "select", options: ["Petrol", "Diesel", "Hybrid", "Electric"] }
-      - { label: "Transmission", name: "transmission", widget: "string" }
-      - { label: "Engine", name: "engine", widget: "string" }
-      - { label: "Mileage", name: "mileage", widget: "string" }
-      - { label: "Color", name: "color", widget: "string" }
-      - { label: "Body Type", name: "body", widget: "select", options: ["SUV", "Sedan", "Hatchback", "MPV", "Van"] }
-      - { label: "Location", name: "location", widget: "string" }
-      - { label: "Stock ID", name: "stockID", widget: "string" }
-      - { label: "Status", name: "status", widget: "select", options: ["Available", "Incoming", "Sold"], required: false }
-      - { label: "Images", name: "images", widget: "list", field: { label: "Image", name: "image", widget: "image" } }
-      - { label: "Features", name: "features", widget: "list", field: { label: "Feature", name: "feature", widget: "string" } }
+      - { label: "ID", name: "id", widget: "number", required: true }
+      - { label: "Make", name: "make", widget: "string", required: true }
+      - { label: "Model", name: "model", widget: "string", required: true }
+      - { label: "Name", name: "name", widget: "string", required: true }
+      - { label: "Year", name: "year", widget: "number", required: true }
+      - { label: "Price", name: "price", widget: "string", required: true }
+      - { label: "Fuel Type", name: "fuel", widget: "select", options: ["Petrol", "Diesel", "Hybrid", "Electric"], default: "Petrol" }
+      - { label: "Transmission", name: "transmission", widget: "string", default: "Automatic" }
+      - { label: "Engine", name: "engine", widget: "string", default: "1500cc" }
+      - { label: "Mileage", name: "mileage", widget: "string", default: "0 km" }
+      - { label: "Color", name: "color", widget: "string", default: "White" }
+      - { label: "Body Type", name: "body", widget: "select", options: ["SUV", "Sedan", "Hatchback", "MPV", "Van"], default: "SUV" }
+      - { label: "Location", name: "location", widget: "string", default: "Nairobi" }
+      - { label: "Stock ID", name: "stockID", widget: "string", required: true }
+      - { label: "Status", name: "status", widget: "select", options: ["Available", "Incoming", "Sold"], default: "Available" }
+      - { label: "Images", name: "images", widget: "list", field: { label: "Image URL", name: "url", widget: "string" }, default: ["https://via.placeholder.com/600x400?text=Car+Image"] }
+      - { label: "Features", name: "features", widget: "list", field: { label: "Feature", name: "feature", widget: "string" }, default: ["Air Conditioning", "Power Steering"] }
 
   - name: "contacts"
     label: "Contacts"
     folder: "data/contacts"
     create: true
-    slug: "{{name | slugify}}"  # ← CHANGED THIS TOO
+    slug: "{{name | slug}}"
     extension: "json"
     format: "json"
     fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Number", name: "number", widget: "string" }
+      - { label: "Name", name: "name", widget: "string", required: true }
+      - { label: "Number", name: "number", widget: "string", required: true }
