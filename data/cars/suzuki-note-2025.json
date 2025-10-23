@@ -1,0 +1,23 @@
+{
+  "body": "SUV",
+  "engine": "1500cc",
+  "color": "White",
+  "transmission": "Automatic",
+  "price": "980,000",
+  "model": "NOTE",
+  "mileage": "0 km",
+  "name": "suzuki swift",
+  "make": "suzuki",
+  "stockID": "7",
+  "status": "Available",
+  "location": "Nairobi",
+  "fuel": "Petrol",
+  "images": [],
+  "id": 5,
+  "year": 2014,
+  "features": [
+    "Air Conditioning",
+    "Power Steering",
+    "clean"
+  ]
+}
