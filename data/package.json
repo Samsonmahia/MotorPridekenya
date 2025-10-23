@@ -1,0 +1,8 @@
+{
+  "name": "motorpride-site",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node ./scripts/generateCarIndex.js"
+  },
+  "type": "module"
+}

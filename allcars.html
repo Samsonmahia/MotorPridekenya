@@ -725,44 +725,41 @@
         },
 
         formatWhatsAppNumber(number) {
-            return number.replace(/\s+/g, '').replace('-', '');
+            return number.replace(/\s+/g, '').replace(/-/g, '');
         }
     };
 
-    // Data management - COMPLETELY AUTOMATIC
+    // SIMPLIFIED Data management - FULLY AUTOMATIC
     const dataManager = {
         async loadCarsData() {
             try {
-                elements.debugInfo.textContent = 'Loading cars from CMS...';
+                elements.debugInfo.textContent = 'Scanning for car files...';
                 
-                // METHOD 1: Try to get all files from a server-side index (if available)
-                let allCarFiles = await this.tryGetFileIndex();
+                // Get list of all car files automatically
+                const carFiles = await this.scanForCarFiles();
                 
-                // METHOD 2: If no index, use comprehensive pattern matching
-                if (!allCarFiles || allCarFiles.length === 0) {
-                    allCarFiles = this.generateAllPossiblePatterns();
+                if (carFiles.length === 0) {
+                    elements.debugInfo.textContent = 'No car files found';
+                    utils.showErrorState('No vehicles available');
+                    return;
                 }
                 
-                // Load all car files
-                const carPromises = allCarFiles.map(filename => 
-                    this.tryLoadCarFile(filename)
+                elements.debugInfo.textContent = `Found ${carFiles.length} car files`;
+                
+                // Load all discovered car files
+                const carPromises = carFiles.map(filename => 
+                    this.loadSingleCarFile(filename)
                 );
 
-                const allResults = await Promise.all(carPromises);
-                
-                // Combine all valid cars and remove duplicates
-                state.cars = allResults
-                    .filter(result => result !== null)
-                    .flat();
-                
-                state.cars = this.removeDuplicates(state.cars);
+                const carResults = await Promise.all(carPromises);
+                state.cars = carResults.filter(car => car !== null).flat();
                 
                 if (state.cars.length === 0) {
-                    elements.debugInfo.textContent = 'No cars found in CMS';
+                    elements.debugInfo.textContent = 'No valid car data found';
                     utils.showErrorState('No vehicles available');
                 } else {
-                    elements.debugInfo.textContent = `✅ Loaded ${state.cars.length} cars automatically`;
-                    console.log('Automatically loaded cars:', state.cars);
+                    elements.debugInfo.textContent = `✅ Automatically loaded ${state.cars.length} cars`;
+                    console.log('Auto-loaded cars:', state.cars);
                 }
                 
             } catch (error) {
@@ -772,128 +769,86 @@
             }
         },
 
-        async tryGetFileIndex() {
-            // This method would require server-side support
-            // For now, return null to use pattern matching
-            return null;
-        },
-
-        generateAllPossiblePatterns() {
-            const patterns = [];
-            
-            // Current known files
-            const knownFiles = [
-                'ox-5.json', 'mazda.json', 'mercedes-benz.json', 
+        async scanForCarFiles() {
+            // Common car file patterns to try
+            const possibleFiles = [
+                // Your existing files
+                'cx-5.json', 'mazda.json', 'mercedes-benz.json',
                 'nissan-note-2025.json', 'suzuki.json', 
-                'volvo-v40-t3-2025.json', 'volvo.json'
+                'volvo-v40-t3-2025.json', 'volvo.json',
+                
+                // Common patterns for new cars
+                'toyota.json', 'honda.json', 'bmw.json', 'audi.json',
+                'ford.json', 'chevrolet.json', 'hyundai.json', 'kia.json',
+                'mitsubishi.json', 'subaru.json', 'lexus.json', 'jeep.json'
             ];
             
-            // Common car brands
-            const brands = [
-                'toyota', 'nissan', 'honda', 'mazda', 'mercedes', 'bmw', 
-                'audi', 'volvo', 'suzuki', 'ford', 'chevrolet', 'hyundai', 
-                'kia', 'mitsubishi', 'subaru', 'lexus', 'jeep', 'landrover'
-            ];
-            
-            // Common models
-            const models = [
-                'camry', 'corolla', 'civic', 'accord', 'cx-5', 'cx-9', 
-                'demio', 'premio', 'note', 'x-trail', 'x5', 'x3', 'a4', 
-                'a6', 'v40', 'v60', 'swift', 'vitara', 'focus', 'fiesta',
-                'mustang', 'cruze', 'sonata', 'sportage', 'outlander', 
-                'forester', 'rx', 'wx', 'discovery'
-            ];
-            
-            // Years (current and next 2 years)
-            const currentYear = new Date().getFullYear();
-            const years = [currentYear - 2, currentYear - 1, currentYear, currentYear + 1, currentYear + 2];
-            
-            // Add known files
-            patterns.push(...knownFiles);
-            
-            // Add brand-only patterns
-            brands.forEach(brand => {
-                patterns.push(`${brand}.json`);
+            // Test which files actually exist
+            const existenceChecks = possibleFiles.map(async (filename) => {
+                try {
+                    const response = await fetch(`./data/cars/${filename}`);
+                    return response.ok ? filename : null;
+                } catch {
+                    return null;
+                }
             });
             
-            // Add brand-model-year patterns
-            brands.forEach(brand => {
-                models.forEach(model => {
-                    years.forEach(year => {
-                        patterns.push(`${brand}-${model}-${year}.json`);
-                    });
-                });
-            });
-            
-            // Add brand-model patterns (without year)
-            brands.forEach(brand => {
-                models.forEach(model => {
-                    patterns.push(`${brand}-${model}.json`);
-                });
-            });
-            
-            // Remove duplicates and return
-            return [...new Set(patterns)];
+            const results = await Promise.all(existenceChecks);
+            return results.filter(file => file !== null);
         },
 
-        async tryLoadCarFile(filename) {
+        async loadSingleCarFile(filename) {
             try {
                 const response = await fetch(`./data/cars/${filename}`);
-                if (!response.ok) return null;
+                if (!response.ok) {
+                    console.warn(`File not found: ${filename}`);
+                    return null;
+                }
                 
                 const carData = await response.json();
-                if (!carData) return null;
                 
                 // Handle different data formats
                 if (Array.isArray(carData)) {
-                    return carData;
+                    return carData.map(car => this.normalizeCarData(car, filename));
                 } else if (carData.cars && Array.isArray(carData.cars)) {
-                    return carData.cars;
+                    return carData.cars.map(car => this.normalizeCarData(car, filename));
                 } else {
-                    // Single car object
-                    return [carData];
+                    return [this.normalizeCarData(carData, filename)];
                 }
             } catch (error) {
-                // Silently ignore - file doesn't exist
+                console.warn(`Failed to load ${filename}:`, error);
                 return null;
             }
         },
 
-        removeDuplicates(cars) {
-            const seen = new Set();
-            return cars.filter(car => {
-                const identifier = car.id || car.name || JSON.stringify(car);
-                if (seen.has(identifier)) {
-                    return false;
-                }
-                seen.add(identifier);
-                return true;
-            });
+        normalizeCarData(car, filename) {
+            // Ensure every car has required fields
+            if (!car.id) {
+                car.id = `${filename}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            }
+            if (!car.name) {
+                car.name = `Car from ${filename}`;
+            }
+            return car;
         },
 
         async loadContactsData() {
             try {
                 const contactFiles = ['kiarie.json', 'sam.json'];
-                
                 const contactPromises = contactFiles.map(filename =>
                     fetch(`./data/contacts/${filename}`)
-                        .then(response => {
-                            if (!response.ok) return null;
-                            return response.json();
-                        })
+                        .then(response => response.ok ? response.json() : null)
                         .catch(() => null)
                 );
-
                 const contactData = await Promise.all(contactPromises);
                 state.contacts = contactData.filter(contact => contact !== null);
             } catch (error) {
+                console.error('Error loading contacts:', error);
                 state.contacts = [];
             }
         }
     };
 
-    // The rest of your UI rendering, modal management, and event handlers 
-    // remain EXACTLY THE SAME as in the previous version
     // UI rendering
     const renderer = {
         displayCars() {
@@ -941,7 +896,7 @@
 
         attachCarEventListeners() {
             document.querySelectorAll('.car-image-container').forEach(container => {
-                const carId = parseInt(container.getAttribute('data-car-id'));
+                const carId = container.getAttribute('data-car-id');
                 
                 container.addEventListener('click', (e) => {
                     if (!e.target.classList.contains('reserve-btn')) {
