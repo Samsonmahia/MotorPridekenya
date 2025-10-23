@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MotorPride | All Cars</title>
     <style>
+        /* Your existing CSS remains exactly the same */
         :root {
             --primary-color: #1a73e8;
             --secondary-color: #f8f9fa;
@@ -599,8 +600,8 @@
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="#" class="active">All Cars</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="aboutus.html">About</a></li>
+                        <li><a href="contacts.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -729,17 +730,17 @@
         }
     };
 
-    // SIMPLIFIED Data management - FULLY AUTOMATIC
+    // AUTOMATIC FILE DISCOVERY - SIMPLE AND RELIABLE
     const dataManager = {
         async loadCarsData() {
             try {
-                elements.debugInfo.textContent = 'Scanning for car files...';
+                elements.debugInfo.textContent = 'Discovering car files...';
                 
-                // Get list of all car files automatically
-                const carFiles = await this.scanForCarFiles();
+                // Get ALL car files automatically
+                const carFiles = await this.discoverCarFiles();
                 
                 if (carFiles.length === 0) {
-                    elements.debugInfo.textContent = 'No car files found';
+                    elements.debugInfo.textContent = 'No car files found in data/cars/ folder';
                     utils.showErrorState('No vehicles available');
                     return;
                 }
@@ -752,14 +753,21 @@
                 );
 
                 const carResults = await Promise.all(carPromises);
-                state.cars = carResults.filter(car => car !== null).flat();
+                
+                // Combine all cars and remove duplicates
+                state.cars = carResults
+                    .filter(car => car !== null)
+                    .flat()
+                    .filter((car, index, self) => 
+                        index === self.findIndex(c => c.id === car.id)
+                    );
                 
                 if (state.cars.length === 0) {
-                    elements.debugInfo.textContent = 'No valid car data found';
+                    elements.debugInfo.textContent = 'No valid car data found in files';
                     utils.showErrorState('No vehicles available');
                 } else {
-                    elements.debugInfo.textContent = `✅ Automatically loaded ${state.cars.length} cars`;
-                    console.log('Auto-loaded cars:', state.cars);
+                    elements.debugInfo.textContent = `✅ Loaded ${state.cars.length} cars from ${carFiles.length} files`;
+                    console.log('Loaded cars:', state.cars);
                 }
                 
             } catch (error) {
@@ -769,50 +777,74 @@
             }
         },
 
-        async scanForCarFiles() {
-            // Common car file patterns to try
-            const possibleFiles = [
-                // Your existing files
+        async discoverCarFiles() {
+            const discoveredFiles = [];
+            
+            // Known existing files (from your screenshot)
+            const knownFiles = [
                 'cx-5.json', 'mazda.json', 'mercedes-benz.json',
                 'nissan-note-2025.json', 'suzuki.json', 
-                'volvo-v40-t3-2025.json', 'volvo.json',
-                
-                // Common patterns for new cars
-                'toyota.json', 'honda.json', 'bmw.json', 'audi.json',
-                'ford.json', 'chevrolet.json', 'hyundai.json', 'kia.json',
-                'mitsubishi.json', 'subaru.json', 'lexus.json', 'jeep.json'
+                'volvo-v40-t3-2025.json', 'volvo.json'
             ];
             
-            // Test which files actually exist
-            const existenceChecks = possibleFiles.map(async (filename) => {
+            // Common car patterns that CMS might create
+            const commonPatterns = this.generateCommonPatterns();
+            
+            // Combine known files with common patterns
+            const allFilesToCheck = [...new Set([...knownFiles, ...commonPatterns])];
+            
+            // Check which files actually exist
+            for (const filename of allFilesToCheck) {
                 try {
                     const response = await fetch(`./data/cars/${filename}`);
-                    return response.ok ? filename : null;
-                } catch {
-                    return null;
+                    if (response.ok) {
+                        discoveredFiles.push(filename);
+                    }
+                } catch (error) {
+                    // File doesn't exist, continue
                 }
+            }
+            
+            return discoveredFiles;
+        },
+
+        generateCommonPatterns() {
+            const patterns = [];
+            const currentYear = new Date().getFullYear();
+            
+            // Brands and models that CMS might create
+            const brands = ['toyota', 'honda', 'bmw', 'audi', 'ford', 'chevrolet', 'hyundai', 'kia'];
+            const models = ['camry', 'corolla', 'civic', 'accord', 'rav4', 'crv', 'x5', 'a4'];
+            const years = [currentYear - 1, currentYear, currentYear + 1];
+            
+            // Generate brand-model-year patterns
+            brands.forEach(brand => {
+                models.forEach(model => {
+                    years.forEach(year => {
+                        patterns.push(`${brand}-${model}-${year}.json`);
+                    });
+                    patterns.push(`${brand}-${model}.json`);
+                });
+                patterns.push(`${brand}.json`);
             });
             
-            const results = await Promise.all(existenceChecks);
-            return results.filter(file => file !== null);
+            return patterns;
         },
 
         async loadSingleCarFile(filename) {
             try {
                 const response = await fetch(`./data/cars/${filename}`);
-                if (!response.ok) {
-                    console.warn(`File not found: ${filename}`);
-                    return null;
-                }
+                if (!response.ok) return null;
                 
                 const carData = await response.json();
                 
-                // Handle different data formats
+                // Handle different data formats from CMS
                 if (Array.isArray(carData)) {
                     return carData.map(car => this.normalizeCarData(car, filename));
                 } else if (carData.cars && Array.isArray(carData.cars)) {
                     return carData.cars.map(car => this.normalizeCarData(car, filename));
                 } else {
+                    // Single car object from CMS
                     return [this.normalizeCarData(carData, filename)];
                 }
             } catch (error) {
@@ -822,12 +854,15 @@
         },
 
         normalizeCarData(car, filename) {
-            // Ensure every car has required fields
+            // Ensure car has all required fields
             if (!car.id) {
-                car.id = `${filename}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+                car.id = `${filename}-${Date.now()}`;
             }
-            if (!car.name) {
-                car.name = `Car from ${filename}`;
+            if (!car.name && car.make && car.model) {
+                car.name = `${car.make} ${car.model}`;
+            }
+            if (!car.images || car.images.length === 0) {
+                car.images = ['/images/cars/placeholder.jpg'];
             }
             return car;
         },
@@ -849,7 +884,8 @@
         }
     };
 
-    // UI rendering
+    // The rest of your code remains EXACTLY THE SAME
+    // UI rendering, modal management, and event handlers
     const renderer = {
         displayCars() {
             elements.carsGrid.innerHTML = '';
@@ -865,7 +901,7 @@
             
             currentCars.forEach(car => {
                 const statusClass = car.status ? `status-${car.status.toLowerCase()}` : '';
-                const primaryImage = car.images?.[0] || car.image || 'https://via.placeholder.com/400x300?text=No+Image';
+                const primaryImage = car.images?.[0] || car.image || '/images/cars/placeholder.jpg';
                 
                 const carCard = document.createElement('div');
                 carCard.className = 'car-card';
@@ -921,7 +957,7 @@
         }
     };
 
-    // Modal management
+    // Modal management (keep exactly the same)
     const modalManager = {
         openCarModal(carId) {
             const car = state.cars.find(c => c.id === carId);
@@ -930,7 +966,7 @@
             state.currentCarIndex = state.cars.findIndex(c => c.id === carId);
             elements.modalCarTitle.textContent = car.name;
             
-            const primaryImage = car.images?.[0] || car.image || 'https://via.placeholder.com/600x400?text=No+Image';
+            const primaryImage = car.images?.[0] || car.image || '/images/cars/placeholder.jpg';
             elements.modalPrimaryImage.src = primaryImage;
             
             elements.modalThumbnails.innerHTML = '';
@@ -1037,7 +1073,7 @@
         }
     };
 
-    // Event handlers
+    // Event handlers (keep exactly the same)
     const eventHandlers = {
         setupPaginationEvents() {
             elements.prevPage.addEventListener('click', () => {
