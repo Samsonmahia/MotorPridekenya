@@ -668,8 +668,8 @@
         carsPerPage: 12,
         maxThumbnails: 7,
         animationDelay: 100,
-        dataRefreshInterval: 30000, // Refresh data every 30 seconds
-        fallbackDataUrl: './data/cars/fallback-cars.json' // Fallback data file
+        dataRefreshInterval: 15000, // Refresh every 15 seconds for CMS updates
+        fallbackDataUrl: './data/cars/fallback-cars.json'
     };
 
     // State management
@@ -743,13 +743,12 @@
             };
         },
         
-        // Generate a unique ID
         generateId() {
             return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
         }
     };
 
-    // Data management - FIXED FOR AUTOMATIC UPDATES
+    // Data management - FIXED FOR CMS AUTO-DETECTION
     const dataManager = {
         async loadCarsData() {
             try {
@@ -795,97 +794,21 @@
             }
         },
 
-        async loadFallbackData() {
-            try {
-                // Try to load fallback data
-                const response = await fetch(CONFIG.fallbackDataUrl);
-                if (response.ok) {
-                    const fallbackData = await response.json();
-                    
-                    if (Array.isArray(fallbackData)) {
-                        state.cars = fallbackData.map(car => this.normalizeCarData(car, 'fallback'));
-                    } else if (fallbackData.cars && Array.isArray(fallbackData.cars)) {
-                        state.cars = fallbackData.cars.map(car => this.normalizeCarData(car, 'fallback'));
-                    } else {
-                        state.cars = [this.normalizeCarData(fallbackData, 'fallback')];
-                    }
-                    
-                    elements.debugInfo.textContent = `✅ Loaded ${state.cars.length} cars from fallback data`;
-                } else {
-                    // Create sample data if fallback file doesn't exist
-                    state.cars = this.createSampleData();
-                    elements.debugInfo.textContent = `✅ Created ${state.cars.length} sample cars for demonstration`;
-                }
-            } catch (error) {
-                // Create sample data if everything else fails
-                state.cars = this.createSampleData();
-                elements.debugInfo.textContent = `✅ Created ${state.cars.length} sample cars for demonstration`;
-            }
-        },
-
-        createSampleData() {
-            // Create sample car data for demonstration
-            return [
-                {
-                    id: utils.generateId(),
-                    name: "Toyota Camry 2023",
-                    make: "Toyota",
-                    model: "Camry",
-                    year: 2023,
-                    price: "$28,000",
-                    transmission: "Automatic",
-                    fuel: "Hybrid",
-                    mileage: "15,000 km",
-                    status: "Available",
-                    images: ["https://images.unsplash.com/photo-1621135802920-133df287f89c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
-                    features: ["Leather Seats", "Sunroof", "Navigation", "Bluetooth", "Backup Camera"]
-                },
-                {
-                    id: utils.generateId(),
-                    name: "Honda CR-V 2022",
-                    make: "Honda",
-                    model: "CR-V",
-                    year: 2022,
-                    price: "$26,500",
-                    transmission: "Automatic",
-                    fuel: "Gasoline",
-                    mileage: "22,000 km",
-                    status: "Available",
-                    images: ["https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
-                    features: ["All-Wheel Drive", "Apple CarPlay", "Android Auto", "Heated Seats"]
-                },
-                {
-                    id: utils.generateId(),
-                    name: "Ford Mustang 2021",
-                    make: "Ford",
-                    model: "Mustang",
-                    year: 2021,
-                    price: "$35,000",
-                    transmission: "Manual",
-                    fuel: "Gasoline",
-                    mileage: "18,000 km",
-                    status: "Available",
-                    images: ["https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
-                    features: ["V8 Engine", "Leather Interior", "Premium Sound", "Sport Suspension"]
-                }
-            ];
-        },
-
         async discoverAllCarFiles() {
             const discoveredFiles = new Set();
             
-            // Known existing files
+            // Start with files we know exist from your structure
             const knownFiles = [
-                'cx-5.json', 'mazda.json', 'mercedes-benz.json',
-                'nissan-note-2025.json', 'suzuki.json', 
-                'volvo-v40-t3-2025.json', 'volvo.json'
+                'cv-5.json', 'mazda.json', 'mercedes-benz.json',
+                'nissan-note-2025.json', 'subaru-forester-2025.json', 
+                'toyota-wish-2025.json', 'volvo-v40-t3-2025.json'
             ];
             
             // Generate comprehensive patterns for CMS-created files
             const patterns = this.generateComprehensivePatterns();
             
             // Combine all files to check
-            const allFilesToCheck = [...knownFiles, ...patterns];
+            const allFilesToCheck = [...new Set([...knownFiles, ...patterns])];
             
             // Check files in batches to avoid overwhelming
             const batchSize = 10;
@@ -901,6 +824,9 @@
                         discoveredFiles.add(result.filename);
                     }
                 });
+                
+                // Small delay between batches
+                await new Promise(resolve => setTimeout(resolve, 50));
             }
             
             return Array.from(discoveredFiles);
@@ -910,35 +836,14 @@
             const patterns = [];
             const currentYear = new Date().getFullYear();
             
-            // Extensive list of car brands
-            const brands = [
-                'toyota', 'nissan', 'honda', 'mazda', 'mercedes', 'bmw', 
-                'audi', 'volvo', 'suzuki', 'ford', 'chevrolet', 'hyundai', 
-                'kia', 'mitsubishi', 'subaru', 'lexus', 'jeep', 'land-rover',
-                'volkswagen', 'peugeot', 'renault', 'skoda', 'mini', 'porsche'
-            ];
+            // Your actual car brands from the files
+            const brands = ['toyota', 'nissan', 'mazda', 'mercedes', 'subaru', 'volvo'];
             
-            // Common car models
-            const models = [
-                'cx-5', 'cx-9', 'demio', 'premio', 'axela', 'atenza', 'bt-50',
-                'note', 'x-trail', 'navara', 'march', 'sunny', 'tiida', 'juke',
-                'civic', 'accord', 'cr-v', 'fit', 'hr-v', 'odyssey', 'stepwgn',
-                'x5', 'x3', 'x1', '3-series', '5-series', '7-series',
-                'a4', 'a6', 'q5', 'q7', 'a3', 'a5',
-                'v40', 'v60', 'v90', 'xc60', 'xc90', 's60',
-                'swift', 'vitara', 'jimny', 'baleno', 'ciaz', 's-cross',
-                'focus', 'fiesta', 'ranger', 'everest', 'explorer', 'mustang',
-                'camry', 'corolla', 'rav4', 'hilux', 'prado', 'land-cruiser',
-                'sportage', 'sorento', 'cerato', 'picanto', 'seltos',
-                'outlander', 'pajero', 'lancer', 'eclipse-cross',
-                'forester', 'outback', 'impreza', 'xv',
-                'rx', 'nx', 'lx', 'gx', 'es', 'is',
-                'wrangler', 'cherokee', 'grand-cherokee', 'compass',
-                'discovery', 'range-rover', 'defender', 'evoque'
-            ];
+            // Your actual models from the files  
+            const models = ['wish', 'note', 'forester', 'v40', 'cx-5', 'cv-5', 'benz'];
             
-            // Years range
-            const years = [currentYear - 2, currentYear - 1, currentYear, currentYear + 1, currentYear + 2];
+            // Years range that makes sense for your business
+            const years = [2023, 2024, 2025, 2026];
             
             // Brand-only patterns
             brands.forEach(brand => {
@@ -949,7 +854,6 @@
             brands.forEach(brand => {
                 models.forEach(model => {
                     patterns.push(`${brand}-${model}.json`);
-                    // Also try with underscores (common CMS alternative)
                     patterns.push(`${brand}_${model}.json`);
                 });
             });
@@ -976,8 +880,8 @@
 
         async checkFileExists(filename) {
             try {
-                // FIX: Force no-cache for Netlify
-                const response = await fetch(`./data/cars/${filename}`, {
+                // Force no-cache for Netlify
+                const response = await fetch(`./data/cars/${filename}?t=${Date.now()}`, {
                     headers: {
                         'Cache-Control': 'no-cache',
                         'Pragma': 'no-cache'
@@ -998,8 +902,8 @@
 
         async loadSingleCarFile(filename) {
             try {
-                // FIX: Force no-cache for Netlify
-                const response = await fetch(`./data/cars/${filename}`, {
+                // Force no-cache for Netlify
+                const response = await fetch(`./data/cars/${filename}?t=${Date.now()}`, {
                     headers: {
                         'Cache-Control': 'no-cache',
                         'Pragma': 'no-cache'
@@ -1069,12 +973,55 @@
             return car;
         },
 
+        async loadFallbackData() {
+            try {
+                const response = await fetch(CONFIG.fallbackDataUrl);
+                if (response.ok) {
+                    const fallbackData = await response.json();
+                    
+                    if (Array.isArray(fallbackData)) {
+                        state.cars = fallbackData.map(car => this.normalizeCarData(car, 'fallback'));
+                    } else if (fallbackData.cars && Array.isArray(fallbackData.cars)) {
+                        state.cars = fallbackData.cars.map(car => this.normalizeCarData(car, 'fallback'));
+                    } else {
+                        state.cars = [this.normalizeCarData(fallbackData, 'fallback')];
+                    }
+                    
+                    elements.debugInfo.textContent = `✅ Loaded ${state.cars.length} cars from fallback data`;
+                } else {
+                    state.cars = this.createSampleData();
+                    elements.debugInfo.textContent = `✅ Created ${state.cars.length} sample cars for demonstration`;
+                }
+            } catch (error) {
+                state.cars = this.createSampleData();
+                elements.debugInfo.textContent = `✅ Created ${state.cars.length} sample cars for demonstration`;
+            }
+        },
+
+        createSampleData() {
+            return [
+                {
+                    id: utils.generateId(),
+                    name: "Toyota Camry 2023",
+                    make: "Toyota",
+                    model: "Camry",
+                    year: 2023,
+                    price: "$28,000",
+                    transmission: "Automatic",
+                    fuel: "Hybrid",
+                    mileage: "15,000 km",
+                    status: "Available",
+                    images: ["https://images.unsplash.com/photo-1621135802920-133df287f89c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
+                    features: ["Leather Seats", "Sunroof", "Navigation", "Bluetooth", "Backup Camera"]
+                }
+            ];
+        },
+
         async loadContactsData() {
             try {
                 const contactFiles = ['kiarie.json', 'sam.json'];
                 const contactPromises = contactFiles.map(filename => {
-                    // FIX: Force no-cache for Netlify
-                    return fetch(`./data/contacts/${filename}`, {
+                    return fetch(`./data/contacts/${filename}?t=${Date.now()}`, {
                         headers: {
                             'Cache-Control': 'no-cache',
                             'Pragma': 'no-cache'
@@ -1088,7 +1035,6 @@
                 state.contacts = contactData.filter(contact => contact !== null);
                 
                 if (state.contacts.length === 0) {
-                    // Fallback contacts if files not found
                     state.contacts = [
                         { name: "Sales Team", number: "+254712345678" },
                         { name: "Support Team", number: "+254798765432" }
@@ -1096,7 +1042,6 @@
                 }
             } catch (error) {
                 console.error('Error loading contacts:', error);
-                // Fallback contacts
                 state.contacts = [
                     { name: "Sales Team", number: "+254712345678" },
                     { name: "Support Team", number: "+254798765432" }
@@ -1104,16 +1049,16 @@
             }
         },
         
-        // Setup automatic data refresh
+        // Setup automatic data refresh for CMS updates
         setupAutoRefresh() {
             if (state.refreshInterval) {
                 clearInterval(state.refreshInterval);
             }
             
             state.refreshInterval = setInterval(() => {
-                console.log('Auto-refreshing car data...');
+                console.log('Auto-refreshing car data for CMS updates...');
                 this.loadCarsData().then(() => {
-                    // Only update UI if page is visible
+                    // Only update UI if page is visible and data changed
                     if (!document.hidden) {
                         renderer.displayCars();
                         renderer.setupPagination();
@@ -1168,21 +1113,22 @@
             this.attachCarEventListeners();
         },
 
+        // FIXED: Proper event attachment for clickable cars
         attachCarEventListeners() {
-            document.querySelectorAll('.car-image-container').forEach(container => {
-                const carId = container.getAttribute('data-car-id');
+            // Use event delegation for better performance
+            elements.carsGrid.addEventListener('click', (event) => {
+                const carCard = event.target.closest('.car-card');
+                if (!carCard) return;
                 
-                container.addEventListener('click', (e) => {
-                    if (!e.target.classList.contains('reserve-btn')) {
-                        modalManager.openCarModal(carId);
-                    }
-                });
+                const carImageContainer = carCard.querySelector('.car-image-container');
+                const carId = carImageContainer.getAttribute('data-car-id');
                 
-                const reserveBtn = container.querySelector('.reserve-btn');
-                reserveBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
+                if (event.target.classList.contains('reserve-btn')) {
+                    event.stopPropagation();
                     modalManager.openContactsModal();
-                });
+                } else {
+                    modalManager.openCarModal(carId);
+                }
             });
         },
 
@@ -1366,13 +1312,13 @@
                 eventHandlers.setupPaginationEvents();
                 eventHandlers.setupModalEvents();
                 
-                // Setup automatic data refresh
+                // Setup automatic data refresh for CMS
                 dataManager.setupAutoRefresh();
                 
-                // Setup visibility change handler to refresh when page becomes visible
+                // Refresh when page becomes visible
                 document.addEventListener('visibilitychange', utils.debounce(() => {
                     if (!document.hidden) {
-                        console.log('Page visible, refreshing data...');
+                        console.log('Page visible, refreshing CMS data...');
                         dataManager.loadCarsData().then(() => {
                             renderer.displayCars();
                             renderer.setupPagination();
