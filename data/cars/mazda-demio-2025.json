@@ -7,7 +7,7 @@
   "model": "demio",
   "mileage": "0 km",
   "name": "mazda",
-  "make": "mazda",
+  "make": "mazda,",
   "stockID": "1",
   "status": "Available",
   "location": "Nairobi",
