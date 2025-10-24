@@ -1,0 +1,25 @@
+{
+  "body": "SUV",
+  "engine": "1500cc",
+  "color": "White",
+  "transmission": "Automatic",
+  "price": "130000",
+  "model": "Wish ",
+  "mileage": "0 km",
+  "name": "Wish 2015",
+  "make": "Toyota",
+  "stockID": "22",
+  "status": "Sold",
+  "location": "Nairobi",
+  "fuel": "Petrol",
+  "images": [
+    "/images/cars/placeholder.jpg",
+    "/images/cars/img-20251019-wa0017.jpg"
+  ],
+  "id": 22,
+  "year": 2015,
+  "features": [
+    "Air Conditioning",
+    "Power Steering"
+  ]
+}
