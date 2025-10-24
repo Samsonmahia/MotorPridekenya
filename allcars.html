@@ -660,14 +660,13 @@
             <button class="close-contacts" id="closeContacts">&times;</button>
         </div>
         <div class="contacts-list" id="contactsList"></div>
-    </div>
-<script>
+    </div><script>
     // Configuration
     const CONFIG = {
         carsPerPage: 12,
         maxThumbnails: 7,
         animationDelay: 100,
-        dataRefreshInterval: 10000, // Refresh every 10 seconds for CMS updates
+        dataRefreshInterval: 15000, // Increased to 15 seconds for better performance
         fallbackDataUrl: './data/cars/fallback-cars.json'
     };
 
@@ -730,31 +729,19 @@
             return number.replace(/\s+/g, '').replace(/-/g, '');
         },
         
-        debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        },
-        
         generateId() {
             return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
         }
     };
 
-    // Data management - UPDATED FOR YOUR CMS FILE PATTERNS
+    // Data management - OPTIMIZED AND FIXED
     const dataManager = {
         async loadCarsData() {
             try {
-                elements.debugInfo.textContent = 'Scanning for all car files...';
+                elements.debugInfo.textContent = 'Loading car data...';
                 
-                // Get ALL car files automatically
-                const allCarFiles = await this.getAllCarFiles();
+                // Use optimized file discovery
+                const allCarFiles = await this.getCarFilesOptimized();
                 
                 if (allCarFiles.length === 0) {
                     elements.debugInfo.textContent = 'No car files found. Using sample data...';
@@ -762,7 +749,7 @@
                     return;
                 }
                 
-                elements.debugInfo.textContent = `Found ${allCarFiles.length} car files: ${allCarFiles.join(', ')}`;
+                elements.debugInfo.textContent = `Found ${allCarFiles.length} car files`;
                 
                 // Load all discovered car files
                 const carPromises = allCarFiles.map(filename => 
@@ -780,7 +767,7 @@
                     elements.debugInfo.textContent = 'No valid car data found. Using sample data...';
                     state.cars = this.createSampleData();
                 } else {
-                    elements.debugInfo.textContent = `✅ Successfully loaded ${state.cars.length} cars automatically`;
+                    elements.debugInfo.textContent = `✅ Loaded ${state.cars.length} cars`;
                     console.log('Loaded cars:', state.cars);
                 }
                 
@@ -791,50 +778,54 @@
             }
         },
 
-        async getAllCarFiles() {
+        async getCarFilesOptimized() {
             const discoveredFiles = new Set();
             
-            // Method 1: Try to get from existing index.json if it exists
-            try {
-                const indexResponse = await fetch('./data/cars/index.json');
-                if (indexResponse.ok) {
-                    const indexData = await indexResponse.json();
-                    if (indexData.cars && Array.isArray(indexData.cars)) {
-                        indexData.cars.forEach(file => discoveredFiles.add(file));
-                    }
-                }
-            } catch (error) {
-                // Ignore if index.json doesn't exist
-            }
-            
-            // Method 2: Known files from your structure
+            // Start with known files from your structure
             const knownFiles = [
                 'cx-5.json', 'mazda.json', 'mercedes-benz.json',
                 'nissan-note-2025.json', 'subaru-forester-2025.json',
                 'toyota-wish-2025.json', 'volvo-v40-t3-2025.json',
-                'mazda-mazda-2025.json' // ADDED THIS FOR YOUR NEW CMS FILE
+                'mazda-mazda-2025.json'
             ];
-            knownFiles.forEach(file => discoveredFiles.add(file));
             
-            // Method 3: Try to discover ANY .json file in the cars folder
-            const potentialFiles = await this.discoverJSONFiles();
-            potentialFiles.forEach(file => discoveredFiles.add(file));
+            // Check known files first (fastest)
+            const knownPromises = knownFiles.map(filename => 
+                this.checkFileExists(filename)
+            );
+            const knownResults = await Promise.all(knownPromises);
+            knownResults.forEach(result => {
+                if (result.exists) discoveredFiles.add(result.filename);
+            });
             
-            return Array.from(discoveredFiles).filter(file => file.endsWith('.json'));
+            // Then check for any new files using broader patterns
+            const newFiles = await this.discoverNewFiles();
+            newFiles.forEach(file => discoveredFiles.add(file));
+            
+            return Array.from(discoveredFiles);
         },
 
-        async discoverJSONFiles() {
+        async discoverNewFiles() {
             const discovered = [];
-            const patterns = this.generateFilePatterns();
+            const currentYear = new Date().getFullYear();
             
-            // Check each pattern to see if file exists
+            // Limited set of patterns for new files
+            const patterns = [
+                // Common patterns for your CMS
+                '*.json',
+                '*-*-*.json',
+                // Current and next year patterns
+                `*-*-${currentYear}.json`,
+                `*-*-${currentYear+1}.json`
+            ];
+            
             const checkPromises = patterns.map(pattern => 
                 this.checkFileExists(pattern)
             );
             
             const results = await Promise.all(checkPromises);
             results.forEach(result => {
-                if (result.exists) {
+                if (result.exists && !result.filename.includes('fallback') && !result.filename.includes('index')) {
                     discovered.push(result.filename);
                 }
             });
@@ -842,69 +833,9 @@
             return discovered;
         },
 
-        generateFilePatterns() {
-            const patterns = [];
-            const currentYear = new Date().getFullYear();
-            
-            // Common car brands
-            const brands = ['toyota', 'nissan', 'honda', 'mazda', 'mercedes', 'bmw', 
-                           'audi', 'volvo', 'subaru', 'ford', 'chevrolet', 'hyundai', 
-                           'kia', 'mitsubishi', 'lexus', 'jeep', 'suzuki', 'peugeot'];
-            
-            // Common models
-            const models = ['cx-5', 'wish', 'note', 'forester', 'v40', 'demio', 
-                           'premio', 'axio', 'fielder', 'harrier', 'prado', 'hilux',
-                           'rav4', 'corolla', 'camry', 'civic', 'accord', 'cr-v'];
-            
-            // Years
-            const years = [currentYear-2, currentYear-1, currentYear, currentYear+1, currentYear+2];
-            
-            // Generate various filename patterns - UPDATED FOR YOUR CMS PATTERN
-            brands.forEach(brand => {
-                // Brand only
-                patterns.push(`${brand}.json`);
-                
-                // Brand-brand-year (YOUR CMS PATTERN: mazda-mazda-2025.json)
-                years.forEach(year => {
-                    patterns.push(`${brand}-${brand}-${year}.json`);
-                });
-                
-                // Brand-model
-                models.forEach(model => {
-                    patterns.push(`${brand}-${model}.json`);
-                });
-                
-                // Brand-model-year
-                models.forEach(model => {
-                    years.forEach(year => {
-                        patterns.push(`${brand}-${model}-${year}.json`);
-                    });
-                });
-            });
-            
-            // Model only
-            models.forEach(model => {
-                patterns.push(`${model}.json`);
-                years.forEach(year => {
-                    patterns.push(`${model}-${year}.json`);
-                });
-            });
-
-            // Add some generic patterns to catch any file
-            patterns.push('*.json');
-            patterns.push('car-*.json');
-            patterns.push('*-car.json');
-            patterns.push('*-*.json');
-            patterns.push('*-*-*.json');
-            patterns.push('*-*-*-*.json');
-            
-            return [...new Set(patterns)]; // Remove duplicates
-        },
-
         async checkFileExists(filename) {
             try {
-                // Use cache-busting to ensure fresh data
-                const response = await fetch(`./data/cars/${filename}?t=${Date.now()}`);
+                const response = await fetch(`./data/cars/${filename}`);
                 return {
                     filename: filename,
                     exists: response.ok
@@ -919,15 +850,13 @@
 
         async loadSingleCarFile(filename) {
             try {
-                // Use cache-busting to ensure fresh data
-                const response = await fetch(`./data/cars/${filename}?t=${Date.now()}`);
+                const response = await fetch(`./data/cars/${filename}`);
                 if (!response.ok) {
                     console.warn(`File not found: ${filename}`);
                     return null;
                 }
                 
                 const carData = await response.json();
-                console.log(`Loaded ${filename}:`, carData);
                 
                 // Handle different data formats
                 if (Array.isArray(carData)) {
@@ -955,38 +884,39 @@
                     car.name = `${car.make} ${car.model}`;
                 } else if (car.title) {
                     car.name = car.title;
-                } else if (car.carName) {
-                    car.name = car.carName;
                 } else {
                     car.name = `Car from ${filename.replace('.json', '')}`;
                 }
             }
             
-            // Ensure images array exists
+            // ✅ FIXED: Image path handling for your CMS
             if (!car.images || car.images.length === 0) {
                 car.images = ['https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'];
             } else {
-                // Convert image paths if needed
+                // Convert image paths to work with your actual file structure
                 car.images = car.images.map(img => {
                     if (img.startsWith('http')) {
-                        return img;
+                        return img; // Keep external URLs
+                    } else if (img.startsWith('/images/cars/')) {
+                        // ✅ FIX: Convert /images/cars/ to /static/images/cars/
+                        return img.replace('/images/cars/', '/static/images/cars/');
                     } else if (img.startsWith('/')) {
-                        return img;
+                        return img; // Keep other absolute paths
                     } else {
-                        // Handle relative paths from CMS
+                        // Handle relative paths
                         return `/static/images/cars/${img}`;
                     }
                 });
             }
             
             // Ensure required fields have defaults
-            car.price = car.price || car.pricePerDay || car.dailyRate || 'Contact for price';
+            car.price = car.price || car.pricePerDay || 'Contact for price';
             car.year = car.year || 'N/A';
             car.transmission = car.transmission || 'Automatic';
             car.fuel = car.fuel || car.fuelType || 'Petrol';
             car.mileage = car.mileage || '0 km';
             car.status = car.status || 'Available';
-            car.features = car.features || car.specifications || car.amenities || [];
+            car.features = car.features || car.specifications || [];
             
             return car;
         },
@@ -995,40 +925,30 @@
             return [
                 {
                     id: utils.generateId(),
-                    name: "Mazda Mazda 2025",
-                    make: "Mazda",
-                    model: "Mazda",
-                    year: 2025,
-                    price: "$25,000",
+                    name: "Subaru Forester 2011",
+                    make: "Subaru",
+                    model: "Forester",
+                    year: 2011,
+                    price: "$130,000",
                     transmission: "Automatic",
                     fuel: "Petrol",
                     mileage: "0 km",
                     status: "Available",
-                    images: ["https://images.unsplash.com/photo-1621135802920-133df287f89c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
-                    features: ["Air Conditioning", "Power Windows", "Bluetooth", "Backup Camera"]
-                },
-                {
-                    id: utils.generateId(),
-                    name: "Toyota Wish 2025",
-                    make: "Toyota",
-                    model: "Wish",
-                    year: 2025,
-                    price: "$28,000",
-                    transmission: "Automatic",
-                    fuel: "Petrol",
-                    mileage: "0 km",
-                    status: "Available",
-                    images: ["https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
-                    features: ["All-Wheel Drive", "Apple CarPlay", "Android Auto", "Heated Seats"]
+                    images: ["/static/images/cars/img-20251019-wa0017.jpg"],
+                    features: ["Air Conditioning", "Power Steering"]
                 }
             ];
         },
 
         async loadContactsData() {
             try {
-                const contactFiles = ['kiarie.json', 'sam.json'];
+                elements.debugInfo.textContent += ' | Loading contacts...';
+                
+                // ✅ FIXED: Auto-detect contact files like cars
+                const contactFiles = await this.getContactFiles();
+                
                 const contactPromises = contactFiles.map(filename => {
-                    return fetch(`./data/contacts/${filename}?t=${Date.now()}`)
+                    return fetch(`./data/contacts/${filename}`)
                         .then(response => response.ok ? response.json() : null)
                         .catch(() => null)
                 });
@@ -1042,12 +962,46 @@
                         { name: "Support Team", number: "+254798765432" }
                     ];
                 }
+                
+                console.log('Loaded contacts:', state.contacts);
             } catch (error) {
                 console.error('Error loading contacts:', error);
                 state.contacts = [
                     { name: "Sales Team", number: "+254712345678" },
                     { name: "Support Team", number: "+254798765432" }
                 ];
+            }
+        },
+
+        async getContactFiles() {
+            const contactFiles = new Set(['kiarie.json', 'sam.json', 'dad-1.json']);
+            
+            // Check for any .json files in contacts folder
+            const patterns = ['*.json', 'contact-*.json', '*-contact.json'];
+            const checkPromises = patterns.map(pattern => 
+                this.checkContactFileExists(pattern)
+            );
+            
+            const results = await Promise.all(checkPromises);
+            results.forEach(result => {
+                if (result.exists) contactFiles.add(result.filename);
+            });
+            
+            return Array.from(contactFiles);
+        },
+
+        async checkContactFileExists(filename) {
+            try {
+                const response = await fetch(`./data/contacts/${filename}`);
+                return {
+                    filename: filename,
+                    exists: response.ok
+                };
+            } catch (error) {
+                return {
+                    filename: filename,
+                    exists: false
+                };
             }
         },
         
@@ -1058,18 +1012,19 @@
             }
             
             state.refreshInterval = setInterval(() => {
-                console.log('Auto-refreshing car data...');
+                console.log('Auto-refreshing data...');
                 this.loadCarsData().then(() => {
                     if (!document.hidden) {
                         renderer.displayCars();
                         renderer.setupPagination();
                     }
                 });
+                this.loadContactsData();
             }, CONFIG.dataRefreshInterval);
         }
     };
 
-    // UI rendering
+    // UI rendering - FIXED CLICK ISSUES
     const renderer = {
         displayCars() {
             if (state.cars.length === 0) {
@@ -1083,17 +1038,19 @@
             
             elements.carsGrid.innerHTML = '';
             
-            currentCars.forEach(car => {
+            currentCars.forEach((car, index) => {
                 const statusClass = car.status ? `status-${car.status.toLowerCase().replace(' ', '-')}` : '';
                 const primaryImage = car.images?.[0] || 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
                 
                 const carCard = document.createElement('div');
                 carCard.className = 'car-card';
+                carCard.setAttribute('data-car-id', car.id);
                 carCard.innerHTML = `
-                    <div class="car-image-container" data-car-id="${car.id}">
+                    <div class="car-image-container">
                         ${car.status ? `<div class="status-badge ${statusClass}">${car.status}</div>` : ''}
-                        <img src="${primaryImage}" alt="${car.name}" class="car-image" onerror="this.src='https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
-                        <button class="reserve-btn">Reserve</button>
+                        <img src="${primaryImage}" alt="${car.name}" class="car-image" 
+                             onerror="this.src='https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                        <button class="reserve-btn" data-car-id="${car.id}">Reserve</button>
                     </div>
                     <div class="car-info">
                         <div class="car-name">${car.name}</div>
@@ -1114,21 +1071,24 @@
             this.attachCarEventListeners();
         },
 
-        // FIXED: Proper event attachment for clickable cars
+        // ✅ FIXED: Better event attachment
         attachCarEventListeners() {
-            // Use event delegation for better performance
+            // Remove any existing listeners first
+            elements.carsGrid.replaceWith(elements.carsGrid.cloneNode(true));
+            elements.carsGrid = document.getElementById('carsGrid');
+            
+            // Use event delegation for car clicks
             elements.carsGrid.addEventListener('click', (event) => {
                 const carCard = event.target.closest('.car-card');
                 if (!carCard) return;
                 
-                const carImageContainer = carCard.querySelector('.car-image-container');
-                const carId = carImageContainer.getAttribute('data-car-id');
+                const carId = carCard.getAttribute('data-car-id');
                 
                 if (event.target.classList.contains('reserve-btn')) {
                     event.stopPropagation();
                     modalManager.openContactsModal();
                 } else {
-                    // Click anywhere else on the card opens the modal
+                    // Click anywhere on card opens modal
                     modalManager.openCarModal(carId);
                 }
             });
@@ -1146,6 +1106,7 @@
     // Modal management
     const modalManager = {
         openCarModal(carId) {
+            console.log('Opening modal for car:', carId);
             const car = state.cars.find(c => c.id === carId);
             if (!car) {
                 console.error('Car not found:', carId);
@@ -1166,6 +1127,9 @@
                     img.src = image;
                     img.alt = `${car.name} - Image ${index + 1}`;
                     img.className = 'thumbnail';
+                    img.onerror = function() {
+                        this.src = 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                    };
                     img.addEventListener('click', () => {
                         elements.modalPrimaryImage.src = image;
                     });
@@ -1184,7 +1148,7 @@
                 { label: 'Engine', value: car.engine },
                 { label: 'Mileage', value: car.mileage },
                 { label: 'Color', value: car.color },
-                { label: 'Body Type', value: car.bodyType },
+                { label: 'Body Type', value: car.body },
                 { label: 'Location', value: car.location },
                 { label: 'Stock ID', value: car.stockID },
                 { label: 'Status', value: car.status },
@@ -1286,12 +1250,16 @@
         },
 
         setupModalEvents() {
+            // Close modal events
             elements.closeModal.addEventListener('click', () => modalManager.closeCarModal());
             elements.closeContacts.addEventListener('click', () => modalManager.closeContactsModal());
+            
+            // Navigation events
             elements.prevCar.addEventListener('click', () => modalManager.showPreviousCar());
             elements.nextCar.addEventListener('click', () => modalManager.showNextCar());
             elements.modalReserveBtn.addEventListener('click', () => modalManager.openContactsModal());
             
+            // Close on overlay click
             elements.carModal.addEventListener('click', (e) => {
                 if (e.target === elements.carModal) modalManager.closeCarModal();
             });
@@ -1317,16 +1285,7 @@
                 // Setup automatic data refresh for CMS
                 dataManager.setupAutoRefresh();
                 
-                // Refresh when page becomes visible
-                document.addEventListener('visibilitychange', () => {
-                    if (!document.hidden) {
-                        console.log('Page visible, refreshing data...');
-                        dataManager.loadCarsData().then(() => {
-                            renderer.displayCars();
-                            renderer.setupPagination();
-                        });
-                    }
-                });
+                console.log('✅ MotorPride Kenya - All Cars Page Loaded');
                 
             } catch (error) {
                 console.error('Error initializing page:', error);
