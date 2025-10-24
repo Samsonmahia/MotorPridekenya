@@ -1,0 +1,24 @@
+{
+  "body": "SUV",
+  "engine": "1500cc",
+  "color": "White",
+  "transmission": "Automatic",
+  "price": "1.2m",
+  "model": "voxy",
+  "mileage": "0 km",
+  "name": "totota-voxy-2018",
+  "make": "toyota",
+  "stockID": "5",
+  "status": "Available",
+  "location": "Nairobi",
+  "fuel": "Petrol",
+  "images": [
+    "/images/cars/placeholder.jpg"
+  ],
+  "id": 5,
+  "year": 2017,
+  "features": [
+    "Air Conditioning",
+    "Power Steering"
+  ]
+}
