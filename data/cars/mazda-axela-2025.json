@@ -1,0 +1,24 @@
+{
+  "body": "SUV",
+  "engine": "1500cc",
+  "color": "White",
+  "transmission": "Automatic",
+  "price": "765,987",
+  "model": "axela",
+  "mileage": "0 km",
+  "name": "mazda-axela-2020",
+  "make": "mazda",
+  "stockID": "7",
+  "status": "Available",
+  "location": "Nairobi",
+  "fuel": "Hybrid",
+  "images": [
+    "/images/cars/download-1-.jpeg"
+  ],
+  "id": 7,
+  "year": 2020,
+  "features": [
+    "Air Conditioning",
+    "Power Steering"
+  ]
+}
