@@ -1,0 +1,37 @@
+{
+  "body": "Hatchback",
+  "engine": "1300cc",
+  "color": "Pearl White Exterior, Fabric Upholstery",
+  "transmission": "Automatic",
+  "price": "KSh 1.35M",
+  "model": "Demio",
+  "mileage": "N/A",
+  "name": "2018 Mazda Demio",
+  "make": "Mazda",
+  "stockID": "MD-18",
+  "status": "Sold",
+  "location": "N/A",
+  "fuel": "Petrol",
+  "images": [
+    "https://i.ibb.co/pvzVmBZG/Whats-App-Image-2025-10-03-at-10-10-45-PM-1.jpg",
+    "https://i.ibb.co/hF2kgJgc/Whats-App-Image-2025-10-03-at-10-10-45-PM.jpg",
+    "https://i.ibb.co/sd1cnH3F/Whats-App-Image-2025-10-03-at-10-10-44-PM.jpg",
+    "https://i.ibb.co/99VpRnF6/Whats-App-Image-2025-10-03-at-10-10-42-PM-1.jpg",
+    "https://i.ibb.co/C5cs7VTS/Whats-App-Image-2025-10-03-at-10-10-42-PM.jpg",
+    "https://i.ibb.co/cj5Q3xF/Whats-App-Image-2025-10-03-at-10-10-43-PM.jpg"
+  ],
+  "id": 2,
+  "year": 2018,
+  "features": [
+    "Multimedia steering controls",
+    "Multimedia navigation knob",
+    "Sport mode",
+    "FM/DVD/Bluetooth touchscreen player",
+    "Parking sensors",
+    "Blindspot monitoring",
+    "Lane departure alert",
+    "I-stop technology",
+    "Traction control",
+    "Alloy rims"
+  ]
+}
