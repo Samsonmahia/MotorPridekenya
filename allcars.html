@@ -747,7 +747,7 @@
         }
     };
 
-    // Data management - AUTO-DETECT ANY CAR FILE
+    // Data management - UPDATED FOR YOUR CMS FILE PATTERNS
     const dataManager = {
         async loadCarsData() {
             try {
@@ -811,7 +811,8 @@
             const knownFiles = [
                 'cx-5.json', 'mazda.json', 'mercedes-benz.json',
                 'nissan-note-2025.json', 'subaru-forester-2025.json',
-                'toyota-wish-2025.json', 'volvo-v40-t3-2025.json'
+                'toyota-wish-2025.json', 'volvo-v40-t3-2025.json',
+                'mazda-mazda-2025.json' // ADDED THIS FOR YOUR NEW CMS FILE
             ];
             knownFiles.forEach(file => discoveredFiles.add(file));
             
@@ -858,10 +859,15 @@
             // Years
             const years = [currentYear-2, currentYear-1, currentYear, currentYear+1, currentYear+2];
             
-            // Generate various filename patterns
+            // Generate various filename patterns - UPDATED FOR YOUR CMS PATTERN
             brands.forEach(brand => {
                 // Brand only
                 patterns.push(`${brand}.json`);
+                
+                // Brand-brand-year (YOUR CMS PATTERN: mazda-mazda-2025.json)
+                years.forEach(year => {
+                    patterns.push(`${brand}-${brand}-${year}.json`);
+                });
                 
                 // Brand-model
                 models.forEach(model => {
@@ -883,13 +889,22 @@
                     patterns.push(`${model}-${year}.json`);
                 });
             });
+
+            // Add some generic patterns to catch any file
+            patterns.push('*.json');
+            patterns.push('car-*.json');
+            patterns.push('*-car.json');
+            patterns.push('*-*.json');
+            patterns.push('*-*-*.json');
+            patterns.push('*-*-*-*.json');
             
             return [...new Set(patterns)]; // Remove duplicates
         },
 
         async checkFileExists(filename) {
             try {
-                const response = await fetch(`./data/cars/${filename}`);
+                // Use cache-busting to ensure fresh data
+                const response = await fetch(`./data/cars/${filename}?t=${Date.now()}`);
                 return {
                     filename: filename,
                     exists: response.ok
@@ -904,7 +919,8 @@
 
         async loadSingleCarFile(filename) {
             try {
-                const response = await fetch(`./data/cars/${filename}`);
+                // Use cache-busting to ensure fresh data
+                const response = await fetch(`./data/cars/${filename}?t=${Date.now()}`);
                 if (!response.ok) {
                     console.warn(`File not found: ${filename}`);
                     return null;
@@ -939,6 +955,8 @@
                     car.name = `${car.make} ${car.model}`;
                 } else if (car.title) {
                     car.name = car.title;
+                } else if (car.carName) {
+                    car.name = car.carName;
                 } else {
                     car.name = `Car from ${filename.replace('.json', '')}`;
                 }
@@ -947,16 +965,28 @@
             // Ensure images array exists
             if (!car.images || car.images.length === 0) {
                 car.images = ['https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'];
+            } else {
+                // Convert image paths if needed
+                car.images = car.images.map(img => {
+                    if (img.startsWith('http')) {
+                        return img;
+                    } else if (img.startsWith('/')) {
+                        return img;
+                    } else {
+                        // Handle relative paths from CMS
+                        return `/static/images/cars/${img}`;
+                    }
+                });
             }
             
             // Ensure required fields have defaults
-            car.price = car.price || car.pricePerDay || 'Contact for price';
+            car.price = car.price || car.pricePerDay || car.dailyRate || 'Contact for price';
             car.year = car.year || 'N/A';
             car.transmission = car.transmission || 'Automatic';
             car.fuel = car.fuel || car.fuelType || 'Petrol';
             car.mileage = car.mileage || '0 km';
             car.status = car.status || 'Available';
-            car.features = car.features || car.specifications || [];
+            car.features = car.features || car.specifications || car.amenities || [];
             
             return car;
         },
@@ -965,9 +995,9 @@
             return [
                 {
                     id: utils.generateId(),
-                    name: "Toyota Wish 2025",
-                    make: "Toyota",
-                    model: "Wish",
+                    name: "Mazda Mazda 2025",
+                    make: "Mazda",
+                    model: "Mazda",
                     year: 2025,
                     price: "$25,000",
                     transmission: "Automatic",
@@ -979,11 +1009,11 @@
                 },
                 {
                     id: utils.generateId(),
-                    name: "Subaru Forester 2025",
-                    make: "Subaru",
-                    model: "Forester",
+                    name: "Toyota Wish 2025",
+                    make: "Toyota",
+                    model: "Wish",
                     year: 2025,
-                    price: "$32,000",
+                    price: "$28,000",
                     transmission: "Automatic",
                     fuel: "Petrol",
                     mileage: "0 km",
@@ -998,7 +1028,7 @@
             try {
                 const contactFiles = ['kiarie.json', 'sam.json'];
                 const contactPromises = contactFiles.map(filename => {
-                    return fetch(`./data/contacts/${filename}`)
+                    return fetch(`./data/contacts/${filename}?t=${Date.now()}`)
                         .then(response => response.ok ? response.json() : null)
                         .catch(() => null)
                 });
