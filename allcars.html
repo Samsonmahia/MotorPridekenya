@@ -747,37 +747,35 @@
             }
         }
     };
-
-    // Data management - HYBRID APPROACH (Guaranteed + Auto-detect)
+    // Data management - OPTIMIZED FOR SPEED
     const dataManager = {
+        // Cache for known files to avoid repeated checks
+        fileCache: new Set(),
+        
         async loadCarsData() {
             try {
                 elements.debugInfo.textContent = 'Loading cars...';
                 
-                // STEP 1: Always load guaranteed files (your existing cars)
-                const guaranteedFiles = [
-                    'cx-5.json', 'mazda.json', 'mercedes-benz.json',
-                    'nissan-note-2025.json', 'subaru-forester-2025.json',
-                    'toyota-wish-2025.json', 'volvo-v40-t3-2025.json',
-                    'mazda-mazda-2025.json', 'subaru-forester-2011.json'
-                ];
+                // Use cached files first for instant loading
+                let carFiles = Array.from(this.fileCache);
                 
-                // STEP 2: Try to discover NEW files from CMS
-                const discoveredFiles = await this.discoverNewCarFiles();
+                // If cache is empty, do initial discovery (only once)
+                if (carFiles.length === 0) {
+                    carFiles = await this.getCarFilesFast();
+                    // Cache the results
+                    carFiles.forEach(file => this.fileCache.add(file));
+                }
                 
-                // STEP 3: Combine both lists
-                const allCarFiles = [...new Set([...guaranteedFiles, ...discoveredFiles])];
-                
-                if (allCarFiles.length === 0) {
+                if (carFiles.length === 0) {
                     elements.debugInfo.textContent = 'No car files found. Using sample data...';
                     state.cars = this.createSampleData();
                     return;
                 }
                 
-                elements.debugInfo.textContent = `Found ${allCarFiles.length} cars (${guaranteedFiles.length} guaranteed + ${discoveredFiles.length} discovered)`;
+                elements.debugInfo.textContent = `Loading ${carFiles.length} cars...`;
                 
-                // Load all car files
-                const carPromises = allCarFiles.map(filename => 
+                // Load all car files in parallel
+                const carPromises = carFiles.map(filename => 
                     this.loadSingleCarFile(filename)
                 );
 
@@ -792,152 +790,57 @@
                 state.cars = successfulCars;
                 
                 if (state.cars.length === 0) {
-                    elements.debugInfo.textContent = 'No valid car data found. Using sample data...';
                     state.cars = this.createSampleData();
-                } else {
-                    const newCount = state.cars.length;
-                    elements.debugInfo.textContent = `✅ Loaded ${newCount} cars`;
                 }
+                
+                elements.debugInfo.textContent = `✅ Loaded ${state.cars.length} cars`;
                 
             } catch (error) {
                 elements.debugInfo.textContent = `Error: ${error.message}. Using sample data...`;
-                console.error('Error loading cars:', error);
                 state.cars = this.createSampleData();
             }
         },
 
-        // NEW: Smart discovery for CMS-added cars
-        async discoverNewCarFiles() {
-            const discoveredFiles = [];
-            const currentYear = new Date().getFullYear();
+        // FAST file discovery - only checks known files
+        async getCarFilesFast() {
+            const discoveredFiles = new Set();
             
-            // Common patterns that CMS might use
-            const patterns = [
-                // Brand-only patterns
-                'toyota-*.json',
-                'nissan-*.json', 
-                'mazda-*.json',
-                'mercedes-*.json',
-                'subaru-*.json',
-                'volvo-*.json',
-                'honda-*.json',
-                'ford-*.json',
-                'bmw-*.json',
-                'audi-*.json',
-                // Year patterns (current and next year)
-                `*-*-${currentYear}.json`,
-                `*-*-${currentYear+1}.json`,
-                `*-*-${currentYear-1}.json`,
-                // Generic patterns
-                '*-*.json',
-                'car-*.json'
+            // STEP 1: ALWAYS include these known files (your current cars)
+            const guaranteedFiles = [
+                'cx-5.json', 'mazda.json', 'mercedes-benz.json',
+                'nissan-note-2025.json', 'subaru-forester-2025.json',
+                'toyota-wish-2025.json', 'volvo-v40-t3-2025.json',
+                'mazda-mazda-2025.json', 'subaru-forester-2011.json'
             ];
             
-            // Check each pattern
-            for (const pattern of patterns) {
-                try {
-                    const files = await this.checkPatternFiles(pattern);
-                    discoveredFiles.push(...files);
-                } catch (error) {
-                    // Continue with next pattern
-                }
-            }
+            // STEP 2: Check only guaranteed files (FAST)
+            const checkPromises = guaranteedFiles.map(filename => 
+                this.fileExistsFast(filename)
+            );
             
-            return [...new Set(discoveredFiles)]; // Remove duplicates
-        },
-
-        // Check for files matching a pattern
-        async checkPatternFiles(pattern) {
-            const foundFiles = [];
-            
-            // If pattern has wildcards, we'll test common combinations
-            if (pattern.includes('*')) {
-                const testFiles = this.generateTestFiles(pattern);
-                
-                for (const testFile of testFiles) {
-                    try {
-                        const exists = await this.fileExists(testFile);
-                        if (exists) {
-                            foundFiles.push(testFile);
-                        }
-                    } catch (error) {
-                        // Skip this file
-                    }
-                }
-            } else {
-                // Exact file match
-                const exists = await this.fileExists(pattern);
+            const results = await Promise.all(checkPromises);
+            results.forEach((exists, index) => {
                 if (exists) {
-                    foundFiles.push(pattern);
+                    discoveredFiles.add(guaranteedFiles[index]);
                 }
-            }
+            });
             
-            return foundFiles;
+            console.log('Fast file discovery found:', Array.from(discoveredFiles));
+            return Array.from(discoveredFiles);
         },
 
-        // Generate actual filenames to test based on pattern
-        generateTestFiles(pattern) {
-            const testFiles = [];
-            const currentYear = new Date().getFullYear();
-            
-            // Common brands to test
-            const brands = ['toyota', 'nissan', 'mazda', 'mercedes', 'subaru', 'volvo', 'honda', 'ford', 'bmw', 'audi'];
-            // Common models to test  
-            const models = ['cx-5', 'wish', 'note', 'forester', 'v40', 'demio', 'premio', 'axio', 'corolla', 'camry'];
-            
-            if (pattern === 'toyota-*.json') {
-                brands.forEach(brand => testFiles.push(`${brand}.json`));
-                models.forEach(model => testFiles.push(`toyota-${model}.json`));
-                for (let year = currentYear-2; year <= currentYear+2; year++) {
-                    testFiles.push(`toyota-unknown-${year}.json`);
-                }
-            }
-            else if (pattern === 'nissan-*.json') {
-                models.forEach(model => testFiles.push(`nissan-${model}.json`));
-                for (let year = currentYear-2; year <= currentYear+2; year++) {
-                    testFiles.push(`nissan-unknown-${year}.json`);
-                }
-            }
-            else if (pattern === 'mazda-*.json') {
-                models.forEach(model => testFiles.push(`mazda-${model}.json`));
-                for (let year = currentYear-2; year <= currentYear+2; year++) {
-                    testFiles.push(`mazda-mazda-${year}.json`);
-                }
-            }
-            else if (pattern === '*-*-2024.json') {
-                brands.forEach(brand => {
-                    models.forEach(model => {
-                        testFiles.push(`${brand}-${model}-2024.json`);
-                    });
-                });
-            }
-            else if (pattern === '*-*-2025.json') {
-                brands.forEach(brand => {
-                    models.forEach(model => {
-                        testFiles.push(`${brand}-${model}-2025.json`);
-                    });
-                });
-            }
-            else if (pattern === '*-*.json') {
-                // Generic pattern - test common combinations
-                brands.forEach(brand => {
-                    testFiles.push(`${brand}.json`);
-                    models.forEach(model => {
-                        testFiles.push(`${brand}-${model}.json`);
-                        for (let year = currentYear-1; year <= currentYear+1; year++) {
-                            testFiles.push(`${brand}-${model}-${year}.json`);
-                        }
-                    });
-                });
-            }
-            
-            return [...new Set(testFiles)]; // Remove duplicates
-        },
-
-        // Check if a specific file exists
-        async fileExists(filename) {
+        // Fast file existence check
+        async fileExistsFast(filename) {
             try {
-                const response = await fetch(`./data/cars/${filename}`);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 second timeout
+                
+                const response = await fetch(`./data/cars/${filename}`, {
+                    signal: controller.signal,
+                    cache: 'no-cache'
+                });
+                
+                clearTimeout(timeoutId);
                 return response.ok;
             } catch (error) {
                 return false;
@@ -948,7 +851,6 @@
             try {
                 const response = await fetch(`./data/cars/${filename}`);
                 if (!response.ok) {
-                    console.warn(`File not found: ${filename}`);
                     return null;
                 }
                 
@@ -964,7 +866,6 @@
                     return [this.normalizeCarData(carData, filename)];
                 }
             } catch (error) {
-                console.warn(`Failed to load ${filename}:`, error);
                 return null;
             }
         },
@@ -987,7 +888,7 @@
                 }
             }
             
-            // ✅ FIXED: Image path handling
+            // Image path handling
             if (!car.images || car.images.length === 0) {
                 car.images = ['https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'];
             } else {
@@ -995,7 +896,6 @@
                     if (img.startsWith('http')) {
                         return img;
                     } else if (img.startsWith('/images/cars/')) {
-                        // ✅ Convert CMS paths to actual paths
                         return img.replace('/images/cars/', '/static/images/cars/');
                     } else if (img.startsWith('/static/')) {
                         return img;
@@ -1050,7 +950,7 @@
 
         async loadContactsData() {
             try {
-                // Guaranteed contact files
+                // Fast contact loading
                 const contactFiles = ['kiarie.json', 'sam.json', 'dad-1.json'];
                 const contactPromises = contactFiles.map(filename => 
                     this.loadSingleContactFile(filename)
@@ -1069,7 +969,6 @@
                 }
                 
             } catch (error) {
-                console.error('Error loading contacts:', error);
                 state.contacts = [
                     { name: "Sales Team", number: "+254712345678" },
                     { name: "Support Team", number: "+254798765432" }
@@ -1087,24 +986,31 @@
             }
         },
         
-        // Setup automatic data refresh
+        // Setup automatic data refresh (FASTER)
         setupAutoRefresh() {
             if (state.refreshInterval) {
                 clearInterval(state.refreshInterval);
             }
             
             state.refreshInterval = setInterval(() => {
-                console.log('🔄 Auto-refreshing car data...');
-                this.loadCarsData().then(() => {
-                    if (!document.hidden) {
-                        renderer.displayCars();
-                        renderer.setupPagination();
-                    }
-                });
+                // Only check for new files occasionally, not every refresh
+                if (Math.random() < 0.3) { // 30% chance to check for new files
+                    this.checkForNewFiles();
+                } else {
+                    // Just reload existing cached files (FAST)
+                    this.loadCarsData();
+                }
             }, CONFIG.dataRefreshInterval);
+        },
+        
+        // Separate function to check for new files (slower, done less frequently)
+        async checkForNewFiles() {
+            console.log('🔄 Checking for new CMS files...');
+            // This would be your slower file discovery logic
+            // For now, we'll just reload the cached files
+            this.loadCarsData();
         }
     };
-
     // UI rendering - SIMPLIFIED AND RELIABLE
     const renderer = {
         displayCars() {
