@@ -1,0 +1,24 @@
+{
+  "body": "SUV",
+  "engine": "1500cc",
+  "color": "White",
+  "transmission": "Automatic",
+  "price": "130000",
+  "model": "Forester ",
+  "mileage": "0 km",
+  "name": "Subaru-forester-2022",
+  "make": "Subaru ",
+  "stockID": "100",
+  "status": "Incoming",
+  "location": "Nairobi",
+  "fuel": "Electric",
+  "images": [
+    "/images/cars/download-1-.jpeg"
+  ],
+  "id": 100,
+  "year": 2022,
+  "features": [
+    "Air Conditioning",
+    "Power Steering"
+  ]
+}
