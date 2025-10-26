@@ -1,0 +1,24 @@
+{
+  "body": "SUV",
+  "engine": "1500cc",
+  "color": "White",
+  "transmission": "Automatic",
+  "price": "n/a",
+  "model": "x-trail",
+  "mileage": "0 km",
+  "name": "nissan-xtrail-2011",
+  "make": "nissan",
+  "stockID": "34",
+  "status": "Available",
+  "location": "Nairobi",
+  "fuel": "Petrol",
+  "images": [
+    "/images/cars/10816_suzuki_swift_501_r1.jpg"
+  ],
+  "id": 34,
+  "year": 2008,
+  "features": [
+    "Air Conditioning",
+    "Power Steering"
+  ]
+}
