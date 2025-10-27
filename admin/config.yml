@@ -8,7 +8,13 @@ backend:
     uploadMedia: 'Upload "{{path}}"'
     deleteMedia: 'Delete "{{path}}"'
 
-locale: 'en'
+# ADD THESE LINES FOR AUTO-REBUILDS
+publish_mode: editorial_workflow
+site_url: https://your-site.netlify.app  # Replace with your actual site URL
+
+# BUILD HOOK CONFIGURATION - ADD THIS
+display_url: https://your-site.netlify.app  # Replace with your actual site URL
+build_hook: https://api.netlify.com/build_hooks/68ff5402366de6cdc809ec3a
 
 media_folder: "static/images"
 public_folder: "/images"
@@ -20,45 +26,16 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string", required: true }
-      - { label: "Brand", name: "brand", widget: "string", required: true }
-      - { label: "Model", name: "model", widget: "string", required: true }
-      - { label: "Year", name: "year", widget: "number", required: true }
-      - { label: "Price", name: "price", widget: "string", required: true }
-      - { 
-          label: "Status", 
-          name: "status", 
-          widget: "select", 
-          options: ["available", "sold", "incoming"],
-          default: "available",
-          required: true 
-        }
-      - { 
-          label: "Featured", 
-          name: "featured", 
-          widget: "boolean", 
-          default: false 
-        }
-      - { 
-          label: "Description", 
-          name: "description", 
-          widget: "markdown",
-          required: true 
-        }
-      - { 
-          label: "Features", 
-          name: "features", 
-          widget: "list",
-          field: { label: "Feature", name: "feature", widget: "string" },
-          required: false 
-        }
-      - { 
-          label: "Images", 
-          name: "images", 
-          widget: "list", 
-          field: { label: "Image", name: "image", widget: "image" },
-          required: true 
-        }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Brand", name: "brand", widget: "string" }
+      - { label: "Model", name: "model", widget: "string" }
+      - { label: "Year", name: "year", widget: "number" }
+      - { label: "Price", name: "price", widget: "string" }
+      - { label: "Status", name: "status", widget: "select", options: ["available", "sold", "incoming"] }
+      - { label: "Featured", name: "featured", widget: "boolean" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Features", name: "features", widget: "list" }
+      - { label: "Images", name: "images", widget: "list", field: { label: "Image", name: "image", widget: "image" } }
 
   - name: "contacts"
     label: "Contacts"
@@ -66,15 +43,8 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Name", name: "name", widget: "string", required: true }
-      - { label: "Phone", name: "phone", widget: "string", required: true }
-      - { label: "WhatsApp", name: "whatsapp", widget: "string", required: true }
-      - { label: "Email", name: "email", widget: "string", required: false }
-      - { 
-          label: "Role", 
-          name: "role", 
-          widget: "select",
-          options: ["Sales Agent", "Manager", "Support", "Admin"],
-          default: "Sales Agent",
-          required: true 
-        }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Phone", name: "phone", widget: "string" }
+      - { label: "WhatsApp", name: "whatsapp", widget: "string" }
+      - { label: "Email", name: "email", widget: "string" }
+      - { label: "Role", name: "role", widget: "string" }
