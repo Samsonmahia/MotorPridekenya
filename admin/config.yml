@@ -1,159 +1,80 @@
 backend:
   name: git-gateway
   branch: main
+  commit_messages:
+    create: 'Create {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Delete {{collection}} "{{slug}}"'
+    uploadMedia: 'Upload "{{path}}"'
+    deleteMedia: 'Delete "{{path}}"'
 
-# Local media storage for CMS uploads
-media_folder: "static/images/cars"
-public_folder: "/static/images/cars"
+locale: 'en'
 
-# Enable editorial workflow for draft/publish states
-publish_mode: editorial_workflow
+media_folder: "static/images"
+public_folder: "/images"
 
 collections:
   - name: "cars"
     label: "Cars"
-    folder: "data/cars"
+    folder: "content/cars"
     create: true
-    slug: "{{make}}-{{model}}-{{year}}-{{slug}}"
-    identifier_field: "id"
-    extension: "json"
-    format: "json"
-    editor:
-      preview: false
-    
-    # Auto-publish settings
-    publish: true
-    sortable_fields: ["year", "price", "createdAt"]
-    
+    slug: "{{slug}}"
     fields:
-      # Core Identification
-      - { label: "ID", name: "id", widget: "uuid", required: true }
-      - { label: "Make", name: "make", widget: "string", required: true }
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Brand", name: "brand", widget: "string", required: true }
       - { label: "Model", name: "model", widget: "string", required: true }
-      - { label: "Year", name: "year", widget: "number", required: true, min: 1990, max: 2030 }
-      
-      # Pricing
-      - { label: "Price (KES)", name: "price", widget: "number", required: true, min: 0, value_type: "int" }
-      - { label: "Currency", name: "currency", widget: "select", options: ["KES", "USD"], default: "KES" }
-      
-      # Specifications
-      - { label: "Fuel Type", name: "fuelType", widget: "select", options: ["Petrol", "Diesel", "Hybrid", "Electric"], default: "Petrol" }
-      - { label: "Transmission", name: "transmission", widget: "select", options: ["Automatic", "Manual", "CVT"], default: "Automatic" }
-      - { label: "Engine Size", name: "engine", widget: "string", default: "1500cc", required: true }
-      - { label: "Mileage (km)", name: "mileage", widget: "number", default: 0, value_type: "int" }
-      - { label: "Color", name: "color", widget: "string", default: "White", required: true }
-      - { label: "Body Type", name: "bodyType", widget: "select", options: ["SUV", "Sedan", "Hatchback", "MPV", "Van", "Truck", "Coupe"], default: "SUV" }
-      
-      # Location & Status
-      - { label: "Location", name: "location", widget: "string", default: "Nairobi", required: true }
-      - { label: "Stock ID", name: "stockID", widget: "string", required: true }
-      - { label: "Status", name: "status", widget: "select", options: ["Available", "Incoming", "Sold", "Reserved"], default: "Available" }
-      
-      # Images (Auto-upload to static/images/cars)
+      - { label: "Year", name: "year", widget: "number", required: true }
+      - { label: "Price", name: "price", widget: "string", required: true }
       - { 
-          label: "Featured Image", 
-          name: "featuredImage", 
-          widget: "image", 
-          required: true,
-          hint: "Main display image - will be automatically uploaded to your site"
-        }
-      - { 
-          label: "Gallery Images", 
-          name: "images", 
-          widget: "list", 
-          required: false,
-          field: { label: "Image", name: "image", widget: "image" },
-          hint: "Additional images - uploads directly to your website"
-        }
-      
-      # Features & Description
-      - { 
-          label: "Features", 
-          name: "features", 
-          widget: "list", 
-          field: { label: "Feature", name: "feature", widget: "string" }, 
-          default: ["Air Conditioning", "Power Steering", "Power Windows"],
-          hint: "List car features and specifications"
-        }
-      - { 
-          label: "Description", 
-          name: "description", 
-          widget: "markdown", 
-          required: false,
-          hint: "Detailed description of the car"
-        }
-      
-      # Contact Info
-      - { 
-          label: "Contact Phone", 
-          name: "contactPhone", 
-          widget: "string", 
-          default: "+254712345678"
-        }
-      - { 
-          label: "Contact Name", 
-          name: "contactName", 
-          widget: "string", 
-          default: "Sales Team"
-        }
-      
-      # Publishing Controls
-      - { 
-          label: "Published", 
-          name: "published", 
-          widget: "boolean", 
-          default: true,
-          hint: "Unpublish to hide from website"
+          label: "Status", 
+          name: "status", 
+          widget: "select", 
+          options: ["available", "sold", "incoming"],
+          default: "available",
+          required: true 
         }
       - { 
           label: "Featured", 
           name: "featured", 
           widget: "boolean", 
-          default: false,
-          hint: "Show in featured section"
+          default: false 
         }
       - { 
-          label: "Quick View Text", 
-          name: "quickView", 
-          widget: "string", 
-          required: false,
-          hint: "Short description shown in listings"
-        }
-      
-      # Auto-generated timestamps
-      - { 
-          label: "Created Date", 
-          name: "createdAt", 
-          widget: "datetime", 
-          default: "now",
-          format: "YYYY-MM-DD HH:mm:ss"
+          label: "Description", 
+          name: "description", 
+          widget: "markdown",
+          required: true 
         }
       - { 
-          label: "Updated Date", 
-          name: "updatedAt", 
-          widget: "datetime", 
-          default: "now",
-          format: "YYYY-MM-DD HH:mm:ss"
+          label: "Features", 
+          name: "features", 
+          widget: "list",
+          field: { label: "Feature", name: "feature", widget: "string" },
+          required: false 
+        }
+      - { 
+          label: "Images", 
+          name: "images", 
+          widget: "list", 
+          field: { label: "Image", name: "image", widget: "image" },
+          required: true 
         }
 
   - name: "contacts"
     label: "Contacts"
-    folder: "data/contacts"
+    folder: "content/contacts"
     create: true
-    slug: "{{name | slug}}"
-    extension: "json"
-    format: "json"
-    publish: true
-    
+    slug: "{{slug}}"
     fields:
       - { label: "Name", name: "name", widget: "string", required: true }
-      - { label: "Phone Number", name: "number", widget: "string", required: true }
-      - { label: "Role", name: "role", widget: "string", default: "Sales Agent" }
+      - { label: "Phone", name: "phone", widget: "string", required: true }
+      - { label: "WhatsApp", name: "whatsapp", widget: "string", required: true }
       - { label: "Email", name: "email", widget: "string", required: false }
       - { 
-          label: "Active", 
-          name: "active", 
-          widget: "boolean", 
-          default: true,
-          hint: "Set to inactive to hide this contact"
+          label: "Role", 
+          name: "role", 
+          widget: "select",
+          options: ["Sales Agent", "Manager", "Support", "Admin"],
+          default: "Sales Agent",
+          required: true 
         }

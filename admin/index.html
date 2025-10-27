@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MotorPride Kenya CMS</title>
+  <style>
+    :root {
+      --midnight-blue: #003366;
+      --electric-blue: #0066cc;
+      --accent-blue: #0099ff;
+      --white: #ffffff;
+      --light-gray: #f8f9fa;
+      --dark-text: #2c3e50;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--midnight-blue), var(--electric-blue));
+      min-height: 100vh;
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    .admin-header {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .admin-logo {
+      height: 50px;
+      width: auto;
+      border-radius: 8px;
+    }
+
+    .admin-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--white), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .admin-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Decap CMS Customization */
+    .nc-root {
+      --primary: var(--accent-blue);
+      --secondary: var(--midnight-blue);
+      --text-primary: var(--dark-text);
+      --text-secondary: #666;
+      --background: var(--white);
+      --border: #e1e5e9;
+      --border-hover: var(--accent-blue);
+    }
+
+    .nc-github-button {
+      background: linear-gradient(135deg, var(--electric-blue), var(--accent-blue)) !important;
+      border: none !important;
+      border-radius: 8px !important;
+      color: var(--white) !important;
+      font-weight: 600 !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .nc-github-button:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 20px rgba(0, 153, 255, 0.4) !important;
+    }
+
+    .nc-entryListing-container {
+      background: var(--white) !important;
+      border-radius: 12px !important;
+      border: none !important;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .nc-entryListing-card {
+      background: var(--white) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 10px !important;
+      color: var(--dark-text) !important;
+      transition: all 0.3s ease !important;
+      margin: 0.5rem 0 !important;
+    }
+
+    .nc-entryListing-card:hover {
+      border-color: var(--accent-blue) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 20px rgba(0, 153, 255, 0.15) !important;
+    }
+
+    .nc-workflow-container {
+      background: var(--white) !important;
+      border-radius: 12px !important;
+      border: none !important;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .nc-workflow-list {
+      background: transparent !important;
+    }
+
+    .nc-workflow-item {
+      background: var(--white) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 10px !important;
+      color: var(--dark-text) !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .nc-workflow-item:hover {
+      border-color: var(--accent-blue) !important;
+      transform: translateY(-2px) !important;
+    }
+
+    .nc-editor-container {
+      background: var(--white) !important;
+      border-radius: 12px !important;
+      border: none !important;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .nc-widget {
+      background: var(--light-gray) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 8px !important;
+      color: var(--dark-text) !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .nc-widget:focus {
+      border-color: var(--accent-blue) !important;
+      box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1) !important;
+    }
+
+    .nc-button {
+      background: linear-gradient(135deg, var(--electric-blue), var(--accent-blue)) !important;
+      border: none !important;
+      border-radius: 8px !important;
+      color: var(--white) !important;
+      font-weight: 600 !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .nc-button:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 20px rgba(0, 153, 255, 0.4) !important;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .admin-header {
+        padding: 1rem;
+      }
+
+      .admin-container {
+        padding: 1rem;
+      }
+
+      .admin-brand {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+      }
+
+      .admin-title {
+        font-size: 1.4rem;
+      }
+
+      .nc-entryListing-container,
+      .nc-workflow-container,
+      .nc-editor-container {
+        margin: 0.5rem !important;
+      }
+    }
+
+    /* Loading States */
+    .nc-loading {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent) !important;
+      animation: loading 1.5s infinite !important;
+    }
+
+    @keyframes loading {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-header">
+    <div class="admin-brand">
+      <img src="/images/logo.png" alt="MotorPride Kenya" class="admin-logo" onerror="this.style.display='none'">
+      <h1 class="admin-title">MotorPride Kenya Dashboard</h1>
+    </div>
+  </div>
+  <div class="admin-container">
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  </div>
+</body>
+</html>

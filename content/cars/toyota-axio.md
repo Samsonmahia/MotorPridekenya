@@ -1,0 +1,23 @@
+---
+title: "Toyota Axio 2020"
+brand: "Toyota"
+model: "Axio"
+year: 2020
+price: "KSh 1,200,000"
+status: "available"
+featured: true
+description: "Well-maintained Toyota Axio with low mileage. Perfect condition with full service history. This vehicle comes with automatic transmission, air conditioning, and excellent fuel efficiency."
+features:
+  - "Automatic Transmission"
+  - "Air Conditioning"
+  - "Power Steering"
+  - "Bluetooth Connectivity"
+  - "Reverse Camera"
+  - "Alloy Wheels"
+  - "Central Locking"
+  - "Power Windows"
+images:
+  - "/images/cars/toyota-axio-2020-front.jpg"
+  - "/images/cars/toyota-axio-2020-interior.jpg"
+  - "/images/cars/toyota-axio-2020-rear.jpg"
+---
