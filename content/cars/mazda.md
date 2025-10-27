@@ -1,8 +1,8 @@
 ---
-title: mazda
+title: mazda 2021
 brand: axela
 model: axela
-year: 2006
+year: 2019
 price: 1,500,000
 status: incoming
 featured: true
