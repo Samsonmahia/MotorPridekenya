@@ -3,12 +3,14 @@ const path = require('path');
 const yaml = require('js-yaml');
 
 console.log('🚀 Starting MotorPride Kenya Build Process...');
+console.log('📅 Build time:', new Date().toISOString());
 
 // Ensure required directories exist
 const directories = [
     'content/cars',
     'content/contacts', 
-    'data'
+    'data',
+    'static/images/cars'
 ];
 
 directories.forEach(dir => {
@@ -28,7 +30,24 @@ function generateCarsIndex() {
     
     try {
         if (!fs.existsSync(carsDir)) {
-            console.log('❌ Cars directory not found');
+            console.log('❌ Cars directory not found - creating sample');
+            // Create sample data if no content
+            const sampleCars = [{
+                slug: "sample-car",
+                title: "Add cars through CMS",
+                brand: "MotorPride",
+                model: "Sample",
+                year: 2024,
+                price: "KSh 0",
+                status: "available",
+                featured: false,
+                description: "Use the CMS dashboard to add your vehicles",
+                features: ["Add features in CMS"],
+                images: ["/images/cars/sample-car.jpg"]
+            }];
+            
+            fs.writeFileSync(outputFile, JSON.stringify(sampleCars, null, 2));
+            console.log('✅ Created sample cars data');
             return;
         }
 
@@ -37,25 +56,45 @@ function generateCarsIndex() {
         
         console.log(`📄 Found ${mdFiles.length} car files in CMS`);
 
+        if (mdFiles.length === 0) {
+            console.log('ℹ️ No car files found in CMS - creating sample');
+            const sampleCars = [{
+                slug: "sample-car",
+                title: "Add cars through CMS",
+                brand: "MotorPride", 
+                model: "Sample",
+                year: 2024,
+                price: "KSh 0",
+                status: "available",
+                featured: false,
+                description: "Use the CMS dashboard to add your vehicles",
+                features: ["Add features in CMS"],
+                images: ["/images/cars/sample-car.jpg"]
+            }];
+            
+            fs.writeFileSync(outputFile, JSON.stringify(sampleCars, null, 2));
+            return;
+        }
+
         mdFiles.forEach(file => {
             try {
                 const filePath = path.join(carsDir, file);
                 const content = fs.readFileSync(filePath, 'utf8');
                 
-                // Parse frontmatter (between --- and ---)
-                const frontmatterMatch = content.match(/---\n([\s\S]*?)\n---/);
+                // Parse frontmatter (content between --- markers)
+                const frontmatterMatch = content.match(/---\s*\n([\s\S]*?)\n---/);
                 if (frontmatterMatch) {
                     const frontmatter = yaml.load(frontmatterMatch[1]);
                     const slug = path.basename(file, '.md');
                     
-                    // Add slug and ensure proper data structure
+                    // Create car data with proper structure
                     const carData = {
                         slug: slug,
-                        title: frontmatter.title || '',
-                        brand: frontmatter.brand || '',
-                        model: frontmatter.model || '',
-                        year: frontmatter.year || 2020,
-                        price: frontmatter.price || '',
+                        title: frontmatter.title || 'Untitled Car',
+                        brand: frontmatter.brand || 'Unknown',
+                        model: frontmatter.model || 'Unknown',
+                        year: frontmatter.year || 2024,
+                        price: frontmatter.price || 'KSh 0',
                         status: frontmatter.status || 'available',
                         featured: frontmatter.featured || false,
                         description: frontmatter.description || '',
@@ -65,6 +104,8 @@ function generateCarsIndex() {
                     
                     cars.push(carData);
                     console.log(`✅ Processed: ${carData.title}`);
+                } else {
+                    console.log(`❌ No frontmatter found in: ${file}`);
                 }
             } catch (error) {
                 console.error(`❌ Error processing ${file}:`, error.message);
@@ -78,6 +119,7 @@ function generateCarsIndex() {
             return b.year - a.year;
         });
 
+        // Write to file
         fs.writeFileSync(outputFile, JSON.stringify(cars, null, 2));
         console.log(`🎉 Generated cars index with ${cars.length} vehicles`);
 
@@ -95,7 +137,18 @@ function generateContactsIndex() {
     
     try {
         if (!fs.existsSync(contactsDir)) {
-            console.log('❌ Contacts directory not found');
+            console.log('❌ Contacts directory not found - creating sample');
+            const sampleContacts = [{
+                slug: "sample-contact",
+                name: "Add contacts through CMS",
+                phone: "+254700000000",
+                whatsapp: "+254700000000", 
+                email: "contact@example.com",
+                role: "Sales Agent"
+            }];
+            
+            fs.writeFileSync(outputFile, JSON.stringify(sampleContacts, null, 2));
+            console.log('✅ Created sample contacts data');
             return;
         }
 
@@ -104,23 +157,38 @@ function generateContactsIndex() {
         
         console.log(`📄 Found ${mdFiles.length} contact files in CMS`);
 
+        if (mdFiles.length === 0) {
+            console.log('ℹ️ No contact files found in CMS - creating sample');
+            const sampleContacts = [{
+                slug: "sample-contact",
+                name: "Add contacts through CMS",
+                phone: "+254700000000",
+                whatsapp: "+254700000000",
+                email: "contact@example.com",
+                role: "Sales Agent"
+            }];
+            
+            fs.writeFileSync(outputFile, JSON.stringify(sampleContacts, null, 2));
+            return;
+        }
+
         mdFiles.forEach(file => {
             try {
                 const filePath = path.join(contactsDir, file);
                 const content = fs.readFileSync(filePath, 'utf8');
                 
-                const frontmatterMatch = content.match(/---\n([\s\S]*?)\n---/);
+                const frontmatterMatch = content.match(/---\s*\n([\s\S]*?)\n---/);
                 if (frontmatterMatch) {
                     const frontmatter = yaml.load(frontmatterMatch[1]);
                     const slug = path.basename(file, '.md');
                     
                     const contactData = {
                         slug: slug,
-                        name: frontmatter.name || '',
+                        name: frontmatter.name || 'Unknown',
                         phone: frontmatter.phone || '',
                         whatsapp: frontmatter.whatsapp || '',
                         email: frontmatter.email || '',
-                        role: frontmatter.role || ''
+                        role: frontmatter.role || 'Sales Agent'
                     };
                     
                     contacts.push(contactData);
@@ -131,6 +199,7 @@ function generateContactsIndex() {
             }
         });
 
+        // Write to file
         fs.writeFileSync(outputFile, JSON.stringify(contacts, null, 2));
         console.log(`🎉 Generated contacts index with ${contacts.length} contacts`);
 
@@ -145,3 +214,4 @@ generateCarsIndex();
 generateContactsIndex();
 
 console.log('\n✅ Build completed! CMS content → Frontend data synchronized');
+console.log('🕒 Build finished at:', new Date().toISOString());
