@@ -1,8 +1,8 @@
 ---
-title: Toyota Axio 2020
+title: Toyota Axio 2021
 brand: Toyota
 model: Axio
-year: 2020
+year: 2021
 price: KSh 1,200,000
 status: available
 featured: true
