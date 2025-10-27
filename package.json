@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "generate-index": "node scripts/generatecarsindex.js",
+    "build": "npm run generate-index && echo 'Index generated!'"
+  }
+}
