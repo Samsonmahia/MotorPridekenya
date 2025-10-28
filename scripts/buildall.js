@@ -1,129 +1,174 @@
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const yaml = require('js-yaml');
 
-console.log('🚀 Starting FULL BUILD for MotorPride CMS Integration');
+console.log('🚀 Building MotorPride Kenya - FIXING IMAGES');
 
-// Define essential directories
-const dirs = [
-  'content/cars',
-  'content/contacts',
-  'data',
-  'static/images/cars'
-];
-
-dirs.forEach(dir => {
+// Ensure directories exist
+const directories = ['content/cars', 'content/contacts', 'data', 'static/images/cars'];
+directories.forEach(dir => {
   const fullPath = path.join(__dirname, '..', dir);
   if (!fs.existsSync(fullPath)) {
     fs.mkdirSync(fullPath, { recursive: true });
-    console.log(`📁 Created missing directory: ${dir}`);
+    console.log(`📁 Created: ${dir}`);
   }
 });
 
-// Paths for output files
-const carsIndexPath = path.join(__dirname, '../data/cars-index.json');
-const contactsIndexPath = path.join(__dirname, '../data/contacts-index.json');
-
-// Step 1: Run generator scripts
-try {
-  console.log('⚙️ Generating car index...');
-  execSync('node scripts/generatecarsindex.js', { stdio: 'inherit' });
-
-  console.log('⚙️ Generating contacts index...');
-  execSync('node scripts/generatecontactsindex.js', { stdio: 'inherit' });
-
-  console.log('✅ Index generation complete.');
-} catch (error) {
-  console.error('❌ Error running generator scripts:', error.message);
-}
-
-// Step 2: If no data generated, create emergency placeholder data
-function createEmergencyData() {
-  console.log('🚨 Creating EMERGENCY placeholder data...');
-
-  const carsData = [
-    {
-      slug: "mazda-cx5-2020",
-      title: "Mazda CX-5 2020",
-      brand: "Mazda",
-      model: "CX-5",
-      year: 2020,
-      price: "KSh 3,450,000",
-      status: "available",
-      featured: true,
-      description: "6-Speed Manual Petrol. Well-maintained with full service history.",
-      features: ["6-Speed Manual", "Petrol", "Air Conditioning", "Power Steering"],
-      images: ["https://via.placeholder.com/600x400/0066cc/ffffff?text=Mazda+CX-5"]
-    },
-    {
-      slug: "toyota-axio-2020",
-      title: "Toyota Axio 2020",
-      brand: "Toyota", 
-      model: "Axio",
-      year: 2020,
-      price: "KSh 2,000,000",
+function buildCarsIndex() {
+  console.log('\n📊 Processing cars from CMS...');
+  
+  const carsDir = path.join(__dirname, '../content/cars');
+  const outputFile = path.join(__dirname, '../data/cars-index.json');
+  
+  let cars = [];
+  
+  if (fs.existsSync(carsDir)) {
+    const files = fs.readdirSync(carsDir).filter(f => f.endsWith('.md'));
+    console.log(`📄 Found ${files.length} car files in CMS`);
+    
+    files.forEach(file => {
+      try {
+        const filePath = path.join(carsDir, file);
+        const content = fs.readFileSync(filePath, 'utf8');
+        
+        const frontmatterMatch = content.match(/---\s*\n([\s\S]*?)\n---/);
+        if (frontmatterMatch) {
+          const frontmatter = yaml.load(frontmatterMatch[1]);
+          const slug = path.basename(file, '.md');
+          
+          // ✅ CRITICAL FIX: Process images correctly
+          let images = [];
+          if (frontmatter.images && Array.isArray(frontmatter.images)) {
+            images = frontmatter.images.map(img => {
+              // CMS stores images as objects with path property
+              if (typeof img === 'object' && img.image) {
+                return img.image; // Extract the actual image path
+              }
+              return img; // Already a string path
+            }).filter(img => img); // Remove empty values
+          }
+          
+          // ✅ Ensure images start with correct path
+          images = images.map(img => {
+            if (img.startsWith('/images/')) {
+              return img; // Already correct
+            } else if (img.startsWith('images/')) {
+              return '/' + img; // Add leading slash
+            } else if (img.startsWith('static/images/')) {
+              return img.replace('static/', '/'); // Fix static path
+            } else {
+              return '/images/' + img; // Assume it's just filename
+            }
+          });
+          
+          // ✅ If no images, use placeholder
+          if (images.length === 0) {
+            images = ['/images/cars/car-placeholder.jpg'];
+          }
+          
+          const car = {
+            slug: slug,
+            title: frontmatter.title || 'Untitled Car',
+            brand: frontmatter.brand || '',
+            model: frontmatter.model || '',
+            year: frontmatter.year || 2024,
+            price: frontmatter.price || 'KSh 0',
+            status: frontmatter.status || 'available',
+            featured: frontmatter.featured || false,
+            description: frontmatter.description || '',
+            features: Array.isArray(frontmatter.features) ? frontmatter.features : [],
+            images: images // ✅ Now properly formatted
+          };
+          
+          cars.push(car);
+          console.log(`✅ ${car.title} - ${car.images.length} images: ${car.images[0]}`);
+        }
+      } catch (error) {
+        console.log(`⚠️ Error with ${file}:`, error.message);
+      }
+    });
+  }
+  
+  // If no cars from CMS, create sample with working images
+  if (cars.length === 0) {
+    console.log('📝 No cars in CMS - creating sample data');
+    cars = [{
+      slug: "sample-car",
+      title: "Add cars through CMS",
+      brand: "MotorPride Kenya",
+      model: "Sample",
+      year: 2024,
+      price: "KSh 0",
       status: "available",
       featured: false,
-      description: "Smart and efficient vehicle perfect for city driving.",
-      features: ["Automatic", "Fuel Efficient", "AC", "Bluetooth"],
-      images: ["https://via.placeholder.com/600x400/28a745/ffffff?text=Toyota+Axio"]
-    }
-  ];
-
-  const contactsData = [
-    {
-      slug: "samuel-maina",
-      name: "Samuel Maina",
-      phone: "+254712345678",
-      whatsapp: "+254712345678",
-      email: "sam@motorpridekenya.com",
-      role: "Sales Manager"
-    },
-    {
-      slug: "elizabeth-wanjiku",
-      name: "Elizabeth Wanjiku",
-      phone: "+254723456789", 
-      whatsapp: "+254723456789",
-      email: "liz@motorpridekenya.com",
-      role: "Sales Agent"
-    },
-    {
-      slug: "klarie-mwangi",
-      name: "Klarie Mwangi",
-      phone: "+254734567890",
-      whatsapp: "+254734567890",
-      email: "klarie@motorpridekenya.com",
-      role: "Customer Support"
-    },
-    {
-      slug: "john-kamau", 
-      name: "John Kamau",
-      phone: "+254745678901",
-      whatsapp: "+254745678901",
-      email: "john@motorpridekenya.com",
-      role: "Sales Agent"
-    },
-    {
-      slug: "sarah-otieno",
-      name: "Sarah Otieno",
-      phone: "+254756789012",
-      whatsapp: "+254756789012", 
-      email: "sarah@motorpridekenya.com",
-      role: "Sales Agent"
-    }
-  ];
-
-  fs.writeFileSync(carsIndexPath, JSON.stringify(carsData, null, 2));
-  fs.writeFileSync(contactsIndexPath, JSON.stringify(contactsData, null, 2));
-
-  console.log('✅ Emergency data successfully created.');
+      description: "Use the CMS dashboard to add your vehicles",
+      features: ["Add features in CMS"],
+      images: ["/images/cars/car-placeholder.jpg"]
+    }];
+  }
+  
+  // Write to file
+  fs.writeFileSync(outputFile, JSON.stringify(cars, null, 2));
+  console.log(`🎉 Saved ${cars.length} cars with FIXED image paths`);
 }
 
-// Check if JSON files exist; if not, trigger emergency data
-if (!fs.existsSync(carsIndexPath) || !fs.existsSync(contactsIndexPath)) {
-  createEmergencyData();
-} else {
-  console.log('🟢 Valid JSON index files found — skipping emergency data.');
+function buildContactsIndex() {
+  console.log('\n📞 Processing contacts...');
+  
+  const contactsDir = path.join(__dirname, '../content/contacts');
+  const outputFile = path.join(__dirname, '../data/contacts-index.json');
+  
+  let contacts = [];
+  
+  if (fs.existsSync(contactsDir)) {
+    const files = fs.readdirSync(contactsDir).filter(f => f.endsWith('.md'));
+    console.log(`📄 Found ${files.length} contact files`);
+    
+    files.forEach(file => {
+      try {
+        const filePath = path.join(contactsDir, file);
+        const content = fs.readFileSync(filePath, 'utf8');
+        
+        const frontmatterMatch = content.match(/---\s*\n([\s\S]*?)\n---/);
+        if (frontmatterMatch) {
+          const frontmatter = yaml.load(frontmatterMatch[1]);
+          const slug = path.basename(file, '.md');
+          
+          const contact = {
+            slug: slug,
+            name: frontmatter.name || 'Unknown',
+            phone: frontmatter.phone || '+254000000000',
+            whatsapp: frontmatter.whatsapp || '+254000000000',
+            email: frontmatter.email || '',
+            role: frontmatter.role || 'Staff'
+          };
+          
+          contacts.push(contact);
+        }
+      } catch (error) {
+        console.log(`⚠️ Error with ${file}:`, error.message);
+      }
+    });
+  }
+  
+  // Ensure we have contacts for WhatsApp
+  if (contacts.length === 0) {
+    contacts = [
+      { slug: "contact-1", name: "Samuel Maina", whatsapp: "+254712345678", role: "Sales Manager" },
+      { slug: "contact-2", name: "Elizabeth Wanjiku", whatsapp: "+254723456789", role: "Sales Agent" },
+      { slug: "contact-3", name: "Klarie Mwangi", whatsapp: "+254734567890", role: "Customer Support" },
+      { slug: "contact-4", name: "John Kamau", whatsapp: "+254745678901", role: "Sales Agent" },
+      { slug: "contact-5", name: "Sarah Otieno", whatsapp: "+254756789012", role: "Sales Agent" }
+    ];
+  }
+  
+  fs.writeFileSync(outputFile, JSON.stringify(contacts, null, 2));
+  console.log(`🎉 Saved ${contacts.length} contacts`);
 }
 
-console.log('🎯 Build process completed successfully.');
+// Run build
+buildCarsIndex();
+buildContactsIndex();
+
+console.log('\n✅ BUILD COMPLETED - Images should now work!');
+console.log('🖼️  Image paths have been fixed in cars-index.json');
