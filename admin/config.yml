@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: main
 
-# FIX IMAGE PATHS - CHANGE THESE LINES:
+# FIXED IMAGE CONFIGURATION
 media_folder: "static/images"
 public_folder: "/images"
 
@@ -13,30 +13,56 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Brand", name: "brand", widget: "string" }
-      - { label: "Model", name: "model", widget: "string" }
-      - { label: "Year", name: "year", widget: "number" }
-      - { label: "Price", name: "price", widget: "string" }
-      - { label: "Status", name: "status", widget: "select", options: ["available", "sold", "incoming"] }
-      - { label: "Featured", name: "featured", widget: "boolean" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Features", name: "features", widget: "list" }
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Brand", name: "brand", widget: "string", required: true }
+      - { label: "Model", name: "model", widget: "string", required: true }
+      - { label: "Year", name: "year", widget: "number", required: true }
+      - { label: "Price", name: "price", widget: "string", required: true }
+      - { 
+          label: "Status", 
+          name: "status", 
+          widget: "select", 
+          options: ["available", "sold", "incoming"],
+          default: "available",
+          required: true 
+        }
+      - { 
+          label: "Featured", 
+          name: "featured", 
+          widget: "boolean", 
+          default: false 
+        }
+      - { 
+          label: "Description", 
+          name: "description", 
+          widget: "text",
+          required: true 
+        }
+      - { 
+          label: "Features", 
+          name: "features", 
+          widget: "list",
+          field: { label: "Feature", name: "feature", widget: "string" },
+          required: false 
+        }
       - { 
           label: "Images", 
           name: "images", 
           widget: "list", 
+          summary: "{{fields.image}}",
           field: { 
             label: "Image", 
             name: "image", 
             widget: "image",
-            # ADD THIS FOR PROPER IMAGE PATHS:
+            allow_multiple: false,
+            choose_url: false,
             media_library: {
               config: {
                 public_folder: "/images"
               }
             }
-          } 
+          },
+          required: true 
         }
 
   - name: "contacts"
@@ -45,8 +71,15 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Phone", name: "phone", widget: "string" }
-      - { label: "WhatsApp", name: "whatsapp", widget: "string" }
-      - { label: "Email", name: "email", widget: "string" }
-      - { label: "Role", name: "role", widget: "string" }
+      - { label: "Name", name: "name", widget: "string", required: true }
+      - { label: "Phone", name: "phone", widget: "string", required: true }
+      - { label: "WhatsApp", name: "whatsapp", widget: "string", required: true }
+      - { label: "Email", name: "email", widget: "string", required: false }
+      - { 
+          label: "Role", 
+          name: "role", 
+          widget: "select",
+          options: ["Sales Manager", "Sales Agent", "Customer Support", "Admin"],
+          default: "Sales Agent",
+          required: true 
+        }
