@@ -1,13 +1,11 @@
 const fs = require('fs');
 const path = require('path');
-const yaml = require('js-yaml');
 
-console.log('🚀 Building MotorPride Kenya...');
-console.log('📅 Build time:', new Date().toISOString());
+console.log('🚀 QUICK BUILD - MotorPride Kenya');
 
-// Ensure directories exist
-const directories = ['content/cars', 'content/contacts', 'data', 'static/images/cars'];
-directories.forEach(dir => {
+// Create directories if they don't exist
+const dirs = ['content/cars', 'content/contacts', 'data'];
+dirs.forEach(dir => {
   const fullPath = path.join(__dirname, '..', dir);
   if (!fs.existsSync(fullPath)) {
     fs.mkdirSync(fullPath, { recursive: true });
@@ -15,139 +13,60 @@ directories.forEach(dir => {
   }
 });
 
-function buildCarsIndex() {
-  console.log('\n📊 Processing cars...');
-  
-  const carsDir = path.join(__dirname, '../content/cars');
-  const outputFile = path.join(__dirname, '../data/cars-index.json');
-  
-  let cars = [];
-  
-  if (fs.existsSync(carsDir)) {
-    const files = fs.readdirSync(carsDir).filter(f => f.endsWith('.md'));
-    console.log(`📄 Found ${files.length} car files`);
-    
-    files.forEach(file => {
-      try {
-        const filePath = path.join(carsDir, file);
-        const content = fs.readFileSync(filePath, 'utf8');
-        
-        const frontmatterMatch = content.match(/---\s*\n([\s\S]*?)\n---/);
-        if (frontmatterMatch) {
-          const frontmatter = yaml.load(frontmatterMatch[1]);
-          const slug = path.basename(file, '.md');
-          
-          // FIX IMAGE PATHS - Ensure they start with /images/
-          let images = [];
-          if (frontmatter.images) {
-            images = frontmatter.images.map(img => {
-              if (img.startsWith('/images/')) {
-                return img;
-              } else if (img.startsWith('images/')) {
-                return '/' + img;
-              } else {
-                return '/images/' + img;
-              }
-            });
-          }
-          
-          // If no images, use placeholder
-          if (images.length === 0) {
-            images = ['/images/cars/car-placeholder.jpg'];
-          }
-          
-          const car = {
-            slug: slug,
-            title: frontmatter.title || 'Untitled Car',
-            brand: frontmatter.brand || '',
-            model: frontmatter.model || '',
-            year: frontmatter.year || 2024,
-            price: frontmatter.price || 'KSh 0',
-            status: frontmatter.status || 'available',
-            featured: frontmatter.featured || false,
-            description: frontmatter.description || '',
-            features: Array.isArray(frontmatter.features) ? frontmatter.features : [],
-            images: images
-          };
-          
-          cars.push(car);
-          console.log(`✅ ${car.title} - ${images.length} images`);
-        }
-      } catch (error) {
-        console.log(`⚠️ Error with ${file}:`, error.message);
-      }
-    });
+// SIMPLE TEST DATA - Always create this
+const testCars = [
+  {
+    slug: "test-car-1",
+    title: "Toyota Axio 2020",
+    brand: "Toyota",
+    model: "Axio",
+    year: 2020,
+    price: "KSh 1,200,000",
+    status: "available",
+    featured: true,
+    description: "Test car to verify build is working",
+    features: ["Automatic", "AC", "Power Steering"],
+    images: ["/images/cars/sample.jpg"]
+  },
+  {
+    slug: "test-car-2", 
+    title: "Mazda CX-5 2020",
+    brand: "Mazda",
+    model: "CX-5",
+    year: 2020,
+    price: "KSh 3,450,000",
+    status: "available",
+    featured: false,
+    description: "Another test car",
+    features: ["6-Speed Manual", "Petrol"],
+    images: ["/images/cars/sample.jpg"]
   }
-  
-  // Sort: featured first, then by year
-  cars.sort((a, b) => {
-    if (a.featured && !b.featured) return -1;
-    if (!a.featured && b.featured) return 1;
-    return b.year - a.year;
-  });
-  
-  fs.writeFileSync(outputFile, JSON.stringify(cars, null, 2));
-  console.log(`🎉 Saved ${cars.length} cars`);
-}
+];
 
-function buildContactsIndex() {
-  console.log('\n📞 Processing contacts...');
-  
-  const contactsDir = path.join(__dirname, '../content/contacts');
-  const outputFile = path.join(__dirname, '../data/contacts-index.json');
-  
-  let contacts = [];
-  
-  if (fs.existsSync(contactsDir)) {
-    const files = fs.readdirSync(contactsDir).filter(f => f.endsWith('.md'));
-    console.log(`📄 Found ${files.length} contact files`);
-    
-    files.forEach(file => {
-      try {
-        const filePath = path.join(contactsDir, file);
-        const content = fs.readFileSync(filePath, 'utf8');
-        
-        const frontmatterMatch = content.match(/---\s*\n([\s\S]*?)\n---/);
-        if (frontmatterMatch) {
-          const frontmatter = yaml.load(frontmatterMatch[1]);
-          const slug = path.basename(file, '.md');
-          
-          const contact = {
-            slug: slug,
-            name: frontmatter.name || 'Unknown',
-            phone: frontmatter.phone || '+254000000000',
-            whatsapp: frontmatter.whatsapp || '+254000000000',
-            email: frontmatter.email || '',
-            role: frontmatter.role || 'Staff'
-          };
-          
-          contacts.push(contact);
-          console.log(`✅ ${contact.name}`);
-        }
-      } catch (error) {
-        console.log(`⚠️ Error with ${file}:`, error.message);
-      }
-    });
+const testContacts = [
+  {
+    slug: "contact-1",
+    name: "Samuel Maina",
+    phone: "+254712345678",
+    whatsapp: "+254712345678",
+    email: "sam@motorpridekenya.com",
+    role: "Sales Manager"
+  },
+  {
+    slug: "contact-2",
+    name: "Elizabeth Wanjiku", 
+    phone: "+254723456789",
+    whatsapp: "+254723456789",
+    email: "liz@motorpridekenya.com",
+    role: "Sales Agent"
   }
-  
-  // Ensure we have at least 5 contacts for WhatsApp buttons
-  while (contacts.length < 5) {
-    contacts.push({
-      slug: `contact-${contacts.length + 1}`,
-      name: `Sales Agent ${contacts.length + 1}`,
-      phone: '+254711223344',
-      whatsapp: '+254711223344',
-      email: `agent${contacts.length + 1}@motorpridekenya.com`,
-      role: 'Sales Agent'
-    });
-  }
-  
-  fs.writeFileSync(outputFile, JSON.stringify(contacts, null, 2));
-  console.log(`🎉 Saved ${contacts.length} contacts (5 required for WhatsApp)`);
-}
+];
 
-// Run build
-buildCarsIndex();
-buildContactsIndex();
+// ALWAYS write fresh data
+fs.writeFileSync('./data/cars-index.json', JSON.stringify(testCars, null, 2));
+fs.writeFileSync('./data/contacts-index.json', JSON.stringify(testContacts, null, 2));
 
-console.log('\n✅ BUILD COMPLETED!');
+console.log('✅ FORCE CREATED: cars-index.json and contacts-index.json');
+console.log('📊 Cars:', testCars.length);
+console.log('📞 Contacts:', testContacts.length);
+console.log('🎯 If cars show on your site, build works!');
