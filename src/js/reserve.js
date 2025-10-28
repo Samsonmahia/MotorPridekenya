@@ -14,23 +14,28 @@ class ReserveManager {
             const timestamp = new Date().getTime();
             const response = await fetch(`/data/contacts-index.json?t=${timestamp}`);
             if (!response.ok) throw new Error('Failed to load contacts');
-            
+
             this.contacts = await response.json();
+
+            if (!Array.isArray(this.contacts) || this.contacts.length === 0) {
+                console.warn('⚠️ No contacts found in JSON, using fallback list');
+                this.contacts = this.createFallbackContacts();
+            }
+
             console.log(`📞 Loaded ${this.contacts.length} contacts`);
         } catch (error) {
-            console.error('Error loading contacts:', error);
-            // Create fallback contacts
+            console.error('❌ Error loading contacts:', error);
             this.contacts = this.createFallbackContacts();
         }
     }
 
     createFallbackContacts() {
         return [
-            { name: "Samuel Maina", whatsapp: "+254712345678", role: "Sales Manager" },
-            { name: "Elizabeth Wanjiku", whatsapp: "+254723456789", role: "Sales Agent" },
-            { name: "Klarie Mwangi", whatsapp: "+254734567890", role: "Customer Support" },
-            { name: "John Kamau", whatsapp: "+254745678901", role: "Sales Agent" },
-            { name: "Sarah Otieno", whatsapp: "+254756789012", role: "Sales Agent" }
+            { name: "Samuel Maina", whatsapp: "254712345678", role: "Sales Manager" },
+            { name: "Elizabeth Wanjiku", whatsapp: "254723456789", role: "Sales Agent" },
+            { name: "Klarie Mwangi", whatsapp: "254734567890", role: "Customer Support" },
+            { name: "John Kamau", whatsapp: "254745678901", role: "Sales Agent" },
+            { name: "Sarah Otieno", whatsapp: "254756789012", role: "Sales Agent" }
         ];
     }
 
@@ -45,36 +50,47 @@ class ReserveManager {
         const carInfo = document.getElementById('selected-car-info');
         const contactsList = document.getElementById('contacts-list');
 
-        // Update car info
+        if (!modal || !carInfo || !contactsList) {
+            console.error('❌ Reserve modal elements missing');
+            return;
+        }
+
+        // ✅ Car Info
         carInfo.innerHTML = `
-            <div style="text-align: center;">
-                <h4 style="margin: 0 0 0.5rem 0; color: var(--midnight-blue);">${this.selectedCar.title}</h4>
-                <p style="margin: 0.2rem 0; font-size: 1.1rem; font-weight: bold; color: var(--electric-blue);">${this.selectedCar.price}</p>
-                <p style="margin: 0.2rem 0; font-size: 0.9rem; color: var(--dark-gray);">Reference: ${this.selectedCar.slug}</p>
+            <div class="reserve-header">
+                <h3>${this.selectedCar.title}</h3>
+                <p><strong>${this.selectedCar.price}</strong></p>
+                <p class="car-ref">Reference: ${this.selectedCar.slug}</p>
             </div>
         `;
 
-        // Show exactly 5 contacts
+        // ✅ Limit to 5 contacts
         const contactsToShow = this.contacts.slice(0, 5);
-        
-        // Render contacts
-        contactsList.innerHTML = contactsToShow.map(contact => 
-            this.createContactCard(contact)
-        ).join('');
+        contactsList.innerHTML = contactsToShow.map(contact => this.createContactCard(contact)).join('');
 
         modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
     }
 
     createContactCard(contact) {
+        const cleanNumber = this.formatNumber(contact.whatsapp);
         return `
             <div class="contact-card">
-                <div class="contact-name">${contact.name}</div>
-                <div class="contact-role">${contact.role}</div>
-                <button class="whatsapp-btn" onclick="reserveManager.contactViaWhatsApp('${contact.whatsapp}', '${contact.name}')">
-                    💬 WhatsApp ${contact.name}
+                <div class="contact-info">
+                    <div class="contact-name">${contact.name}</div>
+                    <div class="contact-role">${contact.role}</div>
+                </div>
+                <button class="whatsapp-btn" 
+                    onclick="reserveManager.contactViaWhatsApp('${cleanNumber}', '${contact.name}')">
+                    💬 Chat ${contact.name}
                 </button>
             </div>
         `;
+    }
+
+    formatNumber(number) {
+        // Normalize to Kenyan format (no + or spaces)
+        return number.replace(/\D/g, '').replace(/^0/, '254');
     }
 
     contactViaWhatsApp(phoneNumber, contactName) {
@@ -83,84 +99,90 @@ class ReserveManager {
         const message = this.createReservationMessage(contactName);
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-        
-        // Open WhatsApp
+
         window.open(whatsappUrl, '_blank');
-        
-        // Show success message
         this.showSuccessMessage(contactName);
-        
-        // Track the reservation
-        this.trackReservation(contactName);
+        console.log(`📝 Reservation initiated for ${this.selectedCar.title} via ${contactName}`);
     }
 
     createReservationMessage(contactName) {
         const car = this.selectedCar;
-        return `Hey MotorPride, I want to reserve… ${car.title}
+        return `Hey MotorPride, I want to reserve… ${car.title}.
 
 Vehicle Details:
-• Model: ${car.brand} ${car.model}
+• Brand: ${car.brand}
+• Model: ${car.model}
 • Year: ${car.year}
 • Price: ${car.price}
 
-Please contact me to proceed with the reservation. Thank you!`;
-    }
-
-    trackReservation(contactName) {
-        console.log(`📝 Reservation initiated for ${this.selectedCar.title} via ${contactName}`);
+Please contact me to proceed. (via ${contactName})`;
     }
 
     showSuccessMessage(contactName) {
         const modal = document.getElementById('reserve-modal');
-        const existingMessage = modal.querySelector('.success-message');
-        
-        if (!existingMessage) {
-            const successDiv = document.createElement('div');
-            successDiv.className = 'success-message';
-            successDiv.style.cssText = `
-                background: var(--success);
-                color: white;
-                padding: 1rem;
-                border-radius: 8px;
-                margin: 1rem 0;
-                text-align: center;
-                animation: slideIn 0.5s ease-out;
-            `;
-            successDiv.innerHTML = `
-                <strong>✅ WhatsApp opened!</strong>
-                <div style="font-size: 0.9rem; margin-top: 0.5rem;">
-                    Message prepared for ${contactName}. Please send it to proceed.
-                </div>
-            `;
-            
-            const contactsSection = modal.querySelector('.contacts-section');
-            contactsSection.parentNode.insertBefore(successDiv, contactsSection);
-            
-            setTimeout(() => {
-                if (successDiv.parentNode) {
-                    successDiv.style.animation = 'slideOut 0.3s ease-in';
-                    setTimeout(() => successDiv.remove(), 300);
-                }
-            }, 5000);
-        }
+        const existing = modal.querySelector('.success-message');
+        if (existing) existing.remove();
+
+        const successDiv = document.createElement('div');
+        successDiv.className = 'success-message';
+        successDiv.innerHTML = `
+            <strong>✅ WhatsApp opened!</strong><br>
+            Message prepared for <b>${contactName}</b>.
+        `;
+        modal.querySelector('.contacts-section').prepend(successDiv);
+
+        setTimeout(() => successDiv.remove(), 5000);
     }
 }
 
-// Add animation styles
+// Add CSS animations
 const reserveStyles = `
-    @keyframes slideIn {
-        from { transform: translateY(-20px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes slideOut {
-        from { transform: translateY(0); opacity: 1; }
-        to { transform: translateY(-20px); opacity: 0; }
-    }
+.success-message {
+    background: #28a745;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 1rem;
+    animation: fadeIn 0.4s ease-out;
+}
+.contact-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f7fa;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.6rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.contact-name {
+    font-weight: 600;
+    color: #0A1F44;
+}
+.contact-role {
+    font-size: 0.85rem;
+    color: #555;
+}
+.whatsapp-btn {
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+.whatsapp-btn:hover {
+    background: #1ebe5d;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 `;
-
-const styleSheet = document.createElement('style');
-styleSheet.textContent = reserveStyles;
-document.head.appendChild(styleSheet);
+document.head.insertAdjacentHTML('beforeend', `<style>${reserveStyles}</style>`);
 
 // Initialize
 const reserveManager = new ReserveManager();
