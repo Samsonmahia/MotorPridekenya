@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
-console.log('🚀 Building MotorPride Kenya - FIXING IMAGES');
+console.log('🚀 Building from CMS .md files...');
 
 // Ensure directories exist
 const directories = ['content/cars', 'content/contacts', 'data', 'static/images/cars'];
@@ -14,106 +14,122 @@ directories.forEach(dir => {
   }
 });
 
-function buildCarsIndex() {
-  console.log('\n📊 Processing cars from CMS...');
+function processCarsFromMD() {
+  console.log('\n📊 Processing cars from .md files...');
   
   const carsDir = path.join(__dirname, '../content/cars');
   const outputFile = path.join(__dirname, '../data/cars-index.json');
   
   let cars = [];
   
-  if (fs.existsSync(carsDir)) {
-    const files = fs.readdirSync(carsDir).filter(f => f.endsWith('.md'));
-    console.log(`📄 Found ${files.length} car files in CMS`);
-    
-    files.forEach(file => {
-      try {
-        const filePath = path.join(carsDir, file);
-        const content = fs.readFileSync(filePath, 'utf8');
-        
-        const frontmatterMatch = content.match(/---\s*\n([\s\S]*?)\n---/);
-        if (frontmatterMatch) {
-          const frontmatter = yaml.load(frontmatterMatch[1]);
-          const slug = path.basename(file, '.md');
-          
-          // ✅ CRITICAL FIX: Process images correctly
-          let images = [];
-          if (frontmatter.images && Array.isArray(frontmatter.images)) {
-            images = frontmatter.images.map(img => {
-              // CMS stores images as objects with path property
-              if (typeof img === 'object' && img.image) {
-                return img.image; // Extract the actual image path
-              }
-              return img; // Already a string path
-            }).filter(img => img); // Remove empty values
-          }
-          
-          // ✅ Ensure images start with correct path
-          images = images.map(img => {
-            if (img.startsWith('/images/')) {
-              return img; // Already correct
-            } else if (img.startsWith('images/')) {
-              return '/' + img; // Add leading slash
-            } else if (img.startsWith('static/images/')) {
-              return img.replace('static/', '/'); // Fix static path
-            } else {
-              return '/images/' + img; // Assume it's just filename
-            }
-          });
-          
-          // ✅ If no images, use placeholder
-          if (images.length === 0) {
-            images = ['/images/cars/car-placeholder.jpg'];
-          }
-          
-          const car = {
-            slug: slug,
-            title: frontmatter.title || 'Untitled Car',
-            brand: frontmatter.brand || '',
-            model: frontmatter.model || '',
-            year: frontmatter.year || 2024,
-            price: frontmatter.price || 'KSh 0',
-            status: frontmatter.status || 'available',
-            featured: frontmatter.featured || false,
-            description: frontmatter.description || '',
-            features: Array.isArray(frontmatter.features) ? frontmatter.features : [],
-            images: images // ✅ Now properly formatted
-          };
-          
-          cars.push(car);
-          console.log(`✅ ${car.title} - ${car.images.length} images: ${car.images[0]}`);
-        }
-      } catch (error) {
-        console.log(`⚠️ Error with ${file}:`, error.message);
+  if (!fs.existsSync(carsDir)) {
+    console.log('❌ content/cars directory not found');
+    return;
+  }
+
+  const files = fs.readdirSync(carsDir).filter(f => f.endsWith('.md'));
+  console.log(`📄 Found ${files.length} .md car files`);
+  
+  if (files.length === 0) {
+    console.log('⚠️ No .md files found in content/cars/');
+  }
+
+  files.forEach(file => {
+    try {
+      const filePath = path.join(carsDir, file);
+      const content = fs.readFileSync(filePath, 'utf8');
+      
+      console.log(`\n🔍 Processing: ${file}`);
+      
+      // Extract frontmatter (between --- markers)
+      const frontmatterMatch = content.match(/---\s*\n([\s\S]*?)\n---/);
+      if (!frontmatterMatch) {
+        console.log(`❌ No frontmatter found in ${file}`);
+        return;
       }
-    });
-  }
-  
-  // If no cars from CMS, create sample with working images
-  if (cars.length === 0) {
-    console.log('📝 No cars in CMS - creating sample data');
-    cars = [{
-      slug: "sample-car",
-      title: "Add cars through CMS",
-      brand: "MotorPride Kenya",
-      model: "Sample",
-      year: 2024,
-      price: "KSh 0",
-      status: "available",
-      featured: false,
-      description: "Use the CMS dashboard to add your vehicles",
-      features: ["Add features in CMS"],
-      images: ["/images/cars/car-placeholder.jpg"]
-    }];
-  }
-  
-  // Write to file
+
+      const frontmatter = yaml.load(frontmatterMatch[1]);
+      const slug = path.basename(file, '.md');
+      
+      console.log(`✅ Frontmatter extracted for: ${frontmatter.title || 'Untitled'}`);
+      
+      // Process images - handle both string and object formats from CMS
+      let images = [];
+      if (frontmatter.images) {
+        if (Array.isArray(frontmatter.images)) {
+          images = frontmatter.images.map(img => {
+            if (typeof img === 'object' && img.image) {
+              // CMS stores as {image: "/images/cars/filename.jpg"}
+              return img.image;
+            }
+            return img; // Already a string
+          });
+        } else if (typeof frontmatter.images === 'string') {
+          // Single image as string
+          images = [frontmatter.images];
+        }
+      }
+      
+      // Ensure images have correct path format
+      images = images.map(img => {
+        if (img.startsWith('/images/')) {
+          return img;
+        } else if (img.startsWith('images/')) {
+          return '/' + img;
+        } else {
+          return '/images/' + img;
+        }
+      }).filter(img => img); // Remove empty values
+      
+      // If no images, use placeholder
+      if (images.length === 0) {
+        images = ['/images/cars/car-placeholder.jpg'];
+        console.log(`⚠️ No images found, using placeholder for ${frontmatter.title}`);
+      }
+      
+      console.log(`🖼️ Images processed: ${images.length} images`);
+      
+      const car = {
+        slug: slug,
+        title: frontmatter.title || 'Untitled Car',
+        brand: frontmatter.brand || '',
+        model: frontmatter.model || '',
+        year: frontmatter.year || 2024,
+        price: frontmatter.price || 'KSh 0',
+        status: frontmatter.status || 'available',
+        featured: frontmatter.featured || false,
+        description: frontmatter.description || '',
+        features: Array.isArray(frontmatter.features) ? frontmatter.features : [],
+        images: images
+      };
+      
+      cars.push(car);
+      console.log(`✅ Added to JSON: ${car.title}`);
+      
+    } catch (error) {
+      console.log(`❌ Error processing ${file}:`, error.message);
+    }
+  });
+
+  // Sort cars: featured first, then by year
+  cars.sort((a, b) => {
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+    return b.year - a.year;
+  });
+
+  // Write to JSON file
   fs.writeFileSync(outputFile, JSON.stringify(cars, null, 2));
-  console.log(`🎉 Saved ${cars.length} cars with FIXED image paths`);
+  console.log(`\n🎉 Generated cars-index.json with ${cars.length} vehicles from .md files`);
+  
+  // Log what was created
+  cars.forEach(car => {
+    console.log(`   🚗 ${car.title} - ${car.images.length} images`);
+  });
 }
 
-function buildContactsIndex() {
-  console.log('\n📞 Processing contacts...');
+function processContactsFromMD() {
+  console.log('\n📞 Processing contacts from .md files...');
   
   const contactsDir = path.join(__dirname, '../content/contacts');
   const outputFile = path.join(__dirname, '../data/contacts-index.json');
@@ -122,7 +138,7 @@ function buildContactsIndex() {
   
   if (fs.existsSync(contactsDir)) {
     const files = fs.readdirSync(contactsDir).filter(f => f.endsWith('.md'));
-    console.log(`📄 Found ${files.length} contact files`);
+    console.log(`📄 Found ${files.length} .md contact files`);
     
     files.forEach(file => {
       try {
@@ -144,31 +160,34 @@ function buildContactsIndex() {
           };
           
           contacts.push(contact);
+          console.log(`✅ Added contact: ${contact.name}`);
         }
       } catch (error) {
-        console.log(`⚠️ Error with ${file}:`, error.message);
+        console.log(`❌ Error processing ${file}:`, error.message);
       }
     });
   }
   
   // Ensure we have contacts for WhatsApp
   if (contacts.length === 0) {
+    console.log('📝 Creating sample contacts for WhatsApp');
     contacts = [
-      { slug: "contact-1", name: "Samuel Maina", whatsapp: "+254712345678", role: "Sales Manager" },
-      { slug: "contact-2", name: "Elizabeth Wanjiku", whatsapp: "+254723456789", role: "Sales Agent" },
-      { slug: "contact-3", name: "Klarie Mwangi", whatsapp: "+254734567890", role: "Customer Support" },
-      { slug: "contact-4", name: "John Kamau", whatsapp: "+254745678901", role: "Sales Agent" },
-      { slug: "contact-5", name: "Sarah Otieno", whatsapp: "+254756789012", role: "Sales Agent" }
+      { slug: "samuel", name: "Samuel Maina", whatsapp: "+254712345678", role: "Sales Manager" },
+      { slug: "elizabeth", name: "Elizabeth Wanjiku", whatsapp: "+254723456789", role: "Sales Agent" },
+      { slug: "klarie", name: "Klarie Mwangi", whatsapp: "+254734567890", role: "Customer Support" },
+      { slug: "john", name: "John Kamau", whatsapp: "+254745678901", role: "Sales Agent" },
+      { slug: "sarah", name: "Sarah Otieno", whatsapp: "+254756789012", role: "Sales Agent" }
     ];
   }
   
   fs.writeFileSync(outputFile, JSON.stringify(contacts, null, 2));
-  console.log(`🎉 Saved ${contacts.length} contacts`);
+  console.log(`🎉 Generated contacts-index.json with ${contacts.length} contacts`);
 }
 
-// Run build
-buildCarsIndex();
-buildContactsIndex();
+// Run the build
+processCarsFromMD();
+processContactsFromMD();
 
-console.log('\n✅ BUILD COMPLETED - Images should now work!');
-console.log('🖼️  Image paths have been fixed in cars-index.json');
+console.log('\n✅ BUILD COMPLETED!');
+console.log('📊 CMS .md files → JSON data conversion successful');
+console.log('🚀 Your cars should now appear on the live site!');
