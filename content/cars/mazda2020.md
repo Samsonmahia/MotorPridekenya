@@ -11,4 +11,5 @@ features:
   - smart
 images:
   - /images/download-1-.jpeg
+  - /images/img-20251028-wa0018.jpg
 ---
