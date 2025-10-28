@@ -1,23 +1,8 @@
 backend:
   name: git-gateway
   branch: main
-  commit_messages:
-    create: 'Create {{collection}} "{{slug}}"'
-    update: 'Update {{collection}} "{{slug}}"'
-    delete: 'Delete {{collection}} "{{slug}}"'
-    uploadMedia: 'Upload "{{path}}"'
-    deleteMedia: 'Delete "{{path}}"'
-  # ✅ Netlify Build Hook (triggers automatic rebuild when CMS content changes)
-  build_hook: https://api.netlify.com/build_hooks/68ff5402366de6cdc809ec3a
 
-# Enables editorial workflow (draft → review → publish)
-publish_mode: editorial_workflow
-
-# ✅ Replace with your live Netlify site URL
-site_url: https://motorpridekenya.netlify.app
-display_url: https://motorpridekenya.netlify.app
-
-# Where uploaded images go (in your repo)
+# FIX IMAGE PATHS - CHANGE THESE LINES:
 media_folder: "static/images"
 public_folder: "/images"
 
@@ -37,13 +22,22 @@ collections:
       - { label: "Featured", name: "featured", widget: "boolean" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Features", name: "features", widget: "list" }
-      - label: "Images"
-        name: "images"
-        widget: "list"
-        field:
-          label: "Image"
-          name: "image"
-          widget: "image"
+      - { 
+          label: "Images", 
+          name: "images", 
+          widget: "list", 
+          field: { 
+            label: "Image", 
+            name: "image", 
+            widget: "image",
+            # ADD THIS FOR PROPER IMAGE PATHS:
+            media_library: {
+              config: {
+                public_folder: "/images"
+              }
+            }
+          } 
+        }
 
   - name: "contacts"
     label: "Contacts"
