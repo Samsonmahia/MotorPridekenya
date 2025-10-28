@@ -1,17 +1,31 @@
-/* Image Gallery Styles */
+/* 🚗 Enhanced Car Detail Gallery Styles */
 .car-detail-gallery {
     margin-bottom: 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
+/* Main Image Wrapper */
 .main-image {
     position: relative;
-    height: 400px;
-    border-radius: 10px;
+    height: 420px;
+    width: 100%;
+    border-radius: 12px;
     overflow: hidden;
     cursor: zoom-in;
-    margin-bottom: 1rem;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.main-image:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Zoomed Lightbox Mode */
 .main-image.zoomed {
     position: fixed;
     top: 0;
@@ -19,34 +33,40 @@
     width: 100vw;
     height: 100vh;
     z-index: 3000;
-    cursor: zoom-out;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0, 0, 0, 0.95);
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: zoom-out;
+    animation: fadeIn 0.3s ease forwards;
 }
 
 .main-image.zoomed img {
     max-width: 90%;
     max-height: 90%;
     object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
 }
 
 .main-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
+/* Overlay Label */
 .image-overlay {
     position: absolute;
     bottom: 1rem;
     right: 1rem;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
     font-size: 0.8rem;
+    letter-spacing: 0.5px;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -55,20 +75,23 @@
     opacity: 1;
 }
 
+/* Thumbnails */
 .thumbnail-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 0.5rem;
+    gap: 0.6rem;
+    width: 100%;
 }
 
 .thumbnail {
     height: 80px;
-    border-radius: 5px;
+    border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
     opacity: 0.7;
-    transition: all 0.3s ease;
     border: 2px solid transparent;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
 }
 
 .thumbnail:hover,
@@ -76,10 +99,37 @@
     opacity: 1;
     transform: scale(1.05);
     border-color: var(--accent-blue);
+    box-shadow: 0 4px 12px rgba(0, 153, 255, 0.2);
 }
 
 .thumbnail img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail:hover img {
+    transform: scale(1.08);
+}
+
+/* Fade-in Animation for Lightbox */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .main-image {
+        height: 280px;
+    }
+
+    .thumbnail {
+        height: 65px;
+    }
+
+    .thumbnail-grid {
+        gap: 0.4rem;
+    }
 }
