@@ -4,9 +4,13 @@
   "description": "MotorPride Kenya - Premium Vehicle Marketplace",
   "type": "commonjs",
   "scripts": {
-    "build": "node scripts/buildall.js",
-    "dev": "npx live-server --port=3000",
-    "test": "node scripts/test-car-files.js"
+    "build": "node scripts/generatecarsindex.js",
+    "build-images": "node scripts/generatecarsindex.js && node scripts/create-image-structure.js",
+    "build-all": "node scripts/generatecarsindex.js && node scripts/create-image-structure.js",
+    "dev": "node scripts/generatecarsindex.js && npx live-server --port=3000",
+    "test": "node scripts/test-car-files.js",
+    "setup": "node scripts/generatecarsindex.js && node scripts/create-image-structure.js && echo '✅ Setup complete!'",
+    "emergency-build": "node scripts/emergency-build.js"
   },
   "dependencies": {
     "js-yaml": "^4.1.0"
@@ -16,5 +20,14 @@
   },
   "engines": {
     "node": ">=16.0.0"
-  }
+  },
+  "keywords": [
+    "cars",
+    "kenya",
+    "marketplace",
+    "vehicle",
+    "automotive"
+  ],
+  "author": "MotorPride Kenya",
+  "license": "MIT"
 }
