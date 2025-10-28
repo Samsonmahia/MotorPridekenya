@@ -8,14 +8,17 @@ backend:
     uploadMedia: 'Upload "{{path}}"'
     deleteMedia: 'Delete "{{path}}"'
 
-# ADD THESE LINES FOR AUTO-REBUILDS
+# Enables editorial workflow (draft → review → publish)
 publish_mode: editorial_workflow
-site_url: https://your-site.netlify.app  # Replace with your actual site URL
 
-# BUILD HOOK CONFIGURATION - ADD THIS
-display_url: https://your-site.netlify.app  # Replace with your actual site URL
+# ✅ Replace with your live Netlify site URL
+site_url: https://motorpridekenya.netlify.app
+display_url: https://motorpridekenya.netlify.app
+
+# ✅ Netlify Build Hook (triggers automatic rebuild when CMS content changes)
 build_hook: https://api.netlify.com/build_hooks/68ff5402366de6cdc809ec3a
 
+# Where uploaded images go (in your repo)
 media_folder: "static/images"
 public_folder: "/images"
 
@@ -35,7 +38,13 @@ collections:
       - { label: "Featured", name: "featured", widget: "boolean" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Features", name: "features", widget: "list" }
-      - { label: "Images", name: "images", widget: "list", field: { label: "Image", name: "image", widget: "image" } }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        field:
+          label: "Image"
+          name: "image"
+          widget: "image"
 
   - name: "contacts"
     label: "Contacts"
