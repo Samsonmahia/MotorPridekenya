@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
-console.log('🚀 Building from CMS .md files...');
+console.log('🚀 Building from CMS .md files - FIXING IMAGES');
 
 // Ensure directories exist
 const directories = ['content/cars', 'content/contacts', 'data', 'static/images/cars'];
@@ -53,41 +53,79 @@ function processCarsFromMD() {
       
       console.log(`✅ Frontmatter extracted for: ${frontmatter.title || 'Untitled'}`);
       
-      // Process images - handle both string and object formats from CMS
+      // ✅ CRITICAL FIX: Handle CMS image format properly
       let images = [];
+      
       if (frontmatter.images) {
+        console.log('🖼️ Raw images data:', frontmatter.images);
+        
         if (Array.isArray(frontmatter.images)) {
           images = frontmatter.images.map(img => {
+            // CMS stores images as objects: {image: "filename.jpg"}
             if (typeof img === 'object' && img.image) {
-              // CMS stores as {image: "/images/cars/filename.jpg"}
-              return img.image;
+              console.log(`   📸 Processing image object:`, img);
+              return `/images/${img.image}`;
             }
-            return img; // Already a string
-          });
-        } else if (typeof frontmatter.images === 'string') {
-          // Single image as string
-          images = [frontmatter.images];
+            // Or as full path strings
+            else if (typeof img === 'string') {
+              if (img.startsWith('/images/')) {
+                return img;
+              } else {
+                return `/images/${img}`;
+              }
+            }
+            return null;
+          }).filter(img => img !== null);
+        } 
+        // Handle single image (not in array)
+        else if (typeof frontmatter.images === 'string') {
+          if (frontmatter.images.startsWith('/images/')) {
+            images = [frontmatter.images];
+          } else {
+            images = [`/images/${frontmatter.images}`];
+          }
+        }
+        // Handle single image object
+        else if (typeof frontmatter.images === 'object' && frontmatter.images.image) {
+          images = [`/images/${frontmatter.images.image}`];
         }
       }
       
-      // Ensure images have correct path format
-      images = images.map(img => {
-        if (img.startsWith('/images/')) {
-          return img;
-        } else if (img.startsWith('images/')) {
-          return '/' + img;
-        } else {
-          return '/images/' + img;
-        }
-      }).filter(img => img); // Remove empty values
+      // ✅ Remove duplicates and ensure unique images
+      images = [...new Set(images)];
       
-      // If no images, use placeholder
+      // ✅ If no images found, use placeholder and check what's available
       if (images.length === 0) {
-        images = ['/images/cars/car-placeholder.jpg'];
-        console.log(`⚠️ No images found, using placeholder for ${frontmatter.title}`);
+        console.log(`⚠️ No valid images found in frontmatter for ${frontmatter.title}`);
+        console.log(`   Images field:`, frontmatter.images);
+        
+        // Check static/images/cars for any images
+        const staticImagesDir = path.join(__dirname, '../static/images/cars');
+        if (fs.existsSync(staticImagesDir)) {
+          const existingImages = fs.readdirSync(staticImagesDir);
+          console.log(`   Available images in static:`, existingImages);
+          
+          if (existingImages.length > 0) {
+            // Try to find images that might belong to this car
+            const carImages = existingImages.filter(img => 
+              img.includes(slug) || img.includes(frontmatter.model) || img.includes(frontmatter.brand)
+            );
+            
+            if (carImages.length > 0) {
+              images = carImages.map(img => `/images/cars/${img}`);
+              console.log(`   🎯 Found matching images:`, images);
+            }
+          }
+        }
+        
+        // If still no images, use placeholder
+        if (images.length === 0) {
+          images = ['https://via.placeholder.com/600x400/003366/ffffff?text=MotorPride+Kenya'];
+          console.log(`   🖼️ Using placeholder for ${frontmatter.title}`);
+        }
       }
       
-      console.log(`🖼️ Images processed: ${images.length} images`);
+      console.log(`🖼️ Final images:`, images);
       
       const car = {
         slug: slug,
@@ -104,7 +142,7 @@ function processCarsFromMD() {
       };
       
       cars.push(car);
-      console.log(`✅ Added to JSON: ${car.title}`);
+      console.log(`✅ Added to JSON: ${car.title} with ${car.images.length} images`);
       
     } catch (error) {
       console.log(`❌ Error processing ${file}:`, error.message);
@@ -120,11 +158,11 @@ function processCarsFromMD() {
 
   // Write to JSON file
   fs.writeFileSync(outputFile, JSON.stringify(cars, null, 2));
-  console.log(`\n🎉 Generated cars-index.json with ${cars.length} vehicles from .md files`);
+  console.log(`\n🎉 Generated cars-index.json with ${cars.length} vehicles`);
   
   // Log what was created
   cars.forEach(car => {
-    console.log(`   🚗 ${car.title} - ${car.images.length} images`);
+    console.log(`   🚗 ${car.title} - ${car.images.length} images: ${car.images[0]}`);
   });
 }
 
@@ -189,5 +227,4 @@ processCarsFromMD();
 processContactsFromMD();
 
 console.log('\n✅ BUILD COMPLETED!');
-console.log('📊 CMS .md files → JSON data conversion successful');
-console.log('🚀 Your cars should now appear on the live site!');
+console.log('🖼️  Images should now work with proper CMS format handling');
