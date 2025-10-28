@@ -87,10 +87,19 @@ class CarsDisplay {
         const statusClass = `status-${car.status}`;
         const featuredClass = car.featured ? 'featured' : '';
         
-        // ✅ FIXED: Use primary_image field with fallbacks
-        const imageUrl = car.primary_image || 
-                        (car.images && car.images[0]) || 
-                        '/images/cars/car-placeholder.jpg';
+        // ✅ CRITICAL FIX: Handle all image scenarios
+        let imageUrl = '/images/cars/car-placeholder.jpg';
+        
+        if (car.primary_image) {
+            imageUrl = car.primary_image;
+        } else if (car.images && car.images.length > 0) {
+            imageUrl = car.images[0];
+        }
+        
+        // Ensure the URL is properly formatted
+        if (!imageUrl.startsWith('/') && !imageUrl.startsWith('http')) {
+            imageUrl = '/images/' + imageUrl;
+        }
         
         console.log(`🖼️  Car ${car.title} image: ${imageUrl}`);
         
@@ -100,8 +109,7 @@ class CarsDisplay {
                     <img src="${imageUrl}" 
                          alt="${car.title}" 
                          loading="lazy"
-                         onload="console.log('✅ Image loaded:', this.src)"
-                         onerror="this.onerror=null; this.src='/images/cars/car-placeholder.jpg'; console.log('❌ Image failed, using placeholder:', this.alt)">
+                         onerror="this.onerror=null; this.src='/images/cars/car-placeholder.jpg';">
                     <div class="status-badge ${statusClass}">
                         ${car.status.toUpperCase()}
                     </div>
@@ -146,9 +154,18 @@ class CarsDisplay {
 
     createCarDetailHTML(car) {
         // ✅ FIXED: Use primary_image with proper fallbacks
-        const mainImage = car.primary_image || 
-                         (car.images && car.images[0]) || 
-                         '/images/cars/car-placeholder.jpg';
+        let mainImage = '/images/cars/car-placeholder.jpg';
+        
+        if (car.primary_image) {
+            mainImage = car.primary_image;
+        } else if (car.images && car.images.length > 0) {
+            mainImage = car.images[0];
+        }
+        
+        // Ensure the URL is properly formatted
+        if (!mainImage.startsWith('/') && !mainImage.startsWith('http')) {
+            mainImage = '/images/' + mainImage;
+        }
         
         return `
             <div class="car-detail-header">
@@ -176,14 +193,20 @@ class CarsDisplay {
                 </div>
                 ${car.images && car.images.length > 1 ? `
                 <div class="thumbnail-grid" id="thumbnail-grid">
-                    ${car.images.map((image, index) => `
+                    ${car.images.map((image, index) => {
+                        // Format thumbnail images properly
+                        let thumbImage = image;
+                        if (!thumbImage.startsWith('/') && !thumbImage.startsWith('http')) {
+                            thumbImage = '/images/' + thumbImage;
+                        }
+                        return `
                         <div class="thumbnail ${index === 0 ? 'active' : ''}" 
-                             onclick="carsDisplay.changeMainImage('${image}')">
-                            <img src="${image}" 
+                             onclick="carsDisplay.changeMainImage('${thumbImage}')">
+                            <img src="${thumbImage}" 
                                  alt="${car.title} - Image ${index + 1}"
                                  onerror="this.style.display='none'">
                         </div>
-                    `).join('')}
+                    `}).join('')}
                 </div>
                 ` : ''}
             </div>
@@ -600,6 +623,177 @@ Please contact me to proceed. (via ${contactName})`;
     }
 }
 
+// Add CSS animations for reserve manager
+const reserveStyles = `
+.success-message {
+    background: #28a745;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 1rem;
+    animation: fadeIn 0.4s ease-out;
+}
+.contact-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f7fa;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.6rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.contact-name {
+    font-weight: 600;
+    color: #0A1F44;
+}
+.contact-role {
+    font-size: 0.85rem;
+    color: #555;
+}
+.whatsapp-btn {
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+.whatsapp-btn:hover {
+    background: #1ebe5d;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+`;
+document.head.insertAdjacentHTML('beforeend', `<style>${reserveStyles}</style>`);
+
 // Initialize
 const reserveManager = new ReserveManager();
 window.reserveManager = reserveManager;
+
+// Smooth animations for car grid and modals
+const animationStyles = `
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Car card animations */
+.car-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.car-card:nth-child(odd) {
+    animation-delay: 0.1s;
+}
+
+.car-card:nth-child(even) {
+    animation-delay: 0.2s;
+}
+
+/* Modal animations */
+.modal-content {
+    animation: scaleIn 0.3s ease-out;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Hover animations */
+.car-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Status badge animations */
+.status-badge {
+    animation: slideInRight 0.5s ease-out;
+}
+
+/* Button pulse animation for reserve button */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 102, 204, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 102, 204, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 102, 204, 0);
+    }
+}
+
+.reserve-btn.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Feature tag animations */
+.feature-tag {
+    transition: all 0.3s ease;
+}
+
+.feature-tag:hover {
+    background: var(--accent-blue);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* Success message animation */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.success-message {
+    animation: bounceIn 0.6s ease-out;
+}
+`;
+
+document.head.insertAdjacentHTML('beforeend', `<style>${animationStyles}</style>`);
