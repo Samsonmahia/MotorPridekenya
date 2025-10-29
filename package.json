@@ -9,7 +9,8 @@
     "dev": "npx live-server --port=3000",
     "prebuild": "npm run generate-index || exit 0",
     "test": "echo 'No tests defined'",
-    "setup": "npm run generate-index"
+    "setup": "npm run generate-index",
+    "emergency-build": "node scripts/emergency-fallback.js && echo '🚨 Emergency build completed'"
   },
   "dependencies": {
     "gray-matter": "^4.0.3"
@@ -27,4 +28,3 @@
   "author": "MotorPride Kenya",
   "license": "MIT"
 }
-"emergency-build": "node scripts/emergency-fallback.js && echo '🚨 Emergency build completed'"
