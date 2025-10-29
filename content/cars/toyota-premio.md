@@ -4,7 +4,7 @@ brand: toyota
 model: premio
 year: 2014
 price: 1,090,000
-status: incoming
+status: sold
 featured: true
 description: clean
 features:
