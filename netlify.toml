@@ -1,26 +1,16 @@
-# ======================================
-# 🚗 MotorPride Kenya - Netlify Config
-# ======================================
-
 [build]
-  command = "npm install && npm run build"
+  command = "npm install && npm run json-fix"
   publish = "."
 
 [build.environment]
   NODE_VERSION = "18"
   NPM_FLAGS = "--legacy-peer-deps"
 
-# ======================================
-# 🔀 SPA Routing & Redirects
-# ======================================
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# ======================================
-# 🔒 CORS & JSON Headers
-# ======================================
 [[headers]]
   for = "/*.json"
   [headers.values]
