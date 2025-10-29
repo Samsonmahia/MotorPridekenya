@@ -1,16 +1,11 @@
 {
   "name": "motorpridekenya",
-  "version": "1.0.0", 
+  "version": "1.0.0",
   "description": "MotorPride Kenya - Premium Vehicle Marketplace",
   "type": "commonjs",
   "scripts": {
-    "generate-index": "node scripts/generateCarsIndex.js",
-    "json-fix": "node scripts/emergency-json-fix.js",
-    "build": "npm run json-fix || npm run generate-index || echo 'Build completed'",
-    "dev": "npx live-server --port=3000",
-    "prebuild": "npm run json-fix || exit 0",
-    "test": "echo 'No tests defined'",
-    "setup": "npm run json-fix"
+    "build": "node scripts/generateCarsIndex.js",
+    "dev": "npx live-server --port=3000"
   },
   "dependencies": {
     "gray-matter": "^4.0.3"
@@ -20,7 +15,7 @@
   },
   "keywords": [
     "cars",
-    "kenya", 
+    "kenya",
     "marketplace",
     "vehicle",
     "automotive"
