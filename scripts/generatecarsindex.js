@@ -1,114 +1,138 @@
 const fs = require('fs');
 const path = require('path');
 
-// Define paths
+console.log('🚗 Starting CMS cars index generation...');
+
 const carsDir = path.join(__dirname, '../content/cars');
 const outputFile = path.join(__dirname, '../data/cars-index.json');
 
+// Ensure data directory exists
+fs.mkdirSync(path.dirname(outputFile), { recursive: true });
+
 try {
-  console.log('🚗 Starting cars index generation...');
-  
-  // Ensure /data exists
-  fs.mkdirSync(path.dirname(outputFile), { recursive: true });
-  
   // Check if cars directory exists
   if (!fs.existsSync(carsDir)) {
-    console.warn('⚠️ Cars directory not found, creating empty index');
+    console.log('📁 Creating cars directory...');
+    fs.mkdirSync(carsDir, { recursive: true });
     fs.writeFileSync(outputFile, '[]');
-    console.log('✅ Empty cars-index.json created');
+    console.log('✅ Empty cars index created (no cars yet)');
     process.exit(0);
   }
-  
+
   const files = fs.readdirSync(carsDir).filter(f => f.endsWith('.md'));
-  
+  console.log(`📁 Found ${files.length} car files in CMS`);
+
   if (files.length === 0) {
-    console.warn('⚠️ No car files found, creating empty index');
+    console.log('ℹ️ No car files found in CMS yet');
     fs.writeFileSync(outputFile, '[]');
-    console.log('✅ Empty cars-index.json created');
     process.exit(0);
   }
-  
-  console.log(`📁 Found ${files.length} car files`);
-  
+
   const cars = [];
-  
-  // Try to use gray-matter, but fallback if it fails
   let matter;
+
+  // Try to load gray-matter, but continue without it if needed
   try {
     matter = require('gray-matter');
   } catch (error) {
-    console.warn('⚠️ gray-matter not available, using fallback parser');
-    // Fallback: create basic car objects without gray-matter
-    for (const file of files) {
-      const slug = file.replace('.md', '');
-      cars.push({
-        slug: slug,
-        title: slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
-        brand: 'Unknown',
-        model: 'Unknown',
-        year: '2023',
-        price: 'Contact for price',
-        status: 'available',
-        featured: false,
-        description: 'Description not available',
-        features: [],
-        images: ['/images/car-placeholder.jpg'],
-        primary_image: '/images/car-placeholder.jpg'
-      });
-    }
-    
-    fs.writeFileSync(outputFile, JSON.stringify(cars, null, 2));
-    console.log(`✅ Fallback cars-index.json created with ${cars.length} entries`);
-    process.exit(0);
+    console.log('⚠️ gray-matter not available, using basic parsing');
   }
-  
-  // Use gray-matter if available
+
   for (const file of files) {
     try {
       const fullPath = path.join(carsDir, file);
       const content = fs.readFileSync(fullPath, 'utf8');
-      const { data } = matter(content);
       
-      // Process images safely
-      let images = data.images || [];
-      if (images.length > 0 && typeof images[0] === 'object') {
-        images = images.map(img => typeof img === 'string' ? img : (img.image || ''));
+      let carData = {};
+      const slug = file.replace('.md', '');
+
+      if (matter) {
+        // Use gray-matter if available
+        const { data } = matter(content);
+        carData = data;
+      } else {
+        // Basic YAML frontmatter parsing (fallback)
+        const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+        if (frontMatterMatch) {
+          const yamlContent = frontMatterMatch[1];
+          yamlContent.split('\n').forEach(line => {
+            const match = line.match(/(\w+):\s*(.*)/);
+            if (match) {
+              const key = match[1].trim();
+              let value = match[2].trim();
+              
+              // Handle arrays (like features, images)
+              if (value.startsWith('[') && value.endsWith(']')) {
+                value = value.slice(1, -1).split(',').map(item => item.trim().replace(/['"]/g, ''));
+              }
+              
+              // Handle boolean values
+              if (value === 'true') value = true;
+              if (value === 'false') value = false;
+              
+              carData[key] = value;
+            }
+          });
+        }
       }
-      
-      const primary_image = images.length > 0 ? images[0] : '/images/car-placeholder.jpg';
-      
-      cars.push({
-        slug: file.replace('.md', ''),
-        title: data.title || `${data.brand || 'Car'} ${data.model || ''}`.trim(),
-        brand: data.brand || 'Unknown',
-        model: data.model || '',
-        year: data.year || '2023',
-        price: data.price || 'Contact for price',
-        status: data.status || 'available',
-        featured: data.featured || false,
-        description: data.description || 'No description available.',
-        features: data.features || [],
+
+      console.log(`📄 Processing: ${file}`, carData.title || carData.brand);
+
+      // Process images from CMS - CRITICAL FIX
+      let images = [];
+      if (carData.images && Array.isArray(carData.images)) {
+        images = carData.images.map(img => {
+          if (typeof img === 'string') return img;
+          if (img && typeof img === 'object') return img.image || img.url || '';
+          return '';
+        }).filter(img => img && img !== '');
+      }
+
+      // If no images from CMS, use placeholder
+      if (images.length === 0) {
+        images = ['/images/car-placeholder.jpg'];
+      }
+
+      // Format the car object for frontend
+      const car = {
+        slug: slug,
+        title: carData.title || `${carData.brand || 'Car'} ${carData.model || ''}`.trim() || 'Untitled Car',
+        brand: carData.brand || 'Unknown',
+        model: carData.model || '',
+        year: carData.year || '2023',
+        price: carData.price || 'Contact for price',
+        status: carData.status || 'available',
+        featured: carData.featured || false,
+        description: carData.description || 'No description available.',
+        features: Array.isArray(carData.features) ? carData.features : [],
         images: images,
-        primary_image: primary_image
-      });
-      
-    } catch (err) {
-      console.warn(`⚠️ Skipping ${file}: ${err.message}`);
+        primary_image: images[0] || '/images/car-placeholder.jpg'
+      };
+
+      cars.push(car);
+      console.log(`✅ Added: ${car.title}`);
+
+    } catch (error) {
+      console.error(`❌ Error processing ${file}:`, error.message);
     }
   }
-  
+
+  // Write the final JSON file
   fs.writeFileSync(outputFile, JSON.stringify(cars, null, 2));
-  console.log(`✅ cars-index.json created successfully with ${cars.length} entries`);
+  console.log(`🎉 Success! Generated cars-index.json with ${cars.length} cars from CMS`);
   
-} catch (error) {
-  console.error('❌ Critical error in generateCarsIndex:', error.message);
-  // Ensure we always write a valid JSON file, even if empty
-  try {
-    fs.mkdirSync(path.dirname(outputFile), { recursive: true });
-    fs.writeFileSync(outputFile, '[]');
-    console.log('✅ Emergency empty cars-index.json created');
-  } catch (e) {
-    console.error('❌ Could not create emergency file:', e.message);
+  // Debug: Show first car to verify
+  if (cars.length > 0) {
+    console.log('🔍 First car sample:', {
+      title: cars[0].title,
+      images: cars[0].images,
+      primary_image: cars[0].primary_image
+    });
   }
-  process.exit(0); // Always exit with 0 to prevent build failures
+
+} catch (error) {
+  console.error('💥 Critical error:', error);
+  // Always create valid JSON, even if empty
+  fs.writeFileSync(outputFile, '[]');
+  console.log('✅ Created empty cars index as fallback');
 }
