@@ -1,4 +1,3 @@
-// scripts/generateCarsIndex.js
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
@@ -31,17 +30,33 @@ for (const file of files) {
     const content = fs.readFileSync(fullPath, 'utf8');
     const { data } = matter(content);
 
+    // ✅ FIX: Proper image path handling for CMS
+    let images = data.images || [];
+    
+    // Convert CMS image objects to proper paths
+    if (images.length > 0 && typeof images[0] === 'object') {
+      images = images.map(img => {
+        // Handle both string paths and image objects from CMS
+        return typeof img === 'string' ? img : (img.image || '');
+      }).filter(img => img); // Remove empty values
+    }
+
+    // Use first image as primary
+    const primary_image = images.length > 0 ? images[0] : '/images/car-placeholder.jpg';
+
     cars.push({
       slug: file.replace('.md', ''),
-      name: data.name || 'Unnamed Car',
+      title: data.title || `${data.brand} ${data.model}` || 'Unnamed Car',
       brand: data.brand || 'Unknown',
       model: data.model || '',
       year: data.year || '',
-      price: data.price || '',
-      fuel: data.fuel || '',
-      transmission: data.transmission || '',
-      images: data.images || [],
-      status: data.status || 'Available'
+      price: data.price || 'Contact for price',
+      status: data.status || 'available',
+      featured: data.featured || false,
+      description: data.description || 'No description available.',
+      features: data.features || [],
+      images: images,
+      primary_image: primary_image
     });
   } catch (err) {
     console.error(`Error reading ${file}:`, err.message);
