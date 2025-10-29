@@ -4,15 +4,17 @@
   "description": "MotorPride Kenya - Premium Vehicle Marketplace",
   "type": "commonjs",
   "scripts": {
-    "build": "node scripts/generatecarsindex.js",
-    "build-images": "node scripts/generatecarsindex.js && node scripts/create-image-structure.js",
-    "build-all": "node scripts/generatecarsindex.js && node scripts/create-image-structure.js",
-    "dev": "node scripts/generatecarsindex.js && npx live-server --port=3000",
+    "generate-index": "node generateCarsIndex.js",
+    "build": "npm run generate-index && npm run site-build",
+    "site-build": "npm run build-local",
+    "build-local": "echo '⚙️ Building static site...' && npx live-server --port=3000",
+    "dev": "npm run generate-index && npx live-server --port=3000",
     "test": "node scripts/test-car-files.js",
-    "setup": "node scripts/generatecarsindex.js && node scripts/create-image-structure.js && echo '✅ Setup complete!'",
+    "setup": "npm run generate-index && node scripts/create-image-structure.js && echo '✅ Setup complete!'",
     "emergency-build": "node scripts/emergency-build.js"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
