@@ -5,11 +5,13 @@
   "type": "commonjs",
   "scripts": {
     "generate-index": "node scripts/generateCarsIndex.js",
-    "build": "npm run generate-index && echo '⚙️ Building site for Netlify...'",
+    "build": "npm run generate-index && echo '✅ Build complete - cars index generated'",
     "dev": "npm run generate-index && npx live-server --port=3000",
+    "prebuild": "npm run generate-index",
+    "postinstall": "npm run generate-index",
     "test": "node scripts/test-car-files.js",
-    "setup": "npm run generate-index && node scripts/create-image-structure.js && echo '✅ Setup complete!'",
-    "emergency-build": "node scripts/emergency-build.js"
+    "setup": "npm run generate-index && echo '✅ Setup complete!'",
+    "emergency-build": "node scripts/generateCarsIndex.js && echo '🚨 Emergency build complete'"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
