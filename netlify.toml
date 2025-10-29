@@ -1,18 +1,11 @@
 [build]
-  command = "npm install && npm run json-fix"
+  command = "npm install && npm run build"
   publish = "."
 
 [build.environment]
   NODE_VERSION = "18"
-  NPM_FLAGS = "--legacy-peer-deps"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[[headers]]
-  for = "/*.json"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Content-Type = "application/json"
