@@ -1,14 +1,11 @@
-// generateCarsIndex.js
-// This script scans /content/cars for Markdown (.md) files,
-// extracts YAML frontmatter, and builds /data/cars-index.json
+// scripts/generateCarsIndex.js
 
 const fs = require('fs');
 const path = require('path');
-const matter = require('gray-matter'); // make sure gray-matter is installed
+const matter = require('gray-matter');
 
-const carsDir = path.join(__dirname, 'content', 'cars');
-const dataDir = path.join(__dirname, 'data');
-const outputFile = path.join(dataDir, 'cars-index.json');
+const carsDir = path.join(__dirname, '../content/cars');
+const outputFile = path.join(__dirname, '../data/cars-index.json');
 
 function generateCarsIndex() {
   if (!fs.existsSync(carsDir)) {
@@ -16,16 +13,10 @@ function generateCarsIndex() {
     return;
   }
 
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-    console.log('📁 Created /data directory.');
-  }
-
   const carFiles = fs.readdirSync(carsDir).filter(file => file.endsWith('.md'));
 
   if (carFiles.length === 0) {
-    console.warn('⚠️ No Markdown car files found in /content/cars.');
-    fs.writeFileSync(outputFile, '[]');
+    console.warn('⚠️ No Markdown files found in content/cars.');
     return;
   }
 
@@ -54,7 +45,7 @@ function generateCarsIndex() {
   }).filter(Boolean);
 
   fs.writeFileSync(outputFile, JSON.stringify(cars, null, 2));
-  console.log(`✅ cars-index.json generated with ${cars.length} cars.`);
+  console.log(`✅ cars-index.json successfully generated with ${cars.length} cars.`);
 }
 
 generateCarsIndex();
