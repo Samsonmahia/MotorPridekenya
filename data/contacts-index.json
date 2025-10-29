@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Samuel Maina",
+    "phone": "254712345678",
+    "whatsapp": "254712345678",
+    "email": "samuel@motorpridekenya.com",
+    "role": "Sales Manager"
+  },
+  {
+    "name": "Elizabeth Wanjiku", 
+    "phone": "254723456789",
+    "whatsapp": "254723456789",
+    "email": "elizabeth@motorpridekenya.com",
+    "role": "Sales Agent"
+  },
+  {
+    "name": "Klarie Mwangi",
+    "phone": "254734567890",
+    "whatsapp": "254734567890",
+    "email": "klarie@motorpridekenya.com", 
+    "role": "Customer Support"
+  },
+  {
+    "name": "John Kamau",
+    "phone": "254745678901",
+    "whatsapp": "254745678901",
+    "email": "john@motorpridekenya.com",
+    "role": "Sales Agent"
+  },
+  {
+    "name": "Sarah Otieno",
+    "phone": "254756789012",
+    "whatsapp": "254756789012",
+    "email": "sarah@motorpridekenya.com",
+    "role": "Sales Agent"
+  }
+]

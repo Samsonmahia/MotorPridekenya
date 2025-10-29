@@ -1,0 +1,22 @@
+{
+  "name": "motorpridekenya",
+  "version": "1.0.0",
+  "description": "MotorPride Kenya - Premium Vehicle Marketplace",
+  "type": "commonjs",
+  "scripts": {
+    "build": "node scripts/generate-cars.js",
+    "dev": "npx live-server --port=3000"
+  },
+  "dependencies": {
+    "decap-cms-app": "^3.0.0",
+    "netlify-identity-widget": "^1.9.2"
+  },
+  "keywords": [
+    "cars",
+    "kenya",
+    "marketplace",
+    "vehicle"
+  ],
+  "author": "MotorPride Kenya",
+  "license": "MIT"
+}

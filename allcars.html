@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Cars - MotorPride Kenya</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">MotorPride Kenya</div>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <a href="/allcars.html" class="active">All Cars</a>
+                <a href="/about.html">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Premium Vehicle Collection</h1>
+            <p>Discover your perfect ride from our carefully curated selection</p>
+        </div>
+    </section>
+
+    <!-- Status Tabs -->
+    <div class="container">
+        <div class="status-tabs">
+            <div class="tab active" data-status="all">All Vehicles</div>
+            <div class="tab" data-status="available">Available</div>
+            <div class="tab" data-status="incoming">Incoming</div>
+            <div class="tab" data-status="sold">Sold</div>
+        </div>
+    </div>
+
+    <!-- Cars Grid -->
+    <main class="container">
+        <div id="cars-grid" class="cars-grid">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading premium vehicles...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Car Detail Modal -->
+    <div id="car-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="car-detail-content"></div>
+        </div>
+    </div>
+
+    <!-- Reserve Modal -->
+    <div id="reserve-modal" class="modal">
+        <div class="modal-content reserve-modal">
+            <span class="close-modal">&times;</span>
+            <h2>Reserve This Vehicle</h2>
+            <div id="selected-car-info" class="selected-car-info"></div>
+            <div class="contacts-section">
+                <h3>Contact Our Sales Team</h3>
+                <div id="contacts-list" class="contacts-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🚗 CAR DISPLAY SYSTEM
+        class CarDisplay {
+            constructor() {
+                this.cars = [];
+                this.filteredCars = [];
+                this.currentCar = null;
+                this.contacts = [];
+                this.currentStatus = 'all';
+                this.init();
+            }
+
+            async init() {
+                await this.loadContacts();
+                await this.loadCars();
+                this.setupEventListeners();
+            }
+
+            async loadCars() {
+                try {
+                    const response = await fetch('/data/cars-index.json?t=' + Date.now());
+                    if (!response.ok) throw new Error('Failed to load cars');
+                    
+                    this.cars = await response.json();
+                    this.filteredCars = [...this.cars];
+                    
+                    this.hideLoading();
+                    this.renderCars();
+                    this.updateTabCounts();
+                    
+                } catch (error) {
+                    this.showError('Failed to load vehicles: ' + error.message);
+                }
+            }
+
+            async loadContacts() {
+                try {
+                    const response = await fetch('/data/contacts.json?t=' + Date.now());
+                    this.contacts = await response.json();
+                } catch (error) {
+                    console.error('Failed to load contacts:', error);
+                    // Fallback contacts
+                    this.contacts = [
+                        { name: "Sales Team", whatsapp: "254712345678", role: "Sales Agent" }
+                    ];
+                }
+            }
+
+            hideLoading() {
+                const loading = document.querySelector('.loading');
+                if (loading) loading.style.display = 'none';
+            }
+
+            renderCars() {
+                const grid = document.getElementById('cars-grid');
+                if (!grid) return;
+
+                if (this.filteredCars.length === 0) {
+                    grid.innerHTML = `
+                        <div class="error-message">
+                            <h3>No vehicles found</h3>
+                            <p>Try selecting a different status filter</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                grid.innerHTML = this.filteredCars.map(car => this.createCarCard(car)).join('');
+                
+                // Add click events to cards
+                setTimeout(() => {
+                    document.querySelectorAll('.car-card').forEach(card => {
+                        card.addEventListener('click', () => {
+                            const slug = card.getAttribute('data-slug');
+                            this.openCarDetail(slug);
+                        });
+                    });
+                }, 100);
+            }
+
+            createCarCard(car) {
+                const statusClass = `status-${car.status}`;
+                const featuredBadge = car.featured ? '<div class="featured-badge">⭐ Featured</div>' : '';
+                
+                return `
+                    <div class="car-card" data-slug="${car.slug}">
+                        <div class="car-image">
+                            <img src="${car.primary_image}" 
+                                 alt="${car.title}"
+                                 onerror="this.src='/images/car-placeholder.jpg'">
+                            <div class="status-badge ${statusClass}">${car.status}</div>
+                            ${featuredBadge}
+                        </div>
+                        <div class="car-info">
+                            <h3 class="car-title">${car.title}</h3>
+                            <div class="car-meta">
+                                <span>${car.brand}</span>
+                                <span>${car.model}</span>
+                                <span>${car.year}</span>
+                            </div>
+                            <div class="car-price">${car.price}</div>
+                            ${car.features.length > 0 ? `
+                                <div class="car-features">
+                                    ${car.features.slice(0, 3).map(feature => 
+                                        `<span class="feature-tag">${feature}</span>`
+                                    ).join('')}
+                                    ${car.features.length > 3 ? 
+                                        `<span class="feature-tag">+${car.features.length - 3}</span>` : ''
+                                    }
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+
+            openCarDetail(slug) {
+                this.currentCar = this.cars.find(car => car.slug === slug);
+                if (!this.currentCar) return;
+
+                const modal = document.getElementById('car-modal');
+                const content = document.getElementById('car-detail-content');
+                
+                content.innerHTML = this.createCarDetailHTML(this.currentCar);
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+
+                this.setupGallery();
+            }
+
+            createCarDetailHTML(car) {
+                return `
+                    <div class="car-detail-header">
+                        <div class="car-detail-title">
+                            <h2>${car.title}</h2>
+                            <div class="car-detail-meta">
+                                <span>${car.brand}</span>
+                                <span>${car.model}</span>
+                                <span>${car.year}</span>
+                                <span class="status-badge status-${car.status}">${car.status}</span>
+                            </div>
+                        </div>
+                        <div class="car-detail-price">${car.price}</div>
+                    </div>
+
+                    <div class="car-gallery">
+                        <div class="main-image">
+                            <img src="${car.primary_image}" 
+                                 alt="${car.title}"
+                                 id="main-car-image"
+                                 onerror="this.src='/images/car-placeholder.jpg'">
+                        </div>
+                        ${car.images.length > 1 ? `
+                        <div class="thumbnail-strip">
+                            ${car.images.map((image, index) => `
+                                <div class="thumbnail ${index === 0 ? 'active' : ''}" 
+                                     onclick="carDisplay.changeMainImage('${image}')">
+                                    <img src="${image}" 
+                                         alt="${car.title} - Image ${index + 1}"
+                                         onerror="this.style.display='none'">
+                                </div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
+                    </div>
+
+                    <div class="car-detail-info">
+                        <div class="car-description">
+                            <h3>Description</h3>
+                            <p>${car.description}</p>
+                            
+                            ${car.features.length > 0 ? `
+                                <h3>Features & Specifications</h3>
+                                <div class="car-features-detail">
+                                    ${car.features.map(feature => 
+                                        `<span class="feature-tag">${feature}</span>`
+                                    ).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                        
+                        <div class="car-specs">
+                            <h3>Vehicle Details</h3>
+                            <div class="specs-grid">
+                                <div class="spec-item">
+                                    <span>Brand:</span>
+                                    <span>${car.brand}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span>Model:</span>
+                                    <span>${car.model}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span>Year:</span>
+                                    <span>${car.year}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span>Status:</span>
+                                    <span class="status-badge status-${car.status}">${car.status}</span>
+                                </div>
+                                ${car.featured ? `
+                                <div class="spec-item">
+                                    <span>Featured:</span>
+                                    <span>⭐ Yes</span>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reserve-section">
+                        <button class="reserve-btn" onclick="carDisplay.openReserveModal()">
+                            🚗 Reserve This Vehicle
+                        </button>
+                    </div>
+                `;
+            }
+
+            changeMainImage(imageUrl) {
+                const mainImage = document.getElementById('main-car-image');
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                
+                if (mainImage) {
+                    mainImage.src = imageUrl;
+                }
+                
+                thumbnails.forEach(thumb => {
+                    thumb.classList.remove('active');
+                    if (thumb.querySelector('img').src.includes(imageUrl)) {
+                        thumb.classList.add('active');
+                    }
+                });
+            }
+
+            setupGallery() {
+                // Smooth gallery functionality
+                console.log('Gallery ready');
+            }
+
+            openReserveModal() {
+                if (!this.currentCar) return;
+
+                const modal = document.getElementById('reserve-modal');
+                const carInfo = document.getElementById('selected-car-info');
+                const contactsList = document.getElementById('contacts-list');
+
+                carInfo.innerHTML = `
+                    <h3>${this.currentCar.title}</h3>
+                    <p><strong>${this.currentCar.price}</strong></p>
+                    <p>Reference: ${this.currentCar.slug}</p>
+                `;
+
+                // Show first 5 contacts
+                const contactsToShow = this.contacts.slice(0, 5);
+                contactsList.innerHTML = contactsToShow.map(contact => `
+                    <div class="contact-card">
+                        <div class="contact-info">
+                            <div class="contact-name">${contact.name}</div>
+                            <div class="contact-role">${contact.role}</div>
+                        </div>
+                        <a href="https://wa.me/${contact.whatsapp.replace(/\D/g, '')}?text=Hi ${contact.name}, I'm interested in the ${this.currentCar.title} (${this.currentCar.price}) from MotorPride Kenya. Please contact me to proceed." 
+                           target="_blank" class="whatsapp-btn">
+                            💬 WhatsApp
+                        </a>
+                    </div>
+                `).join('');
+
+                modal.style.display = 'block';
+            }
+
+            setupEventListeners() {
+                // Status tabs
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        
+                        this.currentStatus = tab.getAttribute('data-status');
+                        this.filterCars();
+                    });
+                });
+
+                // Modal close events
+                document.querySelectorAll('.close-modal').forEach(closeBtn => {
+                    closeBtn.addEventListener('click', (e) => {
+                        e.target.closest('.modal').style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    });
+                });
+
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) {
+                            modal.style.display = 'none';
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                });
+
+                // Escape key to close modals
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        document.querySelectorAll('.modal').forEach(modal => {
+                            modal.style.display = 'none';
+                            document.body.style.overflow = 'auto';
+                        });
+                    }
+                });
+            }
+
+            filterCars() {
+                if (this.currentStatus === 'all') {
+                    this.filteredCars = [...this.cars];
+                } else {
+                    this.filteredCars = this.cars.filter(car => car.status === this.currentStatus);
+                }
+                this.renderCars();
+            }
+
+            updateTabCounts() {
+                const counts = {
+                    all: this.cars.length,
+                    available: this.cars.filter(car => car.status === 'available').length,
+                    incoming: this.cars.filter(car => car.status === 'incoming').length,
+                    sold: this.cars.filter(car => car.status === 'sold').length
+                };
+
+                document.querySelectorAll('.tab').forEach(tab => {
+                    const status = tab.getAttribute('data-status');
+                    const count = counts[status];
+                    if (!tab.querySelector('.count')) {
+                        tab.innerHTML += ` <span class="count">(${count})</span>`;
+                    } else {
+                        tab.querySelector('.count').textContent = `(${count})`;
+                    }
+                });
+            }
+
+            showError(message) {
+                const grid = document.getElementById('cars-grid');
+                if (grid) {
+                    grid.innerHTML = `
+                        <div class="error-message">
+                            <h3>Loading Failed</h3>
+                            <p>${message}</p>
+                            <button onclick="location.reload()" style="
+                                background: var(--primary); 
+                                color: white; 
+                                border: none; 
+                                padding: 1rem 2rem; 
+                                border-radius: 8px; 
+                                cursor: pointer; 
+                                margin-top: 1rem;">
+                                🔄 Refresh Page
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // Add count styles
+        const countStyles = `
+            .tab .count {
+                font-size: 0.8em;
+                opacity: 0.8;
+                margin-left: 0.3rem;
+            }
+        `;
+        document.head.insertAdjacentHTML('beforeend', `<style>${countStyles}</style>`);
+
+        // Initialize when page loads
+        let carDisplay;
+        document.addEventListener('DOMContentLoaded', () => {
+            carDisplay = new CarDisplay();
+            window.carDisplay = carDisplay;
+        });
+    </script>
+</body>
+</html>
