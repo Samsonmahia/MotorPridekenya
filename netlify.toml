@@ -3,13 +3,12 @@
 # ======================================
 
 [build]
-  # ✅ FIXED: Simple build command that works
-  command = "npm run build"
+  command = "npm install && npm run build"
   publish = "."
 
 [build.environment]
   NODE_VERSION = "18"
-  NPM_VERSION = "10"
+  NPM_FLAGS = "--legacy-peer-deps"
 
 # ======================================
 # 🔀 SPA Routing & Redirects
@@ -27,21 +26,3 @@
   [headers.values]
     Access-Control-Allow-Origin = "*"
     Content-Type = "application/json"
-
-# ======================================
-# ⚡ Performance Optimizations
-# ======================================
-[[headers]]
-  for = "/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000"
-
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000"
-
-[[headers]]
-  for = "/images/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000"
