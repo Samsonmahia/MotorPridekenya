@@ -1,3 +1,67 @@
+# ======================================
+# 🚗 MotorPride Kenya - Netlify Config
+# ======================================
+
 [build]
-  command = "node generateCarsIndex.js && npm run build"
-  publish = "dist"
+  # Generate cars-index.json before building the site
+  command = "node scripts/generateCarsIndex.js && npm run build"
+  # Publish root folder (where index.html is)
+  publish = "."
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "10"
+  NETLIFY_BUILD_TIMEOUT = "600"
+
+# ======================================
+# 🌐 Automatic Rebuild on CMS Publish
+# ======================================
+
+# Create a Build Hook in Netlify → Site Settings → Build & Deploy → Build Hooks
+# Copy the generated URL (e.g. https://api.netlify.com/build_hooks/xxxxxx)
+# Then paste it here for reference/documentation only — not for execution
+
+[context.production.environment]
+  BUILD_HOOK_URL = "https://api.netlify.com/build_hooks/YOUR_HOOK_ID_HERE"
+
+# When Decap CMS saves new content, it can send a POST request to this URL
+# Example (Decap CMS config.yml):
+# backend:
+#   name: git-gateway
+#   branch: main
+# publish_mode: editorial_workflow
+# site_url: https://motorpridekenya.netlify.app
+# media_folder: "assets/uploads"
+# public_folder: "/assets/uploads"
+# collections:
+#   - name: "cars"
+#     label: "Cars"
+#     folder: "content/cars"
+#     create: true
+#     slug: "{{slug}}"
+#     fields:
+#       - {label: "Name", name: "name", widget: "string"}
+#       - {label: "Brand", name: "brand", widget: "string"}
+#       - {label: "Price", name: "price", widget: "string"}
+#       - {label: "Images", name: "images", widget: "list"}
+#       - {label: "Fuel Type", name: "fuel", widget: "string"}
+#       - {label: "Transmission", name: "transmission", widget: "string"}
+#       - {label: "Year", name: "year", widget: "string"}
+#       - {label: "Status", name: "status", widget: "select", options: ["Available", "Incoming", "Sold"]}
+
+# ======================================
+# 🔀 SPA Routing & Redirects
+# ======================================
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# ======================================
+# 🔒 CORS & JSON Headers
+# ======================================
+[[headers]]
+  for = "/*.json"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Content-Type = "application/json"
