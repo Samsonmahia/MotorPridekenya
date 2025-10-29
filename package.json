@@ -4,10 +4,8 @@
   "description": "MotorPride Kenya - Premium Vehicle Marketplace",
   "type": "commonjs",
   "scripts": {
-    "generate-index": "node generateCarsIndex.js",
-    "build": "npm run generate-index && npm run site-build",
-    "site-build": "npm run build-local",
-    "build-local": "echo '⚙️ Building static site...' && npx live-server --port=3000",
+    "generate-index": "node scripts/generateCarsIndex.js",
+    "build": "npm run generate-index && echo '⚙️ Building site for Netlify...'",
     "dev": "npm run generate-index && npx live-server --port=3000",
     "test": "node scripts/test-car-files.js",
     "setup": "npm run generate-index && node scripts/create-image-structure.js && echo '✅ Setup complete!'",
