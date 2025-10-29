@@ -27,3 +27,4 @@
   "author": "MotorPride Kenya",
   "license": "MIT"
 }
+"emergency-build": "node scripts/emergency-fallback.js && echo '🚨 Emergency build completed'"
