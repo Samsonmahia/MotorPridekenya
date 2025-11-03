@@ -1,579 +1,786 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Us | Motorpride Kenya</title>
-  <style>
-    /* === Base Styles === */
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f0f4f8;
-      color: #333;
-    }
-    section {
-      padding: 3rem 1.5rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-    h1, h2 {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotorPride Kenya | About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    /* === Hero Section === */
-    .about-hero {
-      background: linear-gradient(to right, #0052cc, #007fff);
-      color: white;
-      padding: 4rem 1.5rem;
-      text-align: center;
-    }
-    .animated-title {
-      font-size: 3rem;
-      font-weight: bold;
-      animation: fadeInZoom 1.5s ease-out forwards;
-    }
-    .subtitle {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-    }
-    @keyframes fadeInZoom {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
-    }
+        :root {
+            --primary-color: #1a73e8;
+            --primary-dark: #0d5bb9;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ff6b35;
+            --text-color: #333;
+            --light-text: #666;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
 
-    /* === Story Section === */
-    .about-story {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: center;
-    }
-    .story-text {
-      flex: 1;
-    }
-    .story-image {
-      flex: 1;
-      text-align: center;
-    }
-    .story-image img {
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
 
-    /* === Services Section === */
-    .services {
-      background: #fff;
-    }
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .service-card {
-      background: #007fff;
-      color: white;
-      padding: 2rem;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, background 0.3s ease;
-      opacity: 0;
-      transform: translateY(50px);
-    }
-    .service-card:hover {
-      transform: scale(1.05);
-      background: #0052cc;
-    }
-    .service-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition: all 0.6s ease-out;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    /* === Why Us Section === */
-    .why-us ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 2rem;
-    }
-    .why-us li {
-      background: #e6f0ff;
-      padding: 1rem;
-      margin-bottom: 0.5rem;
-      border-left: 5px solid #007fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
+        /* About Us Section Styles */
+        .about-us {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* === CTA Section === */
-    .cta {
-      background: #0052cc;
-      color: white;
-      text-align: center;
-      padding: 3rem 1.5rem;
-    }
-    .cta-button {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.75rem 1.5rem;
-      background: white;
-      color: #0052cc;
-      font-weight: bold;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-    .cta-button:hover {
-      background: #cce0ff;
-    }
+        .about-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
 
-    @media (max-width: 768px) {
-      .about-story {
-        flex-direction: column;
-      }
-    }
-  </style>
+        .about-header h1 {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .about-header .lead {
+            font-size: 1.4rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .accent-line {
+            height: 4px;
+            width: 80px;
+            background: var(--accent-color);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        /* Hero Section with Vehicle Background */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1593941707882-a5bba5338bf2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 5rem;
+        }
+
+        .hero-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Vehicle Stats */
+        .vehicle-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2.5rem 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-top-color: var(--accent-color);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--light-text);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Mission & Vision */
+        .mission-vision {
+            margin: 5rem 0;
+        }
+
+        .mv-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .mv-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .mv-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-color);
+        }
+
+        .mv-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mv-card.mission:hover::before {
+            background: var(--accent-color);
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .mv-card h3 {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .mv-card p {
+            color: var(--light-text);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Vehicle Showcase */
+        .vehicle-showcase {
+            margin: 5rem 0;
+        }
+
+        .showcase-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .showcase-title h2 {
+            color: var(--text-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .showcase-title p {
+            color: var(--light-text);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .vehicle-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .vehicle-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .vehicle-content {
+            padding: 1.5rem;
+        }
+
+        .vehicle-content h4 {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .vehicle-content p {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* Why Choose Us */
+        .why-choose-us {
+            margin: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            color: var(--text-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--light-text);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .feature-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .feature-item:hover .feature-icon {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .feature-item h4 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .feature-item p {
+            color: var(--light-text);
+            line-height: 1.7;
+        }
+
+        /* Our Values */
+        .our-values {
+            margin: 5rem 0;
+        }
+
+        .values-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .value-item {
+            padding: 2.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .value-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .value-content h4 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .value-content p {
+            color: var(--light-text);
+            line-height: 1.7;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1486496572940-2bb2341fdbdf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .cta-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #e55a2b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .features-grid, .vehicle-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .vehicle-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .mv-container {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .mv-container, .values-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid, .vehicle-grid, .vehicle-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 250px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .about-header h1 {
+                font-size: 2.3rem;
+            }
+            
+            .about-header .lead {
+                font-size: 1.2rem;
+            }
+            
+            .mv-card, .feature-item, .value-item, .stat-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .cta-content h2 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- About Us Section -->
+    <section class="about-us" id="about-us">
+        <div class="container">
+            <!-- Header Section -->
+            <div class="about-header">
+                <h1>About MotorPride Kenya</h1>
+                <div class="accent-line"></div>
+                <p class="lead">Your Trusted Automotive Partner for Premium Imported Vehicles</p>
+            </div>
 
-  <!-- Hero Section -->
-<section class="about-hero">
-  <h1 class="animated-title">Welcome to Motorpride Kenya</h1>
-  <p class="subtitle">Where Kenyan roads meet global standards.</p>
-</section>
-<style>
-/* Push hero section down */
-.about-hero {
-  margin-top: 120px; /* Adjust based on your carousel height */
-  padding: 4rem 1.5rem;
-  background: linear-gradient(to right, #0052cc, #007fff);
-  color: white;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h2>Driving Kenya Forward</h2>
+                    <p>With over a decade of experience in vehicle importation, MotorPride Kenya has established itself as the premier destination for quality, reliability, and exceptional customer service in the automotive industry.</p>
+                    <a href="allcars.html" class="btn btn-primary">Explore Our Vehicle Collection</a>
+                </div>
+            </div>
 
-/* Enhanced animated title */
-.animated-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-  font-family: 'Poppins', sans-serif;
-  animation: fadeSlideUp 1.2s ease-out forwards;
-  opacity: 0;
-}
+            <!-- Vehicle Stats -->
+            <div class="vehicle-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-label">Vehicles Delivered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Customer Satisfaction</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Vehicle Brands</div>
+                </div>
+            </div>
 
-/* Subtitle styling */
-.subtitle {
-  font-size: 1.3rem;
-  font-weight: 400;
-  margin-top: 0.5rem;
-  font-family: 'Open Sans', sans-serif;
-  animation: fadeSlideUp 1.8s ease-out forwards;
-  opacity: 0;
-}
+            <!-- Mission & Vision -->
+            <div class="mission-vision">
+                <div class="mv-container">
+                    <div class="mv-card mission">
+                        <div class="card-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Our Mission</h3>
+                        <p>To revolutionize vehicle ownership in Kenya by providing access to premium, reliable imported cars with transparent pricing, exceptional customer service, and comprehensive after-sales support that exceeds expectations.</p>
+                    </div>
+                    <div class="mv-card">
+                        <div class="card-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Our Vision</h3>
+                        <p>To become East Africa's most trusted automotive partner, setting new standards in vehicle importation, customer experience, and sustainable mobility solutions for generations to come.</p>
+                    </div>
+                </div>
+            </div>
 
-/* Keyframes for smooth entrance */
-@keyframes fadeSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-</style>
-<section class="about-story">
-  <div class="story-text">
-    <h2 class="gradient-heading">Who We Are</h2>
-    <p class="fade-in-text">
-      Motorpride Kenya began as a dream to redefine how Kenyans buy, sell, and experience vehicles.
-      From humble beginnings in Kisumu, we’ve grown into a trusted digital dealership platform—blending
-      local identity with global innovation. Our mission? To empower every Kenyan with access to
-      reliable, stylish, and affordable vehicles, backed by transparency and tech.
-    </p>
-  </div>
-  <div class="story-image">
-    <img src="https://i.postimg.cc/mk01DP9B/Whats-App-Image-2025-09-09-at-1-49-20-PM.jpg" alt="Car Image">
-  </div>
-</section>
+            <!-- Vehicle Showcase -->
+            <div class="vehicle-showcase">
+                <div class="showcase-title">
+                    <h2>Our Vehicle Specialties</h2>
+                    <p>We source and deliver a diverse range of quality vehicles to suit every need and budget</p>
+                </div>
+                <div class="vehicle-grid">
+                    <div class="vehicle-card">
+                        <div class="vehicle-image" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="vehicle-content">
+                            <h4>Family SUVs</h4>
+                            <p>Spacious and reliable vehicles perfect for family adventures and daily commutes.</p>
+                        </div>
+                    </div>
+                    <div class="vehicle-card">
+                        <div class="vehicle-image" style="background-image: url('https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="vehicle-content">
+                            <h4>Luxury Sedans</h4>
+                            <p>Premium vehicles offering comfort, style, and advanced technology features.</p>
+                        </div>
+                    </div>
+                    <div class="vehicle-card">
+                        <div class="vehicle-image" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="vehicle-content">
+                            <h4>Commercial Vehicles</h4>
+                            <p>Durable and efficient vehicles designed for business and commercial use.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<style>
-  .about-story {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    align-items: center;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    padding: 2rem;
-    margin: 3rem auto;
-    max-width: 1200px;
-  }
+            <!-- Why Choose Us -->
+            <div class="why-choose-us">
+                <div class="section-title">
+                    <h2>Why Choose MotorPride?</h2>
+                    <p>Discover what sets us apart in the competitive automotive market</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Quality Guarantee</h4>
+                        <p>Every vehicle undergoes a rigorous 150-point inspection to ensure it meets our uncompromising standards for safety and reliability.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <h4>Best Value</h4>
+                        <p>Our direct international partnerships eliminate middlemen, allowing us to offer premium vehicles at unbeatable prices.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4>Expert Guidance</h4>
+                        <p>Our automotive specialists provide personalized consultation to help you find the perfect vehicle for your needs and budget.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h4>Transparent Process</h4>
+                        <p>Complete visibility into pricing, vehicle history, and import process with no hidden fees or surprises.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4>Comprehensive Support</h4>
+                        <p>From maintenance to spare parts sourcing, we provide ongoing support long after your purchase.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h4>Efficient Delivery</h4>
+                        <p>Our streamlined import and logistics process ensures timely delivery of your vehicle directly to your doorstep.</p>
+                    </div>
+                </div>
+            </div>
 
-  .story-text {
-    flex: 1;
-    animation: fadeInLeft 1.2s ease-out forwards;
-    opacity: 0;
-  }
+            <!-- Our Values -->
+            <div class="our-values">
+                <div class="section-title">
+                    <h2>Our Core Values</h2>
+                    <p>The principles that guide every decision we make</p>
+                </div>
+                <div class="values-container">
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <div class="value-content">
+                            <h4>Integrity</h4>
+                            <p>We conduct business with unwavering honesty and transparency, building trust through ethical practices and open communication.</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="value-content">
+                            <h4>Customer First</h4>
+                            <p>Your satisfaction is our ultimate measure of success. We listen intently, respond promptly, and deliver beyond expectations.</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="value-content">
+                            <h4>Excellence</h4>
+                            <p>We pursue perfection in every aspect of our service, from vehicle quality to customer experience, never settling for mediocrity.</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="value-content">
+                            <h4>Reliability</h4>
+                            <p>We build lasting relationships through consistent, dependable service that our customers can count on year after year.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  .story-image {
-    flex: 1;
-    text-align: center;
-    animation: fadeInRight 1.5s ease-out forwards;
-    opacity: 0;
-  }
+            <!-- Call to Action -->
+            <div class="cta-section">
+                <div class="cta-content">
+                    <h2>Find Your Perfect Vehicle Today</h2>
+                    <p>Browse our extensive inventory of quality imported vehicles and experience the MotorPride difference</p>
+                    <div class="cta-buttons">
+                        <a href="allcars.html" class="btn btn-primary">View All Vehicles</a>
+                        <a href="contacts.html" class="btn btn-secondary">Schedule a Test Drive</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  .story-image img {
-    max-width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  }
+    <script>
+        // Add subtle animation to elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-  .gradient-heading {
-    font-size: 2.8rem;
-    font-weight: 800;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to right, #0052cc, #00c6ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
-    animation: slideFadeIn 1s ease-out forwards;
-    opacity: 0;
-  }
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
 
-  .fade-in-text {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    font-family: 'Open Sans', sans-serif;
-    animation: fadeInUp 1.8s ease-out forwards;
-    opacity: 0;
-  }
-
-  @keyframes slideFadeIn {
-    0% { opacity: 0; transform: translateY(30px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeInUp {
-    0% { opacity: 0; transform: translateY(30px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeInLeft {
-    0% { opacity: 0; transform: translateX(-40px); }
-    100% { opacity: 1; transform: translateX(0); }
-  }
-
-  @keyframes fadeInRight {
-    0% { opacity: 0; transform: translateX(40px); }
-    100% { opacity: 1; transform: translateX(0); }
-  }
-
-  @media (max-width: 768px) {
-    .about-story {
-      flex-direction: column;
-    }
-    .gradient-heading {
-      font-size: 2.2rem;
-    }
-  }
-</style>
-
-  <!-- Our Services -->
-<section class="services">
-  <h2>Our Services</h2>
-  <div class="service-grid">
-    <div class="service-card">🚘 Buy a Car</div>
-    <div class="service-card">🔁 Sell Your Vehicle</div>
-    <div class="service-card">💳 Financing Options</div>
-    <div class="service-card">🛠️ After-Sale Support</div>
-  </div>
-</section>
-
-<style>
-  .services {
-    padding: 3rem 1.5rem;
-    background: #ffffff;
-    text-align: center;
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  .services h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #0052cc;
-    margin-bottom: 2rem;
-  }
-
-  .service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    justify-content: center;
-  }
-
-  .service-card {
-    background: #007fff;
-    color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-    text-align: center;
-  }
-
-  .service-card:hover {
-    transform: scale(1.05);
-    background: #0052cc;
-  }
-
-  /* Mobile Optimization */
-  @media (max-width: 480px) {
-    .services {
-      padding: 2rem 1rem;
-    }
-
-    .service-grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .service-card {
-      width: 100%;
-      margin: 0 auto;
-    }
-  }
-</style>
-<!-- Why Choose Us -->
-<section class="why-us">
-  <h2>Why Choose Us</h2>
-
-  <div class="reasons">
-    <li>🇰🇪 Proudly Kenyan, globally inspired</li>
-    <li>🔧 Verified listings and trusted dealers</li>
-    <li>📱 Mobile-first design for easy access</li>
-    <li>💬 Real-time support and guidance</li>
-    <li>📊 Transparent pricing and financing</li>
-  </div>
-
-  <div class="road">
-    <div class="lane"></div>
-  </div>
-</section>
-
-<style>
-.why-us {
-  text-align: center;
-  padding: 60px 20px;
-  background: #0A1F44; /* Midnight blue */
-  color: white;
-  position: relative;
-}
-
-.why-us h2 {
-  font-size: 2rem;
-  margin-bottom: 40px;
-  background: linear-gradient(45deg, #ff6ec4, #7873f5); /* Pink/Purple gradient */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 10px rgba(255,110,196,0.6);
-}
-
-/* Road signs area */
-.reasons {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
-  list-style: none;
-  padding: 0;
-}
-
-.reasons li {
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 12px 20px;
-  border-radius: 12px;
-  text-align: center;
-  background: linear-gradient(135deg, #ff6ec4, #ff9a9e); /* Pink gradient */
-  color: #fff;
-  border: 3px solid #fff;
-  box-shadow: 0 0 12px rgba(255,110,196,0.8), 0 0 25px rgba(255,154,158,0.6);
-  margin: 10px;
-  min-width: 180px;
-  opacity: 0;
-  animation: popIn 1s ease forwards;
-}
-
-.reasons li:nth-child(1) { animation-delay: 0.3s; }
-.reasons li:nth-child(2) { animation-delay: 0.6s; }
-.reasons li:nth-child(3) { animation-delay: 0.9s; }
-.reasons li:nth-child(4) { animation-delay: 1.2s; }
-.reasons li:nth-child(5) { animation-delay: 1.5s; }
-
-@keyframes popIn {
-  0% { opacity: 0; transform: translateY(30px) scale(0.9); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* Tarmac road */
-.road {
-  position: relative;
-  margin: 0 auto;
-  width: 90%;
-  background: #222;
-  height: 120px;
-  border-radius: 50px;
-  overflow: hidden;
-  box-shadow: inset 0 0 25px #000;
-}
-
-.lane {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 12px;
-  background: repeating-linear-gradient(
-    to right,
-    #fff 0,
-    #fff 30px,
-    transparent 30px,
-    transparent 60px
-  );
-  transform: translateY(-50%);
-  animation: moveLane 2s linear infinite;
-}
-
-@keyframes moveLane {
-  from { background-position: 0; }
-  to { background-position: 60px; }
-}
-</style>
-
-<!-- Call to Action -->
-<section class="cta">
-  <h2>Ready to take the wheel?</h2>
-  <a href="#available-units" class="cta-button">Explore Our Cars</a>
-</section>
-
-  <!-- Scroll Animation Script -->
-  <script>
-    window.addEventListener('scroll', () => {
-      document.querySelectorAll('.service-card').forEach(card => {
-        const rect = card.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 50) {
-          card.classList.add('visible');
-        }
-      });
-    });
-  </script>
-  <!-- CUSTOMER RESPONSE SECTION -->
-<section id="response" style="background: linear-gradient(135deg, #0A1F44, #00AEEF); padding: 60px 20px; color: #fff; width: 100vw; box-sizing: border-box;">
-  <h2 style="text-align: center; font-size: clamp(26px, 7vw, 36px); margin-bottom: 20px;">💬 What Our Customers Say</h2>
-  <p style="text-align: center; color: #d0e7ff; margin-bottom: 40px; font-size: clamp(18px, 5vw, 22px);">
-    Real feedback from our happy clients
-  </p>
-
-  <!-- Carousel Container -->
-  <div style="overflow: hidden; width: 100%; margin: auto; border-radius: 12px;">
-    <div id="testimonialCarouselTrack" class="testimonial-carousel-track" style="display: flex; transition: transform 0.6s ease-in-out;">
-      
-      <!-- Slide 1 -->
-      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
-        <img src="https://i.ibb.co/MyztSZgH/Whats-App-Image-2025-07-12-at-11-09-15-AM-Copy.jpg" alt="Customer 1"
-             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
-        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Samuel Mahia</h3>
-        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
-          "MotorPride helped me get my dream car through their flexible loan options. Highly recommended!"
-        </p>
-      </div>
-
-      <!-- Slide 2 -->
-      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
-        <img src="https://i.ibb.co/VcDz0px0/Whats-App-Image-2025-07-12-at-11-10-56-AM.jpg" alt="Customer 2"
-             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
-        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Samson Mahia</h3>
-        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
-          "I hired a Land Cruiser Prado for my trip to Amboseli through their Safari service. The car was clean, powerful, and fuel-efficient. Great experience"
-        </p>
-      </div>
-
-      <!-- Slide 3 -->
-      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
-        <img src="https://i.ibb.co/FLM5PgDf/Whats-App-Image-2025-07-12-at-11-11-48-AM.jpg" alt="Customer 3"
-             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
-        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Eric Karanja</h3>
-        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
-          "Very professional and responsive team. They even helped me reserve a unit through WhatsApp before I traveled to Nairobi. Highly recommend them"
-        </p>
-      </div>
-
-      <!-- Slide 4 -->
-      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
-        <img src="https://i.ibb.co/Y73yDZLT/Whats-App-Image-2025-07-15-at-12-13-26-PM-1.jpg" alt="Customer 4"
-             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
-        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Elizabeth Mahia</h3>
-        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
-          "MotorPride gave me the best deal on a clean, low-mileage Toyota Axio. The process was smooth and transparent. I’ll definitely come back for my next car."
-        </p>
-      </div>
-
-      <!-- Slide 5 -->
-      <div class="testimonial" style="flex: 0 0 100%; padding: 30px 10px; text-align: center;">
-        <img src="https://i.ibb.co/FqgBR5s4/Whats-App-Image-2025-07-15-at-12-13-26-PM.jpg" alt="Customer 5"
-             style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid #fff; margin-bottom: 15px; object-fit: cover;">
-        <h3 style="font-size: clamp(20px, 6vw, 26px); margin-bottom: 10px;">Michael Kibe</h3>
-        <p style="font-size: clamp(17px, 5vw, 20px); line-height: 1.6;">
-          "They even helped me sell my car fast. The process was transparent and fair."
-        </p>
-      </div>
-    </div>
-
-    <!-- Controls -->
-    <div style="text-align: center; margin-top: 20px;">
-      <button onclick="prevTestimonial()" style="margin-right: 10px; padding: 14px 24px; background: #fff; color: #0A1F44; border: none; border-radius: 6px; font-size: clamp(18px, 6vw, 22px);">◀</button>
-      <button onclick="nextTestimonial()" style="padding: 14px 24px; background: #fff; color: #0A1F44; border: none; border-radius: 6px; font-size: clamp(18px, 6vw, 22px);">▶</button>
-    </div>
-  </div>
-</section>
-
-<!-- Carousel Script -->
-<script>
-  let testimonialIndex = 0;
-  const testimonialTrack = document.getElementById('testimonialCarouselTrack');
-  const testimonialSlides = testimonialTrack.children.length;
-
-  function showTestimonial(i) {
-    testimonialIndex = (i + testimonialSlides) % testimonialSlides;
-    testimonialTrack.style.transform = `translateX(-${testimonialIndex * 100}%)`;
-  }
-
-  function nextTestimonial() {
-    showTestimonial(testimonialIndex + 1);
-  }
-
-  function prevTestimonial() {
-    showTestimonial(testimonialIndex - 1);
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    showTestimonial(0);
-    setInterval(() => nextTestimonial(), 8000);
-  });
-</script>
-
-
+            // Animate elements on scroll
+            const animateElements = document.querySelectorAll('.mv-card, .feature-item, .value-item, .stat-card, .vehicle-card');
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>

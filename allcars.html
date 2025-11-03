@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotorPride | All Cars</title>
+    <title>MotorPride Kenya | All Cars</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #1a73e8;
+            --primary-dark: #0d5bb9;
             --secondary-color: #f8f9fa;
             --accent-color: #ff6b35;
             --text-color: #333;
             --light-text: #666;
             --border-color: #e0e0e0;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
             --transition: all 0.3s ease;
         }
 
@@ -77,11 +80,66 @@
             color: var(--primary-color);
         }
 
+        nav ul li a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
         .page-title {
             font-size: 32px;
             margin: 30px 0;
+            text-align: center;
         }
 
+        /* Search Results Header */
+        .search-results-header {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+
+        .search-results-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .search-criteria {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .search-criteria-item {
+            background-color: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .clear-search {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .clear-search:hover {
+            background-color: #e55a2b;
+        }
+
+        /* Cars Grid - Improved Design */
         .cars-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -91,16 +149,27 @@
 
         .car-card {
             background-color: white;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
             cursor: pointer;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .car-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
         }
 
         .car-image-container {
@@ -117,7 +186,7 @@
         }
 
         .car-card:hover .car-image {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         .reserve-btn {
@@ -137,28 +206,40 @@
 
         .reserve-btn:hover {
             background-color: #e55a2b;
+            transform: scale(1.05);
         }
 
         .car-info {
-            padding: 15px;
+            padding: 18px;
         }
 
         .car-name {
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .car-id {
+            font-size: 12px;
+            color: var(--light-text);
+            margin-bottom: 8px;
+            font-weight: 500;
         }
 
         .car-year-price {
             display: flex;
             justify-content: space-between;
             color: var(--light-text);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .car-price {
             font-weight: 600;
             color: var(--accent-color);
+            font-size: 18px;
         }
 
         .car-specs {
@@ -168,80 +249,45 @@
             color: var(--light-text);
         }
 
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            grid-column: 1 / -1;
-        }
-
-        .no-results-icon {
-            font-size: 60px;
-            margin-bottom: 20px;
-            color: var(--light-text);
-        }
-
-        .no-results-title {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--text-color);
-        }
-
-        .no-results-text {
-            color: var(--light-text);
-            margin-bottom: 25px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .browse-all {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 4px;
+        /* Enhanced Status Badges with Scroll Animation */
+        .status-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
+            z-index: 5;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.5s ease;
         }
 
-        .browse-all:hover {
-            background-color: #0d5bb9;
+        .status-badge.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin: 40px 0;
-        }
-
-        .pagination button {
-            background-color: white;
-            border: 1px solid var(--border-color);
-            padding: 10px 20px;
-            margin: 0 5px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-
-        .pagination button:hover:not(:disabled) {
-            background-color: var(--primary-color);
+        .status-available {
+            background-color: #28a745;
             color: white;
-            border-color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
         }
 
-        .pagination button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .status-incoming {
+            background-color: #ffc107;
+            color: #000;
+            box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
         }
 
-        .page-numbers {
-            display: flex;
-            align-items: center;
-            margin: 0 10px;
+        .status-sold {
+            background-color: #6c757d;
+            color: white;
+            box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
         }
 
+        /* Modal Styles with Enhanced Animations */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -265,18 +311,20 @@
 
         .car-detail-modal {
             background-color: white;
-            border-radius: 8px;
+            border-radius: 12px;
             width: 90%;
-            max-width: 1000px;
+            max-width: 1100px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            transform: translateY(50px);
-            transition: transform 0.4s ease;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .modal-overlay.active .car-detail-modal {
-            transform: translateY(0);
+            transform: scale(1);
+            opacity: 1;
         }
 
         .modal-header {
@@ -299,14 +347,21 @@
             cursor: pointer;
             color: var(--light-text);
             transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
         .close-modal:hover {
             color: var(--text-color);
+            background-color: rgba(0, 0, 0, 0.05);
         }
 
         .modal-content {
-            padding: 20px;
+            padding: 25px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
@@ -319,12 +374,19 @@
 
         .primary-image {
             width: 100%;
-            height: 300px;
+            height: 350px;
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 15px;
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow);
         }
 
+        .primary-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Enlarged Thumbnails */
         .thumbnails {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -333,15 +395,22 @@
 
         .thumbnail {
             width: 100%;
-            height: 80px;
+            height: 100px;
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             transition: var(--transition);
+            box-shadow: var(--shadow);
         }
 
         .thumbnail:hover {
-            opacity: 0.8;
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .thumbnail.active {
+            border: 3px solid var(--primary-color);
+            transform: scale(1.05);
         }
 
         .car-details {
@@ -350,15 +419,15 @@
         }
 
         .detail-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
+            margin-bottom: 18px;
+            padding-bottom: 18px;
             border-bottom: 1px solid var(--border-color);
+            animation: slideInRight 0.5s ease forwards;
             opacity: 0;
-            transform: translateX(-20px);
-            animation: slideIn 0.5s forwards;
+            transform: translateX(20px);
         }
 
-        @keyframes slideIn {
+        @keyframes slideInRight {
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -367,8 +436,9 @@
 
         .detail-label {
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             color: var(--primary-color);
+            font-size: 16px;
         }
 
         .features-list {
@@ -382,6 +452,15 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            padding: 8px;
+            background-color: rgba(26, 115, 232, 0.05);
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            background-color: rgba(26, 115, 232, 0.1);
+            transform: translateX(5px);
         }
 
         .feature-item::before {
@@ -406,156 +485,233 @@
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
+            padding: 10px 18px;
+            border-radius: 6px;
             cursor: pointer;
             transition: var(--transition);
+            font-weight: 600;
         }
 
         .nav-btn:hover {
-            background-color: #0d5bb9;
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
         .modal-reserve-btn {
             background-color: var(--accent-color);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
+            padding: 12px 24px;
+            border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
         }
 
         .modal-reserve-btn:hover {
             background-color: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 53, 0.4);
         }
 
-        .contacts-modal {
+        /* Enhanced Agents Modal */
+        .agents-modal {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: white;
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 25px;
             width: 90%;
-            max-width: 400px;
-            box-shadow: var(--shadow);
+            max-width: 700px;
+            box-shadow: var(--shadow-lg);
             z-index: 1100;
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
         }
 
-        .contacts-modal.active {
+        .agents-modal.active {
             opacity: 1;
             visibility: visible;
+            animation: modalSlideIn 0.4s ease;
         }
 
-        .contacts-header {
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .agents-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .contacts-title {
-            font-size: 20px;
+        .agents-title {
+            font-size: 22px;
             font-weight: 600;
         }
 
-        .close-contacts {
+        .close-agents {
             background: none;
             border: none;
-            font-size: 20px;
+            font-size: 24px;
             cursor: pointer;
-        }
-
-        .contacts-list {
-            display: grid;
-            gap: 15px;
-        }
-
-        .contact-item {
+            color: var(--light-text);
+            width: 36px;
+            height: 36px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: var(--secondary-color);
+            justify-content: center;
+            border-radius: 50%;
             transition: var(--transition);
         }
 
-        .contact-item:hover {
+        .close-agents:hover {
+            color: var(--text-color);
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .agents-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .agent-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .agent-item:hover {
             background-color: #e9ecef;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .contact-name {
+        .agent-photo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            font-size: 36px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .agent-name {
             font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 18px;
         }
 
-        .contact-number {
-            color: var(--primary-color);
+        .agent-role {
+            font-size: 14px;
+            color: var(--light-text);
+            margin-bottom: 15px;
         }
 
-        .contact-action {
+        .agent-action {
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
+            padding: 10px 15px;
+            border-radius: 6px;
             cursor: pointer;
             transition: var(--transition);
             text-decoration: none;
             display: inline-block;
             font-size: 14px;
-        }
-
-        .contact-action:hover {
-            background-color: #0d5bb9;
-        }
-
-        .status-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
+            width: 100%;
             font-weight: 600;
-            z-index: 5;
         }
 
-        .status-available {
-            background-color: #28a745;
+        .agent-action:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
-        .status-incoming {
-            background-color: #ffc107;
-            color: #000;
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
         }
 
-        .status-sold {
-            background-color: #6c757d;
+        .pagination button {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: var(--transition);
+            font-weight: 600;
         }
 
-        .debug-info {
-            background: #e3f2fd;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            font-family: monospace;
+        .pagination button:hover:not(:disabled) {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-numbers {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+            font-weight: 600;
+        }
+
+        /* Caplicity Motors branding */
+        .caplicity-brand {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 700;
+            color: #1a73e8;
             font-size: 14px;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .modal-content {
                 grid-template-columns: 1fr;
             }
             
+            .thumbnails {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
                 gap: 15px;
@@ -572,6 +728,19 @@
             .features-list {
                 grid-template-columns: 1fr;
             }
+            
+            .thumbnails {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .agents-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-criteria {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -587,6 +756,10 @@
             .nav-buttons {
                 justify-content: center;
             }
+            
+            .thumbnails {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
@@ -594,7 +767,7 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">motorpride</div>
+                <div class="logo">MotorPride Kenya</div>
                 <nav>
                     <ul>
                         <li><a href="index.html">Home</a></li>
@@ -608,18 +781,17 @@
     </header>
 
     <main class="container">
-        <h1 class="page-title">Our Vehicle Collection</h1>
+        <h1 class="page-title" id="pageTitle">Our Vehicle Collection</h1>
         
-        <div class="debug-info" id="debugInfo">
-            Loading cars data...
+        <!-- Search Results Header -->
+        <div class="search-results-header" id="searchResultsHeader">
+            <h2 class="search-results-title" id="searchResultsTitle">Search Results</h2>
+            <div class="search-criteria" id="searchCriteria"></div>
+            <button class="clear-search" id="clearSearch">Clear Search & Show All Vehicles</button>
         </div>
         
         <div class="cars-grid" id="carsGrid">
-            <div class="no-results">
-                <div class="no-results-icon">🔄</div>
-                <h3 class="no-results-title">Loading Vehicles...</h3>
-                <p class="no-results-text">Please wait while we load our vehicle collection.</p>
-            </div>
+            <!-- Cars will be loaded here by JavaScript -->
         </div>
         
         <div class="pagination">
@@ -631,6 +803,7 @@
         </div>
     </main>
 
+    <!-- Car Details Modal -->
     <div class="modal-overlay" id="carModal">
         <div class="car-detail-modal">
             <div class="modal-header">
@@ -654,389 +827,294 @@
         </div>
     </div>
 
-    <div class="contacts-modal" id="contactsModal">
-        <div class="contacts-header">
-            <h3 class="contacts-title">Contact Our Team</h3>
-            <button class="close-contacts" id="closeContacts">&times;</button>
+    <!-- Agents Modal -->
+    <div class="agents-modal" id="agentsModal">
+        <div class="agents-header">
+            <h3 class="agents-title">Contact Our Sales Team</h3>
+            <button class="close-agents" id="closeAgents">&times;</button>
         </div>
-        <div class="contacts-list" id="contactsList"></div>
-    </div><script>
-    // Configuration
-    const CONFIG = {
-        carsPerPage: 12,
-        maxThumbnails: 7,
-        animationDelay: 100,
-        dataRefreshInterval: 15000, // Increased to 15 seconds for better performance
-        fallbackDataUrl: './data/cars/fallback-cars.json'
-    };
+        <div class="agents-message">
+            <p>For reservations and enquiries about this vehicle, please contact one of our sales agents:</p>
+        </div>
+        <div class="agents-list" id="agentsList"></div>
+        <div class="agents-footer">
+            <button class="exit-reserve" id="exitReserve">Exit Reservation</button>
+        </div>
+    </div>
 
-    // State management
-    const state = {
-        cars: [],
-        contacts: [],
-        currentPage: 1,
-        currentCarIndex: 0,
-        totalPages: 1,
-        refreshInterval: null
-    };
+    <script>
+        // Sample car data (replace with your actual data)
+        const cars = [
+            {
+                id: "CAP-001",
+                name: "Toyota Harrier 2021",
+                make: "Toyota",
+                model: "Harrier",
+                year: 2021,
+                price: "KSh 3,200,000",
+                transmission: "Automatic",
+                fuel: "Petrol",
+                mileage: "18,000 km",
+                status: "Available",
+                images: [
+                    "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                ],
+                features: ["Air Conditioning", "Power Steering", "Bluetooth", "Backup Camera", "Leather Seats", "Sunroof", "Navigation System"],
+                agents: [0, 1] // Indices of agents in the agents array
+            },
+            {
+                id: "CAP-002",
+                name: "Toyota Camry 2022",
+                make: "Toyota",
+                model: "Camry",
+                year: 2022,
+                price: "KSh 2,800,000",
+                transmission: "Automatic",
+                fuel: "Petrol",
+                mileage: "15,000 km",
+                status: "Available",
+                images: [
+                    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                ],
+                features: ["Premium Sound System", "Heated Seats", "Panoramic Roof", "Adaptive Cruise Control", "Parking Assist", "Wireless Charging", "Ambient Lighting"],
+                agents: [0, 2]
+            },
+            {
+                id: "CAP-003",
+                name: "Toyota RAV4 2020",
+                make: "Toyota",
+                model: "RAV4",
+                year: 2020,
+                price: "KSh 2,900,000",
+                transmission: "Automatic",
+                fuel: "Petrol",
+                mileage: "32,000 km",
+                status: "Incoming",
+                images: [
+                    "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                ],
+                features: ["All-Wheel Drive", "Roof Rails", "Third Row Seating", "Touchscreen Display", "Rear AC Vents", "Keyless Entry", "Fog Lights"],
+                agents: [1, 3]
+            },
+            {
+                id: "CAP-004",
+                name: "Nissan X-Trail 2020",
+                make: "Nissan",
+                model: "X-Trail",
+                year: 2020,
+                price: "KSh 2,400,000",
+                transmission: "Automatic",
+                fuel: "Petrol",
+                mileage: "45,000 km",
+                status: "Sold",
+                images: [
+                    "https://images.unsplash.com/photo-1621330396173-e41b1cafd163?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                ],
+                features: ["Symmetrical AWD", "X-Mode", "EyeSight Driver Assist", "Apple CarPlay", "Android Auto", "All-Weather Package", "Power Liftgate"],
+                agents: [2, 4]
+            },
+            {
+                id: "CAP-005",
+                name: "Mercedes-Benz C300 2022",
+                make: "Mercedes-Benz",
+                model: "C300",
+                year: 2022,
+                price: "KSh 5,800,000",
+                transmission: "Automatic",
+                fuel: "Petrol",
+                mileage: "12,500 km",
+                status: "Available",
+                images: [
+                    "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                ],
+                features: ["Premium Sound System", "Heated Seats", "Panoramic Roof", "Adaptive Cruise Control", "Parking Assist", "Wireless Charging", "Ambient Lighting"],
+                agents: [3, 4]
+            },
+            // Add more cars as needed
+        ];
 
-    // DOM Elements
-    const elements = {
-        carsGrid: document.getElementById('carsGrid'),
-        carModal: document.getElementById('carModal'),
-        contactsModal: document.getElementById('contactsModal'),
-        closeModal: document.getElementById('closeModal'),
-        closeContacts: document.getElementById('closeContacts'),
-        prevPage: document.getElementById('prevPage'),
-        nextPage: document.getElementById('nextPage'),
-        currentPageEl: document.getElementById('currentPage'),
-        totalPagesEl: document.getElementById('totalPages'),
-        prevCar: document.getElementById('prevCar'),
-        nextCar: document.getElementById('nextCar'),
-        modalReserveBtn: document.getElementById('modalReserveBtn'),
-        debugInfo: document.getElementById('debugInfo'),
-        modalCarTitle: document.getElementById('modalCarTitle'),
-        modalPrimaryImage: document.getElementById('modalPrimaryImage'),
-        modalThumbnails: document.getElementById('modalThumbnails'),
-        carDetails: document.getElementById('carDetails'),
-        contactsList: document.getElementById('contactsList')
-    };
+        // Sample agents data
+        const agents = [
+            { name: "John Kamau", role: "Sales Manager", number: "+254712345678", photo: "👨🏾‍💼" },
+            { name: "Sarah Wanjiku", role: "Sales Executive", number: "+254723456789", photo: "👩🏾‍💼" },
+            { name: "David Ochieng", role: "Sales Consultant", number: "+254734567890", photo: "👨🏾‍💼" },
+            { name: "Grace Akinyi", role: "Customer Relations", number: "+254745678901", photo: "👩🏾‍💼" },
+            { name: "Michael Mwangi", role: "Finance Specialist", number: "+254756789012", photo: "👨🏾‍💼" }
+        ];
 
-    // Utility functions
-    const utils = {
-        showLoadingState() {
-            elements.carsGrid.innerHTML = `
-                <div class="no-results">
-                    <div class="no-results-icon">🔄</div>
-                    <h3 class="no-results-title">Loading Vehicles...</h3>
-                    <p class="no-results-text">Please wait while we load our vehicle collection.</p>
-                </div>
-            `;
-        },
+        // DOM Elements
+        const carsGrid = document.getElementById('carsGrid');
+        const carModal = document.getElementById('carModal');
+        const agentsModal = document.getElementById('agentsModal');
+        const closeModal = document.getElementById('closeModal');
+        const closeAgents = document.getElementById('closeAgents');
+        const prevPage = document.getElementById('prevPage');
+        const nextPage = document.getElementById('nextPage');
+        const currentPageEl = document.getElementById('currentPage');
+        const totalPagesEl = document.getElementById('totalPages');
+        const prevCar = document.getElementById('prevCar');
+        const nextCar = document.getElementById('nextCar');
+        const modalReserveBtn = document.getElementById('modalReserveBtn');
+        const modalCarTitle = document.getElementById('modalCarTitle');
+        const modalPrimaryImage = document.getElementById('modalPrimaryImage');
+        const modalThumbnails = document.getElementById('modalThumbnails');
+        const carDetails = document.getElementById('carDetails');
+        const agentsList = document.getElementById('agentsList');
+        const pageTitle = document.getElementById('pageTitle');
+        const searchResultsHeader = document.getElementById('searchResultsHeader');
+        const searchResultsTitle = document.getElementById('searchResultsTitle');
+        const searchCriteria = document.getElementById('searchCriteria');
+        const clearSearch = document.getElementById('clearSearch');
+        const exitReserve = document.getElementById('exitReserve');
 
-        showErrorState(message = 'Temporary Unavailable') {
-            elements.carsGrid.innerHTML = `
-                <div class="no-results">
-                    <div class="no-results-icon">⚠️</div>
-                    <h3 class="no-results-title">${message}</h3>
-                    <p class="no-results-text">Our vehicle catalog is currently being updated. Please check back shortly.</p>
-                    <button class="browse-all" onclick="location.reload()">Try Again</button>
-                </div>
-            `;
-        },
+        // State
+        let currentPage = 1;
+        const carsPerPage = 8;
+        let currentCarIndex = 0;
+        let filteredCars = [...cars]; // Start with all cars
+        let currentCarForReservation = null;
 
-        formatWhatsAppNumber(number) {
-            return number.replace(/\s+/g, '').replace(/-/g, '');
-        },
-        
-        generateId() {
-            return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+        // Initialize the page
+        function init() {
+            // Check for URL parameters and filter cars
+            checkURLParameters();
+            displayCars();
+            setupPagination();
+            setupEventListeners();
+            setupScrollAnimation();
         }
-    };
 
-    // Data management - OPTIMIZED AND FIXED
-    const dataManager = {
-        async loadCarsData() {
-            try {
-                elements.debugInfo.textContent = 'Loading car data...';
-                
-                // Use optimized file discovery
-                const allCarFiles = await this.getCarFilesOptimized();
-                
-                if (allCarFiles.length === 0) {
-                    elements.debugInfo.textContent = 'No car files found. Using sample data...';
-                    state.cars = this.createSampleData();
-                    return;
-                }
-                
-                elements.debugInfo.textContent = `Found ${allCarFiles.length} car files`;
-                
-                // Load all discovered car files
-                const carPromises = allCarFiles.map(filename => 
-                    this.loadSingleCarFile(filename)
-                );
-
-                const carResults = await Promise.all(carPromises);
-                
-                // Combine all cars and remove null results
-                state.cars = carResults
-                    .filter(car => car !== null)
-                    .flat();
-                
-                if (state.cars.length === 0) {
-                    elements.debugInfo.textContent = 'No valid car data found. Using sample data...';
-                    state.cars = this.createSampleData();
-                } else {
-                    elements.debugInfo.textContent = `✅ Loaded ${state.cars.length} cars`;
-                    console.log('Loaded cars:', state.cars);
-                }
-                
-            } catch (error) {
-                elements.debugInfo.textContent = `Error: ${error.message}. Using sample data...`;
-                console.error('Error loading cars:', error);
-                state.cars = this.createSampleData();
+        // Check URL parameters for search criteria
+        function checkURLParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const make = urlParams.get('make');
+            const model = urlParams.get('model');
+            const year = urlParams.get('year');
+            const transmission = urlParams.get('transmission');
+            const fuel = urlParams.get('fuel');
+            const search = urlParams.get('search');
+            
+            // If there's a search parameter, filter the cars
+            if (search === 'true' && (make || model || year || transmission || fuel)) {
+                filterCars(make, model, year, transmission, fuel);
+                showSearchResultsHeader(make, model, year, transmission, fuel);
             }
-        },
-
-        async getCarFilesOptimized() {
-            const discoveredFiles = new Set();
-            
-            // Start with known files from your structure
-            const knownFiles = [
-                'cx-5.json', 'mazda.json', 'mercedes-benz.json',
-                'nissan-note-2025.json', 'subaru-forester-2025.json',
-                'toyota-wish-2025.json', 'volvo-v40-t3-2025.json',
-                'mazda-mazda-2025.json'
-            ];
-            
-            // Check known files first (fastest)
-            const knownPromises = knownFiles.map(filename => 
-                this.checkFileExists(filename)
-            );
-            const knownResults = await Promise.all(knownPromises);
-            knownResults.forEach(result => {
-                if (result.exists) discoveredFiles.add(result.filename);
-            });
-            
-            // Then check for any new files using broader patterns
-            const newFiles = await this.discoverNewFiles();
-            newFiles.forEach(file => discoveredFiles.add(file));
-            
-            return Array.from(discoveredFiles);
-        },
-
-        async discoverNewFiles() {
-            const discovered = [];
-            const currentYear = new Date().getFullYear();
-            
-            // Limited set of patterns for new files
-            const patterns = [
-                // Common patterns for your CMS
-                '*.json',
-                '*-*-*.json',
-                // Current and next year patterns
-                `*-*-${currentYear}.json`,
-                `*-*-${currentYear+1}.json`
-            ];
-            
-            const checkPromises = patterns.map(pattern => 
-                this.checkFileExists(pattern)
-            );
-            
-            const results = await Promise.all(checkPromises);
-            results.forEach(result => {
-                if (result.exists && !result.filename.includes('fallback') && !result.filename.includes('index')) {
-                    discovered.push(result.filename);
-                }
-            });
-            
-            return discovered;
-        },
-
-        async checkFileExists(filename) {
-            try {
-                const response = await fetch(`./data/cars/${filename}`);
-                return {
-                    filename: filename,
-                    exists: response.ok
-                };
-            } catch (error) {
-                return {
-                    filename: filename,
-                    exists: false
-                };
-            }
-        },
-
-        async loadSingleCarFile(filename) {
-            try {
-                const response = await fetch(`./data/cars/${filename}`);
-                if (!response.ok) {
-                    console.warn(`File not found: ${filename}`);
-                    return null;
-                }
-                
-                const carData = await response.json();
-                
-                // Handle different data formats
-                if (Array.isArray(carData)) {
-                    return carData.map(car => this.normalizeCarData(car, filename));
-                } else if (carData.cars && Array.isArray(carData.cars)) {
-                    return carData.cars.map(car => this.normalizeCarData(car, filename));
-                } else {
-                    // Single car object
-                    return [this.normalizeCarData(carData, filename)];
-                }
-            } catch (error) {
-                console.warn(`Failed to load ${filename}:`, error);
-                return null;
-            }
-        },
-
-        normalizeCarData(car, filename) {
-            // Ensure car has all required fields
-            if (!car.id) {
-                car.id = utils.generateId();
-            }
-            
-            if (!car.name) {
-                if (car.make && car.model) {
-                    car.name = `${car.make} ${car.model}`;
-                } else if (car.title) {
-                    car.name = car.title;
-                } else {
-                    car.name = `Car from ${filename.replace('.json', '')}`;
-                }
-            }
-            
-            // ✅ FIXED: Image path handling for your CMS
-            if (!car.images || car.images.length === 0) {
-                car.images = ['https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'];
-            } else {
-                // Convert image paths to work with your actual file structure
-                car.images = car.images.map(img => {
-                    if (img.startsWith('http')) {
-                        return img; // Keep external URLs
-                    } else if (img.startsWith('/images/cars/')) {
-                        // ✅ FIX: Convert /images/cars/ to /static/images/cars/
-                        return img.replace('/images/cars/', '/static/images/cars/');
-                    } else if (img.startsWith('/')) {
-                        return img; // Keep other absolute paths
-                    } else {
-                        // Handle relative paths
-                        return `/static/images/cars/${img}`;
-                    }
-                });
-            }
-            
-            // Ensure required fields have defaults
-            car.price = car.price || car.pricePerDay || 'Contact for price';
-            car.year = car.year || 'N/A';
-            car.transmission = car.transmission || 'Automatic';
-            car.fuel = car.fuel || car.fuelType || 'Petrol';
-            car.mileage = car.mileage || '0 km';
-            car.status = car.status || 'Available';
-            car.features = car.features || car.specifications || [];
-            
-            return car;
-        },
-
-        createSampleData() {
-            return [
-                {
-                    id: utils.generateId(),
-                    name: "Subaru Forester 2011",
-                    make: "Subaru",
-                    model: "Forester",
-                    year: 2011,
-                    price: "$130,000",
-                    transmission: "Automatic",
-                    fuel: "Petrol",
-                    mileage: "0 km",
-                    status: "Available",
-                    images: ["/static/images/cars/img-20251019-wa0017.jpg"],
-                    features: ["Air Conditioning", "Power Steering"]
-                }
-            ];
-        },
-
-        async loadContactsData() {
-            try {
-                elements.debugInfo.textContent += ' | Loading contacts...';
-                
-                // ✅ FIXED: Auto-detect contact files like cars
-                const contactFiles = await this.getContactFiles();
-                
-                const contactPromises = contactFiles.map(filename => {
-                    return fetch(`./data/contacts/${filename}`)
-                        .then(response => response.ok ? response.json() : null)
-                        .catch(() => null)
-                });
-                
-                const contactData = await Promise.all(contactPromises);
-                state.contacts = contactData.filter(contact => contact !== null);
-                
-                if (state.contacts.length === 0) {
-                    state.contacts = [
-                        { name: "Sales Team", number: "+254712345678" },
-                        { name: "Support Team", number: "+254798765432" }
-                    ];
-                }
-                
-                console.log('Loaded contacts:', state.contacts);
-            } catch (error) {
-                console.error('Error loading contacts:', error);
-                state.contacts = [
-                    { name: "Sales Team", number: "+254712345678" },
-                    { name: "Support Team", number: "+254798765432" }
-                ];
-            }
-        },
-
-        async getContactFiles() {
-            const contactFiles = new Set(['kiarie.json', 'sam.json', 'dad-1.json']);
-            
-            // Check for any .json files in contacts folder
-            const patterns = ['*.json', 'contact-*.json', '*-contact.json'];
-            const checkPromises = patterns.map(pattern => 
-                this.checkContactFileExists(pattern)
-            );
-            
-            const results = await Promise.all(checkPromises);
-            results.forEach(result => {
-                if (result.exists) contactFiles.add(result.filename);
-            });
-            
-            return Array.from(contactFiles);
-        },
-
-        async checkContactFileExists(filename) {
-            try {
-                const response = await fetch(`./data/contacts/${filename}`);
-                return {
-                    filename: filename,
-                    exists: response.ok
-                };
-            } catch (error) {
-                return {
-                    filename: filename,
-                    exists: false
-                };
-            }
-        },
-        
-        // Setup automatic data refresh for CMS updates
-        setupAutoRefresh() {
-            if (state.refreshInterval) {
-                clearInterval(state.refreshInterval);
-            }
-            
-            state.refreshInterval = setInterval(() => {
-                console.log('Auto-refreshing data...');
-                this.loadCarsData().then(() => {
-                    if (!document.hidden) {
-                        renderer.displayCars();
-                        renderer.setupPagination();
-                    }
-                });
-                this.loadContactsData();
-            }, CONFIG.dataRefreshInterval);
         }
-    };
 
-    // UI rendering - FIXED CLICK ISSUES
-    const renderer = {
-        displayCars() {
-            if (state.cars.length === 0) {
-                utils.showErrorState('No vehicles available');
+        // Filter cars based on search criteria
+        function filterCars(make, model, year, transmission, fuel) {
+            filteredCars = cars.filter(car => {
+                // Check each criteria - if provided, it must match
+                if (make && car.make !== make) return false;
+                if (model && car.model !== model) return false;
+                if (year && car.year.toString() !== year) return false;
+                if (transmission && car.transmission !== transmission) return false;
+                if (fuel && car.fuel !== fuel) return false;
+                return true;
+            });
+            
+            // Reset to first page when filtering
+            currentPage = 1;
+        }
+
+        // Show search results header with criteria
+        function showSearchResultsHeader(make, model, year, transmission, fuel) {
+            searchResultsHeader.style.display = 'block';
+            pageTitle.textContent = 'Search Results';
+            
+            // Clear previous criteria
+            searchCriteria.innerHTML = '';
+            
+            // Add criteria items
+            if (make) {
+                addCriteriaItem('Make', make);
+            }
+            if (model) {
+                addCriteriaItem('Model', model);
+            }
+            if (year) {
+                addCriteriaItem('Year', year);
+            }
+            if (transmission) {
+                addCriteriaItem('Transmission', transmission);
+            }
+            if (fuel) {
+                addCriteriaItem('Fuel Type', fuel);
+            }
+            
+            // Update results title
+            const count = filteredCars.length;
+            searchResultsTitle.textContent = `Found ${count} ${count === 1 ? 'vehicle' : 'vehicles'} matching your search`;
+        }
+
+        // Add a criteria item to the search criteria display
+        function addCriteriaItem(label, value) {
+            const criteriaItem = document.createElement('div');
+            criteriaItem.className = 'search-criteria-item';
+            criteriaItem.innerHTML = `
+                <span>${label}:</span>
+                <strong>${value}</strong>
+            `;
+            searchCriteria.appendChild(criteriaItem);
+        }
+
+        // Display cars in the grid
+        function displayCars() {
+            const startIndex = (currentPage - 1) * carsPerPage;
+            const endIndex = startIndex + carsPerPage;
+            const currentCars = filteredCars.slice(startIndex, endIndex);
+            
+            carsGrid.innerHTML = '';
+            
+            if (currentCars.length === 0) {
+                carsGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                        <div style="font-size: 60px; margin-bottom: 20px; color: var(--light-text);">🚗</div>
+                        <h3 style="font-size: 24px; margin-bottom: 15px; color: var(--text-color);">No Vehicles Found</h3>
+                        <p style="color: var(--light-text); margin-bottom: 25px; max-width: 500px; margin-left: auto; margin-right: auto;">
+                            No vehicles match your search criteria. Try adjusting your filters or <a href="#" id="clearSearchLink" style="color: var(--primary-color); text-decoration: underline;">view all vehicles</a>.
+                        </p>
+                    </div>
+                `;
+                
+                // Add event listener to clear search link
+                document.getElementById('clearSearchLink').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    clearSearchAndShowAll();
+                });
+                
                 return;
             }
-            
-            const startIndex = (state.currentPage - 1) * CONFIG.carsPerPage;
-            const endIndex = startIndex + CONFIG.carsPerPage;
-            const currentCars = state.cars.slice(startIndex, endIndex);
-            
-            elements.carsGrid.innerHTML = '';
             
             currentCars.forEach((car, index) => {
                 const statusClass = car.status ? `status-${car.status.toLowerCase().replace(' ', '-')}` : '';
@@ -1045,15 +1123,17 @@
                 const carCard = document.createElement('div');
                 carCard.className = 'car-card';
                 carCard.setAttribute('data-car-id', car.id);
+                carCard.style.animationDelay = `${index * 0.1}s`;
                 carCard.innerHTML = `
                     <div class="car-image-container">
                         ${car.status ? `<div class="status-badge ${statusClass}">${car.status}</div>` : ''}
-                        <img src="${primaryImage}" alt="${car.name}" class="car-image" 
-                             onerror="this.src='https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                        <img src="${primaryImage}" alt="${car.name}" class="car-image">
                         <button class="reserve-btn" data-car-id="${car.id}">Reserve</button>
                     </div>
                     <div class="car-info">
+                        <div class="caplicity-brand">Caplicity Motors</div>
                         <div class="car-name">${car.name}</div>
+                        <div class="car-id">ID: ${car.id}</div>
                         <div class="car-year-price">
                             <span>${car.year || 'N/A'}</span>
                             <span class="car-price">${car.price || 'Contact for price'}</span>
@@ -1065,92 +1145,179 @@
                         </div>
                     </div>
                 `;
-                elements.carsGrid.appendChild(carCard);
+                carsGrid.appendChild(carCard);
             });
             
-            this.attachCarEventListeners();
-        },
+            attachCarEventListeners();
+        }
 
-        // ✅ FIXED: Better event attachment
-        attachCarEventListeners() {
-            // Remove any existing listeners first
-            elements.carsGrid.replaceWith(elements.carsGrid.cloneNode(true));
-            elements.carsGrid = document.getElementById('carsGrid');
+        // Clear search and show all vehicles
+        function clearSearchAndShowAll() {
+            filteredCars = [...cars];
+            currentPage = 1;
+            searchResultsHeader.style.display = 'none';
+            pageTitle.textContent = 'Our Vehicle Collection';
+            displayCars();
+            setupPagination();
             
-            // Use event delegation for car clicks
-            elements.carsGrid.addEventListener('click', (event) => {
-                const carCard = event.target.closest('.car-card');
-                if (!carCard) return;
-                
-                const carId = carCard.getAttribute('data-car-id');
-                
-                if (event.target.classList.contains('reserve-btn')) {
-                    event.stopPropagation();
-                    modalManager.openContactsModal();
-                } else {
-                    // Click anywhere on card opens modal
-                    modalManager.openCarModal(carId);
+            // Update URL without search parameters
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        }
+
+        // Attach event listeners to car cards
+        function attachCarEventListeners() {
+            document.querySelectorAll('.car-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('reserve-btn')) {
+                        e.stopPropagation();
+                        const carId = card.getAttribute('data-car-id');
+                        const car = filteredCars.find(c => c.id === carId);
+                        openAgentsModal(car);
+                    } else {
+                        const carId = card.getAttribute('data-car-id');
+                        openCarModal(carId);
+                    }
+                });
+            });
+        }
+
+        // Setup scroll animation for status badges
+        function setupScrollAnimation() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const statusBadge = entry.target.querySelector('.status-badge');
+                        if (statusBadge) {
+                            setTimeout(() => {
+                                statusBadge.classList.add('visible');
+                            }, 200);
+                        }
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            document.querySelectorAll('.car-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Setup pagination
+        function setupPagination() {
+            const totalPages = Math.ceil(filteredCars.length / carsPerPage);
+            currentPageEl.textContent = currentPage;
+            totalPagesEl.textContent = totalPages || 1;
+            prevPage.disabled = currentPage === 1;
+            nextPage.disabled = currentPage === totalPages || totalPages === 0;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Pagination
+            prevPage.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayCars();
+                    setupPagination();
+                    setupScrollAnimation();
                 }
             });
-        },
-
-        setupPagination() {
-            state.totalPages = Math.ceil(state.cars.length / CONFIG.carsPerPage);
-            elements.currentPageEl.textContent = state.currentPage;
-            elements.totalPagesEl.textContent = state.totalPages || 1;
-            elements.prevPage.disabled = state.currentPage === 1;
-            elements.nextPage.disabled = state.currentPage === state.totalPages || state.totalPages === 0;
-        }
-    };
-
-    // Modal management
-    const modalManager = {
-        openCarModal(carId) {
-            console.log('Opening modal for car:', carId);
-            const car = state.cars.find(c => c.id === carId);
-            if (!car) {
-                console.error('Car not found:', carId);
-                return;
-            }
             
-            state.currentCarIndex = state.cars.findIndex(c => c.id === carId);
-            elements.modalCarTitle.textContent = car.name;
+            nextPage.addEventListener('click', () => {
+                const totalPages = Math.ceil(filteredCars.length / carsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayCars();
+                    setupPagination();
+                    setupScrollAnimation();
+                }
+            });
+            
+            // Modal events
+            closeModal.addEventListener('click', closeCarModal);
+            closeAgents.addEventListener('click', closeAgentsModal);
+            
+            // Car navigation in modal
+            prevCar.addEventListener('click', showPreviousCar);
+            nextCar.addEventListener('click', showNextCar);
+            
+            // Reserve button in modal
+            modalReserveBtn.addEventListener('click', () => {
+                const car = filteredCars[currentCarIndex];
+                openAgentsModal(car);
+            });
+            
+            // Close modals on overlay click
+            carModal.addEventListener('click', (e) => {
+                if (e.target === carModal) closeCarModal();
+            });
+            
+            agentsModal.addEventListener('click', (e) => {
+                if (e.target === agentsModal) closeAgentsModal();
+            });
+            
+            // Clear search button
+            clearSearch.addEventListener('click', clearSearchAndShowAll);
+            
+            // Exit reserve button
+            exitReserve.addEventListener('click', closeAgentsModal);
+        }
+
+        // Open car modal with enhanced animations
+        function openCarModal(carId) {
+            const car = filteredCars.find(c => c.id === carId);
+            if (!car) return;
+            
+            currentCarIndex = filteredCars.findIndex(c => c.id === carId);
+            modalCarTitle.textContent = car.name;
             
             const primaryImage = car.images?.[0] || 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
-            elements.modalPrimaryImage.src = primaryImage;
-            elements.modalPrimaryImage.alt = car.name;
+            modalPrimaryImage.src = primaryImage;
+            modalPrimaryImage.alt = car.name;
             
-            elements.modalThumbnails.innerHTML = '';
+            // Clear and add thumbnails
+            modalThumbnails.innerHTML = '';
             if (car.images && car.images.length > 0) {
-                car.images.slice(0, CONFIG.maxThumbnails).forEach((image, index) => {
+                car.images.slice(0, 7).forEach((image, index) => {
                     const img = document.createElement('img');
                     img.src = image;
                     img.alt = `${car.name} - Image ${index + 1}`;
-                    img.className = 'thumbnail';
-                    img.onerror = function() {
-                        this.src = 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
-                    };
+                    img.className = 'thumbnail' + (index === 0 ? ' active' : '');
                     img.addEventListener('click', () => {
-                        elements.modalPrimaryImage.src = image;
+                        modalPrimaryImage.src = image;
+                        // Update active thumbnail
+                        document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+                        img.classList.add('active');
                     });
-                    elements.modalThumbnails.appendChild(img);
+                    modalThumbnails.appendChild(img);
                 });
+            } else {
+                // Add placeholder thumbnails if no images
+                for (let i = 0; i < 7; i++) {
+                    const img = document.createElement('img');
+                    img.src = 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                    img.alt = `${car.name} - Image ${i + 1}`;
+                    img.className = 'thumbnail' + (i === 0 ? ' active' : '');
+                    img.addEventListener('click', () => {
+                        modalPrimaryImage.src = img.src;
+                        document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+                        img.classList.add('active');
+                    });
+                    modalThumbnails.appendChild(img);
+                }
             }
             
-            elements.carDetails.innerHTML = '';
+            // Populate car details with staggered animation
+            carDetails.innerHTML = '';
             const details = [
+               
                 { label: 'Price', value: car.price },
                 { label: 'Year', value: car.year },
                 { label: 'Make', value: car.make },
                 { label: 'Model', value: car.model },
                 { label: 'Transmission', value: car.transmission },
                 { label: 'Fuel Type', value: car.fuel },
-                { label: 'Engine', value: car.engine },
                 { label: 'Mileage', value: car.mileage },
-                { label: 'Color', value: car.color },
-                { label: 'Body Type', value: car.body },
-                { label: 'Location', value: car.location },
-                { label: 'Stock ID', value: car.stockID },
                 { label: 'Status', value: car.status },
                 { label: 'Features', value: car.features, isFeatures: true }
             ];
@@ -1179,123 +1346,69 @@
                         <div>${detail.value}</div>
                     `;
                 }
-                elements.carDetails.appendChild(detailItem);
+                carDetails.appendChild(detailItem);
             });
             
-            elements.carModal.classList.add('active');
-        },
+            carModal.classList.add('active');
+        }
 
-        closeCarModal() {
-            elements.carModal.classList.remove('active');
-        },
+        // Close car modal
+        function closeCarModal() {
+            carModal.classList.remove('active');
+        }
 
-        showPreviousCar() {
-            if (state.cars.length === 0) return;
-            state.currentCarIndex = state.currentCarIndex > 0 ? state.currentCarIndex - 1 : state.cars.length - 1;
-            this.openCarModal(state.cars[state.currentCarIndex].id);
-        },
+        // Show previous car in modal
+        function showPreviousCar() {
+            if (filteredCars.length === 0) return;
+            currentCarIndex = currentCarIndex > 0 ? currentCarIndex - 1 : filteredCars.length - 1;
+            openCarModal(filteredCars[currentCarIndex].id);
+        }
 
-        showNextCar() {
-            if (state.cars.length === 0) return;
-            state.currentCarIndex = state.currentCarIndex < state.cars.length - 1 ? state.currentCarIndex + 1 : 0;
-            this.openCarModal(state.cars[state.currentCarIndex].id);
-        },
+        // Show next car in modal
+        function showNextCar() {
+            if (filteredCars.length === 0) return;
+            currentCarIndex = currentCarIndex < filteredCars.length - 1 ? currentCarIndex + 1 : 0;
+            openCarModal(filteredCars[currentCarIndex].id);
+        }
 
-        openContactsModal() {
-            const contactsList = document.getElementById('contactsList');
-            contactsList.innerHTML = '';
+        // Open agents modal with specific agents for the car
+        function openAgentsModal(car) {
+            if (!car) return;
             
-            state.contacts.forEach(contact => {
-                const formattedNumber = utils.formatWhatsAppNumber(contact.number);
-                const whatsappUrl = `https://wa.me/${formattedNumber}`;
+            currentCarForReservation = car;
+            agentsList.innerHTML = '';
+            
+            // Get the specific agents for this car
+            const carAgents = car.agents.map(index => agents[index]);
+            
+            carAgents.forEach(agent => {
+                const formattedNumber = agent.number.replace(/\s+/g, '').replace(/-/g, '');
+                const message = `Hello, I am interested in reserving the ${car.name} (ID: ${car.id}). Please provide more details.`;
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${formattedNumber}?text=${encodedMessage}`;
                 
-                const contactItem = document.createElement('div');
-                contactItem.className = 'contact-item';
-                contactItem.innerHTML = `
-                    <div>
-                        <div class="contact-name">${contact.name}</div>
-                        <div class="contact-number">${contact.number}</div>
-                    </div>
-                    <a class="contact-action" href="${whatsappUrl}" target="_blank">Chat</a>
+                const agentItem = document.createElement('div');
+                agentItem.className = 'agent-item';
+                agentItem.innerHTML = `
+                    <div class="agent-photo">${agent.photo}</div>
+                    <div class="agent-name">${agent.name}</div>
+                    <div class="agent-role">${agent.role}</div>
+                    <a class="agent-action" href="${whatsappUrl}" target="_blank">Chat on WhatsApp</a>
                 `;
-                contactsList.appendChild(contactItem);
+                agentsList.appendChild(agentItem);
             });
             
-            elements.contactsModal.classList.add('active');
-        },
-
-        closeContactsModal() {
-            elements.contactsModal.classList.remove('active');
+            agentsModal.classList.add('active');
         }
-    };
 
-    // Event handlers
-    const eventHandlers = {
-        setupPaginationEvents() {
-            elements.prevPage.addEventListener('click', () => {
-                if (state.currentPage > 1) {
-                    state.currentPage--;
-                    renderer.displayCars();
-                    renderer.setupPagination();
-                }
-            });
-            
-            elements.nextPage.addEventListener('click', () => {
-                if (state.currentPage < state.totalPages) {
-                    state.currentPage++;
-                    renderer.displayCars();
-                    renderer.setupPagination();
-                }
-            });
-        },
-
-        setupModalEvents() {
-            // Close modal events
-            elements.closeModal.addEventListener('click', () => modalManager.closeCarModal());
-            elements.closeContacts.addEventListener('click', () => modalManager.closeContactsModal());
-            
-            // Navigation events
-            elements.prevCar.addEventListener('click', () => modalManager.showPreviousCar());
-            elements.nextCar.addEventListener('click', () => modalManager.showNextCar());
-            elements.modalReserveBtn.addEventListener('click', () => modalManager.openContactsModal());
-            
-            // Close on overlay click
-            elements.carModal.addEventListener('click', (e) => {
-                if (e.target === elements.carModal) modalManager.closeCarModal();
-            });
-            
-            elements.contactsModal.addEventListener('click', (e) => {
-                if (e.target === elements.contactsModal) modalManager.closeContactsModal();
-            });
+        // Close agents modal
+        function closeAgentsModal() {
+            agentsModal.classList.remove('active');
+            currentCarForReservation = null;
         }
-    };
 
-    // Main application
-    const app = {
-        async init() {
-            try {
-                utils.showLoadingState();
-                await dataManager.loadCarsData();
-                await dataManager.loadContactsData();
-                renderer.displayCars();
-                renderer.setupPagination();
-                eventHandlers.setupPaginationEvents();
-                eventHandlers.setupModalEvents();
-                
-                // Setup automatic data refresh for CMS
-                dataManager.setupAutoRefresh();
-                
-                console.log('✅ MotorPride Kenya - All Cars Page Loaded');
-                
-            } catch (error) {
-                console.error('Error initializing page:', error);
-                utils.showErrorState();
-            }
-        }
-    };
-
-    // Initialize the application
-    document.addEventListener('DOMContentLoaded', () => app.init());
-</script>
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>

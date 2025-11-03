@@ -260,6 +260,93 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Instructions Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .instruction-steps {
+            margin: 1.5rem 0;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background-color: var(--accent);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            flex: 1;
+        }
+
+        .btn-continue {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .btn-continue:hover {
+            background: #1a3a6e;
+        }
+
         @media (max-width: 768px) {
             .sell-car-section {
                 padding: 2rem 1rem;
@@ -383,14 +470,52 @@
         </div>
     </section>
 
+    <!-- Instructions Modal -->
+    <div class="modal" id="instructionsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>How to Send Your Car Photos</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <p>Your car details have been sent to WhatsApp. To complete your listing, please follow these steps to send your car photos:</p>
+            
+            <div class="instruction-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">After WhatsApp opens with your car details, locate the attachment button (paperclip icon)</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Select "Gallery" or "Photos" from the menu</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Select the car photos you uploaded on our website</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-text">Add a caption if needed and send the photos</div>
+                </div>
+            </div>
+            
+            <p><strong>Note:</strong> Your photos are stored temporarily in your browser and won't be sent automatically. You need to manually select them in WhatsApp.</p>
+            
+            <button class="btn-continue" id="continueBtn">Got it, continue to WhatsApp</button>
+        </div>
+    </div>
+
     <script>
         // Image Upload Functionality
         const uploadArea = document.getElementById('uploadArea');
         const imageInput = document.getElementById('imageInput');
         const imagePreview = document.getElementById('imagePreview');
         const uploadBtn = document.getElementById('uploadBtn');
+        const instructionsModal = document.getElementById('instructionsModal');
+        const closeModal = document.getElementById('closeModal');
+        const continueBtn = document.getElementById('continueBtn');
         
         let uploadedImages = [];
+        let whatsappURL = '';
         
         // Open file selector when clicking the upload area or button
         uploadArea.addEventListener('click', () => imageInput.click());
@@ -488,6 +613,16 @@
             }
         }
         
+        // Modal functionality
+        closeModal.addEventListener('click', () => {
+            instructionsModal.style.display = 'none';
+        });
+        
+        continueBtn.addEventListener('click', () => {
+            instructionsModal.style.display = 'none';
+            window.open(whatsappURL, '_blank');
+        });
+        
         // WhatsApp Function
         function sendToWhatsApp() {
             const makeModel = document.getElementById("makeModel").value.trim();
@@ -507,29 +642,32 @@
 
             // Build the WhatsApp message
             let message = "Hi MotorPride, I want to sell my car. Here are the details:\n\n";
-            message += `🚗 *Make & Model:* ${makeModel}\n`;
-            message += `📅 *Year:* ${year}\n`;
-            message += `📏 *Mileage:* ${mileage} km\n`;
-            message += `⚙️ *Transmission:* ${transmission}\n`;
-            message += `⛽ *Fuel Type:* ${fuel}\n`;
-            message += `🛠️ *Condition:* ${condition}\n`;
-            message += `💰 *Asking Price:* KSh ${price}\n`;
-            message += `📞 *Contact:* ${contact}\n\n`;
-            message += `📸 I have ${uploadedImages.length} photo(s) of the car that I will send now.`;
+            message += ` *Make & Model:* ${makeModel}\n`;
+            message += ` *Year:* ${year}\n`;
+            message += ` *Mileage:* ${mileage} km\n`;
+            message += ` *Transmission:* ${transmission}\n`;
+            message += ` *Fuel Type:* ${fuel}\n`;
+            message += ` *Condition:* ${condition}\n`;
+            message += ` *Asking Price:* KSh ${price}\n`;
+            message += ` *Contact:* ${contact}\n\n`;
+            
+            if (uploadedImages.length > 0) {
+                message += `📸 I have uploaded ${uploadedImages.length} photo(s) of the car and will send them separately.`;
+            } else {
+                message += `📸 I will send photos of the car separately.`;
+            }
 
             // Encode the message for URL
             const encodedMessage = encodeURIComponent(message);
             
             // Create WhatsApp URL
-            const whatsappURL = `https://wa.me/254723098206?text=${encodedMessage}`;
+            whatsappURL = `https://wa.me/254723098206?text=${encodedMessage}`;
             
-            // Open WhatsApp
-            window.open(whatsappURL, "_blank");
-            
-            // Show reminder about images
+            // Show instructions if images were uploaded
             if (uploadedImages.length > 0) {
-                alert(`Your car details have been sent to WhatsApp. Please send the ${uploadedImages.length} car photo(s) separately by selecting them in the WhatsApp chat.`);
+                instructionsModal.style.display = 'flex';
             } else {
+                window.open(whatsappURL, '_blank');
                 alert("Your car details have been sent to WhatsApp. Don't forget to send photos of your car in the chat!");
             }
         }
