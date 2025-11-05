@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotorPride Kenya | Premium Car Hire Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1a73e8;
+            --primary-dark: #0d5bb9;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ff6b35;
+            --text-color: #333;
+            --light-text: #666;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+            --safari-green: #2e8b57;
+            --safari-dark-green: #1e6b47;
+            --luxury-gold: #d4af37;
+            --luxury-dark-gold: #b8941f;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Section */
+        .hire-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .hire-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,50 Q250,0 500,50 T1000,50 V100 H0 Z" fill="rgba(255,255,255,0.1)"></path></svg>');
+            background-size: cover;
+        }
+
+        .welcome-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .welcome-text p {
+            font-size: 1.3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.3s forwards;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tabs Section */
+        .hire-tabs {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-top: -40px;
+            border-radius: 15px 15px 0 0;
+            overflow: hidden;
+        }
+
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .tab {
+            padding: 20px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+            position: relative;
+            flex: 1;
+            text-align: center;
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            background: rgba(26, 115, 232, 0.05);
+        }
+
+        .tab:hover:not(.active) {
+            background: rgba(26, 115, 232, 0.05);
+        }
+
+        .tab-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-color);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        /* Content Sections */
+        .hire-content {
+            padding: 60px 0;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-title p {
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Vehicle Grid */
+        .vehicles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .vehicle-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .vehicle-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .vehicle-card:hover .vehicle-image {
+            transform: scale(1.05);
+        }
+
+        .vehicle-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
+        }
+
+        .vehicle-content {
+            padding: 25px;
+        }
+
+        .vehicle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .vehicle-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .vehicle-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .vehicle-price span {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            font-weight: 500;
+        }
+
+        .vehicle-details {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .detail-item i {
+            color: var(--primary-color);
+        }
+
+        .vehicle-features {
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .feature-tag {
+            background: rgba(26, 115, 232, 0.1);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Reserve Section */
+        .reserve-section {
+            margin-top: 20px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .reserve-contacts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 15px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3);
+        }
+
+        .contact-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(26, 115, 232, 0.4);
+        }
+
+        .contact-btn i {
+            font-size: 1rem;
+        }
+
+        .hire-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(26, 115, 232, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: rgba(26, 115, 232, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Safari Section Styling */
+        .safari-vehicle .vehicle-badge {
+            background: var(--safari-green);
+            box-shadow: 0 4px 10px rgba(46, 139, 87, 0.3);
+        }
+
+        .safari-vehicle .vehicle-price {
+            color: var(--safari-green);
+        }
+
+        .safari-vehicle .detail-item i {
+            color: var(--safari-green);
+        }
+
+        .safari-vehicle .feature-tag {
+            background: rgba(46, 139, 87, 0.1);
+            color: var(--safari-green);
+        }
+
+        .safari-vehicle .contact-btn {
+            background: var(--safari-green);
+            box-shadow: 0 4px 10px rgba(46, 139, 87, 0.3);
+        }
+
+        .safari-vehicle .contact-btn:hover {
+            background: var(--safari-dark-green);
+            box-shadow: 0 6px 15px rgba(46, 139, 87, 0.4);
+        }
+
+        .safari-vehicle .btn-primary {
+            background: var(--safari-green);
+            box-shadow: 0 4px 10px rgba(46, 139, 87, 0.3);
+        }
+
+        .safari-vehicle .btn-primary:hover {
+            background: var(--safari-dark-green);
+            box-shadow: 0 6px 15px rgba(46, 139, 87, 0.4);
+        }
+
+        .safari-vehicle .btn-outline {
+            color: var(--safari-green);
+            border-color: var(--safari-green);
+        }
+
+        .safari-vehicle .btn-outline:hover {
+            background: rgba(46, 139, 87, 0.1);
+        }
+
+        /* Luxury Vehicle Styling */
+        .luxury-vehicle .vehicle-badge {
+            background: var(--luxury-gold);
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .luxury-vehicle .vehicle-price {
+            color: var(--luxury-gold);
+        }
+
+        .luxury-vehicle .detail-item i {
+            color: var(--luxury-gold);
+        }
+
+        .luxury-vehicle .feature-tag {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--luxury-gold);
+        }
+
+        .luxury-vehicle .contact-btn {
+            background: var(--luxury-gold);
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .luxury-vehicle .contact-btn:hover {
+            background: var(--luxury-dark-gold);
+            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .luxury-vehicle .btn-primary {
+            background: var(--luxury-gold);
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .luxury-vehicle .btn-primary:hover {
+            background: var(--luxury-dark-gold);
+            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .luxury-vehicle .btn-outline {
+            color: var(--luxury-gold);
+            border-color: var(--luxury-gold);
+        }
+
+        .luxury-vehicle .btn-outline:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* Additional Info Section */
+        .additional-info {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-top: 50px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 20px;
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .info-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .safari-info .info-icon {
+            color: var(--safari-green);
+        }
+
+        .luxury-info .info-icon {
+            color: var(--luxury-gold);
+        }
+
+        .info-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .info-card p {
+            color: var(--light-text);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .vehicles-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tabs-container {
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: center;
+            }
+            
+            .vehicles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hire-actions {
+                flex-direction: column;
+            }
+            
+            .reserve-contacts {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <section class="hire-header">
+        <div class="container">
+            <div class="welcome-text">
+                <h1>Welcome to MotorPride Kenya Hire Section</h1>
+                <p>Discover our premium car hire services for both self-drive adventures and tourist safaris across Kenya</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tabs Section -->
+    <section class="hire-tabs">
+        <div class="container">
+            <div class="tabs-container">
+                <div class="tab active" data-tab="self-drive">
+                    Self Drive & Chauffeur
+                    <span class="tab-badge">Popular</span>
+                </div>
+                <div class="tab" data-tab="safari">
+                    Tourist Safaris
+                    <span class="tab-badge">Adventure</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="hire-content">
+        <div class="container">
+            <!-- Self Drive Section -->
+            <div class="tab-content active" id="self-drive">
+                <div class="section-title">
+                    <h2>Self Drive & Chauffeur Services</h2>
+                    <p>Choose from our wide range of vehicles for your personal or business needs</p>
+                </div>
+
+                <div class="vehicles-grid">
+                    <!-- Vehicle 1 -->
+                    <div class="vehicle-card">
+                        <div class="vehicle-image" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="vehicle-badge">Self Drive</div>
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-name">Toyota RAV4</h3>
+                                <div class="vehicle-price">KSh 4,500<span>/day</span></div>
+                            </div>
+                            <div class="vehicle-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Automatic</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-user-friends"></i>
+                                    <span>5 Seats</span>
+                                </div>
+                            </div>
+                            <div class="vehicle-features">
+                                <div class="feature-list">
+                                    <span class="feature-tag">AC</span>
+                                    <span class="feature-tag">GPS</span>
+                                    <span class="feature-tag">Bluetooth</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Reserve Section -->
+                            <div class="reserve-section">
+                                <div class="reserve-contacts">
+                                    <a href="https://api.whatsapp.com/send?phone=254723098206&text=Hello%20Mahia%20Sam,%20I'm%20interested%20in%20hiring%20the%20Toyota%20RAV4%20for%20self-drive.%20Please%20provide%20availability%20and%20booking%20details." class="contact-btn" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Mahia Sam: 0723 098 206
+                                    </a>
+                                    <a href="https://api.whatsapp.com/send?phone=254724804354&text=Hello%20Sam%20Kiarie,%20I'm%20interested%20in%20hiring%20the%20Toyota%20RAV4%20for%20self-drive.%20Please%20provide%20availability%20and%20booking%20details." class="contact-btn" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Sam Kiarie: 0724 804 354
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="hire-actions">
+                                <button class="btn btn-primary">Book Now</button>
+                                <button class="btn btn-outline">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vehicle 2 -->
+                    <div class="vehicle-card luxury-vehicle">
+                        <div class="vehicle-image" style="background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="vehicle-badge">With Driver</div>
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-name">Mercedes E-Class</h3>
+                                <div class="vehicle-price">KSh 8,500<span>/day</span></div>
+                            </div>
+                            <div class="vehicle-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Automatic</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-user-friends"></i>
+                                    <span>4 Seats</span>
+                                </div>
+                            </div>
+                            <div class="vehicle-features">
+                                <div class="feature-list">
+                                    <span class="feature-tag">Luxury</span>
+                                    <span class="feature-tag">WiFi</span>
+                                    <span class="feature-tag">Chauffeur</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Reserve Section -->
+                            <div class="reserve-section">
+                                <div class="reserve-contacts">
+                                    <a href="https://api.whatsapp.com/send?phone=254723098206&text=Hello%20Mahia%20Sam,%20I'm%20interested%20in%20hiring%20the%20Mercedes%20E-Class%20with%20driver.%20Please%20provide%20availability%20and%20booking%20details." class="contact-btn" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Mahia Sam: 0723 098 206
+                                    </a>
+                                    <a href="https://api.whatsapp.com/send?phone=254724804354&text=Hello%20Sam%20Kiarie,%20I'm%20interested%20in%20hiring%20the%20Mercedes%20E-Class%20with%20driver.%20Please%20provide%20availability%20and%20booking%20details." class="contact-btn" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Sam Kiarie: 0724 804 354
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="hire-actions">
+                                <button class="btn btn-primary">Book Now</button>
+                                <button class="btn btn-outline">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vehicle 3 -->
+                    <div class="vehicle-card">
+                        <div class="vehicle-image" style="background-image: url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="vehicle-badge">Self Drive</div>
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-name">Toyota Hilux</h3>
+                                <div class="vehicle-price">KSh 6,000<span>/day</span></div>
+                            </div>
+                            <div class="vehicle-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Manual</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Diesel</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-user-friends"></i>
+                                    <span>5 Seats</span>
+                                </div>
+                            </div>
+                            <div class="vehicle-features">
+                                <div class="feature-list">
+                                    <span class="feature-tag">4x4</span>
+                                    <span class="feature-tag">Rugged</span>
+                                    <span class="feature-tag">AC</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Reserve Section -->
+                            <div class="reserve-section">
+                                <div class="reserve-contacts">
+                                    <a href="https://api.whatsapp.com/send?phone=254723098206&text=Hello%20Mahia%20Sam,%20I'm%20interested%20in%20hiring%20the%20Toyota%20Hilux%20for%20self-drive.%20Please%20provide%20availability%20and%20booking%20details." class="contact-btn" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Mahia Sam: 0723 098 206
+                                    </a>
+                                    <a href="https://api.whatsapp.com/send?phone=254724804354&text=Hello%20Sam%20Kiarie,%20I'm%20interested%20in%20hiring%20the%20Toyota%20Hilux%20for%20self-drive.%20Please%20provide%20availability%20and%20booking%20details." class="contact-btn" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Sam Kiarie: 0724 804 354
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="hire-actions">
+                                <button class="btn btn-primary">Book Now</button>
+                                <button class="btn btn-outline">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="additional-info">
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <h3>Easy Booking</h3>
+                            <p>Book your vehicle in just a few clicks with our simple online process</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Full Insurance</h3>
+                            <p>All our vehicles come with comprehensive insurance coverage</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <i class="fas fa-road"></i>
+                            </div>
+                            <h3>Nationwide Coverage</h3>
+                            <p>Pick up and drop off at multiple locations across Kenya</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Safari Section -->
+            <div class="tab-content" id="safari">
+                <div class="section-title">
+                    <h2>Tourist Safari Packages</h2>
+                    <p>Experience Kenya's wildlife and landscapes with our specialized safari vehicles</p>
+                </div>
+
+                <div class="vehicles-grid">
+                    <!-- Safari Vehicle 1 -->
+                    <div class="vehicle-card safari-vehicle">
+                        <div class="vehicle-image" style="background-image: url('https://images.unsplash.com/photo-1598894595350-76770f7df34c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="vehicle-badge">Safari Ready</div>
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-name">Land Cruiser Safari Van</h3>
+                                <div class="vehicle-price">KSh 12,000<span>/day</span></div>
+                            </div>
+                            <div class="vehicle-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-cog"></i>
+                                    <span>4x4</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Diesel</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-user-friends"></i>
+                                    <span>7 Seats</span>
+                                </div>
+                            </div>
+                            <div class="vehicle-features">
+                                <div class="feature-list">
+                                    <span class="feature-tag">Pop-up Roof</span>
+                                    <span class="feature-tag">Guide Included</span>
+                                    <span class="feature-tag">Cooler Box</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Reserve Section -->
+                            <div class="reserve-section">
+                                <div class="reserve-contacts">
+                                    <a href="https://api.whatsapp.com/send?phone=254723098206&text=Hello%20Mahia%20Sam,%20I'm%20interested%20in%20the%20Land%20Cruiser%20Safari%20Van%20for%20a%20tourist%20safari.%20Please%20provide%20availability%20and%20package%20details." class="contact-btn" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Mahia Sam: 0723 098 206
+                                    </a>
+                                    <a href="https://api.whatsapp.com/send?phone=254724804354&text=Hello%20Sam%20Kiarie,%20I'm%20interested%20in%20the%20Land%20Cruiser%20Safari%20Van%20for%20a%20tourist%20safari.%20Please%20provide%20availability%20and%20package%20details." class="contact-btn" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Sam Kiarie: 0724 804 354
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="hire-actions">
+                                <button class="btn btn-primary">Book Safari</button>
+                                <button class="btn btn-outline">Package Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Safari Vehicle 2 -->
+                    <div class="vehicle-card safari-vehicle luxury-vehicle">
+                        <div class="vehicle-image" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="vehicle-badge">Luxury Safari</div>
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-name">Range Rover Safari</h3>
+                                <div class="vehicle-price">KSh 18,000<span>/day</span></div>
+                            </div>
+                            <div class="vehicle-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-cog"></i>
+                                    <span>4x4 Auto</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Petrol</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-user-friends"></i>
+                                    <span>5 Seats</span>
+                                </div>
+                            </div>
+                            <div class="vehicle-features">
+                                <div class="feature-list">
+                                    <span class="feature-tag">Luxury Interior</span>
+                                    <span class="feature-tag">Expert Guide</span>
+                                    <span class="feature-tag">Gourmet Meals</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Reserve Section -->
+                            <div class="reserve-section">
+                                <div class="reserve-contacts">
+                                    <a href="https://api.whatsapp.com/send?phone=254723098206&text=Hello%20Mahia%20Sam,%20I'm%20interested%20in%20the%20Range%20Rover%20Safari%20for%20a%20luxury%20tourist%20experience.%20Please%20provide%20availability%20and%20package%20details." class="contact-btn" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Mahia Sam: 0723 098 206
+                                    </a>
+                                    <a href="https://api.whatsapp.com/send?phone=254724804354&text=Hello%20Sam%20Kiarie,%20I'm%20interested%20in%20the%20Range%20Rover%20Safari%20for%20a%20luxury%20tourist%20experience.%20Please%20provide%20availability%20and%20package%20details." class="contact-btn" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Sam Kiarie: 0724 804 354
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="hire-actions">
+                                <button class="btn btn-primary">Book Safari</button>
+                                <button class="btn btn-outline">Package Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Safari Vehicle 3 -->
+                    <div class="vehicle-card safari-vehicle">
+                        <div class="vehicle-image" style="background-image: url('https://images.unsplash.com/photo-1506197603050-40eaad1b8ed0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                            <div class="vehicle-badge">Group Safari</div>
+                        </div>
+                        <div class="vehicle-content">
+                            <div class="vehicle-header">
+                                <h3 class="vehicle-name">Custom Safari Truck</h3>
+                                <div class="vehicle-price">KSh 25,000<span>/day</span></div>
+                            </div>
+                            <div class="vehicle-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-cog"></i>
+                                    <span>6x6</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Diesel</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-user-friends"></i>
+                                    <span>12 Seats</span>
+                                </div>
+                            </div>
+                            <div class="vehicle-features">
+                                <div class="feature-list">
+                                    <span class="feature-tag">Large Group</span>
+                                    <span class="feature-tag">Camping Gear</span>
+                                    <span class="feature-tag">Chef Included</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Reserve Section -->
+                            <div class="reserve-section">
+                                <div class="reserve-contacts">
+                                    <a href="https://api.whatsapp.com/send?phone=254723098206&text=Hello%20Mahia%20Sam,%20I'm%20interested%20in%20the%20Custom%20Safari%20Truck%20for%20a%20group%20tourist%20safari.%20Please%20provide%20availability%20and%20package%20details." class="contact-btn" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Mahia Sam: 0723 098 206
+                                    </a>
+                                    <a href="https://api.whatsapp.com/send?phone=254724804354&text=Hello%20Sam%20Kiarie,%20I'm%20interested%20in%20the%20Custom%20Safari%20Truck%20for%20a%20group%20tourist%20safari.%20Please%20provide%20availability%20and%20package%20details." class="contact-btn" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Sam Kiarie: 0724 804 354
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="hire-actions">
+                                <button class="btn btn-primary">Book Safari</button>
+                                <button class="btn btn-outline">Package Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="additional-info">
+                    <div class="info-grid">
+                        <div class="info-card safari-info">
+                            <div class="info-icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <h3>Safari Routes</h3>
+                            <p>Customized itineraries covering Maasai Mara, Amboseli, Tsavo and more</p>
+                        </div>
+                        <div class="info-card safari-info">
+                            <div class="info-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <h3>Photo Opportunities</h3>
+                            <p>Expert guides know the best spots for wildlife photography</p>
+                        </div>
+                        <div class="info-card safari-info">
+                            <div class="info-icon">
+                                <i class="fas fa-concierge-bell"></i>
+                            </div>
+                            <h3>Full Service</h3>
+                            <p>Accommodation, meals, and park fees all arranged for you</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Add animation to vehicle cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Animate vehicle cards on scroll
+            const vehicleCards = document.querySelectorAll('.vehicle-card');
+            vehicleCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Book Now button functionality
+            const bookButtons = document.querySelectorAll('.btn-primary');
+            bookButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const vehicleCard = this.closest('.vehicle-card');
+                    const vehicleName = vehicleCard.querySelector('.vehicle-name').textContent;
+                    const vehiclePrice = vehicleCard.querySelector('.vehicle-price').textContent;
+                    
+                    alert(`Thank you for your interest in ${vehicleName}! Our team will contact you shortly to complete your booking.`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

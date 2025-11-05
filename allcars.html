@@ -846,120 +846,303 @@
         // Sample car data (replace with your actual data)
         const cars = [
             {
-                id: "CAP-001",
-                name: "Toyota Harrier 2021",
-                make: "Toyota",
-                model: "Harrier",
-                year: 2021,
-                price: "KSh 3,200,000",
-                transmission: "Automatic",
-                fuel: "Petrol",
-                mileage: "18,000 km",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: ["Air Conditioning", "Power Steering", "Bluetooth", "Backup Camera", "Leather Seats", "Sunroof", "Navigation System"],
-                agents: [0, 1] // Indices of agents in the agents array
-            },
+  id: "lafesta2016",
+  name: "Nissan Lafesta 2016",
+  make: "Nissan",
+  model: "Lafesta",
+  year: 2016,
+  price: "1,200,000",
+  transmission: "Automatic",
+  fuel: "Petrol",
+  mileage: "—",
+  status: "Available",
+  images: [
+    "https://i.ibb.co/Xf73ZG2v/Whats-App-Image-2025-11-04-at-3-10-10-PM-1.jpg",
+    "https://i.ibb.co/0VDdP6Lc/Whats-App-Image-2025-11-04-at-3-10-10-PM-2.jpg",
+    "https://i.ibb.co/r2TvgBRM/Whats-App-Image-2025-11-04-at-3-10-10-PM.jpg",
+    "https://i.ibb.co/KSz6G5M/Whats-App-Image-2025-11-04-at-3-10-11-PM-1.jpg",
+    "https://i.ibb.co/dxcvW0s/Whats-App-Image-2025-11-04-at-3-10-11-PM-2.jpg",
+    "https://i.ibb.co/mjCgtWv/Whats-App-Image-2025-11-04-at-3-10-11-PM.jpg",
+    "https://i.ibb.co/67RWYTG7/Whats-App-Image-2025-11-04-at-3-10-12-PM-1.jpg",
+    "https://i.ibb.co/tPHzVKTZ/Whats-App-Image-2025-11-04-at-3-10-12-PM-2.jpg",
+    "https://i.ibb.co/yF9t3bzB/Whats-App-Image-2025-11-04-at-3-10-12-PM.jpg",
+    "https://i.ibb.co/MxG7Sd37/Whats-App-Image-2025-11-04-at-3-10-13-PM-1.jpg",
+    "https://i.ibb.co/dst32N6c/Whats-App-Image-2025-11-04-at-3-10-13-PM-2.jpg",
+    "https://i.ibb.co/BHhr118f/Whats-App-Image-2025-11-04-at-3-10-13-PM.jpg",
+    "https://i.ibb.co/0V9XhGgB/Whats-App-Image-2025-11-04-at-3-10-14-PM-1.jpg",
+    "https://i.ibb.co/zhHvJScF/Whats-App-Image-2025-11-04-at-3-10-14-PM.jpg"
+  ],
+  features: [
+    "2000cc Engine",
+    "7-Seater Capacity",
+    "Fabric Upholstery",
+    "Black Exterior",
+    "Spacious Interior",
+    "Power Windows & Mirrors"
+  ],
+  agents: [
+    {
+      name: "MotorPride Kenya",
+      phone: "+254701234567",
+      whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%20Nissan%20Lafesta%202016"
+    }
+  ]
+},
+
             {
-                id: "CAP-002",
-                name: "Toyota Camry 2022",
-                make: "Toyota",
-                model: "Camry",
-                year: 2022,
-                price: "KSh 2,800,000",
-                transmission: "Automatic",
-                fuel: "Petrol",
-                mileage: "15,000 km",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: ["Premium Sound System", "Heated Seats", "Panoramic Roof", "Adaptive Cruise Control", "Parking Assist", "Wireless Charging", "Ambient Lighting"],
-                agents: [0, 2]
-            },
-            {
-                id: "CAP-003",
-                name: "Toyota RAV4 2020",
-                make: "Toyota",
-                model: "RAV4",
-                year: 2020,
-                price: "KSh 2,900,000",
-                transmission: "Automatic",
-                fuel: "Petrol",
-                mileage: "32,000 km",
-                status: "Incoming",
-                images: [
-                    "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: ["All-Wheel Drive", "Roof Rails", "Third Row Seating", "Touchscreen Display", "Rear AC Vents", "Keyless Entry", "Fog Lights"],
-                agents: [1, 3]
-            },
-            {
-                id: "CAP-004",
-                name: "Nissan X-Trail 2020",
-                make: "Nissan",
-                model: "X-Trail",
-                year: 2020,
-                price: "KSh 2,400,000",
-                transmission: "Automatic",
-                fuel: "Petrol",
-                mileage: "45,000 km",
-                status: "Sold",
-                images: [
-                    "https://images.unsplash.com/photo-1621330396173-e41b1cafd163?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: ["Symmetrical AWD", "X-Mode", "EyeSight Driver Assist", "Apple CarPlay", "Android Auto", "All-Weather Package", "Power Liftgate"],
-                agents: [2, 4]
-            },
-            {
-                id: "CAP-005",
-                name: "Mercedes-Benz C300 2022",
-                make: "Mercedes-Benz",
-                model: "C300",
-                year: 2022,
-                price: "KSh 5,800,000",
-                transmission: "Automatic",
-                fuel: "Petrol",
-                mileage: "12,500 km",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: ["Premium Sound System", "Heated Seats", "Panoramic Roof", "Adaptive Cruise Control", "Parking Assist", "Wireless Charging", "Ambient Lighting"],
-                agents: [3, 4]
-            },
+  id: "voxy2018",
+  name: "Toyota Voxy 2018",
+  make: "Toyota",
+  model: "Voxy",
+  year: 2018,
+  price: "—", // update when ready
+  transmission: "Automatic",
+  fuel: "Petrol",
+  mileage: "—",
+  status: "Incoming",
+  images: [
+    "https://i.ibb.co/JR3Pr3rW/Whats-App-Image-2025-11-04-at-3-25-29-PM-Copy-2.jpg",
+    "https://i.ibb.co/nszhZVXy/Whats-App-Image-2025-11-04-at-3-25-29-PM-1-Copy.jpg",
+    "https://i.ibb.co/1G0JxYCc/Whats-App-Image-2025-11-04-at-3-25-29-PM-2-Copy.jpg",
+    "https://i.ibb.co/KxqgGKZ0/Whats-App-Image-2025-11-04-at-3-25-29-PM-2.jpg",
+    "https://i.ibb.co/HL1q87mK/Whats-App-Image-2025-11-04-at-3-25-30-PM-Copy-Copy.jpg",
+    "https://i.ibb.co/B5gms00X/Whats-App-Image-2025-11-04-at-3-25-30-PM-1-Copy-Copy.jpg",
+    "https://i.ibb.co/N69k4X5h/Whats-App-Image-2025-11-04-at-3-25-31-PM-Copy-Copy.jpg"
+  ],
+  features: [
+    "1800cc Petrol Engine – efficient and durable",
+    "Automatic Transmission",
+    "Spacious 8-Seater Layout with flexible seat arrangement",
+    "Dual Powered Sliding Doors for easy access",
+    "Modern Infotainment System with Bluetooth & Reverse Camera",
+    "Ample Legroom & Cargo Space for ultimate comfort",
+    "Safety Suite: Lane Assist, Traction Control, and Anti-Collision Assist"
+  ],
+  agents: [
+    {
+      name: "MotorPride Kenya",
+      phone: "+254701234567",
+      whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%202018%20Toyota%20Voxy"
+    }
+  ]
+},
+
+           {
+  id: "cx8-2019",
+  name: "Mazda CX-8 2019",
+  make: "Mazda",
+  model: "CX-8",
+  year: 2019,
+  price: "KSh 3,450,000",
+  transmission: "Automatic",
+  fuel: "Diesel",
+  mileage: "—",
+  status: "Available",
+  images: [
+    "https://i.ibb.co/prwWPMGP/Whats-App-Image-2025-11-04-at-3-34-29-PM.jpg",
+    "https://i.ibb.co/20D5smKm/Whats-App-Image-2025-11-04-at-3-34-30-PM-1.jpg",
+    "https://i.ibb.co/PzcpZkBP/Whats-App-Image-2025-11-04-at-3-34-30-PM-2.jpg",
+    "https://i.ibb.co/jkn0wNz9/Whats-App-Image-2025-11-04-at-3-34-30-PM.jpg",
+    "https://i.ibb.co/GvdTMdtR/Whats-App-Image-2025-11-04-at-3-34-31-PM-1.jpg",
+    "https://i.ibb.co/mgY2BgC/Whats-App-Image-2025-11-04-at-3-34-31-PM-2.jpg",
+    "https://i.ibb.co/k24639DY/Whats-App-Image-2025-11-04-at-3-34-31-PM.jpg",
+    "https://i.ibb.co/jvpp3wdX/Whats-App-Image-2025-11-04-at-3-34-32-PM.jpg"
+  ],
+  features: [
+    "2200cc Diesel Engine – Efficient, powerful & reliable",
+    "All-Wheel Drive (AWD) for superior control and stability",
+    "7-Seater Configuration – Spacious and family-friendly",
+    "Dark Fabric Upholstery with premium interior finish",
+    "360° Camera View for full visibility and easy parking",
+    "Heads-Up Display for an advanced driving experience",
+    "Lane Assist, Anti-Collision System, & Blindspot Monitoring for maximum safety",
+    "Multifunctional Steering Wheel with Adaptive Cruise Control & audio controls",
+    "Heated Steering Wheel & Front Heated Seats for comfort in every climate",
+    "Power Tailgate for convenience",
+    "All-Round Parking Sensors for confident maneuvering",
+    "Plus more thoughtful features throughout!"
+  ],
+  agents: [
+    {
+      name: "MotorPride Kenya",
+      phone: "+254701234567",
+      whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%202019%20Mazda%20CX-8%20(7%20Seater%20AWD)"
+    }
+  ]
+},
+
+           {
+  id: "volvo-xc60-2019",
+  name: "Volvo XC60 T5 Inscription 2019",
+  make: "Volvo",
+  model: "XC60",
+  year: 2019,
+  price: "KSh 5,000,000",
+  transmission: "Automatic",
+  fuel: "Petrol",
+  mileage: "—",
+  status: "Available",
+  images: [
+    "https://i.ibb.co/RGxnNpLN/Whats-App-Image-2025-11-04-at-3-39-59-PM-1.jpg",
+    "https://i.ibb.co/4Z2Z5Kj7/Whats-App-Image-2025-11-04-at-3-39-59-PM.jpg",
+    "https://i.ibb.co/ksxB6mS0/Whats-App-Image-2025-11-04-at-3-40-00-PM-1.jpg",
+    "https://i.ibb.co/rf1bVSxs/Whats-App-Image-2025-11-04-at-3-40-00-PM-2.jpg",
+    "https://i.ibb.co/G39QYxS6/Whats-App-Image-2025-11-04-at-3-40-00-PM.jpg",
+    "https://i.ibb.co/wNT9RcjQ/Whats-App-Image-2025-11-04-at-3-40-01-PM-1.jpg",
+    "https://i.ibb.co/8gfR8BBr/Whats-App-Image-2025-11-04-at-3-40-01-PM-2.jpg",
+    "https://i.ibb.co/FbfDRDFX/Whats-App-Image-2025-11-04-at-3-40-01-PM.jpg",
+    "https://i.ibb.co/95ZK2wB/Whats-App-Image-2025-11-04-at-3-40-02-PM.jpg"
+  ],
+  features: [
+    "2000cc Turbo Petrol Engine – Smooth, powerful & efficient performance",
+    "Pearl Exterior with a refined Beige Leather Interior",
+    "Panoramic Sunroof – Experience natural light and open-air luxury",
+    "Harman Kardon Premium Sound System – Crystal-clear audio for every drive",
+    "Inscription Trim (Full Option) – Top-tier craftsmanship and modern design",
+    "Automatic Transmission | All-Wheel Drive (AWD) ready comfort",
+    "Modern Safety Suite: Adaptive cruise control, lane assist, and blindspot monitoring",
+    "Signature Volvo Elegance: Timeless Scandinavian styling and superior build quality"
+  ],
+  agents: [
+    {
+      name: "MotorPride Kenya",
+      phone: "+254701234567",
+      whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%202019%20Volvo%20XC60%20T5%20Inscription"
+    }
+  ]
+},
+
+           {
+  id: "mercedes-a180-2019",
+  name: "Mercedes-Benz A180 (W177 Series) 2019",
+  make: "Mercedes-Benz",
+  model: "A180",
+  year: 2019,
+  price: "KSh 2,650,000",
+  transmission: "Automatic",
+  fuel: "Petrol",
+  mileage: "—",
+  status: "Available",
+  images: [
+    "https://i.ibb.co/4wdx75tS/Whats-App-Image-2025-11-04-at-3-44-55-PM.jpg",
+    "https://i.ibb.co/Vcj4Nm8M/Whats-App-Image-2025-11-04-at-3-44-56-PM-1.jpg",
+    "https://i.ibb.co/1tw7MNF0/Whats-App-Image-2025-11-04-at-3-44-56-PM-2.jpg",
+    "https://i.ibb.co/C3ht0hV8/Whats-App-Image-2025-11-04-at-3-44-56-PM.jpg",
+    "https://i.ibb.co/My5WhT8q/Whats-App-Image-2025-11-04-at-3-44-57-PM-1.jpg",
+    "https://i.ibb.co/VWcqgp2C/Whats-App-Image-2025-11-04-at-3-44-58-PM-1.jpg",
+    "https://i.ibb.co/6cwHxCsY/Whats-App-Image-2025-11-04-at-3-44-58-PM-2.jpg",
+    "https://i.ibb.co/9KJSb5m/Whats-App-Image-2025-11-04-at-3-44-58-PM.jpg"
+  ],
+  features: [
+    "1300cc Turbo Petrol Engine – Dynamic yet efficient performance",
+    "Automatic Transmission | Elegant Gray Exterior",
+    "Premium Leather Upholstery with Front Bucket Seats",
+    "Digital Instrument Cluster – Fully customizable and modern display",
+    "Front Heated Seats with Driver’s Memory Seat for maximum comfort",
+    "Multifunctional Steering Wheel Controls for easy command access",
+    "Apple CarPlay & Android Auto – Seamless smartphone integration",
+    "Wireless Charging – Stay powered effortlessly",
+    "360° Reverse Camera with All-Round Parking Sensors",
+    "Active Brake Assist, Lane Departure Warning & Blindspot Monitoring"
+  ],
+  agents: [
+    {
+      name: "MotorPride Kenya",
+      phone: "+254701234567",
+      whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%202019%20Mercedes-Benz%20A180%20(W177%20Series)"
+    }
+  ]
+},
+
+{
+  id: "suzuki-hustler-2018",
+  name: "Suzuki Hustler 2018",
+  make: "Suzuki",
+  model: "Hustler",
+  year: 2018,
+  price: "KSh 880,000",
+  transmission: "Automatic",
+  fuel: "Petrol",
+  mileage: "—",
+  status: "Available",
+  images: [
+    "https://i.ibb.co/Y4cfdzM3/Whats-App-Image-2025-11-04-at-3-56-03-PM-1.jpg",
+    "https://i.ibb.co/zh7tFw59/Whats-App-Image-2025-11-04-at-3-56-03-PM.jpg",
+    "https://i.ibb.co/xq6B7BdT/Whats-App-Image-2025-11-04-at-3-56-04-PM-1.jpg",
+    "https://i.ibb.co/gM184Td7/Whats-App-Image-2025-11-04-at-3-56-04-PM.jpg",
+    "https://i.ibb.co/mFh0q8gn/Whats-App-Image-2025-11-04-at-3-56-05-PM-1.jpg",
+    "https://i.ibb.co/k2v3QVQg/Whats-App-Image-2025-11-04-at-3-56-05-PM-2.jpg",
+    "https://i.ibb.co/v4kRG74q/Whats-App-Image-2025-11-04-at-3-56-05-PM.jpg",
+    "https://i.ibb.co/KzR08pkB/Whats-App-Image-2025-11-04-at-3-56-06-PM-1.jpg",
+    "https://i.ibb.co/zH73GDDJ/Whats-App-Image-2025-11-04-at-3-56-06-PM-2.jpg",
+    "https://i.ibb.co/ZRHnvkgw/Whats-App-Image-2025-11-04-at-3-56-06-PM.jpg",
+    "https://i.ibb.co/2YgDXKw7/Whats-App-Image-2025-11-04-at-3-56-07-PM.jpg"
+  ],
+  features: [
+    "650cc Petrol Engine – Super fuel-efficient & reliable",
+    "Automatic Transmission | Black Exterior",
+    "Alloy Wheels for a sporty look",
+    "Digital Climate Control for all-weather comfort",
+    "Heated Seats – Stay warm and cozy during chilly mornings",
+    "360° Camera + Anti-Collision Assist + Lane Departure Warning – advanced safety for confident driving",
+    "Auto Start-Stop System – saves fuel effortlessly",
+    "FM/DVD/Bluetooth Player for seamless entertainment"
+  ],
+  agents: [
+    {
+      name: "MotorPride Kenya",
+      phone: "+254701234567",
+      whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%202018%20Suzuki%20Hustler"
+    }
+  ]
+},
+
+
+{
+  id: "mazda-cx5-2017",
+  name: "Mazda CX-5 2.5S-L Package 2017 (AWD)",
+  make: "Mazda",
+  model: "CX-5",
+  year: 2017,
+  price: "KSh 2,950,000",
+  transmission: "Automatic",
+  fuel: "Petrol",
+  mileage: "—",
+  status: "Available",
+  images: [
+    "https://i.ibb.co/zTcSCZT9/Whats-App-Image-2025-11-04-at-4-08-35-PM.jpg",
+    "https://i.ibb.co/wfxCJ7v/Whats-App-Image-2025-11-04-at-4-08-36-PM-1.jpg",
+    "https://i.ibb.co/mrL60QZh/Whats-App-Image-2025-11-04-at-4-08-36-PM-2.jpg",
+    "https://i.ibb.co/ym6m9GFf/Whats-App-Image-2025-11-04-at-4-08-36-PM.jpg",
+    "https://i.ibb.co/8L3VjzHf/Whats-App-Image-2025-11-04-at-4-08-37-PM-1.jpg",
+    "https://i.ibb.co/CKqq70Gk/Whats-App-Image-2025-11-04-at-4-08-37-PM-2.jpg",
+    "https://i.ibb.co/n8cXzT6f/Whats-App-Image-2025-11-04-at-4-08-37-PM.jpg",
+    "https://i.ibb.co/Hf2XCR8J/Whats-App-Image-2025-11-04-at-4-08-38-PM-1.jpg",
+    "https://i.ibb.co/ymVwKrnw/Whats-App-Image-2025-11-04-at-4-08-38-PM.jpg"
+  ],
+  features: [
+    "2500cc Petrol Engine delivering power and smooth performance",
+    "All-Wheel Drive (AWD) for extra grip and stability",
+    "Stunning Wine Red exterior paired with Dark Leather upholstery for a premium look",
+    "Multifunctional Steering Wheel with Adaptive Cruise Control & Multimedia Controls",
+    "Lane Assist and Blindspot Monitoring System for enhanced safety",
+    "Side View Camera & Parking Sensors for easy maneuvering",
+    "Powered Tailgate for convenience",
+    "Front & Rear Heated Seats, Electric Handbrake with Auto Hold, and Memory Driver’s Seat for added comfort",
+    "Daytime Running Lights, Foglights, and Original Mazda Alloy Rims"
+  ],
+  agents: [
+    {
+      name: "MotorPride Kenya",
+      phone: "+254701234567",
+      whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%202017%20Mazda%20CX-5%202.5S-L%20Package%20(AWD)"
+    }
+  ]
+}
+
+
+
+
             // Add more cars as needed
         ];
 
@@ -1131,7 +1314,7 @@
                         <button class="reserve-btn" data-car-id="${car.id}">Reserve</button>
                     </div>
                     <div class="car-info">
-                        <div class="caplicity-brand">Caplicity Motors</div>
+                        
                         <div class="car-name">${car.name}</div>
                         <div class="car-id">ID: ${car.id}</div>
                         <div class="car-year-price">

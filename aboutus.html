@@ -42,30 +42,25 @@
         .about-us {
             padding: 80px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            position: relative;
-            overflow: hidden;
         }
 
         .about-header {
             text-align: center;
             margin-bottom: 60px;
-            position: relative;
         }
 
         .about-header h1 {
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             color: var(--primary-color);
             margin-bottom: 1rem;
-            font-weight: 800;
-            letter-spacing: -1px;
+            font-weight: 700;
         }
 
         .about-header .lead {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: var(--light-text);
             max-width: 700px;
             margin: 0 auto;
-            font-weight: 300;
         }
 
         .accent-line {
@@ -76,222 +71,122 @@
             border-radius: 2px;
         }
 
-        /* Hero Section with Vehicle Background */
-        .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1593941707882-a5bba5338bf2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
+        /* Company Overview */
+        .company-overview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 5rem;
+            align-items: center;
+        }
+
+        .overview-content h2 {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+
+        .overview-content p {
+            color: var(--light-text);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .overview-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .overview-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--primary-color);
             color: white;
-            padding: 100px 0;
-            text-align: center;
-            border-radius: 15px;
+            padding: 4rem 0;
+            border-radius: 10px;
             margin-bottom: 5rem;
         }
 
-        .hero-content h2 {
-            font-size: 2.8rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
-        }
-
-        /* Vehicle Stats */
-        .vehicle-stats {
+        .stats-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
-            margin: 4rem 0;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 2.5rem 1.5rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
             text-align: center;
-            transition: var(--transition);
-            border-top: 4px solid var(--primary-color);
         }
 
-        .stat-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-            border-top-color: var(--accent-color);
-        }
-
-        .stat-icon {
+        .stat-item .number {
             font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary-color);
+            font-weight: 700;
             margin-bottom: 0.5rem;
-            line-height: 1;
         }
 
-        .stat-label {
-            color: var(--light-text);
-            font-weight: 600;
+        .stat-item .label {
             font-size: 1rem;
+            opacity: 0.9;
         }
 
         /* Mission & Vision */
         .mission-vision {
-            margin: 5rem 0;
-        }
-
-        .mv-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
+            margin-bottom: 5rem;
         }
 
         .mv-card {
             background: white;
-            padding: 3rem;
-            border-radius: 20px;
+            padding: 2.5rem;
+            border-radius: 10px;
             box-shadow: var(--shadow);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            height: 100%;
-        }
-
-        .mv-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--primary-color);
-        }
-
-        .mv-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .mv-card.mission:hover::before {
-            background: var(--accent-color);
-        }
-
-        .card-icon {
-            font-size: 3.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
+            text-align: center;
         }
 
         .mv-card h3 {
             color: var(--text-color);
             margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
         .mv-card p {
             color: var(--light-text);
-            line-height: 1.8;
-            font-size: 1.1rem;
+            line-height: 1.7;
         }
 
-        /* Vehicle Showcase */
-        .vehicle-showcase {
-            margin: 5rem 0;
-        }
-
-        .showcase-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .showcase-title h2 {
-            color: var(--text-color);
+        .mv-icon {
             font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .showcase-title p {
-            color: var(--light-text);
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
-
-        .vehicle-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .vehicle-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .vehicle-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .vehicle-image {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .vehicle-content {
-            padding: 1.5rem;
-        }
-
-        .vehicle-content h4 {
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .vehicle-content p {
-            color: var(--light-text);
-            font-size: 0.9rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
         }
 
         /* Why Choose Us */
-        .why-choose-us {
-            margin: 5rem 0;
+        .why-choose {
+            margin-bottom: 5rem;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
 
         .section-title h2 {
             color: var(--text-color);
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 2.2rem;
             margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .section-title p {
             color: var(--light-text);
             max-width: 600px;
             margin: 0 auto;
-            font-size: 1.1rem;
         }
 
         .features-grid {
@@ -302,168 +197,127 @@
 
         .feature-item {
             text-align: center;
-            padding: 2.5rem 2rem;
+            padding: 2rem;
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
             box-shadow: var(--shadow);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--primary-color);
-            transform: scaleX(0);
-            transition: var(--transition);
-        }
-
-        .feature-item:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-item:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
         }
 
         .feature-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--primary-color);
             margin-bottom: 1.5rem;
-            transition: var(--transition);
-        }
-
-        .feature-item:hover .feature-icon {
-            color: var(--accent-color);
-            transform: scale(1.1);
         }
 
         .feature-item h4 {
             color: var(--text-color);
             margin-bottom: 1rem;
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
         .feature-item p {
             color: var(--light-text);
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
-        /* Our Values */
-        .our-values {
-            margin: 5rem 0;
+        /* Team Section */
+        .team-section {
+            margin-bottom: 5rem;
         }
 
-        .values-container {
+        .team-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
 
-        .value-item {
-            padding: 2.5rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-        }
-
-        .value-item:hover {
-            transform: translateX(10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .value-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            flex-shrink: 0;
-        }
-
-        .value-content h4 {
-            color: var(--text-color);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        .value-content p {
-            color: var(--light-text);
-            line-height: 1.7;
-        }
-
-        /* Call to Action */
-        .cta-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1486496572940-2bb2341fdbdf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            padding: 5rem 2rem;
-            border-radius: 20px;
+        .team-member {
             text-align: center;
-            color: white;
-            margin-top: 4rem;
-            position: relative;
+            background: white;
+            border-radius: 10px;
             overflow: hidden;
+            box-shadow: var(--shadow);
         }
 
-        .cta-content {
-            position: relative;
-            z-index: 1;
+        .member-image {
+            height: 250px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            font-size: 4rem;
+        }
+
+        .member-info {
+            padding: 1.5rem;
+        }
+
+        .member-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .member-role {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .member-bio {
+            color: var(--light-text);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--primary-color);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 10px;
+            text-align: center;
         }
 
         .cta-content h2 {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             margin-bottom: 1.5rem;
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .cta-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
             opacity: 0.9;
-            max-width: 700px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             justify-content: center;
-            flex-wrap: wrap;
         }
 
         .btn {
-            padding: 15px 35px;
-            border-radius: 50px;
+            padding: 12px 30px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
             display: inline-block;
-            font-size: 1.1rem;
-            border: none;
-            cursor: pointer;
         }
 
         .btn-primary {
             background: var(--accent-color);
             color: white;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
         }
 
         .btn-primary:hover {
             background: #e55a2b;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
         }
 
         .btn-secondary {
@@ -475,34 +329,25 @@
         .btn-secondary:hover {
             background: white;
             color: var(--primary-color);
-            transform: translateY(-3px);
         }
 
         /* Responsive Design */
         @media (max-width: 992px) {
-            .features-grid, .vehicle-grid {
+            .features-grid, .team-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .vehicle-stats {
+            .stats-container {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .mv-container {
-                gap: 2rem;
             }
         }
 
         @media (max-width: 768px) {
-            .about-header h1 {
-                font-size: 2.8rem;
-            }
-            
-            .mv-container, .values-container {
+            .company-overview, .mission-vision {
                 grid-template-columns: 1fr;
             }
             
-            .features-grid, .vehicle-grid, .vehicle-stats {
+            .features-grid, .team-grid, .stats-container {
                 grid-template-columns: 1fr;
             }
             
@@ -512,30 +357,8 @@
             }
             
             .btn {
-                width: 250px;
+                width: 200px;
                 text-align: center;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .about-header h1 {
-                font-size: 2.3rem;
-            }
-            
-            .about-header .lead {
-                font-size: 1.2rem;
-            }
-            
-            .mv-card, .feature-item, .value-item, .stat-card {
-                padding: 2rem 1.5rem;
-            }
-            
-            .cta-content h2 {
-                font-size: 2.2rem;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
             }
         }
     </style>
@@ -548,239 +371,420 @@
             <div class="about-header">
                 <h1>About MotorPride Kenya</h1>
                 <div class="accent-line"></div>
-                <p class="lead">Your Trusted Automotive Partner for Premium Imported Vehicles</p>
+                <p class="lead">Your trusted partner for quality imported vehicles in Kenya</p>
             </div>
 
-            <!-- Hero Section -->
-            <div class="hero-section">
-                <div class="hero-content">
-                    <h2>Driving Kenya Forward</h2>
-                    <p>With over a decade of experience in vehicle importation, MotorPride Kenya has established itself as the premier destination for quality, reliability, and exceptional customer service in the automotive industry.</p>
-                    <a href="allcars.html" class="btn btn-primary">Explore Our Vehicle Collection</a>
+            <!-- Company Overview -->
+            <div class="company-overview">
+                <div class="overview-content">
+                    <h2>Who We Are</h2>
+                    <p>MotorPride Kenya is a premier vehicle import company dedicated to providing Kenyans with access to high-quality, reliable, and affordable imported vehicles. With years of experience in the automotive industry, we have built a reputation for excellence and trust.</p>
+                    <p>Our team of automotive experts carefully selects each vehicle, ensuring it meets our stringent quality standards before making it available to our customers. We believe in transparency, integrity, and putting our customers first in everything we do.</p>
+                    <p>Whether you're looking for a family car, a commercial vehicle, or a luxury model, MotorPride Kenya is your one-stop destination for all your automotive needs.</p>
+                </div>
+                <div class="overview-image">
+                    <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="MotorPride Kenya Showroom">
                 </div>
             </div>
 
-            <!-- Vehicle Stats -->
-            <div class="vehicle-stats">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-car"></i>
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="number">5,000+</div>
+                        <div class="label">Vehicles Sold</div>
                     </div>
-                    <div class="stat-number">5,000+</div>
-                    <div class="stat-label">Vehicles Delivered</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-tachometer-alt"></i>
+                    <div class="stat-item">
+                        <div class="number">10+</div>
+                        <div class="label">Years Experience</div>
                     </div>
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
+                    <div class="stat-item">
+                        <div class="number">98%</div>
+                        <div class="label">Customer Satisfaction</div>
                     </div>
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Customer Satisfaction</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-warehouse"></i>
+                    <div class="stat-item">
+                        <div class="number">50+</div>
+                        <div class="label">Vehicle Brands</div>
                     </div>
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Vehicle Brands</div>
                 </div>
             </div>
 
             <!-- Mission & Vision -->
             <div class="mission-vision">
-                <div class="mv-container">
-                    <div class="mv-card mission">
-                        <div class="card-icon">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                        <h3>Our Mission</h3>
-                        <p>To revolutionize vehicle ownership in Kenya by providing access to premium, reliable imported cars with transparent pricing, exceptional customer service, and comprehensive after-sales support that exceeds expectations.</p>
+                <div class="mv-card">
+                    <div class="mv-icon">
+                        <i class="fas fa-bullseye"></i>
                     </div>
-                    <div class="mv-card">
-                        <div class="card-icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <h3>Our Vision</h3>
-                        <p>To become East Africa's most trusted automotive partner, setting new standards in vehicle importation, customer experience, and sustainable mobility solutions for generations to come.</p>
+                    <h3>Our Mission</h3>
+                    <p>To provide Kenyans with access to high-quality, reliable, and affordable imported vehicles while delivering exceptional customer service and comprehensive after-sales support.</p>
+                </div>
+                <div class="mv-card">
+                    <div class="mv-icon">
+                        <i class="fas fa-eye"></i>
                     </div>
+                    <h3>Our Vision</h3>
+                    <p>To become Kenya's most trusted and preferred vehicle import company, setting new standards in transparency, reliability, and customer satisfaction in the automotive industry.</p>
                 </div>
             </div>
 
-            <!-- Vehicle Showcase -->
-            <div class="vehicle-showcase">
-                <div class="showcase-title">
-                    <h2>Our Vehicle Specialties</h2>
-                    <p>We source and deliver a diverse range of quality vehicles to suit every need and budget</p>
-                </div>
-                <div class="vehicle-grid">
-                    <div class="vehicle-card">
-                        <div class="vehicle-image" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="vehicle-content">
-                            <h4>Family SUVs</h4>
-                            <p>Spacious and reliable vehicles perfect for family adventures and daily commutes.</p>
-                        </div>
-                    </div>
-                    <div class="vehicle-card">
-                        <div class="vehicle-image" style="background-image: url('https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="vehicle-content">
-                            <h4>Luxury Sedans</h4>
-                            <p>Premium vehicles offering comfort, style, and advanced technology features.</p>
-                        </div>
-                    </div>
-                    <div class="vehicle-card">
-                        <div class="vehicle-image" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="vehicle-content">
-                            <h4>Commercial Vehicles</h4>
-                            <p>Durable and efficient vehicles designed for business and commercial use.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Choose MotorPride Kenya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-            <!-- Why Choose Us -->
-            <div class="why-choose-us">
-                <div class="section-title">
-                    <h2>Why Choose MotorPride?</h2>
-                    <p>Discover what sets us apart in the competitive automotive market</p>
-                </div>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h4>Quality Guarantee</h4>
-                        <p>Every vehicle undergoes a rigorous 150-point inspection to ensure it meets our uncompromising standards for safety and reliability.</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
-                        </div>
-                        <h4>Best Value</h4>
-                        <p>Our direct international partnerships eliminate middlemen, allowing us to offer premium vehicles at unbeatable prices.</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <h4>Expert Guidance</h4>
-                        <p>Our automotive specialists provide personalized consultation to help you find the perfect vehicle for your needs and budget.</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-file-contract"></i>
-                        </div>
-                        <h4>Transparent Process</h4>
-                        <p>Complete visibility into pricing, vehicle history, and import process with no hidden fees or surprises.</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h4>Comprehensive Support</h4>
-                        <p>From maintenance to spare parts sourcing, we provide ongoing support long after your purchase.</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-shipping-fast"></i>
-                        </div>
-                        <h4>Efficient Delivery</h4>
-                        <p>Our streamlined import and logistics process ensures timely delivery of your vehicle directly to your doorstep.</p>
-                    </div>
-                </div>
-            </div>
+        :root {
+            --primary-color: #1a73e8;
+            --primary-dark: #0d5bb9;
+            --accent-color: #ff6b35;
+            --text-color: #333;
+            --light-text: #666;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
 
-            <!-- Our Values -->
-            <div class="our-values">
-                <div class="section-title">
-                    <h2>Our Core Values</h2>
-                    <p>The principles that guide every decision we make</p>
-                </div>
-                <div class="values-container">
-                    <div class="value-item">
-                        <div class="value-icon">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                        <div class="value-content">
-                            <h4>Integrity</h4>
-                            <p>We conduct business with unwavering honesty and transparency, building trust through ethical practices and open communication.</p>
-                        </div>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="value-content">
-                            <h4>Customer First</h4>
-                            <p>Your satisfaction is our ultimate measure of success. We listen intently, respond promptly, and deliver beyond expectations.</p>
-                        </div>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
-                        <div class="value-content">
-                            <h4>Excellence</h4>
-                            <p>We pursue perfection in every aspect of our service, from vehicle quality to customer experience, never settling for mediocrity.</p>
-                        </div>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <div class="value-content">
-                            <h4>Reliability</h4>
-                            <p>We build lasting relationships through consistent, dependable service that our customers can count on year after year.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-            <!-- Call to Action -->
+        .why-choose-section {
+            max-width: 1200px;
+            width: 100%;
+            padding: 60px 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .feature-card:nth-child(2) {
+            border-top-color: var(--accent-color);
+        }
+
+        .feature-card:nth-child(3) {
+            border-top-color: #28a745;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, var(--accent-color), #e55a2b);
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--light-text);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .features-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="why-choose-section">
+        <div class="section-title">
+            <h2>Why Choose MotorPride Kenya?</h2>
+            <p>Discover what makes us the preferred choice for vehicle imports in Kenya</p>
+        </div>
+        <div class="features-container">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Quality Assurance</h3>
+                <p>Every vehicle undergoes rigorous inspection and testing to ensure it meets our high standards for quality and reliability.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3>Competitive Pricing</h3>
+                <p>Direct sourcing from international markets allows us to offer the best prices without compromising on quality.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Expert Support</h3>
+                <p>Our team of automotive experts provides guidance throughout your vehicle selection and purchase journey.</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+            </div>
+<!-- Team Section -->
+<div class="team-section">
+  <div class="section-title">
+    <h2>Meet Our Team</h2>
+    <p>The dedicated professionals behind MotorPride Kenya's success</p>
+  </div>
+
+  <div class="team-grid">
+    <!-- Member 1 -->
+    <div class="team-member">
+      <div class="member-image">
+        <img src="https://i.ibb.co/qMby9g7b/Whats-App-Image-2025-11-04-at-1-35-57-PM.jpg" alt="John Kamau - Founder & CEO">
+      </div>
+      <div class="member-info">
+        <div class="member-name">mr samson mahia</div>
+        <div class="member-role">Founder & CEO</div>
+        <div class="member-bio">With over 15 years in the automotive industry, John leads our team with vision and expertise.</div>
+        <a href="https://wa.me/254701234567?text=Hello%20John%2C%20I%27d%20like%20to%20learn%20more%20about%20MotorPride%20Kenya" 
+           class="whatsapp-btn" target="_blank">
+           <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Member 2 -->
+    <div class="team-member">
+      <div class="member-image">
+        <img src="https://i.ibb.co/4Z89SBT9/Whats-App-Image-2025-11-04-at-1-35-59-PM.jpg" alt="Sarah Wanjiku - Sales Director">
+      </div>
+      <div class="member-info">
+        <div class="member-name">Sarah Wanjiku</div>
+        <div class="member-role">Sales Director</div>
+        <div class="member-bio">Sarah ensures our customers receive the best service and find the perfect vehicle for their needs.</div>
+        <a href="https://wa.me/254712345678?text=Hello%20Sarah%2C%20I%27m%20interested%20in%20buying%20a%20car%20through%20MotorPride%20Kenya" 
+           class="whatsapp-btn" target="_blank">
+           <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Member 3 -->
+    <div class="team-member">
+      <div class="member-image">
+        <img src="https://i.ibb.co/p6gpkj68/Whats-App-Image-2025-11-04-at-1-36-00-PM.jpg" alt="David Ochieng - Operations Manager">
+      </div>
+      <div class="member-info">
+        <div class="member-name">David Ochieng</div>
+        <div class="member-role">Operations Manager</div>
+        <div class="member-bio">David oversees our import and logistics operations, ensuring timely delivery of vehicles.</div>
+        <a href="https://wa.me/254701112233?text=Hello%20David%2C%20I%27d%20like%20to%20inquire%20about%20vehicle%20logistics%20at%20MotorPride%20Kenya" 
+           class="whatsapp-btn" target="_blank">
+           <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add this CSS -->
+<style>
+.team-section {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+}
+.team-section .section-title h2 {
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 10px;
+}
+.team-section .section-title p {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 40px;
+}
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+.team-member {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 320px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+.team-member:hover {
+  transform: translateY(-5px);
+}
+.member-image img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffc107;
+  margin-bottom: 15px;
+}
+.member-name {
+  font-weight: 600;
+  color: #111;
+  font-size: 1.2rem;
+}
+.member-role {
+  color: #ffc107;
+  font-weight: 500;
+  margin: 5px 0 10px;
+}
+.member-bio {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+.whatsapp-btn {
+  display: inline-block;
+  background: #25D366;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+.whatsapp-btn:hover {
+  background: #1EBE57;
+}
+.whatsapp-btn i {
+  margin-right: 6px;
+}
+@media (max-width: 768px) {
+  .team-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+</style>
+
+            <!-- CTA Section -->
             <div class="cta-section">
                 <div class="cta-content">
-                    <h2>Find Your Perfect Vehicle Today</h2>
-                    <p>Browse our extensive inventory of quality imported vehicles and experience the MotorPride difference</p>
+                    <h2>Ready to Find Your Dream Car?</h2>
+                    <p>Browse our extensive inventory of quality imported vehicles and experience the MotorPride Kenya difference.</p>
                     <div class="cta-buttons">
-                        <a href="allcars.html" class="btn btn-primary">View All Vehicles</a>
-                        <a href="contacts.html" class="btn btn-secondary">Schedule a Test Drive</a>
+                        <a href="allcars.html" class="btn btn-primary">View Our Vehicles</a>
+                        <a href="contact.html" class="btn btn-secondary">Contact Us</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <script>
-        // Add subtle animation to elements when they come into view
-        document.addEventListener('DOMContentLoaded', function() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            // Animate elements on scroll
-            const animateElements = document.querySelectorAll('.mv-card, .feature-item, .value-item, .stat-card, .vehicle-card');
-            animateElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
-        });
-    </script>
 </body>
 </html>
