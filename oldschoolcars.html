@@ -845,294 +845,207 @@
     <script>
         // Old School Cars Data
         const oldSchoolCars = [
-            {
-                id: "mercedes-280sl-1971",
-                name: "Mercedes-Benz 280SL 1971",
-                make: "Mercedes-Benz",
-                model: "280SL",
-                year: 1971,
-                price: "KSh 4,800,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223480-42e6d3ecc881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223180-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223181-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "2.8L Inline-6 Engine",
-                    "Pagoda Roof Design",
-                    "Convertible Hardtop",
-                    "Classic Cream Exterior",
-                    "Brown Leather Interior",
-                    "Wooden Dashboard", ////
-                    "Power Steering",
-                    "Disc Brakes",
-                    "Fuel Injection System"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201971%20Mercedes-Benz%20280SL"
-                    }
-                ]
-            },
-            {
-                id: "toyota-landcruiser-fj40-1980",
-                name: "Toyota Land Cruiser FJ40 1980",
-                make: "Toyota",
-                model: "Land Cruiser FJ40",
-                year: 1980,
-                price: "KSh 3,200,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223182-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223183-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223184-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "4.2L Straight-6 Engine",
-                    "4x4 Capability",
-                    "Removable Hardtop",
-                    "Classic Beige Exterior",
-                    "Vinyl Interior",
-                    "Manual Windows",
-                    "Original Tool Kit",
-                    "Bull Bar",
-                    "Off-road Tires",
-                    "Manual Choke"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201980%20Toyota%20Land%20Cruiser%20FJ40"
-                    }
-                ]
-            },
-            {
-                id: "ford-mustang-1967",
-                name: "Ford Mustang 1967",
-                make: "Ford",
-                model: "Mustang",
-                year: 1967,
-                price: "KSh 5,500,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223185-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223186-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223187-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "4.7L V8 Engine",
-                    "Fastback Design",
-                    "Racing Stripes",
-                    "Classic Red Exterior",
-                    "Black Vinyl Interior",
-                    "Wooden Steering Wheel",
-                    "Original AM Radio",
-                    "Tachometer",
-                    "Dual Exhaust",
-                    "GT Package"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201967%20Ford%20Mustang"
-                    }
-                ]
-            },
-            {
-                id: "volkswagen-beetle-1973",
-                name: "Volkswagen Beetle 1973",
-                make: "Volkswagen",
-                model: "Beetle",
-                year: 1973,
-                price: "KSh 950,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223188-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223189-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223190-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "1.6L Air-Cooled Engine",
-                    "Sunroof",
-                    "Original Hubcaps",
-                    "Classic Yellow Exterior",
-                    "Beige Interior",
-                    "Original Radio",
-                    "Manual Crank Windows",
-                    "Rear Engine",
-                    "Compact Design",
-                    "Excellent Fuel Economy"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201973%20Volkswagen%20Beetle"
-                    }
-                ]
-            },
-            {
-                id: "peugeot-404-1975",
-                name: "Peugeot 404 1975",
-                make: "Peugeot",
-                model: "404",
-                year: 1975,
-                price: "KSh 750,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223191-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223192-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223193-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "1.6L Inline-4 Engine",
-                    "Sedan Body Style",
-                    "Durable Construction",
-                    "Classic Green Exterior",
-                    "Beige Vinyl Interior",
-                    "Manual Transmission",
-                    "Robust Suspension",
-                    "Spacious Trunk",
-                    "Reliable Performance",
-                    "Easy Maintenance"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201975%20Peugeot%20404"
-                    }
-                ]
-            },
-            {
-                id: "datsun-240z-1972",
-                name: "Datsun 240Z 1972",
-                make: "Datsun",
-                model: "240Z",
-                year: 1972,
-                price: "KSh 2,800,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223194-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223195-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223196-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "2.4L Inline-6 Engine",
-                    "Sports Coupe Design",
-                    "Targa Top",
-                    "Classic Orange Exterior",
-                    "Black Interior",
-                    "Wooden Gear Knob",
-                    "Sport Suspension",
-                    "Dual Carburetors",
-                    "Sport Exhaust",
-                    "Classic Japanese Sports Car"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201972%20Datsun%20240Z"
-                    }
-                ]
-            },
-            {
-                id: "bmw-2002-1974",
-                name: "BMW 2002 1974",
-                make: "BMW",
-                model: "2002",
-                year: 1974,
-                price: "KSh 1,900,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223197-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223198-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223199-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "2.0L Inline-4 Engine",
-                    "Sport Sedan",
-                    "Fuel Injection",
-                    "Classic Blue Exterior",
-                    "Black Interior",
-                    "Sport Steering Wheel",
-                    "Tachometer",
-                    "Sport Suspension",
-                    "Alloy Wheels",
-                    "German Engineering"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201974%20BMW%202002"
-                    }
-                ]
-            },
-            {
-                id: "chevrolet-impala-1964",
-                name: "Chevrolet Impala 1964",
-                make: "Chevrolet",
-                model: "Impala",
-                year: 1964,
-                price: "KSh 4,200,000",
-                transmission: "Automatic",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223200-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223201-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223202-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "5.3L V8 Engine",
-                    "Full-size Sedan",
-                    "Power Steering",
-                    "Classic White Exterior",
-                    "Red Interior",
-                    "Power Windows",
-                    "AM Radio",
-                    "Automatic Transmission",
-                    "Chrome Accents",
-                    "Spacious Interior"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201964%20Chevrolet%20Impala"
-                    }
-                ]
-            }
-        ];
+  {
+    "id": "toyota-townace-2015",
+    "name": "Toyota TownAce",
+    "make": "Toyota",
+    "model": "TownAce",
+    "year": 2015,
+    "price": "KSh 585,000",
+    "transmission": "Automatic",
+    "fuel": "Petrol",
+    "mileage": "—",
+    "engine": "1800cc",
+    "drive": "2WD",
+    "status": "Available",
+    "images": [
+      "https://i.ibb.co/1Y5BY13G/Whats-App-Image-2025-11-04-at-9-01-10-PM.jpg",
+      "https://i.ibb.co/n8MnsCYr/Whats-App-Image-2025-11-04-at-9-01-11-PM-1.jpg",
+      "https://i.ibb.co/BKNk2B2n/Whats-App-Image-2025-11-04-at-9-01-11-PM.jpg",
+      "https://i.ibb.co/fYkgqbdm/Whats-App-Image-2025-11-04-at-9-01-13-PM.jpg",
+      "https://i.ibb.co/p6SvBPRx/Whats-App-Image-2025-11-04-at-9-01-14-PM-1.jpg",
+      "https://i.ibb.co/wNTRP3Mh/Whats-App-Image-2025-11-04-at-9-01-14-PM-2.jpg",
+      "https://i.ibb.co/8wM9dVT/Whats-App-Image-2025-11-04-at-9-01-14-PM.jpg"
+    ],
+    "features": [
+      "Extremely clean exterior and interior condition",
+      "Automatic transmission with smooth gear shifts",
+      "1.8L Petrol Engine (1800cc) offering great efficiency",
+      "2WD system – reliable and easy to maintain",
+      "Accident-free and mechanically sound",
+      "Comfortable cabin with ample cargo space",
+      "Ideal for both business and personal use",
+      "Ready for immediate transfer and drive away"
+    ],
+    "agents": [
+      {
+        "name": "MotorPride Kenya",
+        "phone": "+254723098206",
+        "whatsapp": "https://wa.me/254723098206?text=I'm%20interested%20in%20the%20Toyota%20TownAce%20listed%20for%20KSh%20585,000"
+      }
+    ]
+  },
+  {
+    "id": "mercedes-e200d-2014",
+    "name": "Mercedes Benz E200d",
+    "make": "Mercedes",
+    "model": "E200d",
+    "year": 2014,
+    "price": "KSh 469,000",
+    "transmission": "Manual",
+    "fuel": "Diesel",
+    "mileage": "—",
+    "engine": "2000cc",
+    "drive": "2WD",
+    "status": "Available",
+    "images": [
+      "https://i.ibb.co/Y7RZ1fZ8/Whats-App-Image-2025-11-04-at-8-49-05-PM-1.jpg",
+      "https://i.ibb.co/bgZ6tp5g/Whats-App-Image-2025-11-04-at-8-49-05-PM.jpg",
+      "https://i.ibb.co/pjnNz1FV/Whats-App-Image-2025-11-04-at-8-49-11-PM.jpg",
+      "https://i.ibb.co/chRdG31B/Whats-App-Image-2025-11-04-at-8-49-14-PM-1.jpg",
+      "https://i.ibb.co/Vpxcb3Nh/Whats-App-Image-2025-11-04-at-8-49-14-PM.jpg",
+      "https://i.ibb.co/SXW8FS42/Whats-App-Image-2025-11-04-at-8-49-18-PM.jpg",
+      "https://i.ibb.co/W4dm09fg/Whats-App-Image-2025-11-04-at-8-49-20-PM.jpg",
+      "https://i.ibb.co/TxqVfZ6G/Whats-App-Image-2025-11-04-at-8-49-21-PM.jpg",
+      "https://i.ibb.co/LVVJ2b4/Whats-App-Image-2025-11-04-at-8-49-29-PM.jpg"
+    ],
+    "features": [
+      "Asian-owned and exceptionally well-maintained unit",
+      "Manual transmission offering full control and driving engagement",
+      "Diesel engine – fuel-efficient and durable",
+      "Classic Mercedes build with premium comfort and style",
+      "Extremely clean both inside and out",
+      "Solid mechanical condition – no issues",
+      "Perfect daily driver or collector’s classic",
+      "Located in Ngara – ready for viewing"
+    ],
+    "agents": [
+      {
+        "name": "MotorPride Kenya",
+        "phone": "+254723098206",
+        "whatsapp": "https://wa.me/254723098206?text=I'm%20interested%20in%20the%20Mercedes%20Benz%20E200d%20listed%20for%20KSh%20469,000"
+      }
+    ]
+  },
+  {
+    "id": "toyota-townace-2013",
+    "name": "Toyota TownAce",
+    "make": "Toyota",
+    "model": "TownAce",
+    "year": 2013,
+    "price": "KSh 585,000",
+    "transmission": "Automatic",
+    "fuel": "Petrol",
+    "engine": "1800cc",
+    "drive": "2WD",
+    "status": "Available",
+    "mileage": "—",
+    "images": [
+      "https://i.ibb.co/3mZzjCcB/Whats-App-Image-2025-11-04-at-8-53-31-PM-1.jpg",
+      "https://i.ibb.co/sJF9YGdh/Whats-App-Image-2025-11-04-at-8-53-31-PM-2.jpg",
+      "https://i.ibb.co/vCY2WXgv/Whats-App-Image-2025-11-04-at-8-53-31-PM.jpg",
+      "https://i.ibb.co/M55P8gps/Whats-App-Image-2025-11-04-at-8-53-32-PM.jpg",
+      "https://i.ibb.co/3y27fdfy/Whats-App-Image-2025-11-04-at-8-53-33-PM.jpg",
+      "https://i.ibb.co/zhVgBBQY/Whats-App-Image-2025-11-04-at-8-53-34-PM.jpg"
+    ],
+    "features": [
+      "Extremely clean exterior and interior – well maintained unit",
+      "Automatic transmission for smooth driving comfort",
+      "Petrol engine – 1800cc for efficiency and reliability",
+      "2WD drive system – ideal for city and light travel",
+      "Accident-free and mechanically sound",
+      "No mechanical issues – ready to drive away",
+      "Perfect family or business utility van",
+      "Asking price: KSh 585,000 🔥"
+    ],
+    "agents": [
+      {
+        "name": "MotorPride Kenya",
+        "phone": "+254723098206",
+        "whatsapp": "https://wa.me/254723098206?text=I'm%20interested%20in%20the%20Toyota%20TownAce%20listed%20for%20KSh%20585,000"
+      }
+    ]
+  },
+  {
+    "id": "toyota-100-manual-5a",
+    "name": "Toyota 100",
+    "make": "Toyota",
+    "model": "100",
+    "year": 2000,
+    "price": "KSh 250,000",
+    "transmission": "Manual",
+    "fuel": "Petrol",
+    "engine": "5A Engine",
+    "drive": "2WD",
+    "status": "Available",
+    "mileage": "—",
+    "location": "Murang’a, Kenya",
+    "images": [
+      "https://i.ibb.co/7tQcX9Fq/Whats-App-Image-2025-11-04-at-8-48-20-PM.jpg",
+      "https://i.ibb.co/v6ZGY2jm/Whats-App-Image-2025-11-04-at-8-48-21-PM.jpg",
+      "https://i.ibb.co/gMRpGPbN/Whats-App-Image-2025-11-04-at-8-48-29-PM.jpg",
+      "https://i.ibb.co/Dx40tXH/Whats-App-Image-2025-11-04-at-8-48-30-PM.jpg",
+      "https://i.ibb.co/Dg5DNS6F/Whats-App-Image-2025-11-04-at-8-48-31-PM.jpg",
+      "https://i.ibb.co/bRGZK4Nc/Whats-App-Image-2025-11-04-at-8-48-32-PM.jpg",
+      "https://i.ibb.co/jkK1WvRx/Whats-App-Image-2025-11-04-at-8-48-41-PM.jpg",
+      "https://i.ibb.co/VcWh32Y2/Whats-App-Image-2025-11-04-at-8-48-44-PM.jpg",
+      "https://i.ibb.co/TqY5P9h4/Whats-App-Image-2025-11-04-at-8-48-45-PM.jpg"
+    ],
+    "features": [
+      "Quick sale – ready for immediate transfer",
+      "Manual transmission with efficient 5A engine",
+      "Smooth performance and reliable fuel economy",
+      "Clean exterior and interior in good condition",
+      "Ideal for first-time buyers or budget-friendly option",
+      "Located in Murang’a – easy access for viewing",
+      "Asking price: KSh 250,000 🥊🔥"
+    ],
+    "agents": [
+      {
+        "name": "MotorPride Kenya",
+        "phone": "+254723098206",
+        "whatsapp": "https://wa.me/254723098206?text=I'm%20interested%20in%20the%20Toyota%20100%20listed%20for%20KSh%20250,000"
+      }
+    ]
+  },
+  {
+    "id": "ford-mustang-1967",
+    "name": "Ford Mustang 1967",
+    "make": "Ford",
+    "model": "Mustang",
+    "year": 1967,
+    "price": "KSh 5,500,000",
+    "transmission": "Manual",
+    "fuel": "Petrol",
+    "mileage": "—",
+    "status": "Available",
+    "images": [
+      "https://images.unsplash.com/photo-1563720223185-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1563720223186-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1563720223187-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    ],
+    "features": [
+      "4.7L V8 Engine",
+      "Fastback Design",
+      "Racing Stripes",
+      "Classic Red Exterior",
+      "Black Vinyl Interior",
+      "Wooden Steering Wheel",
+      "Original AM Radio",
+      "Tachometer",
+      "Dual Exhaust",
+      "GT Package"
+    ],
+    "agents": [
+      {
+        "name": "MotorPride Kenya",
+        "phone": "+254701234567",
+        "whatsapp": "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201967%20Ford%20Mustang"
+      }
+    ]
+  }
+];
+
 
         // Sample agents data
         const agents = [

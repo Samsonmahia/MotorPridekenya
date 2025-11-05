@@ -945,6 +945,7 @@
   <div class="dropdown-content">
     <a href="toyota.html">Toyota</a>
     <a href="nissan.html">Nissan</a>
+    <a href="volvo.html">Volvo</a>
     <a href="mistubishi.html">Mistubishi</a>
     <a href="mazda.html">Mazda</a>
     <a href="mercedes.html">Mercedes</a>
@@ -2987,21 +2988,72 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   </script>
+<!-- WhatsApp Floating Chat Button -->
+<a
+  href="https://wa.me/254723098206?text=Hi%20MotorPride%20Kenya!%20I%20would%20like%20to%20inquire%20about%20your%20cars."
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <div class="whatsapp-bubble">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+      alt="WhatsApp"
+      class="whatsapp-icon"
+    />
+    <span class="agent-name">Chat with Samson – MotorPride Kenya</span>
+  </div>
+</a>
 
-  <!-- ========== NETLIFY IDENTITY SCRIPT - ADDED FOR CMS AUTHENTICATION ========== -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
+<style>
+  /* Floating WhatsApp Button */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    text-decoration: none;
+    z-index: 9999;
+  }
+
+  .whatsapp-bubble {
+    background: linear-gradient(45deg, #25d366, #128c7e);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+  }
+
+  .whatsapp-bubble:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .whatsapp-icon {
+    width: 28px;
+    height: 28px;
+    margin-right: 10px;
+  }
+
+  .agent-name {
+    white-space: nowrap;
+  }
+
+  /* Responsive: hide text on small screens */
+  @media (max-width: 600px) {
+    .agent-name {
+      display: none;
     }
-  </script>
-  <!-- ========== END NETLIFY IDENTITY SCRIPT ========== -->
-  
+    .whatsapp-bubble {
+      padding: 12px;
+      border-radius: 50%;
+    }
+  }
+</style>
+
 </body>
 </html>
