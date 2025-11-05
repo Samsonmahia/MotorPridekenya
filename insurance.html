@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> motorpride Insurance Partners | Global Auto Imports</title>
+    <title>Motorpride Kenya Insurance Services | Global Auto Imports</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -34,9 +34,56 @@
             padding: 0 20px;
         }
 
+        /* Welcome Quote Section */
+        .welcome-quote {
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1551524164-6ca5e3aa1c04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            margin-bottom: 50px;
+        }
+
+        .welcome-quote h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .welcome-quote p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .intro-text {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .intro-text h2 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .intro-text p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
         /* Insurance Section Styles */
         .insurance-section {
-            padding: 80px 0;
+            padding: 60px 0;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
@@ -86,6 +133,8 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .insurance-card:hover {
@@ -156,11 +205,15 @@
 
         .insurance-content {
             padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .insurance-features {
             list-style: none;
             margin-bottom: 25px;
+            flex-grow: 1;
         }
 
         .insurance-features li {
@@ -180,6 +233,16 @@
             font-size: 1.1rem;
         }
 
+        .price-tag {
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
         .insurance-button {
             display: block;
             width: 100%;
@@ -193,6 +256,7 @@
             transition: background 0.3s ease;
             text-align: center;
             text-decoration: none;
+            margin-top: auto;
         }
 
         .insurance-button:hover {
@@ -247,8 +311,57 @@
             color: var(--gray);
         }
 
+        /* Contact Section */
+        .contact-section {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-top: 50px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+
+        .contact-section h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-section p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--secondary);
+            color: var(--primary);
+            border-radius: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .contact-button:hover {
+            background: #e6c44f;
+            transform: scale(1.05);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
+            .welcome-quote {
+                padding: 60px 0;
+                border-bottom-left-radius: 30px;
+                border-bottom-right-radius: 30px;
+            }
+            
+            .welcome-quote h1 {
+                font-size: 2.2rem;
+            }
+            
             .insurance-grid {
                 grid-template-columns: 1fr;
             }
@@ -268,94 +381,119 @@
             .benefits-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .contact-section {
+                border-top-left-radius: 30px;
+                border-top-right-radius: 30px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Insurance Partners Section -->
+    <!-- Welcome Quote Section -->
+    <section class="welcome-quote">
+        <div class="container">
+            <h1>Welcome to Motorpride Kenya Insurance Services</h1>
+            <p>Your trusted partner for comprehensive vehicle protection in Kenya</p>
+            
+            <div class="intro-text">
+                <h2>Drive with Confidence, Drive with Motorpride</h2>
+                <p>At Motorpride Kenya, we understand that your vehicle is more than just transportation—it's an investment, a livelihood, and a source of pride. That's why we've partnered with leading insurance providers to offer you comprehensive protection tailored to your needs.</p>
+                <p>Whether you're looking for full comprehensive coverage, affordable third-party protection, or flexible monthly payment options, we have the perfect solution for you. Our team of experts is dedicated to finding you the best coverage at competitive rates.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insurance Section -->
     <section class="insurance-section">
         <div class="container">
             <div class="section-title">
-                <h2>Insurance Partners</h2>
-                <p>Protect your investment with our trusted insurance partners. Comprehensive coverage tailored for imported vehicles.</p>
+                <h2>Our Insurance Solutions</h2>
+                <p>Choose from our range of insurance packages designed to suit every need and budget</p>
             </div>
 
             <div class="insurance-grid">
-                <!-- Partner 1: Motor Pride Kenya -->
+                <!-- Comprehensive Insurance -->
                 <div class="insurance-card">
                     <div class="insurance-header">
-                        <img src="https://images.unsplash.com/photo-1533478589333-c45ceb8f87ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Motor Pride Kenya">
+                        <img src="https://i.ibb.co/DsK7nQ7/Whats-App-Image-2025-11-05-at-10-12-26-AM.jpg" alt="Comprehensive Insurance">
                         <div class="insurance-overlay">
                             <div class="insurance-logo">
                                 <i class="fas fa-shield-alt" style="color: #2ecc71; font-size: 2rem;"></i>
                             </div>
                             <div class="insurance-title">
-                                <h3>Motor Pride Kenya</h3>
-                                <p>Comprehensive Vehicle Protection</p>
+                                <h3>Comprehensive Insurance</h3>
+                                <p>Complete Protection for Your Vehicle</p>
                             </div>
                         </div>
                     </div>
                     <div class="insurance-content">
+                        <div class="price-tag">Premium: 4-5% of Vehicle Value</div>
                         <ul class="insurance-features">
-                            <li><i class="fas fa-check-circle"></i> Specialized import vehicle coverage</li>
-                            <li><i class="fas fa-check-circle"></i> 24/7 roadside assistance across East Africa</li>
-                            <li><i class="fas fa-check-circle"></i> Fast claims processing within 48 hours</li>
-                            <li><i class="fas fa-check-circle"></i> Flexible payment plans available</li>
-                            <li><i class="fas fa-check-circle"></i> Coverage for parts imported for repairs</li>
+                            <li><i class="fas fa-check-circle"></i> Coverage for damage to your own vehicle</li>
+                            <li><i class="fas fa-check-circle"></i> Third-party liability protection</li>
+                            <li><i class="fas fa-check-circle"></i> Fire and theft coverage included</li>
+                            <li><i class="fas fa-check-circle"></i> Windscreen and window protection</li>
+                            <li><i class="fas fa-check-circle"></i> Personal accident cover for driver</li>
+                            <li><i class="fas fa-check-circle"></i> 24/7 roadside assistance</li>
                         </ul>
-                        <a href="#" class="insurance-button">Get Quote</a>
+                        <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20the%20Comprehensive%20Insurance%20cover%20for%20my%20vehicle.%20Please%20provide%20more%20details." class="insurance-button" target="_blank">Get Quote</a>
                     </div>
                 </div>
 
-                <!-- Partner 2: Global Shield Insurance -->
+                <!-- 3rd Party Insurance (Annual) -->
                 <div class="insurance-card">
                     <div class="insurance-header">
-                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Global Shield Insurance">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="3rd Party Insurance Annual">
                         <div class="insurance-overlay">
                             <div class="insurance-logo">
-                                <i class="fas fa-globe" style="color: #3498db; font-size: 2rem;"></i>
+                                <i class="fas fa-file-contract" style="color: #3498db; font-size: 2rem;"></i>
                             </div>
                             <div class="insurance-title">
-                                <h3>Global Shield Insurance</h3>
-                                <p>Worldwide Coverage Experts</p>
+                                <h3>3rd Party Insurance (Annual)</h3>
+                                <p>Essential Protection at Affordable Rates</p>
                             </div>
                         </div>
                     </div>
                     <div class="insurance-content">
+                        <div class="price-tag">Annual Premium Payment</div>
                         <ul class="insurance-features">
-                            <li><i class="fas fa-check-circle"></i> International coverage for cross-border travel</li>
-                            <li><i class="fas fa-check-circle"></i> Multi-currency claim settlements</li>
-                            <li><i class="fas fa-check-circle"></i> Specialized exotic and luxury vehicle policies</li>
-                            <li><i class="fas fa-check-circle"></i> Agreed value policies for collector imports</li>
-                            <li><i class="fas fa-check-circle"></i> 24/7 multilingual customer support</li>
+                            <li><i class="fas fa-check-circle"></i> Coverage for third-party injury and death</li>
+                            <li><i class="fas fa-check-circle"></i> Protection against third-party property damage</li>
+                            <li><i class="fas fa-check-circle"></i> Legal requirement for all Kenyan vehicles</li>
+                            <li><i class="fas fa-check-circle"></i> Cost-effective annual premium</li>
+                            <li><i class="fas fa-check-circle"></i> Quick and easy renewal process</li>
+                            <li><i class="fas fa-check-circle"></i> Nationwide acceptance and validity</li>
                         </ul>
-                        <a href="#" class="insurance-button">Get Quote</a>
+                        <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20the%203rd%20Party%20Annual%20Insurance%20cover%20for%20my%20vehicle.%20Please%20provide%20more%20details." class="insurance-button" target="_blank">Get Quote</a>
                     </div>
                 </div>
 
-                <!-- Partner 3: SafeDrive Assurance -->
+                <!-- 3rd Party Insurance (Monthly) -->
                 <div class="insurance-card">
                     <div class="insurance-header">
-                        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="SafeDrive Assurance">
+                        <img src="https://i.ibb.co/39cCr67Y/Whats-App-Image-2025-11-05-at-10-12-15-AM.jpg" alt="3rd Party Insurance Monthly">
                         <div class="insurance-overlay">
                             <div class="insurance-logo">
-                                <i class="fas fa-car" style="color: #e74c3c; font-size: 2rem;"></i>
+                                <i class="fas fa-calendar-alt" style="color: #e74c3c; font-size: 2rem;"></i>
                             </div>
                             <div class="insurance-title">
-                                <h3>SafeDrive Assurance</h3>
-                                <p>Budget-Friendly Protection</p>
+                                <h3>3rd Party Insurance (Monthly)</h3>
+                                <p>Flexible Payment Options</p>
                             </div>
                         </div>
                     </div>
                     <div class="insurance-content">
+                        <div class="price-tag">Convenient Monthly Payments</div>
                         <ul class="insurance-features">
-                            <li><i class="fas fa-check-circle"></i> Affordable premiums with flexible deductibles</li>
-                            <li><i class="fas fa-check-circle"></i> Special discounts for multiple vehicle policies</li>
-                            <li><i class="fas fa-check-circle"></i> Easy monthly payment options</li>
-                            <li><i class="fas fa-check-circle"></i> Quick online claims filing</li>
-                            <li><i class="fas fa-check-circle"></i> Network of certified repair shops nationwide</li>
+                            <li><i class="fas fa-check-circle"></i> Same coverage as annual third-party policy</li>
+                            <li><i class="fas fa-check-circle"></i> Monthly installment payment option</li>
+                            <li><i class="fas fa-check-circle"></i> Perfect for budget-conscious vehicle owners</li>
+                            <li><i class="fas fa-check-circle"></i> Easy payment via mobile money or bank transfer</li>
+                            <li><i class="fas fa-check-circle"></i> Automatic renewal reminders</li>
+                            <li><i class="fas fa-check-circle"></i> No long-term commitment required</li>
                         </ul>
-                        <a href="#" class="insurance-button">Get Quote</a>
+                        <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20the%203rd%20Party%20Monthly%20Insurance%20cover%20for%20my%20vehicle.%20Please%20provide%20more%20details." class="insurance-button" target="_blank">Get Quote</a>
                     </div>
                 </div>
             </div>
@@ -363,7 +501,7 @@
             <!-- Insurance Benefits Section -->
             <div class="insurance-benefits">
                 <div class="benefits-title">
-                    <h3>Why Choose Our Insurance Partners?</h3>
+                    <h3>Why Choose Motorpride Kenya Insurance?</h3>
                 </div>
                 <div class="benefits-grid">
                     <div class="benefit-item">
@@ -371,31 +509,42 @@
                             <i class="fas fa-handshake"></i>
                         </div>
                         <h4>Trusted Partnerships</h4>
-                        <p>We've carefully selected insurance providers with proven track records in import vehicle coverage.</p>
+                        <p>We work with reputable insurance companies to ensure you get the best coverage and service.</p>
                     </div>
                     <div class="benefit-item">
                         <div class="benefit-icon">
                             <i class="fas fa-dollar-sign"></i>
                         </div>
                         <h4>Competitive Rates</h4>
-                        <p>Exclusive discounted rates for our customers through our partnership agreements.</p>
+                        <p>Our partnerships allow us to offer you exclusive rates not available elsewhere.</p>
                     </div>
                     <div class="benefit-item">
                         <div class="benefit-icon">
                             <i class="fas fa-headset"></i>
                         </div>
-                        <h4>Dedicated Support</h4>
-                        <p>Our team assists with claims and acts as your advocate with insurance providers.</p>
+                        <h4>Personalized Support</h4>
+                        <p>Our dedicated team provides personalized assistance throughout the insurance process.</p>
                     </div>
                     <div class="benefit-item">
                         <div class="benefit-icon">
-                            <i class="fas fa-shield-alt"></i>
+                            <i class="fas fa-bolt"></i>
                         </div>
-                        <h4>Specialized Coverage</h4>
-                        <p>Policies specifically designed for the unique needs of imported vehicles.</p>
+                        <h4>Quick Processing</h4>
+                        <p>We ensure fast policy issuance and claims processing to minimize your wait time.</p>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h3>Need Help Choosing the Right Insurance?</h3>
+            <p>Our insurance specialist Samuel is ready to assist you in selecting the perfect coverage for your vehicle and budget.</p>
+            <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20need%20assistance%20choosing%20the%20right%20insurance%20for%20my%20vehicle." class="contact-button" target="_blank">
+                <i class="fab fa-whatsapp"></i> Chat with Samuel on WhatsApp
+            </a>
         </div>
     </section>
 
@@ -403,16 +552,6 @@
         // Add interactivity to insurance cards
         document.addEventListener('DOMContentLoaded', function() {
             const insuranceCards = document.querySelectorAll('.insurance-card');
-            const insuranceButtons = document.querySelectorAll('.insurance-button');
-            
-            // Add click event to insurance buttons
-            insuranceButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const insuranceProvider = this.closest('.insurance-card').querySelector('h3').textContent;
-                    alert(`Thank you for your interest in ${insuranceProvider}! Our insurance specialist will contact you shortly with a customized quote.`);
-                });
-            });
             
             // Add animation on scroll
             const observerOptions = {

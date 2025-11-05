@@ -1,223 +1,1330 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Subaru Models | MotorPride Kenya</title>
-<style>
-body { font-family: Arial, sans-serif; background:#f5f7fa; margin:0; padding:0; }
-h2 { text-align:center; color:#0A1F44; margin:30px 0; font-size:28px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotorPride Kenya | Toyota Models</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --primary-dark: #0d5bb9;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ff6b35;
+            --text-color: #333;
+            --light-text: #666;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
 
-/* Vehicle Grid */
-.vehicle-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-@media(max-width:992px){ .vehicle-grid { grid-template-columns: repeat(2, 1fr); } }
-@media(max-width:600px){ .vehicle-grid { grid-template-columns: 1fr; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-.vehicle-card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-.vehicle-card:hover { transform: translateY(-6px); }
-.vehicle-card img { width:100%; height:200px; object-fit:cover; }
-.vehicle-info { padding:15px; text-align:center; }
-.vehicle-info h3 { margin:5px 0; font-size:18px; color:#0A1F44; }
-.vehicle-info p { margin:4px 0; color:#333; font-size:14px; }
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
 
-/* Modal */
-.modal { display:none; position:fixed; z-index:1000; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); overflow-y:auto; }
-.modal-content { background:#fff; margin:30px auto; padding:20px; border-radius:12px; width:90%; max-width:1000px; text-align:center; position:relative; display:flex; flex-direction: column; }
-.close { position:absolute; right:15px; top:10px; font-size:28px; cursor:pointer; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-.modal-body { display:flex; flex-direction: column; }
-@media(min-width:768px){ .modal-body { flex-direction: row; gap:20px; } }
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-#modalMainImage { width:100%; max-height:450px; object-fit:cover; border-radius:10px; margin-bottom:15px; }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
 
-.thumbnails { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:15px; }
-@media(min-width:768px){ .thumbnails { flex-direction: column; max-height:450px; overflow-y:auto; margin:0; } }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
 
-.thumbnails img { width:110px; height:80px; object-fit:cover; border-radius:8px; cursor:pointer; transition: transform 0.2s; }
-.thumbnails img:hover, .thumbnails img.active { transform: scale(1.08); border:2px solid #00AEEF; }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
 
-#modalSpecs { text-align:left; margin-top:10px; font-size:14px; }
-#modalSpecs p { margin:5px 0; }
-.reserve-btn { display:inline-block; margin-top:10px; padding:10px 20px; background:#25D366; color:#fff; border-radius:8px; text-decoration:none; }
+        nav ul li {
+            margin-left: 25px;
+        }
 
-/* Pagination */
-.pagination { text-align:center; margin:30px 0; }
-.pagination button { padding:10px 16px; margin:5px; border:none; border-radius:6px; background:#0A1F44; color:#fff; cursor:pointer; }
-.pagination button:disabled { background:#ccc; cursor:default; }
-</style>
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        nav ul li a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .page-title {
+            font-size: 32px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        /* Search Results Header */
+        .search-results-header {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+
+        .search-results-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .search-criteria {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .search-criteria-item {
+            background-color: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .clear-search {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .clear-search:hover {
+            background-color: #e55a2b;
+        }
+
+        /* Cars Grid - Improved Design */
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .car-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .car-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .car-image-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .car-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .car-card:hover .car-image {
+            transform: scale(1.08);
+        }
+
+        .reserve-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .reserve-btn:hover {
+            background-color: #e55a2b;
+            transform: scale(1.05);
+        }
+
+        .car-info {
+            padding: 18px;
+        }
+
+        .car-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .car-id {
+            font-size: 12px;
+            color: var(--light-text);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .car-year-price {
+            display: flex;
+            justify-content: space-between;
+            color: var(--light-text);
+            margin-bottom: 12px;
+        }
+
+        .car-price {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 18px;
+        }
+
+        .car-specs {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--light-text);
+        }
+
+        /* Enhanced Status Badges with Scroll Animation */
+        .status-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 5;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.5s ease;
+        }
+
+        .status-badge.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .status-available {
+            background-color: #28a745;
+            color: white;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+        }
+
+        .status-incoming {
+            background-color: #ffc107;
+            color: #000;
+            box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+        }
+
+        .status-sold {
+            background-color: #6c757d;
+            color: white;
+            box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+        }
+
+        /* Modal Styles with Enhanced Animations */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .car-detail-modal {
+            background-color: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 1100px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .car-detail-modal {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--light-text);
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            color: var(--text-color);
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .modal-content {
+            padding: 25px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .car-images {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .primary-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .primary-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Enlarged Thumbnails */
+        .thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .thumbnail.active {
+            border: 3px solid var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .car-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-item {
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border-color);
+            animation: slideInRight 0.5s ease forwards;
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .detail-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            background-color: rgba(26, 115, 232, 0.05);
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            background-color: rgba(26, 115, 232, 0.1);
+            transform: translateX(5px);
+        }
+
+        .feature-item::before {
+            content: "✓";
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .modal-reserve-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
+        }
+
+        .modal-reserve-btn:hover {
+            background-color: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Enhanced Agents Modal */
+        .agents-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: var(--shadow-lg);
+            z-index: 1100;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .agents-modal.active {
+            opacity: 1;
+            visibility: visible;
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .agents-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .agents-title {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .close-agents {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--light-text);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .close-agents:hover {
+            color: var(--text-color);
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .agents-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .agent-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .agent-item:hover {
+            background-color: #e9ecef;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .agent-photo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            font-size: 36px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .agent-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+
+        .agent-role {
+            font-size: 14px;
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+
+        .agent-action {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .agent-action:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .pagination button {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-numbers {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+            font-weight: 600;
+        }
+
+        /* Caplicity Motors branding */
+        .caplicity-brand {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 700;
+            color: #1a73e8;
+            font-size: 14px;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 992px) {
+            .modal-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .thumbnails {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                margin-top: 10px;
+            }
+            
+            .cars-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .thumbnails {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .agents-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-criteria {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .cars-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+            
+            .thumbnails {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">MotorPride Kenya</div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#" class="active">Toyota Models</a></li>
+                        <li><a href="aboutus.html">About</a></li>
+                        <li><a href="contacts.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-<h2>SUBARU MODELS</h2>
-<div id="carGrid" class="vehicle-grid"></div>
+    <main class="container">
+        <h1 class="page-title" id="pageTitle">Subaru Models Collection</h1>
+        
+        <!-- Search Results Header -->
+        <div class="search-results-header" id="searchResultsHeader">
+            <h2 class="search-results-title" id="searchResultsTitle">Search Results</h2>
+            <div class="search-criteria" id="searchCriteria"></div>
+            <button class="clear-search" id="clearSearch">Clear Search & Show All Vehicles</button>
+        </div>
+        
+        <div class="cars-grid" id="carsGrid">
+            <!-- Cars will be loaded here by JavaScript -->
+        </div>
+        
+        <div class="pagination">
+            <button id="prevPage" disabled>Previous</button>
+            <div class="page-numbers">
+                <span id="currentPage">1</span> / <span id="totalPages">1</span>
+            </div>
+            <button id="nextPage">Next</button>
+        </div>
+    </main>
 
-<!-- Pagination -->
-<div class="pagination">
-  <button id="prevBtn" onclick="changePage(-1)">Prev</button>
-  <button id="nextBtn" onclick="changePage(1)">Next</button>
-</div>
-
-<!-- Modal -->
-<div id="carModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <div class="modal-body">
-      <div style="flex:1;">
-        <img id="modalMainImage" src="" alt="Car" />
-        <div id="modalThumbnails" class="thumbnails"></div>
-      </div>
-      <div id="modalSpecs" style="flex:1;"></div>
+    <!-- Car Details Modal -->
+    <div class="modal-overlay" id="carModal">
+        <div class="car-detail-modal">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalCarTitle">Car Details</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="car-images">
+                    <img src="" alt="Car Image" class="primary-image" id="modalPrimaryImage">
+                    <div class="thumbnails" id="modalThumbnails"></div>
+                </div>
+                <div class="car-details" id="carDetails"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="nav-buttons">
+                    <button class="nav-btn" id="prevCar">Previous Car</button>
+                    <button class="nav-btn" id="nextCar">Next Car</button>
+                </div>
+                <button class="modal-reserve-btn" id="modalReserveBtn">Reserve This Car</button>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-<script>
-const vehicles = [
- {
-  name: "SUBARU IMPREZA GP3",
-  images: [
-    "https://i.imgur.com/PJYqzOz.jpeg",
-    "https://i.imgur.com/1fbwmtS.jpeg",
-    "https://i.imgur.com/j6yyPHg.jpeg",
-    "https://i.imgur.com/kBAxzc2.jpeg",
-    "https://i.imgur.com/YOkIbIs.jpeg",
-    "https://i.imgur.com/cZlamEQ.jpeg"
-  ],
-  fuel: "Petrol",
-  price: "KSh 1.1M",
-  year: 2014,
-  transmission: "Automatic",
-  engine: "N/A",
-  mileage: "N/A",
-  color: "N/A",
-  body: "Sedan",
-  location: "Nairobi",
-  stockID: "SB-IMP14",
-  features: [
-    "Reverse Camera",
-    "Paddle Shifters",
-    "Xenon Lights",
-    "Very Clean"
-  ]
-},
-  {
-    name: "2019 Subaru Outback 2.5i-L",
-    images: [
-      "https://i.imgur.com/abc456a.jpeg",
-      "https://i.imgur.com/abc456b.jpeg",
-      "https://i.imgur.com/abc456c.jpeg",
-      "https://i.imgur.com/abc456d.jpeg",
-      "https://i.imgur.com/abc456e.jpeg"
-    ],
-    fuel: "Petrol",
-    price: "KSh 4.2M",
-    year: 2019,
-    transmission: "Automatic",
-    engine: "2500cc",
-    mileage: "20,000 km",
-    color: "Ice Silver Metallic, Gray Interior",
-    body: "SUV",
-    location: "Nairobi",
-    stockID: "SB-OUT19",
-    features: [
-      "All-Wheel Drive",
-      "Rear Cross Traffic Alert",
-      "Heated Steering Wheel",
-      "Navigation System"
-    ]
-  }
-];
+    <!-- Agents Modal -->
+    <div class="agents-modal" id="agentsModal">
+        <div class="agents-header">
+            <h3 class="agents-title">Contact Our Sales Team</h3>
+            <button class="close-agents" id="closeAgents">&times;</button>
+        </div>
+        <div class="agents-message">
+            <p>For reservations and enquiries about this vehicle, please contact one of our sales agents:</p>
+        </div>
+        <div class="agents-list" id="agentsList"></div>
+        <div class="agents-footer">
+            <button class="exit-reserve" id="exitReserve">Exit Reservation</button>
+        </div>
+    </div>
 
-let currentPage = 1;
-const carsPerPage = 13;
+    <script>
+        // Sample car data for Toyota models
+        const cars = [
+            // Add your Toyota models here following this structure:
+            /*
+            {
+                id: "unique-id",
+                name: "Toyota Model Name",
+                make: "Toyota",
+                model: "Model Name",
+                year: 2023,
+                price: "KSh 2,500,000",
+                transmission: "Automatic",
+                fuel: "Petrol",
+                mileage: "—",
+                status: "Available",
+                images: [
+                    "image-url-1.jpg",
+                    "image-url-2.jpg",
+                    // Add more images
+                ],
+                features: [
+                    "Feature 1",
+                    "Feature 2",
+                    // Add more features
+                ],
+                agents: [
+                    {
+                        name: "Agent Name",
+                        phone: "+254701234567",
+                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%20Toyota%20Model"
+                    }
+                ]
+            }
+            */
+        ];
 
-function renderCars() {
-  const carGrid = document.getElementById("carGrid");
-  carGrid.innerHTML = "";
-  const start = (currentPage - 1) * carsPerPage;
-  const end = start + carsPerPage;
-  const paginated = vehicles.slice(start, end);
+        // Sample agents data
+        const agents = [
+            { name: "John Kamau", role: "Sales Manager", number: "+254712345678", photo: "👨🏾‍💼" },
+            { name: "Sarah Wanjiku", role: "Sales Executive", number: "+254723456789", photo: "👩🏾‍💼" },
+            { name: "David Ochieng", role: "Sales Consultant", number: "+254734567890", photo: "👨🏾‍💼" },
+            { name: "Grace Akinyi", role: "Customer Relations", number: "+254745678901", photo: "👩🏾‍💼" },
+            { name: "Michael Mwangi", role: "Finance Specialist", number: "+254756789012", photo: "👨🏾‍💼" }
+        ];
 
-  paginated.forEach(car => {
-    const card = document.createElement("div");
-    card.className = "vehicle-card";
-    card.onclick = () => openModal(car);
-    card.innerHTML = `
-      <img src="${car.images[0]}" alt="${car.name}">
-      <div class="vehicle-info">
-        <h3>${car.name}</h3>
-        <p><strong>Year:</strong> ${car.year}</p>
-        <p><strong>Price:</strong> ${car.price}</p>
-      </div>
-    `;
-    carGrid.appendChild(card);
-  });
+        // DOM Elements
+        const carsGrid = document.getElementById('carsGrid');
+        const carModal = document.getElementById('carModal');
+        const agentsModal = document.getElementById('agentsModal');
+        const closeModal = document.getElementById('closeModal');
+        const closeAgents = document.getElementById('closeAgents');
+        const prevPage = document.getElementById('prevPage');
+        const nextPage = document.getElementById('nextPage');
+        const currentPageEl = document.getElementById('currentPage');
+        const totalPagesEl = document.getElementById('totalPages');
+        const prevCar = document.getElementById('prevCar');
+        const nextCar = document.getElementById('nextCar');
+        const modalReserveBtn = document.getElementById('modalReserveBtn');
+        const modalCarTitle = document.getElementById('modalCarTitle');
+        const modalPrimaryImage = document.getElementById('modalPrimaryImage');
+        const modalThumbnails = document.getElementById('modalThumbnails');
+        const carDetails = document.getElementById('carDetails');
+        const agentsList = document.getElementById('agentsList');
+        const pageTitle = document.getElementById('pageTitle');
+        const searchResultsHeader = document.getElementById('searchResultsHeader');
+        const searchResultsTitle = document.getElementById('searchResultsTitle');
+        const searchCriteria = document.getElementById('searchCriteria');
+        const clearSearch = document.getElementById('clearSearch');
+        const exitReserve = document.getElementById('exitReserve');
 
-  document.getElementById("prevBtn").disabled = currentPage === 1;
-  document.getElementById("nextBtn").disabled = end >= vehicles.length;
-}
+        // State
+        let currentPage = 1;
+        const carsPerPage = 8;
+        let currentCarIndex = 0;
+        let filteredCars = [...cars]; // Start with all cars
+        let currentCarForReservation = null;
 
-function changePage(direction) {
-  currentPage += direction;
-  renderCars();
-}
+        // Initialize the page
+        function init() {
+            // Check for URL parameters and filter cars
+            checkURLParameters();
+            displayCars();
+            setupPagination();
+            setupEventListeners();
+            setupScrollAnimation();
+        }
 
-const modal = document.getElementById("carModal");
-const modalMainImage = document.getElementById("modalMainImage");
-const modalThumbnails = document.getElementById("modalThumbnails");
-const modalSpecs = document.getElementById("modalSpecs");
+        // Check URL parameters for search criteria
+        function checkURLParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const make = urlParams.get('make');
+            const model = urlParams.get('model');
+            const year = urlParams.get('year');
+            const transmission = urlParams.get('transmission');
+            const fuel = urlParams.get('fuel');
+            const search = urlParams.get('search');
+            
+            // If there's a search parameter, filter the cars
+            if (search === 'true' && (make || model || year || transmission || fuel)) {
+                filterCars(make, model, year, transmission, fuel);
+                showSearchResultsHeader(make, model, year, transmission, fuel);
+            }
+        }
 
-function openModal(car) {
-  modal.style.display = "block";
-  modalMainImage.src = car.images[0];
-  modalThumbnails.innerHTML = "";
-  car.images.forEach((img, index) => {
-    const thumb = document.createElement("img");
-    thumb.src = img;
-    if(index === 0) thumb.classList.add("active");
-    thumb.onclick = () => {
-      modalMainImage.src = img;
-      document.querySelectorAll(".thumbnails img").forEach(t => t.classList.remove("active"));
-      thumb.classList.add("active");
-    };
-    modalThumbnails.appendChild(thumb);
-  });
-  modalSpecs.innerHTML = `
-    <h3>${car.name}</h3>
-    <p><strong>Fuel:</strong> ${car.fuel}</p>
-    <p><strong>Year:</strong> ${car.year}</p>
-    <p><strong>Transmission:</strong> ${car.transmission}</p>
-    <p><strong>Engine:</strong> ${car.engine}</p>
-    <p><strong>Mileage:</strong> ${car.mileage}</p>
-    <p><strong>Color:</strong> ${car.color}</p>
-    <p><strong>Body Type:</strong> ${car.body}</p>
-    <p><strong>Location:</strong> ${car.location}</p>
-    <p><strong>Stock ID:</strong> ${car.stockID}</p>
-    <p><strong>Price:</strong> ${car.price}</p>
-    <p><strong>Features:</strong> ${car.features.join(", ")}</p>
-    <a href="https://wa.me/254723098206?text=I want to reserve ${encodeURIComponent(car.name)}"
-       class="reserve-btn" target="_blank">Reserve via WhatsApp</a>
-  `;
-}
+        // Filter cars based on search criteria
+        function filterCars(make, model, year, transmission, fuel) {
+            filteredCars = cars.filter(car => {
+                // Check each criteria - if provided, it must match
+                if (make && car.make !== make) return false;
+                if (model && car.model !== model) return false;
+                if (year && car.year.toString() !== year) return false;
+                if (transmission && car.transmission !== transmission) return false;
+                if (fuel && car.fuel !== fuel) return false;
+                return true;
+            });
+            
+            // Reset to first page when filtering
+            currentPage = 1;
+        }
 
-function closeModal() { modal.style.display = "none"; }
+        // Show search results header with criteria
+        function showSearchResultsHeader(make, model, year, transmission, fuel) {
+            searchResultsHeader.style.display = 'block';
+            pageTitle.textContent = 'Search Results';
+            
+            // Clear previous criteria
+            searchCriteria.innerHTML = '';
+            
+            // Add criteria items
+            if (make) {
+                addCriteriaItem('Make', make);
+            }
+            if (model) {
+                addCriteriaItem('Model', model);
+            }
+            if (year) {
+                addCriteriaItem('Year', year);
+            }
+            if (transmission) {
+                addCriteriaItem('Transmission', transmission);
+            }
+            if (fuel) {
+                addCriteriaItem('Fuel Type', fuel);
+            }
+            
+            // Update results title
+            const count = filteredCars.length;
+            searchResultsTitle.textContent = `Found ${count} ${count === 1 ? 'vehicle' : 'vehicles'} matching your search`;
+        }
 
-renderCars();
-</script>
+        // Add a criteria item to the search criteria display
+        function addCriteriaItem(label, value) {
+            const criteriaItem = document.createElement('div');
+            criteriaItem.className = 'search-criteria-item';
+            criteriaItem.innerHTML = `
+                <span>${label}:</span>
+                <strong>${value}</strong>
+            `;
+            searchCriteria.appendChild(criteriaItem);
+        }
 
+        // Display cars in the grid
+        function displayCars() {
+            const startIndex = (currentPage - 1) * carsPerPage;
+            const endIndex = startIndex + carsPerPage;
+            const currentCars = filteredCars.slice(startIndex, endIndex);
+            
+            carsGrid.innerHTML = '';
+            
+            if (currentCars.length === 0) {
+                carsGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                        <div style="font-size: 60px; margin-bottom: 20px; color: var(--light-text);">🚗</div>
+                        <h3 style="font-size: 24px; margin-bottom: 15px; color: var(--text-color);">No Vehicles Found</h3>
+                        <p style="color: var(--light-text); margin-bottom: 25px; max-width: 500px; margin-left: auto; margin-right: auto;">
+                            No vehicles match your search criteria. Try adjusting your filters or <a href="#" id="clearSearchLink" style="color: var(--primary-color); text-decoration: underline;">view all vehicles</a>.
+                        </p>
+                    </div>
+                `;
+                
+                // Add event listener to clear search link
+                document.getElementById('clearSearchLink').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    clearSearchAndShowAll();
+                });
+                
+                return;
+            }
+            
+            currentCars.forEach((car, index) => {
+                const statusClass = car.status ? `status-${car.status.toLowerCase().replace(' ', '-')}` : '';
+                const primaryImage = car.images?.[0] || 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                
+                const carCard = document.createElement('div');
+                carCard.className = 'car-card';
+                carCard.setAttribute('data-car-id', car.id);
+                carCard.style.animationDelay = `${index * 0.1}s`;
+                carCard.innerHTML = `
+                    <div class="car-image-container">
+                        ${car.status ? `<div class="status-badge ${statusClass}">${car.status}</div>` : ''}
+                        <img src="${primaryImage}" alt="${car.name}" class="car-image">
+                        <button class="reserve-btn" data-car-id="${car.id}">Reserve</button>
+                    </div>
+                    <div class="car-info">
+                        
+                        <div class="car-name">${car.name}</div>
+                        <div class="car-id">ID: ${car.id}</div>
+                        <div class="car-year-price">
+                            <span>${car.year || 'N/A'}</span>
+                            <span class="car-price">${car.price || 'Contact for price'}</span>
+                        </div>
+                        <div class="car-specs">
+                            <span>${car.transmission || 'N/A'}</span>
+                            <span>${car.fuel || 'N/A'}</span>
+                            <span>${car.mileage || 'N/A'}</span>
+                        </div>
+                    </div>
+                `;
+                carsGrid.appendChild(carCard);
+            });
+            
+            attachCarEventListeners();
+        }
+
+        // Clear search and show all vehicles
+        function clearSearchAndShowAll() {
+            filteredCars = [...cars];
+            currentPage = 1;
+            searchResultsHeader.style.display = 'none';
+            pageTitle.textContent = 'Toyota Models Collection';
+            displayCars();
+            setupPagination();
+            
+            // Update URL without search parameters
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        }
+
+        // Attach event listeners to car cards
+        function attachCarEventListeners() {
+            document.querySelectorAll('.car-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('reserve-btn')) {
+                        e.stopPropagation();
+                        const carId = card.getAttribute('data-car-id');
+                        const car = filteredCars.find(c => c.id === carId);
+                        openAgentsModal(car);
+                    } else {
+                        const carId = card.getAttribute('data-car-id');
+                        openCarModal(carId);
+                    }
+                });
+            });
+        }
+
+        // Setup scroll animation for status badges
+        function setupScrollAnimation() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const statusBadge = entry.target.querySelector('.status-badge');
+                        if (statusBadge) {
+                            setTimeout(() => {
+                                statusBadge.classList.add('visible');
+                            }, 200);
+                        }
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            document.querySelectorAll('.car-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Setup pagination
+        function setupPagination() {
+            const totalPages = Math.ceil(filteredCars.length / carsPerPage);
+            currentPageEl.textContent = currentPage;
+            totalPagesEl.textContent = totalPages || 1;
+            prevPage.disabled = currentPage === 1;
+            nextPage.disabled = currentPage === totalPages || totalPages === 0;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Pagination
+            prevPage.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayCars();
+                    setupPagination();
+                    setupScrollAnimation();
+                }
+            });
+            
+            nextPage.addEventListener('click', () => {
+                const totalPages = Math.ceil(filteredCars.length / carsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayCars();
+                    setupPagination();
+                    setupScrollAnimation();
+                }
+            });
+            
+            // Modal events
+            closeModal.addEventListener('click', closeCarModal);
+            closeAgents.addEventListener('click', closeAgentsModal);
+            
+            // Car navigation in modal
+            prevCar.addEventListener('click', showPreviousCar);
+            nextCar.addEventListener('click', showNextCar);
+            
+            // Reserve button in modal
+            modalReserveBtn.addEventListener('click', () => {
+                const car = filteredCars[currentCarIndex];
+                openAgentsModal(car);
+            });
+            
+            // Close modals on overlay click
+            carModal.addEventListener('click', (e) => {
+                if (e.target === carModal) closeCarModal();
+            });
+            
+            agentsModal.addEventListener('click', (e) => {
+                if (e.target === agentsModal) closeAgentsModal();
+            });
+            
+            // Clear search button
+            clearSearch.addEventListener('click', clearSearchAndShowAll);
+            
+            // Exit reserve button
+            exitReserve.addEventListener('click', closeAgentsModal);
+        }
+
+        // Open car modal with enhanced animations
+        function openCarModal(carId) {
+            const car = filteredCars.find(c => c.id === carId);
+            if (!car) return;
+            
+            currentCarIndex = filteredCars.findIndex(c => c.id === carId);
+            modalCarTitle.textContent = car.name;
+            
+            const primaryImage = car.images?.[0] || 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+            modalPrimaryImage.src = primaryImage;
+            modalPrimaryImage.alt = car.name;
+            
+            // Clear and add thumbnails
+            modalThumbnails.innerHTML = '';
+            if (car.images && car.images.length > 0) {
+                car.images.slice(0, 7).forEach((image, index) => {
+                    const img = document.createElement('img');
+                    img.src = image;
+                    img.alt = `${car.name} - Image ${index + 1}`;
+                    img.className = 'thumbnail' + (index === 0 ? ' active' : '');
+                    img.addEventListener('click', () => {
+                        modalPrimaryImage.src = image;
+                        // Update active thumbnail
+                        document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+                        img.classList.add('active');
+                    });
+                    modalThumbnails.appendChild(img);
+                });
+            } else {
+                // Add placeholder thumbnails if no images
+                for (let i = 0; i < 7; i++) {
+                    const img = document.createElement('img');
+                    img.src = 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                    img.alt = `${car.name} - Image ${i + 1}`;
+                    img.className = 'thumbnail' + (i === 0 ? ' active' : '');
+                    img.addEventListener('click', () => {
+                        modalPrimaryImage.src = img.src;
+                        document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+                        img.classList.add('active');
+                    });
+                    modalThumbnails.appendChild(img);
+                }
+            }
+            
+            // Populate car details with staggered animation
+            carDetails.innerHTML = '';
+            const details = [
+               
+                { label: 'Price', value: car.price },
+                { label: 'Year', value: car.year },
+                { label: 'Make', value: car.make },
+                { label: 'Model', value: car.model },
+                { label: 'Transmission', value: car.transmission },
+                { label: 'Fuel Type', value: car.fuel },
+                { label: 'Mileage', value: car.mileage },
+                { label: 'Status', value: car.status },
+                { label: 'Features', value: car.features, isFeatures: true }
+            ];
+            
+            details.forEach((detail, index) => {
+                if (!detail.value || detail.value === 'N/A' || (Array.isArray(detail.value) && detail.value.length === 0)) return;
+                
+                const detailItem = document.createElement('div');
+                detailItem.className = 'detail-item';
+                detailItem.style.animationDelay = `${index * 0.1}s`;
+                
+                if (detail.isFeatures && Array.isArray(detail.value)) {
+                    const featuresList = document.createElement('div');
+                    featuresList.className = 'features-list';
+                    detail.value.forEach(feature => {
+                        const featureItem = document.createElement('div');
+                        featureItem.className = 'feature-item';
+                        featureItem.textContent = feature;
+                        featuresList.appendChild(featureItem);
+                    });
+                    detailItem.innerHTML = `<div class="detail-label">${detail.label}</div>`;
+                    detailItem.appendChild(featuresList);
+                } else {
+                    detailItem.innerHTML = `
+                        <div class="detail-label">${detail.label}</div>
+                        <div>${detail.value}</div>
+                    `;
+                }
+                carDetails.appendChild(detailItem);
+            });
+            
+            carModal.classList.add('active');
+        }
+
+        // Close car modal
+        function closeCarModal() {
+            carModal.classList.remove('active');
+        }
+
+        // Show previous car in modal
+        function showPreviousCar() {
+            if (filteredCars.length === 0) return;
+            currentCarIndex = currentCarIndex > 0 ? currentCarIndex - 1 : filteredCars.length - 1;
+            openCarModal(filteredCars[currentCarIndex].id);
+        }
+
+        // Show next car in modal
+        function showNextCar() {
+            if (filteredCars.length === 0) return;
+            currentCarIndex = currentCarIndex < filteredCars.length - 1 ? currentCarIndex + 1 : 0;
+            openCarModal(filteredCars[currentCarIndex].id);
+        }
+
+        // Open agents modal with specific agents for the car
+        function openAgentsModal(car) {
+            if (!car) return;
+            
+            currentCarForReservation = car;
+            agentsList.innerHTML = '';
+            
+            // Get the specific agents for this car
+            const carAgents = car.agents.map(index => agents[index]);
+            
+            carAgents.forEach(agent => {
+                const formattedNumber = agent.number.replace(/\s+/g, '').replace(/-/g, '');
+                const message = `Hello, I am interested in reserving the ${car.name} (ID: ${car.id}). Please provide more details.`;
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${formattedNumber}?text=${encodedMessage}`;
+                
+                const agentItem = document.createElement('div');
+                agentItem.className = 'agent-item';
+                agentItem.innerHTML = `
+                    <div class="agent-photo">${agent.photo}</div>
+                    <div class="agent-name">${agent.name}</div>
+                    <div class="agent-role">${agent.role}</div>
+                    <a class="agent-action" href="${whatsappUrl}" target="_blank">Chat on WhatsApp</a>
+                `;
+                agentsList.appendChild(agentItem);
+            });
+            
+            agentsModal.classList.add('active');
+        }
+
+        // Close agents modal
+        function closeAgentsModal() {
+            agentsModal.classList.remove('active');
+            currentCarForReservation = null;
+        }
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>

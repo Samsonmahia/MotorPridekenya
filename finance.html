@@ -26,6 +26,7 @@
             background-color: #f5f5f5;
             color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
@@ -42,23 +43,28 @@
             color: white;
             padding: 100px 0;
             text-align: center;
+            position: relative;
         }
 
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-content h1 {
             font-size: 3.2rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
         }
 
         .hero-content p {
             font-size: 1.2rem;
             margin-bottom: 30px;
             opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
         }
 
         .cta-button {
@@ -73,6 +79,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             margin: 0 10px;
+            animation: fadeInUp 1s ease-out 0.4s both;
         }
 
         .cta-button:hover {
@@ -140,21 +147,33 @@
 
         .option-card {
             background: var(--light);
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
             border-top: 5px solid var(--primary);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .option-card.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .option-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
         .option-card.featured {
             border-top: 5px solid var(--secondary);
-            position: relative;
             transform: scale(1.05);
+        }
+
+        .option-card.featured.animate {
+            transform: scale(1.05) translateY(0);
         }
 
         .featured-badge {
@@ -167,6 +186,24 @@
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: bold;
+            z-index: 10;
+        }
+
+        .option-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .option-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .option-card:hover .option-image img {
+            transform: scale(1.1);
         }
 
         .option-header {
@@ -247,97 +284,11 @@
             background: #2d4a7c;
         }
 
-        /* Calculator Section */
-        .calculator-section {
+        /* Benefits Section */
+        .benefits-section {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
-        .calculator-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .calculator-form {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .range-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .range-container input {
-            flex: 1;
-        }
-
-        .range-value {
-            margin-left: 15px;
-            font-weight: bold;
-            color: var(--primary);
-            min-width: 60px;
-        }
-
-        .calculator-results {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .result-item {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .result-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .result-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-bottom: 5px;
-        }
-
-        .result-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        .result-value.highlight {
-            color: var(--accent);
-        }
-
-        /* Benefits Section */
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -346,11 +297,18 @@
 
         .benefit-card {
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
             background: white;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .benefit-card.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .benefit-card:hover {
@@ -411,6 +369,13 @@
             min-width: 200px;
             padding: 0 15px;
             margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .step.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .step-number {
@@ -446,6 +411,8 @@
             color: white;
             text-align: center;
             padding: 100px 0;
+            border-radius: 20px;
+            margin: 50px 20px;
         }
 
         .cta-section h2 {
@@ -460,12 +427,47 @@
             opacity: 0.9;
         }
 
+        /* WhatsApp Button */
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #25D366;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .whatsapp-button i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 992px) {
-            .calculator-container {
-                grid-template-columns: 1fr;
-            }
-
             .process-steps::before {
                 display: none;
             }
@@ -476,6 +478,10 @@
 
             .option-card.featured {
                 transform: scale(1);
+            }
+            
+            .option-card.featured.animate {
+                transform: translateY(0);
             }
         }
 
@@ -501,6 +507,11 @@
             .cta-button {
                 margin: 0;
             }
+            
+            .cta-section {
+                margin: 50px 10px;
+                padding: 60px 20px;
+            }
         }
     </style>
 </head>
@@ -509,164 +520,126 @@
     <section class="finance-hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Motorpride Financing Solutions</h1>
-                <p>Drive your dream vehicle today with our flexible and affordable financing options. Competitive rates, quick approvals, and personalized payment plans tailored to your budget.</p>
+                <h1>Motorpride Car Financing Solutions</h1>
+                <p>Drive your dream car today with our flexible and affordable financing options. Competitive rates, quick approvals, and personalized payment plans tailored to your budget.</p>
                 <div class="cta-buttons">
-                    <a href="#calculator" class="cta-button">Calculate Payments</a>
-                    <a href="#apply" class="cta-button secondary">Apply Now</a>
+                    <a href="#options" class="cta-button">Explore Options</a>
+                    <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20Motorpride%20car%20financing.%20Please%20provide%20more%20details." class="cta-button secondary" target="_blank">Chat with Samuel</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Finance Options Section -->
-    <section class="finance-options">
+    <section class="finance-options" id="options">
         <div class="container">
             <div class="section-title">
-                <h2>Our Financing Plans</h2>
+                <h2>Our Financing Options</h2>
                 <p>Choose from our range of flexible financing options designed to fit your budget and needs</p>
             </div>
             <div class="options-grid">
-                <!-- Standard Financing -->
+                <!-- Bank Finance -->
                 <div class="option-card">
+                    <div class="option-image">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Bank Finance">
+                    </div>
                     <div class="option-header">
                         <div class="option-icon">
-                            <i class="fas fa-car"></i>
+                            <i class="fas fa-university"></i>
                         </div>
-                        <h3>Standard Financing</h3>
-                        <p>For most customers</p>
+                        <h3>Bank Finance</h3>
+                        <p>Partnered with leading banks</p>
                     </div>
                     <div class="option-content">
                         <ul class="option-features">
-                            <li><i class="fas fa-check"></i> Competitive interest rates</li>
-                            <li><i class="fas fa-check"></i> 12-72 month terms</li>
-                            <li><i class="fas fa-check"></i> 10-20% down payment</li>
-                            <li><i class="fas fa-check"></i> Fixed monthly payments</li>
-                            <li><i class="fas fa-check"></i> No prepayment penalties</li>
+                            <li><i class="fas fa-check"></i> Competitive interest rates from 7.5%</li>
+                            <li><i class="fas fa-check"></i> Flexible repayment periods (12-84 months)</li>
+                            <li><i class="fas fa-check"></i> Loan amounts up to 90% of car value</li>
+                            <li><i class="fas fa-check"></i> Fast approval within 48 hours</li>
+                            <li><i class="fas fa-check"></i> Both salaried and self-employed eligible</li>
                         </ul>
-                        <div class="option-price">
-                            <div class="price-amount">From 6.5% APR</div>
-                            <div class="price-period">Interest rate</div>
-                        </div>
-                        <a href="#" class="option-button">Learn More</a>
+                        <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20Bank%20Finance%20for%20a%20car.%20Please%20provide%20more%20details." class="option-button" target="_blank">Get Pre-Approved</a>
                     </div>
                 </div>
 
-                <!-- Premium Financing -->
+                <!-- SACCOs Finance -->
                 <div class="option-card featured">
                     <div class="featured-badge">Most Popular</div>
+                    <div class="option-image">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2022&q=80" alt="SACCOs Finance">
+                    </div>
                     <div class="option-header">
                         <div class="option-icon">
-                            <i class="fas fa-gem"></i>
+                            <i class="fas fa-handshake"></i>
                         </div>
-                        <h3>Premium Financing</h3>
-                        <p>For qualified buyers</p>
+                        <h3>SACCOs Finance</h3>
+                        <p>Affordable group financing</p>
                     </div>
                     <div class="option-content">
                         <ul class="option-features">
-                            <li><i class="fas fa-check"></i> Lower interest rates</li>
-                            <li><i class="fas fa-check"></i> 5% minimum down payment</li>
-                            <li><i class="fas fa-check"></i> Extended 84-month terms</li>
-                            <li><i class="fas fa-check"></i> Payment holiday options</li>
-                            <li><i class="fas fa-check"></i> Free insurance for 3 months</li>
+                            <li><i class="fas fa-check"></i> Lower interest rates from 6.5%</li>
+                            <li><i class="fas fa-check"></i> Flexible terms for SACCO members</li>
+                            <li><i class="fas fa-check"></i> Minimal paperwork and documentation</li>
+                            <li><i class="fas fa-check"></i> Top-up financing options available</li>
+                            <li><i class="fas fa-check"></i> Special rates for government employees</li>
                         </ul>
-                        <div class="option-price">
-                            <div class="price-amount">From 4.9% APR</div>
-                            <div class="price-period">Interest rate</div>
-                        </div>
-                        <a href="#" class="option-button">Apply Now</a>
+                        <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20SACCOs%20Finance%20for%20a%20car.%20Please%20provide%20more%20details." class="option-button" target="_blank">Apply Now</a>
                     </div>
                 </div>
 
-                <!-- First-Time Buyer -->
+                <!-- Micro Finance -->
                 <div class="option-card">
+                    <div class="option-image">
+                        <img src="https://images.unsplash.com/photo-1533750516457-a7f992034fec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Micro Finance">
+                    </div>
                     <div class="option-header">
                         <div class="option-icon">
-                            <i class="fas fa-user-graduate"></i>
+                            <i class="fas fa-hand-holding-usd"></i>
                         </div>
-                        <h3>First-Time Buyer</h3>
-                        <p>Special program for new buyers</p>
+                        <h3>Micro Finance</h3>
+                        <p>Small loans, big opportunities</p>
                     </div>
                     <div class="option-content">
                         <ul class="option-features">
-                            <li><i class="fas fa-check"></i> Low credit score considered</li>
-                            <li><i class="fas fa-check"></i> 5% down payment</li>
-                            <li><i class="fas fa-check"></i> Credit building program</li>
-                            <li><i class="fas fa-check"></i> Financial education resources</li>
-                            <li><i class="fas fa-check"></i> Co-signer options available</li>
+                            <li><i class="fas fa-check"></i> Accessible to low-income earners</li>
+                            <li><i class="fas fa-check"></i> Smaller loan amounts with flexible terms</li>
+                            <li><i class="fas fa-check"></i> Minimal collateral requirements</li>
+                            <li><i class="fas fa-check"></i> Quick disbursement within 24 hours</li>
+                            <li><i class="fas fa-check"></i> Credit building opportunities</li>
                         </ul>
-                        <div class="option-price">
-                            <div class="price-amount">From 7.9% APR</div>
-                            <div class="price-period">Interest rate</div>
-                        </div>
-                        <a href="#" class="option-button">Learn More</a>
+                        <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20Micro%20Finance%20for%20a%20car.%20Please%20provide%20more%20details." class="option-button" target="_blank">Learn More</a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Calculator Section -->
-    <section class="calculator-section" id="calculator">
-        <div class="container">
-            <div class="section-title">
-                <h2>Payment Calculator</h2>
-                <p>Estimate your monthly payments with our easy-to-use calculator</p>
-            </div>
-            <div class="calculator-container">
-                <div class="calculator-form">
-                    <h3>Enter Your Details</h3>
-                    <form id="finance-calculator">
-                        <div class="form-group">
-                            <label for="vehicle-price">Vehicle Price ($)</label>
-                            <input type="number" id="vehicle-price" value="25000" min="5000" max="100000" step="1000">
-                        </div>
-                        <div class="form-group">
-                            <label for="down-payment">Down Payment ($)</label>
-                            <input type="number" id="down-payment" value="5000" min="0" max="50000" step="500">
-                        </div>
-                        <div class="form-group">
-                            <label for="loan-term">Loan Term (Months)</label>
-                            <div class="range-container">
-                                <input type="range" id="loan-term" min="12" max="84" value="60" step="12">
-                                <span class="range-value" id="term-value">60 months</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="interest-rate">Interest Rate (%)</label>
-                            <div class="range-container">
-                                <input type="range" id="interest-rate" min="3" max="15" value="6.5" step="0.1">
-                                <span class="range-value" id="rate-value">6.5%</span>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="calculator-results">
-                    <h3>Your Estimated Payment</h3>
-                    <div class="result-item">
-                        <div class="result-label">Monthly Payment</div>
-                        <div class="result-value highlight" id="monthly-payment">$402.50</div>
+                <!-- Hire Purchase -->
+                <div class="option-card">
+                    <div class="option-image">
+                        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Hire Purchase">
                     </div>
-                    <div class="result-item">
-                        <div class="result-label">Total Loan Amount</div>
-                        <div class="result-value" id="total-loan">$20,000</div>
+                    <div class="option-header">
+                        <div class="option-icon">
+                            <i class="fas fa-car-side"></i>
+                        </div>
+                        <h3>Hire Purchase</h3>
+                        <p>Own as you pay</p>
                     </div>
-                    <div class="result-item">
-                        <div class="result-label">Total Interest</div>
-                        <div class="result-value" id="total-interest">$4,150</div>
+                    <div class="option-content">
+                        <ul class="option-features">
+                            <li><i class="fas fa-check"></i> Immediate possession of the vehicle</li>
+                            <li><i class="fas fa-check"></i> Ownership transfers after final payment</li>
+                            <li><i class="fas fa-check"></i> Fixed monthly installments</li>
+                            <li><i class="fas fa-check"></i> Lower initial deposit required</li>
+                            <li><i class="fas fa-check"></i> Option to upgrade during contract period</li>
+                        </ul>
+                        <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20Hire%20Purchase%20for%20a%20car.%20Please%20provide%20more%20details." class="option-button" target="_blank">Get Started</a>
                     </div>
-                    <div class="result-item">
-                        <div class="result-label">Total Payment</div>
-                        <div class="result-value" id="total-payment">$24,150</div>
-                    </div>
-                    <a href="#apply" class="option-button" style="margin-top: 20px;">Apply Now</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Benefits Section -->
-    <section>
+    <section class="benefits-section">
         <div class="container">
             <div class="section-title">
                 <h2>Why Choose Motorpride Financing?</h2>
@@ -715,127 +688,97 @@
             <div class="process-steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Apply Online</h3>
-                    <p>Fill out our simple online application in minutes</p>
+                    <h3>Consultation</h3>
+                    <p>Speak with our financing expert to find the best option for you</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Get Pre-Approved</h3>
-                    <p>Receive a decision within 24 hours in most cases</p>
+                    <h3>Documentation</h3>
+                    <p>Submit required documents for verification and approval</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Choose Your Vehicle</h3>
-                    <p>Select from our extensive inventory of quality vehicles</p>
+                    <h3>Approval</h3>
+                    <p>Receive financing approval within 24-48 hours</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Complete Purchase</h3>
-                    <p>Finalize paperwork and drive away in your new vehicle</p>
+                    <h3>Drive Away</h3>
+                    <p>Complete paperwork and drive away in your dream car</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section" id="apply">
+    <section>
         <div class="container">
-            <h2>Ready to Drive Your Dream Vehicle?</h2>
-            <p>Apply for Motorpride financing today and get behind the wheel sooner than you think.</p>
-            <a href="#" class="cta-button">Start Application</a>
+            <div class="cta-section">
+                <h2>Ready to Drive Your Dream Car?</h2>
+                <p>Contact Samuel today for personalized financing advice and get pre-approved in minutes.</p>
+                <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20would%20like%20to%20discuss%20car%20financing%20options%20with%20you." class="whatsapp-button" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Chat with Samuel on WhatsApp
+                </a>
+                <p style="margin-top: 15px; font-size: 0.9rem;">Call/Text: 0724804354</p>
+            </div>
         </div>
     </section>
 
     <script>
-        // Finance Calculator Functionality
+        // Animation on scroll
         document.addEventListener('DOMContentLoaded', function() {
-            const calculatorForm = document.getElementById('finance-calculator');
-            const vehiclePrice = document.getElementById('vehicle-price');
-            const downPayment = document.getElementById('down-payment');
-            const loanTerm = document.getElementById('loan-term');
-            const interestRate = document.getElementById('interest-rate');
-            const termValue = document.getElementById('term-value');
-            const rateValue = document.getElementById('rate-value');
+            // Add animation to option cards
+            const optionCards = document.querySelectorAll('.option-card');
+            const benefitCards = document.querySelectorAll('.benefit-card');
+            const steps = document.querySelectorAll('.step');
             
-            // Update range value displays
-            loanTerm.addEventListener('input', function() {
-                termValue.textContent = `${this.value} months`;
-                calculatePayment();
-            });
-            
-            interestRate.addEventListener('input', function() {
-                rateValue.textContent = `${this.value}%`;
-                calculatePayment();
-            });
-            
-            // Calculate payment when any input changes
-            calculatorForm.addEventListener('input', calculatePayment);
-            
-            // Initial calculation
-            calculatePayment();
-            
-            function calculatePayment() {
-                const price = parseFloat(vehiclePrice.value);
-                const down = parseFloat(downPayment.value);
-                const term = parseFloat(loanTerm.value);
-                const rate = parseFloat(interestRate.value) / 100 / 12; // Monthly interest rate
-                
-                const loanAmount = price - down;
-                const monthlyPayment = (loanAmount * rate * Math.pow(1 + rate, term)) / (Math.pow(1 + rate, term) - 1);
-                const totalPayment = monthlyPayment * term;
-                const totalInterest = totalPayment - loanAmount;
-                
-                // Update results
-                document.getElementById('monthly-payment').textContent = `$${monthlyPayment.toFixed(2)}`;
-                document.getElementById('total-loan').textContent = `$${loanAmount.toFixed(2)}`;
-                document.getElementById('total-interest').textContent = `$${totalInterest.toFixed(2)}`;
-                document.getElementById('total-payment').textContent = `$${totalPayment.toFixed(2)}`;
-            }
-            
-            // Add animation on scroll
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver(function(entries) {
+            // Create intersection observer
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.classList.add('animate');
+                        
+                        // Add staggered animation for option cards
+                        if (entry.target.classList.contains('option-card')) {
+                            const index = Array.from(optionCards).indexOf(entry.target);
+                            entry.target.style.transitionDelay = `${index * 0.1}s`;
+                        }
+                        
+                        // Add staggered animation for benefit cards
+                        if (entry.target.classList.contains('benefit-card')) {
+                            const index = Array.from(benefitCards).indexOf(entry.target);
+                            entry.target.style.transitionDelay = `${index * 0.1}s`;
+                        }
+                        
+                        // Add staggered animation for steps
+                        if (entry.target.classList.contains('step')) {
+                            const index = Array.from(steps).indexOf(entry.target);
+                            entry.target.style.transitionDelay = `${index * 0.2}s`;
+                        }
                     }
                 });
-            }, observerOptions);
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
             
-            // Observe elements for animation
-            const optionCards = document.querySelectorAll('.option-card');
+            // Observe all elements
             optionCards.forEach(card => {
-                card.style.opacity = 0;
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                 observer.observe(card);
             });
             
-            const benefitCards = document.querySelectorAll('.benefit-card');
             benefitCards.forEach(card => {
-                card.style.opacity = 0;
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                 observer.observe(card);
             });
             
-            const steps = document.querySelectorAll('.step');
             steps.forEach(step => {
-                step.style.opacity = 0;
-                step.style.transform = 'translateY(20px)';
-                step.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                 observer.observe(step);
             });
             
             // Add click events to buttons
             const applyButtons = document.querySelectorAll('.option-button, .cta-button');
             applyButtons.forEach(button => {
-                if (button.getAttribute('href') === '#apply') {
+                if (!button.getAttribute('target')) {
                     button.addEventListener('click', function(e) {
                         e.preventDefault();
                         alert('Thank you for your interest in Motorpride Financing! Our finance specialist will contact you shortly to begin your application.');

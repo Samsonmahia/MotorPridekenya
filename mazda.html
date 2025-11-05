@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotorPride Kenya | old school cars</title>
+    <title>MotorPride Kenya | Toyota Models</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -771,7 +771,7 @@
                 <nav>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="#" class="active">Classic Cars</a></li>
+                        <li><a href="#" class="active">Toyota Models</a></li>
                         <li><a href="aboutus.html">About</a></li>
                         <li><a href="contacts.html">Contact</a></li>
                     </ul>
@@ -781,7 +781,7 @@
     </header>
 
     <main class="container">
-        <h1 class="page-title" id="pageTitle">Classic Car Collection</h1>
+        <h1 class="page-title" id="pageTitle">Mazda Models Collection</h1>
         
         <!-- Search Results Header -->
         <div class="search-results-header" id="searchResultsHeader">
@@ -843,295 +843,129 @@
     </div>
 
     <script>
-        // Old School Cars Data
-        const oldSchoolCars = [
+        // Sample car data for Toyota models
+        const cars = [
+            // Add your Toyota models here following this structure:
+            /*
             {
-                id: "mercedes-280sl-1971",
-                name: "Mercedes-Benz 280SL 1971",
-                make: "Mercedes-Benz",
-                model: "280SL",
-                year: 1971,
-                price: "KSh 4,800,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223480-42e6d3ecc881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223180-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223181-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "2.8L Inline-6 Engine",
-                    "Pagoda Roof Design",
-                    "Convertible Hardtop",
-                    "Classic Cream Exterior",
-                    "Brown Leather Interior",
-                    "Wooden Dashboard", ////
-                    "Power Steering",
-                    "Disc Brakes",
-                    "Fuel Injection System"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201971%20Mercedes-Benz%20280SL"
-                    }
-                ]
-            },
-            {
-                id: "toyota-landcruiser-fj40-1980",
-                name: "Toyota Land Cruiser FJ40 1980",
+                id: "unique-id",
+                name: "Toyota Model Name",
                 make: "Toyota",
-                model: "Land Cruiser FJ40",
-                year: 1980,
-                price: "KSh 3,200,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223182-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223183-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223184-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "4.2L Straight-6 Engine",
-                    "4x4 Capability",
-                    "Removable Hardtop",
-                    "Classic Beige Exterior",
-                    "Vinyl Interior",
-                    "Manual Windows",
-                    "Original Tool Kit",
-                    "Bull Bar",
-                    "Off-road Tires",
-                    "Manual Choke"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201980%20Toyota%20Land%20Cruiser%20FJ40"
-                    }
-                ]
-            },
-            {
-                id: "ford-mustang-1967",
-                name: "Ford Mustang 1967",
-                make: "Ford",
-                model: "Mustang",
-                year: 1967,
-                price: "KSh 5,500,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223185-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223186-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223187-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "4.7L V8 Engine",
-                    "Fastback Design",
-                    "Racing Stripes",
-                    "Classic Red Exterior",
-                    "Black Vinyl Interior",
-                    "Wooden Steering Wheel",
-                    "Original AM Radio",
-                    "Tachometer",
-                    "Dual Exhaust",
-                    "GT Package"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201967%20Ford%20Mustang"
-                    }
-                ]
-            },
-            {
-                id: "volkswagen-beetle-1973",
-                name: "Volkswagen Beetle 1973",
-                make: "Volkswagen",
-                model: "Beetle",
-                year: 1973,
-                price: "KSh 950,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223188-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223189-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223190-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "1.6L Air-Cooled Engine",
-                    "Sunroof",
-                    "Original Hubcaps",
-                    "Classic Yellow Exterior",
-                    "Beige Interior",
-                    "Original Radio",
-                    "Manual Crank Windows",
-                    "Rear Engine",
-                    "Compact Design",
-                    "Excellent Fuel Economy"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201973%20Volkswagen%20Beetle"
-                    }
-                ]
-            },
-            {
-                id: "peugeot-404-1975",
-                name: "Peugeot 404 1975",
-                make: "Peugeot",
-                model: "404",
-                year: 1975,
-                price: "KSh 750,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223191-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223192-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223193-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "1.6L Inline-4 Engine",
-                    "Sedan Body Style",
-                    "Durable Construction",
-                    "Classic Green Exterior",
-                    "Beige Vinyl Interior",
-                    "Manual Transmission",
-                    "Robust Suspension",
-                    "Spacious Trunk",
-                    "Reliable Performance",
-                    "Easy Maintenance"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201975%20Peugeot%20404"
-                    }
-                ]
-            },
-            {
-                id: "datsun-240z-1972",
-                name: "Datsun 240Z 1972",
-                make: "Datsun",
-                model: "240Z",
-                year: 1972,
-                price: "KSh 2,800,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223194-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223195-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223196-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "2.4L Inline-6 Engine",
-                    "Sports Coupe Design",
-                    "Targa Top",
-                    "Classic Orange Exterior",
-                    "Black Interior",
-                    "Wooden Gear Knob",
-                    "Sport Suspension",
-                    "Dual Carburetors",
-                    "Sport Exhaust",
-                    "Classic Japanese Sports Car"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201972%20Datsun%20240Z"
-                    }
-                ]
-            },
-            {
-                id: "bmw-2002-1974",
-                name: "BMW 2002 1974",
-                make: "BMW",
-                model: "2002",
-                year: 1974,
-                price: "KSh 1,900,000",
-                transmission: "Manual",
-                fuel: "Petrol",
-                mileage: "—",
-                status: "Available",
-                images: [
-                    "https://images.unsplash.com/photo-1563720223197-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223198-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223199-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                ],
-                features: [
-                    "2.0L Inline-4 Engine",
-                    "Sport Sedan",
-                    "Fuel Injection",
-                    "Classic Blue Exterior",
-                    "Black Interior",
-                    "Sport Steering Wheel",
-                    "Tachometer",
-                    "Sport Suspension",
-                    "Alloy Wheels",
-                    "German Engineering"
-                ],
-                agents: [
-                    {
-                        name: "MotorPride Kenya",
-                        phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201974%20BMW%202002"
-                    }
-                ]
-            },
-            {
-                id: "chevrolet-impala-1964",
-                name: "Chevrolet Impala 1964",
-                make: "Chevrolet",
-                model: "Impala",
-                year: 1964,
-                price: "KSh 4,200,000",
+                model: "Model Name",
+                year: 2023,
+                price: "KSh 2,500,000",
                 transmission: "Automatic",
                 fuel: "Petrol",
                 mileage: "—",
                 status: "Available",
                 images: [
-                    "https://images.unsplash.com/photo-1563720223200-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223201-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1563720223202-7fb2b0b9b8a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    "image-url-1.jpg",
+                    "image-url-2.jpg",
+                    // Add more images
                 ],
                 features: [
-                    "5.3L V8 Engine",
-                    "Full-size Sedan",
-                    "Power Steering",
-                    "Classic White Exterior",
-                    "Red Interior",
-                    "Power Windows",
-                    "AM Radio",
-                    "Automatic Transmission",
-                    "Chrome Accents",
-                    "Spacious Interior"
+                    "Feature 1",
+                    "Feature 2",
+                    // Add more features
                 ],
                 agents: [
                     {
-                        name: "MotorPride Kenya",
+                        name: "Agent Name",
                         phone: "+254701234567",
-                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%201964%20Chevrolet%20Impala"
+                        whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%20Toyota%20Model"
                     }
                 ]
             }
+            */
+           
+{
+  id: "mazda-cx5-2017",
+  name: "Mazda CX-5 2.5S-L Package 2017 (AWD)",
+  make: "Mazda",
+  model: "CX-5",
+  year: 2017,
+  price: "KSh 2,950,000",
+  transmission: "Automatic",
+  fuel: "Petrol",
+  mileage: "—",
+  status: "Available",
+  images: [
+    "https://i.ibb.co/zTcSCZT9/Whats-App-Image-2025-11-04-at-4-08-35-PM.jpg",
+    "https://i.ibb.co/wfxCJ7v/Whats-App-Image-2025-11-04-at-4-08-36-PM-1.jpg",
+    "https://i.ibb.co/mrL60QZh/Whats-App-Image-2025-11-04-at-4-08-36-PM-2.jpg",
+    "https://i.ibb.co/ym6m9GFf/Whats-App-Image-2025-11-04-at-4-08-36-PM.jpg",
+    "https://i.ibb.co/8L3VjzHf/Whats-App-Image-2025-11-04-at-4-08-37-PM-1.jpg",
+    "https://i.ibb.co/CKqq70Gk/Whats-App-Image-2025-11-04-at-4-08-37-PM-2.jpg",
+    "https://i.ibb.co/n8cXzT6f/Whats-App-Image-2025-11-04-at-4-08-37-PM.jpg",
+    "https://i.ibb.co/Hf2XCR8J/Whats-App-Image-2025-11-04-at-4-08-38-PM-1.jpg",
+    "https://i.ibb.co/ymVwKrnw/Whats-App-Image-2025-11-04-at-4-08-38-PM.jpg"
+  ],
+  features: [
+    "2500cc Petrol Engine delivering power and smooth performance",
+    "All-Wheel Drive (AWD) for extra grip and stability",
+    "Stunning Wine Red exterior paired with Dark Leather upholstery for a premium look",
+    "Multifunctional Steering Wheel with Adaptive Cruise Control & Multimedia Controls",
+    "Lane Assist and Blindspot Monitoring System for enhanced safety",
+    "Side View Camera & Parking Sensors for easy maneuvering",
+    "Powered Tailgate for convenience",
+    "Front & Rear Heated Seats, Electric Handbrake with Auto Hold, and Memory Driver’s Seat for added comfort",
+    "Daytime Running Lights, Foglights, and Original Mazda Alloy Rims"
+  ],
+  agents: [
+    {
+      name: "MotorPride Kenya",
+      phone: "+254701234567",
+      whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%202017%20Mazda%20CX-5%202.5S-L%20Package%20(AWD)"
+    }
+  ]
+},
+
+
+
+{
+  id: "cx8-2019",
+  name: "Mazda CX-8 2019",
+  make: "Mazda",
+  model: "CX-8",
+  year: 2019,
+  price: "KSh 3,450,000",
+  transmission: "Automatic",
+  fuel: "Diesel",
+  mileage: "—",
+  status: "Available",
+  images: [
+    "https://i.ibb.co/prwWPMGP/Whats-App-Image-2025-11-04-at-3-34-29-PM.jpg",
+    "https://i.ibb.co/20D5smKm/Whats-App-Image-2025-11-04-at-3-34-30-PM-1.jpg",
+    "https://i.ibb.co/PzcpZkBP/Whats-App-Image-2025-11-04-at-3-34-30-PM-2.jpg",
+    "https://i.ibb.co/jkn0wNz9/Whats-App-Image-2025-11-04-at-3-34-30-PM.jpg",
+    "https://i.ibb.co/GvdTMdtR/Whats-App-Image-2025-11-04-at-3-34-31-PM-1.jpg",
+    "https://i.ibb.co/mgY2BgC/Whats-App-Image-2025-11-04-at-3-34-31-PM-2.jpg",
+    "https://i.ibb.co/k24639DY/Whats-App-Image-2025-11-04-at-3-34-31-PM.jpg",
+    "https://i.ibb.co/jvpp3wdX/Whats-App-Image-2025-11-04-at-3-34-32-PM.jpg"
+  ],
+  features: [
+    "2200cc Diesel Engine – Efficient, powerful & reliable",
+    "All-Wheel Drive (AWD) for superior control and stability",
+    "7-Seater Configuration – Spacious and family-friendly",
+    "Dark Fabric Upholstery with premium interior finish",
+    "360° Camera View for full visibility and easy parking",
+    "Heads-Up Display for an advanced driving experience",
+    "Lane Assist, Anti-Collision System, & Blindspot Monitoring for maximum safety",
+    "Multifunctional Steering Wheel with Adaptive Cruise Control & audio controls",
+    "Heated Steering Wheel & Front Heated Seats for comfort in every climate",
+    "Power Tailgate for convenience",
+    "All-Round Parking Sensors for confident maneuvering",
+    "Plus more thoughtful features throughout!"
+  ],
+  agents: [
+    {
+      name: "MotorPride Kenya",
+      phone: "+254701234567",
+      whatsapp: "https://wa.me/254701234567?text=I'm%20interested%20in%20the%202019%20Mazda%20CX-8%20(7%20Seater%20AWD)"
+    }
+  ]
+},
+
         ];
 
         // Sample agents data
@@ -1172,7 +1006,7 @@
         let currentPage = 1;
         const carsPerPage = 8;
         let currentCarIndex = 0;
-        let filteredCars = [...oldSchoolCars]; // Start with old school cars
+        let filteredCars = [...cars]; // Start with all cars
         let currentCarForReservation = null;
 
         // Initialize the page
@@ -1204,7 +1038,7 @@
 
         // Filter cars based on search criteria
         function filterCars(make, model, year, transmission, fuel) {
-            filteredCars = oldSchoolCars.filter(car => {
+            filteredCars = cars.filter(car => {
                 // Check each criteria - if provided, it must match
                 if (make && car.make !== make) return false;
                 if (model && car.model !== model) return false;
@@ -1324,10 +1158,10 @@
 
         // Clear search and show all vehicles
         function clearSearchAndShowAll() {
-            filteredCars = [...oldSchoolCars];
+            filteredCars = [...cars];
             currentPage = 1;
             searchResultsHeader.style.display = 'none';
-            pageTitle.textContent = 'Classic Car Collection';
+            pageTitle.textContent = 'Toyota Models Collection';
             displayCars();
             setupPagination();
             

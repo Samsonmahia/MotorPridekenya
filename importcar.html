@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>motorpride Vehicle Imports | Global Luxury Cars</title>
+    <title>Motorpride Vehicle Imports | Global Luxury Cars</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -32,6 +32,48 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--primary);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
         }
 
         /* Header Styles */
@@ -227,6 +269,62 @@
             color: var(--gray);
         }
 
+        /* Import Form Styles */
+        .import-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .submit-btn:hover {
+            background: #2d4a7c;
+        }
+
         /* Inventory Section */
         .inventory-filters {
             background: white;
@@ -373,6 +471,131 @@
             background: #2d4a7c;
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .vehicle-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .gallery-main {
+            grid-column: 1 / -1;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-thumb {
+            height: 80px;
+            overflow: hidden;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-thumb:hover img {
+            transform: scale(1.1);
+        }
+
+        .vehicle-specs h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .specs-list {
+            list-style: none;
+        }
+
+        .specs-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .specs-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .spec-value {
+            color: var(--gray);
+        }
+
+        .modal-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
         /* CTA Section */
         .cta-section {
             background: linear-gradient(rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
@@ -477,9 +700,17 @@
             .step {
                 margin-bottom: 30px;
             }
+            
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
             .hero-content h1 {
                 font-size: 2.5rem;
             }
@@ -501,17 +732,36 @@
                 width: 100%;
                 max-width: 300px;
             }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">Motorpride Kenya</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+        
+                <li><a href="finance.html">Financing</a></li>
+                <li><a href="insurance.html">Insurance</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <header>
         <div class="container">
             <div class="hero-content">
-                <h1>Premium Vehicle Imports</h1>
+                <h1>Import with Motorpride Kenya</h1>
                 <p>Discover exclusive vehicles from around the world with our hassle-free import service. Luxury, performance, and reliability delivered to your doorstep.</p>
-                <a href="#inventory" class="cta-button">Browse Our Inventory</a>
+                <a href="#inventory" class="cta-button">Browse Available Units</a>
             </div>
         </div>
     </header>
@@ -526,7 +776,7 @@
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-img">
-                        <img src="https://images.unsplash.com/photo-1563720223485-8d84f13a82e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Global Sourcing">
+                        <img src="https://i.ibb.co/YBCh59XV/Whats-App-Image-2025-11-05-at-11-09-22-AM.jpg" alt="Global Sourcing">
                     </div>
                     <div class="feature-content">
                         <div class="feature-icon">
@@ -538,7 +788,7 @@
                 </div>
                 <div class="feature-card">
                     <div class="feature-img">
-                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Quality Assurance">
+                        <img src="https://i.ibb.co/SXqGsq5B/Whats-App-Image-2025-11-05-at-11-09-23-AM.jpg" alt="Quality Assurance">
                     </div>
                     <div class="feature-content">
                         <div class="feature-icon">
@@ -550,7 +800,7 @@
                 </div>
                 <div class="feature-card">
                     <div class="feature-img">
-                        <img src="https://images.unsplash.com/photo-1581093458791-8a6c6b8d6e6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Transparent Pricing">
+                        <img src="https://i.ibb.co/TBk3d2HW/Whats-App-Image-2025-11-05-at-11-09-23-AM-1.jpg" alt="Transparent Pricing">
                     </div>
                     <div class="feature-content">
                         <div class="feature-icon">
@@ -593,6 +843,93 @@
                     <p>Your vehicle arrives at your chosen destination</p>
                 </div>
             </div>
+            
+            <!-- Import Request Form -->
+            <div class="import-form">
+                <h3 style="text-align: center; margin-bottom: 30px; color: var(--primary);">Request a Vehicle Import</h3>
+                <form id="importRequestForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="brand">Preferred Brand</label>
+                            <select id="brand" required>
+                                <option value="">Select Brand</option>
+                                <option value="toyota">Toyota</option>
+                                <option value="nissan">Nissan</option>
+                                <option value="bmw">BMW</option>
+                                <option value="mercedes">Mercedes-Benz</option>
+                                <option value="audi">Audi</option>
+                                <option value="honda">Honda</option>
+                                <option value="mazda">Mazda</option>
+                                <option value="subaru">Subaru</option>
+                                <option value="lexus">Lexus</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="model">Preferred Model</label>
+                            <input type="text" id="model" placeholder="e.g. Land Cruiser, X5, etc.">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="year">Preferred Year</label>
+                            <select id="year">
+                                <option value="">Any Year</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                                <option value="2017">2017</option>
+                                <option value="older">Older than 2017</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country of Origin</label>
+                            <select id="country">
+                                <option value="">Any Country</option>
+                                <option value="japan">Japan</option>
+                                <option value="germany">Germany</option>
+                                <option value="uk">United Kingdom</option>
+                                <option value="usa">USA</option>
+                                <option value="uae">UAE</option>
+                                <option value="south-africa">South Africa</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">Budget Range (KES)</label>
+                        <select id="budget">
+                            <option value="">Select Budget Range</option>
+                            <option value="1-2">1M - 2M</option>
+                            <option value="2-3">2M - 3M</option>
+                            <option value="3-5">3M - 5M</option>
+                            <option value="5-10">5M - 10M</option>
+                            <option value="10+">10M+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Requirements</label>
+                        <textarea id="message" rows="4" placeholder="Any specific features, colors, or other requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit Request</button>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -600,19 +937,34 @@
     <section id="inventory">
         <div class="container">
             <div class="section-title">
-                <h2>Featured Inventory</h2>
-                <p>Explore our selection of premium imported vehicles</p>
+                <h2>Units on Ship and on Port</h2>
+                <p>Explore our current selection of vehicles arriving soon</p>
             </div>
             
             <div class="inventory-filters">
                 <div class="filter-group">
-                    <label for="make">Make</label>
+                    <label for="make">Brand</label>
                     <select id="make">
-                        <option value="all">All Makes</option>
+                        <option value="all">All Brands</option>
                         <option value="toyota">Toyota</option>
                         <option value="nissan">Nissan</option>
                         <option value="bmw">BMW</option>
                         <option value="mercedes">Mercedes-Benz</option>
+                        <option value="honda">Honda</option>
+                        <option value="mazda">Mazda</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="model">Model</label>
+                    <select id="model-filter">
+                        <option value="all">All Models</option>
+                        <option value="landcruiser">Land Cruiser</option>
+                        <option value="prado">Prado</option>
+                        <option value="harrier">Harrier</option>
+                        <option value="premio">Premio</option>
+                        <option value="x5">X5</option>
+                        <option value="x7">X7</option>
+                        <option value="g-class">G-Class</option>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -623,6 +975,7 @@
                         <option value="sedan">Sedan</option>
                         <option value="sports">Sports Car</option>
                         <option value="luxury">Luxury</option>
+                        <option value="hatchback">Hatchback</option>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -633,30 +986,30 @@
                         <option value="germany">Germany</option>
                         <option value="uk">United Kingdom</option>
                         <option value="usa">USA</option>
+                        <option value="uae">UAE</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="price">Price Range</label>
-                    <select id="price">
-                        <option value="all">Any Price</option>
-                        <option value="low">Under $30,000</option>
-                        <option value="medium">$30,000 - $60,000</option>
-                        <option value="high">Over $60,000</option>
+                    <label for="status">Status</label>
+                    <select id="status">
+                        <option value="all">All Status</option>
+                        <option value="on-ship">On Ship</option>
+                        <option value="on-port">On Port</option>
                     </select>
                 </div>
             </div>
             
             <div class="inventory-grid">
                 <!-- Vehicle 1 -->
-                <div class="vehicle-card" data-make="toyota" data-type="suv" data-origin="japan" data-price="medium">
+                <div class="vehicle-card" data-make="toyota" data-model="landcruiser" data-type="suv" data-origin="japan" data-status="on-ship">
                     <div class="vehicle-img">
                         <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Toyota Land Cruiser">
-                        <div class="vehicle-badge">Just Arrived</div>
+                        <div class="vehicle-badge">On Ship</div>
                     </div>
                     <div class="vehicle-content">
                         <div class="vehicle-title">
                             <h3>Toyota Land Cruiser</h3>
-                            <div class="vehicle-price">$49,999</div>
+                            <div class="vehicle-price">KES 4.5M</div>
                         </div>
                         <div class="vehicle-details">
                             <span>2021 • 18,500 mi</span>
@@ -668,20 +1021,20 @@
                             <li><i class="fas fa-tachometer-alt"></i> 4WD</li>
                             <li><i class="fas fa-palette"></i> White Pearl</li>
                         </ul>
-                        <button class="vehicle-button">View Details</button>
+                        <button class="vehicle-button view-details" data-vehicle="1">View Details</button>
                     </div>
                 </div>
                 
                 <!-- Vehicle 2 -->
-                <div class="vehicle-card" data-make="nissan" data-type="sports" data-origin="japan" data-price="high">
+                <div class="vehicle-card" data-make="nissan" data-model="gtr" data-type="sports" data-origin="japan" data-status="on-port">
                     <div class="vehicle-img">
                         <img src="https://images.unsplash.com/photo-1626668893635-06ed59e08b8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nissan GT-R">
-                        <div class="vehicle-badge">Limited</div>
+                        <div class="vehicle-badge">On Port</div>
                     </div>
                     <div class="vehicle-content">
                         <div class="vehicle-title">
                             <h3>Nissan GT-R</h3>
-                            <div class="vehicle-price">$89,999</div>
+                            <div class="vehicle-price">KES 8.9M</div>
                         </div>
                         <div class="vehicle-details">
                             <span>2020 • 12,300 mi</span>
@@ -693,20 +1046,20 @@
                             <li><i class="fas fa-tachometer-alt"></i> 565 HP</li>
                             <li><i class="fas fa-palette"></i> Gun Metallic</li>
                         </ul>
-                        <button class="vehicle-button">View Details</button>
+                        <button class="vehicle-button view-details" data-vehicle="2">View Details</button>
                     </div>
                 </div>
                 
                 <!-- Vehicle 3 -->
-                <div class="vehicle-card" data-make="bmw" data-type="luxury" data-origin="germany" data-price="high">
+                <div class="vehicle-card" data-make="bmw" data-model="x5" data-type="luxury" data-origin="germany" data-status="on-ship">
                     <div class="vehicle-img">
-                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="BMW 7 Series">
-                        <div class="vehicle-badge">Luxury</div>
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="BMW X5">
+                        <div class="vehicle-badge">On Ship</div>
                     </div>
                     <div class="vehicle-content">
                         <div class="vehicle-title">
-                            <h3>BMW 740i</h3>
-                            <div class="vehicle-price">$72,500</div>
+                            <h3>BMW X5</h3>
+                            <div class="vehicle-price">KES 7.2M</div>
                         </div>
                         <div class="vehicle-details">
                             <span>2022 • 8,700 mi</span>
@@ -718,7 +1071,7 @@
                             <li><i class="fas fa-tachometer-alt"></i> 335 HP</li>
                             <li><i class="fas fa-palette"></i> Black Sapphire</li>
                         </ul>
-                        <button class="vehicle-button">View Details</button>
+                        <button class="vehicle-button view-details" data-vehicle="3">View Details</button>
                     </div>
                 </div>
             </div>
@@ -730,7 +1083,7 @@
         <div class="container">
             <h2>Can't Find What You're Looking For?</h2>
             <p>We specialize in sourcing specific vehicles upon request. Tell us your dream car and we'll find it for you.</p>
-            <a href="#contact" class="cta-button">Request a Vehicle</a>
+            <a href="#import-form" class="cta-button">Request a Vehicle</a>
         </div>
     </section>
 
@@ -739,7 +1092,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Global Auto Imports</h3>
+                    <h3>Motorpride Kenya</h3>
                     <p>Your trusted partner for premium vehicle imports from around the world. We make international car buying simple and secure.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -750,11 +1103,11 @@
                 </div>
                 <div class="footer-column">
                     <h3>Quick Links</h3>
-                    <a href="#">Home</a>
-                    <a href="#inventory">Inventory</a>
-                    <a href="#">Import Process</a>
-                    <a href="#">About Us</a>
-                    <a href="#">Contact</a>
+                    <a href="index.html">Home</a>
+                    <a href="imports.html">Vehicle Imports</a>
+                    <a href="financing.html">Financing</a>
+                    <a href="insurance.html">Insurance</a>
+                    <a href="about.html">About Us</a>
                 </div>
                 <div class="footer-column">
                     <h3>Services</h3>
@@ -766,17 +1119,149 @@
                 </div>
                 <div class="footer-column">
                     <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Import Avenue, Auto City</p>
-                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                    <p><i class="fas fa-envelope"></i> info@globalautoimports.com</p>
+                    <p><i class="fas fa-envelope"></i> motorpridekenya@gmail.com</p>
+                    <p><i class="fab fa-whatsapp"></i> +254 723 098 206 (Mahia)</p>
+                    <p><i class="fab fa-whatsapp"></i> +254 724 804 354 (Samuel)</p>
                     <p><i class="fas fa-clock"></i> Mon-Fri: 9am-6pm</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Global Auto Imports. All rights reserved.</p>
+                <p>&copy; 2023 Motorpride Kenya. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Vehicle Detail Modals -->
+    <div id="modal-1" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2>Toyota Land Cruiser 2021</h2>
+            </div>
+            <div class="modal-body">
+                <div class="vehicle-gallery">
+                    <div class="gallery-main">
+                        <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Toyota Land Cruiser">
+                    </div>
+                    <div class="gallery-thumb">
+                        <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Toyota Land Cruiser">
+                    </div>
+                    <div class="gallery-thumb">
+                        <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2064&q=80" alt="Toyota Land Cruiser Interior">
+                    </div>
+                    <div class="gallery-thumb">
+                        <img src="https://images.unsplash.com/photo-1603584159389-48d81f1d0461?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Toyota Land Cruiser Back">
+                    </div>
+                </div>
+                <div class="vehicle-specs">
+                    <h3>Vehicle Specifications</h3>
+                    <ul class="specs-list">
+                        <li><span class="spec-label">Make & Model:</span> <span class="spec-value">Toyota Land Cruiser</span></li>
+                        <li><span class="spec-label">Year:</span> <span class="spec-value">2021</span></li>
+                        <li><span class="spec-label">Mileage:</span> <span class="spec-value">18,500 miles</span></li>
+                        <li><span class="spec-label">Engine:</span> <span class="spec-value">4.5L V8 Diesel</span></li>
+                        <li><span class="spec-label">Transmission:</span> <span class="spec-value">Automatic</span></li>
+                        <li><span class="spec-label">Drive:</span> <span class="spec-value">4WD</span></li>
+                        <li><span class="spec-label">Color:</span> <span class="spec-value">White Pearl</span></li>
+                        <li><span class="spec-label">Fuel Type:</span> <span class="spec-value">Diesel</span></li>
+                        <li><span class="spec-label">Country of Origin:</span> <span class="spec-value">Japan</span></li>
+                        <li><span class="spec-label">Status:</span> <span class="spec-value">On Ship - Arriving in 3 weeks</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20the%20Toyota%20Land%20Cruiser%202021%20for%20KES%204.5M.%20Please%20provide%20more%20details." class="cta-button" target="_blank">Inquire on WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-2" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2>Nissan GT-R 2020</h2>
+            </div>
+            <div class="modal-body">
+                <div class="vehicle-gallery">
+                    <div class="gallery-main">
+                        <img src="https://images.unsplash.com/photo-1626668893635-06ed59e08b8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nissan GT-R">
+                    </div>
+                    <div class="gallery-thumb">
+                        <img src="https://images.unsplash.com/photo-1626668893635-06ed59e08b8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nissan GT-R">
+                    </div>
+                    <div class="gallery-thumb">
+                        <img src="https://images.unsplash.com/photo-1621605815976-9d2c6e04f7d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nissan GT-R Interior">
+                    </div>
+                    <div class="gallery-thumb">
+                        <img src="https://images.unsplash.com/photo-1626668893643-5c8f1ce4b911?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Nissan GT-R Back">
+                    </div>
+                </div>
+                <div class="vehicle-specs">
+                    <h3>Vehicle Specifications</h3>
+                    <ul class="specs-list">
+                        <li><span class="spec-label">Make & Model:</span> <span class="spec-value">Nissan GT-R</span></li>
+                        <li><span class="spec-label">Year:</span> <span class="spec-value">2020</span></li>
+                        <li><span class="spec-label">Mileage:</span> <span class="spec-value">12,300 miles</span></li>
+                        <li><span class="spec-label">Engine:</span> <span class="spec-value">3.8L V6 Twin-Turbo</span></li>
+                        <li><span class="spec-label">Transmission:</span> <span class="spec-value">Automatic</span></li>
+                        <li><span class="spec-label">Drive:</span> <span class="spec-value">AWD</span></li>
+                        <li><span class="spec-label">Color:</span> <span class="spec-value">Gun Metallic</span></li>
+                        <li><span class="spec-label">Fuel Type:</span> <span class="spec-value">Premium</span></li>
+                        <li><span class="spec-label">Horsepower:</span> <span class="spec-value">565 HP</span></li>
+                        <li><span class="spec-label">Country of Origin:</span> <span class="spec-value">Japan</span></li>
+                        <li><span class="spec-label">Status:</span> <span class="spec-value">On Port - Available for viewing</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20the%20Nissan%20GT-R%202020%20for%20KES%208.9M.%20Please%20provide%20more%20details." class="cta-button" target="_blank">Inquire on WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-3" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2>BMW X5 2022</h2>
+            </div>
+            <div class="modal-body">
+                <div class="vehicle-gallery">
+                    <div class="gallery-main">
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="BMW X5">
+                    </div>
+                    <div class="gallery-thumb">
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="BMW X5">
+                    </div>
+                    <div class="gallery-thumb">
+                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2083&q=80" alt="BMW X5 Interior">
+                    </div>
+                    <div class="gallery-thumb">
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="BMW X5 Back">
+                    </div>
+                </div>
+                <div class="vehicle-specs">
+                    <h3>Vehicle Specifications</h3>
+                    <ul class="specs-list">
+                        <li><span class="spec-label">Make & Model:</span> <span class="spec-value">BMW X5</span></li>
+                        <li><span class="spec-label">Year:</span> <span class="spec-value">2022</span></li>
+                        <li><span class="spec-label">Mileage:</span> <span class="spec-value">8,700 miles</span></li>
+                        <li><span class="spec-label">Engine:</span> <span class="spec-value">3.0L Inline-6 Turbo</span></li>
+                        <li><span class="spec-label">Transmission:</span> <span class="spec-value">Automatic</span></li>
+                        <li><span class="spec-label">Drive:</span> <span class="spec-value">AWD</span></li>
+                        <li><span class="spec-label">Color:</span> <span class="spec-value">Black Sapphire</span></li>
+                        <li><span class="spec-label">Fuel Type:</span> <span class="spec-value">Premium</span></li>
+                        <li><span class="spec-label">Horsepower:</span> <span class="spec-value">335 HP</span></li>
+                        <li><span class="spec-label">Country of Origin:</span> <span class="spec-value">Germany</span></li>
+                        <li><span class="spec-label">Status:</span> <span class="spec-value">On Ship - Arriving in 2 weeks</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20the%20BMW%20X5%202022%20for%20KES%207.2M.%20Please%20provide%20more%20details." class="cta-button" target="_blank">Inquire on WhatsApp</a>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Filter functionality for the inventory
@@ -790,22 +1275,25 @@
             
             function filterVehicles() {
                 const makeFilter = document.getElementById('make').value;
+                const modelFilter = document.getElementById('model-filter').value;
                 const typeFilter = document.getElementById('type').value;
                 const originFilter = document.getElementById('origin').value;
-                const priceFilter = document.getElementById('price').value;
+                const statusFilter = document.getElementById('status').value;
                 
                 vehicleCards.forEach(card => {
                     const make = card.getAttribute('data-make');
+                    const model = card.getAttribute('data-model');
                     const type = card.getAttribute('data-type');
                     const origin = card.getAttribute('data-origin');
-                    const price = card.getAttribute('data-price');
+                    const status = card.getAttribute('data-status');
                     
                     const makeMatch = makeFilter === 'all' || make === makeFilter;
+                    const modelMatch = modelFilter === 'all' || model === modelFilter;
                     const typeMatch = typeFilter === 'all' || type === typeFilter;
                     const originMatch = originFilter === 'all' || origin === originFilter;
-                    const priceMatch = priceFilter === 'all' || price === priceFilter;
+                    const statusMatch = statusFilter === 'all' || status === statusFilter;
                     
-                    if (makeMatch && typeMatch && originMatch && priceMatch) {
+                    if (makeMatch && modelMatch && typeMatch && originMatch && statusMatch) {
                         card.style.display = 'block';
                     } else {
                         card.style.display = 'none';
@@ -813,13 +1301,73 @@
                 });
             }
             
-            // Add click event to vehicle buttons
-            const vehicleButtons = document.querySelectorAll('.vehicle-button');
-            vehicleButtons.forEach(button => {
+            // Modal functionality
+            const viewButtons = document.querySelectorAll('.view-details');
+            const modals = document.querySelectorAll('.modal');
+            const closeButtons = document.querySelectorAll('.close-modal');
+            
+            viewButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const vehicleTitle = this.closest('.vehicle-card').querySelector('h3').textContent;
-                    alert(`Thank you for your interest in the ${vehicleTitle}! Our team will contact you with more details.`);
+                    const vehicleId = this.getAttribute('data-vehicle');
+                    const modal = document.getElementById(`modal-${vehicleId}`);
+                    modal.style.display = 'block';
                 });
+            });
+            
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
+                    modal.style.display = 'none';
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                modals.forEach(modal => {
+                    if (event.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Import form submission
+            const importForm = document.getElementById('importRequestForm');
+            importForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const email = document.getElementById('email').value;
+                const brand = document.getElementById('brand').value;
+                const model = document.getElementById('model').value;
+                const year = document.getElementById('year').value;
+                const country = document.getElementById('country').value;
+                const budget = document.getElementById('budget').value;
+                const message = document.getElementById('message').value;
+                
+                // Create WhatsApp message
+                let whatsappMessage = `Hello Samuel, I would like to request a vehicle import:\n\n`;
+                whatsappMessage += `Name: ${name}\n`;
+                whatsappMessage += `Phone: ${phone}\n`;
+                whatsappMessage += `Email: ${email}\n`;
+                whatsappMessage += `Preferred Brand: ${brand}\n`;
+                if (model) whatsappMessage += `Preferred Model: ${model}\n`;
+                if (year) whatsappMessage += `Preferred Year: ${year}\n`;
+                if (country) whatsappMessage += `Country of Origin: ${country}\n`;
+                if (budget) whatsappMessage += `Budget Range: ${budget}\n`;
+                if (message) whatsappMessage += `Additional Requirements: ${message}\n`;
+                
+                // Encode the message for URL
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                
+                // Open WhatsApp
+                window.open(`https://wa.me/254724804354?text=${encodedMessage}`, '_blank');
+                
+                // Reset form
+                importForm.reset();
+                
+                // Show confirmation
+                alert('Your request has been submitted! You will be redirected to WhatsApp to complete the process.');
             });
             
             // Add smooth scrolling for anchor links
@@ -837,6 +1385,16 @@
                             behavior: 'smooth'
                         });
                     }
+                });
+            });
+            
+            // Gallery thumbnail functionality
+            const galleryThumbs = document.querySelectorAll('.gallery-thumb');
+            galleryThumbs.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    const mainImg = this.closest('.vehicle-gallery').querySelector('.gallery-main img');
+                    const thumbImg = this.querySelector('img');
+                    mainImg.src = thumbImg.src;
                 });
             });
         });

@@ -890,7 +890,7 @@
             <img src="https://i.ibb.co/M5x6w0qt/Whats-App-Image-2025-06-16-at-3-50-59-PM.jpg" alt="Motorpride Kenya" class="logo">
             <div class="brand-text">
               <h1>MOTORPRIDE</h1>
-              <p>Quality Used Cars from Japan</p>
+              <p>Quality new and used cars</p>
             </div>
           </div>
         </div>
@@ -939,18 +939,20 @@
 
           </div>
         </li>
-        
-<!-- Car Brands -->
+  <!-- Car Brands -->
 <li class="dropdown">
   <a href="#" class="dropbtn">BRANDS <i class="fas fa-chevron-down"></i></a>
   <div class="dropdown-content">
-    <a href="../Toyota.html">Toyota</a>
-    <a href="../Nissan.html">Nissan</a>
-    <a href="../Mazda.html">Mazda</a>
-    <a href="../Mercedes.html">Mercedes</a>
-    <a href="../Subaru.html">Subaru</a>
+    <a href="toyota.html">Toyota</a>
+    <a href="nissan.html">Nissan</a>
+    <a href="mistubishi.html">Mistubishi</a>
+    <a href="mazda.html">Mazda</a>
+    <a href="mercedes.html">Mercedes</a>
+    <a href="suzuki.html">Suzuki</a>
+    <a href="subaru.html">Subaru</a>
   </div>
 </li>
+
 
         <!-- Loan Calculator -->
         <li><a href="../loancalculator.html">LOAN CALCULATOR</a></li>
@@ -2794,68 +2796,165 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
   </section>
+<!-- ====== MotorPride Kenya Footer ====== -->
+<footer class="main-footer">
+  <style>
+    /* Footer Styling */
+    .main-footer {
+      background: #0A1F44;
+      color: #E6E8EB;
+      padding: 60px 20px 20px;
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      border-top: 3px solid #00AEEF;
+    }
 
-  <!-- Footer -->
-  <footer class="main-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h4 class="footer-heading">About Motorpride</h4>
-          <p>Motorpride Kenya is a leading importer of quality used Japanese cars. With over 10 years of experience, we provide reliable vehicles at competitive prices.</p>
-          <div class="social-icons mt-4">
-            <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <h4 class="footer-heading">Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Customer Response</a></li>
-            <li><a href="#">Units in Stock</a></li>
-            <li><a href="#">Loan Calculator</a></li>
-          </ul>
-        </div>
-        <div class="col-md-3">
-          <h4 class="footer-heading">Popular Brands</h4>
-          <ul class="footer-links">
-            <li><a href="#">Toyota</a></li>
-            <li><a href="#">Nissan</a></li>
-            <li><a href="#">Mazda</a></li>
-            <li><a href="#">Honda</a></li>
-            <li><a href="#">Subaru</a></li>
-          </ul>
-        </div>
-        <div class="col-md-3">
-          <h4 class="footer-heading">Contact Us</h4>
-          <ul class="footer-contact">
-            <li>
-              <i class="fas fa-map-marker-alt"></i>
-              <span>kiambu Road, Nairobi, Kenya</span>
-            </li>
-            <li>
-              <i class="fas fa-phone"></i>
-              <span>+254 724804354</span>
-            </li>
-            <li>
-              <i class="fas fa-envelope"></i>
-              <span>info@motorpride.co.ke</span>
-            </li>
-            <li>
-              <i class="fas fa-clock"></i>
-              <span>Mon - Sat: 8:00 AM - 6:00 PM</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="copyright">
-        <p>&copy; 2025 Motorpride Kenya. All Rights Reserved.</p>
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-column h4 {
+      color: #00AEEF;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .footer-column h4::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: #00AEEF;
+      margin-top: 6px;
+    }
+
+    .footer-column p {
+      color: #E6E8EB;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-column ul li i {
+      color: #00AEEF;
+    }
+
+    .footer-column ul li a {
+      color: #E6E8EB;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-column ul li a:hover {
+      color: #00AEEF;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      margin-right: 10px;
+      background: #00AEEF;
+      color: #fff;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 35px;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .social-icons a:hover {
+      background: #39FF14;
+      transform: translateY(-4px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+    .footer-bottom strong {
+      color: #00AEEF;
+    }
+
+    @media (max-width: 768px) {
+      .footer-container {
+        text-align: center;
+      }
+      .social-icons a {
+        margin: 5px;
+      }
+      .footer-column ul li {
+        justify-content: center;
+      }
+    }
+  </style>
+
+  <div class="footer-container">
+    <div class="footer-column about">
+      <h4>About MotorPride</h4>
+      <p>
+        MotorPride Kenya is a trusted importer of high-quality Japanese vehicles.
+        With over 10 years of experience, we’re committed to delivering reliability,
+        transparency, and value to every customer.
+      </p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
-  </footer>
+
+    <div class="footer-column links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#customer-response">Customer Response</a></li>
+        <li><a href="#available-units">Units in Stock</a></li>
+        <li><a href="#loan-calculator">Loan Calculator</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column contact">
+      <h4>Contact Us</h4>
+      <ul>
+        <li><i class="fas fa-map-marker-alt"></i> Kiambu Road, Nairobi, Kenya</li>
+        <li><i class="fas fa-phone"></i> +254 723 098 206</li>
+        <li><i class="fas fa-envelope"></i> info@motorpride.co.ke</li>
+        <li><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 <strong>MotorPride Kenya</strong>. All Rights Reserved.</p>
+  </div>
+</footer>
+<!-- ====== End Footer ====== -->
+
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
