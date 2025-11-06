@@ -910,15 +910,59 @@
 },
 
         ];
+// Replace the agents data with the specific numbers provided
+const agents = [
+    { 
+        name: "Samuel", 
+        role: "Sales Agent", 
+        number: "+254724804354", 
+        photo: "👨🏾‍💼",
+        whatsapp: "https://wa.me/254724804354" 
+    },
+    { 
+        name: "Samson", 
+        role: "Sales Agent", 
+        number: "+254723098206", 
+        photo: "👨🏾‍💼",
+        whatsapp: "https://wa.me/254723098206" 
+    }
+];
 
-        // Sample agents data
-        const agents = [
-            { name: "John Kamau", role: "Sales Manager", number: "+254712345678", photo: "👨🏾‍💼" },
-            { name: "Sarah Wanjiku", role: "Sales Executive", number: "+254723456789", photo: "👩🏾‍💼" },
-            { name: "David Ochieng", role: "Sales Consultant", number: "+254734567890", photo: "👨🏾‍💼" },
-            { name: "Grace Akinyi", role: "Customer Relations", number: "+254745678901", photo: "👩🏾‍💼" },
-            { name: "Michael Mwangi", role: "Finance Specialist", number: "+254756789012", photo: "👨🏾‍💼" }
-        ];
+// Update the openAgentsModal function to use the specific reserve message
+function openAgentsModal(car) {
+    if (!car) return;
+    
+    currentCarForReservation = car;
+    agentsList.innerHTML = '';
+    
+    // Constant reserve message that goes directly to DM
+    const reserveMessage = `Hello, I would like to RESERVE the ${car.name} (ID: ${car.id}). Please confirm availability and reservation process.`;
+    const encodedMessage = encodeURIComponent(reserveMessage);
+    
+    // Create agent items for both Samuel and Samson
+    agents.forEach(agent => {
+        const whatsappUrl = `${agent.whatsapp}?text=${encodedMessage}`;
+        
+        const agentItem = document.createElement('div');
+        agentItem.className = 'agent-item';
+        agentItem.innerHTML = `
+            <div class="agent-photo">${agent.photo}</div>
+            <div class="agent-name">${agent.name}</div>
+            <div class="agent-role">${agent.role}</div>
+            <div class="agent-number">${agent.number}</div>
+            <a class="agent-action" href="${whatsappUrl}" target="_blank">Chat with ${agent.name}</a>
+        `;
+        agentsList.appendChild(agentItem);
+    });
+    
+    agentsModal.classList.add('active');
+}
+
+// Update the car data to use the specific agents for each car
+// This ensures the reserve functionality works with the updated agents system
+cars.forEach(car => {
+    car.agents = [0, 1]; // Reference to Samuel (0) and Samson (1) in the agents array
+});
 
         // DOM Elements
         const carsGrid = document.getElementById('carsGrid');

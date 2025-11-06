@@ -21,41 +21,45 @@
         }
         
         .testimonials-section {
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #0A1F44, #00AEEF);
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #0A1F44, #1a365d);
             color: #fff;
             width: 100%;
+            position: relative;
+            overflow: hidden;
         }
         
         .section-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
         
         .section-header h2 {
-            font-size: clamp(28px, 6vw, 42px);
+            font-size: clamp(32px, 6vw, 48px);
             margin-bottom: 15px;
             position: relative;
             display: inline-block;
+            font-weight: 700;
         }
         
         .section-header h2:after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
+            width: 100px;
+            height: 5px;
             background: linear-gradient(to right, #39FF14, #00AEEF);
-            border-radius: 2px;
+            border-radius: 3px;
         }
         
         .section-header p {
-            font-size: clamp(16px, 4vw, 20px);
+            font-size: clamp(18px, 4vw, 22px);
             color: #d0e7ff;
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 700px;
+            margin: 30px auto 0;
+            font-weight: 300;
         }
         
         /* Testimonial Carousel */
@@ -65,21 +69,24 @@
             position: relative;
             overflow: hidden;
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .testimonial-track {
             display: flex;
-            transition: transform 0.6s ease-in-out;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         .testimonial-slide {
             flex: 0 0 100%;
-            padding: 40px 20px;
+            padding: 50px 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 500px;
+            min-height: 600px;
         }
         
         /* Testimonial Content */
@@ -89,46 +96,49 @@
             align-items: center;
             text-align: center;
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
         }
         
         .customer-info {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             width: 100%;
         }
         
         .customer-avatar {
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            border: 4px solid #fff;
+            border: 5px solid #fff;
             object-fit: cover;
-            margin-bottom: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
         }
         
         .customer-avatar:hover {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
             border-color: #39FF14;
         }
         
         .customer-name {
-            font-size: clamp(20px, 5vw, 26px);
-            margin-bottom: 5px;
-            font-weight: 600;
+            font-size: clamp(24px, 5vw, 30px);
+            margin-bottom: 8px;
+            font-weight: 700;
             transition: color 0.3s ease;
         }
         
         .customer-role {
-            font-size: clamp(14px, 3.5vw, 18px);
+            font-size: clamp(16px, 3.5vw, 20px);
             color: #d0e7ff;
             margin-bottom: 15px;
             transition: color 0.3s ease;
+            font-weight: 400;
         }
         
         /* Car and Comment Layout */
@@ -136,32 +146,32 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            gap: 30px;
+            gap: 40px;
         }
         
         .car-image-container {
             flex: 1;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
             position: relative;
-            transition: all 0.4s ease;
+            transition: all 0.5s ease;
         }
         
         .car-image-container:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
         
         .car-image {
             width: 100%;
-            height: 250px;
+            height: 280px;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.7s ease;
         }
         
         .car-image:hover {
-            transform: scale(1.08);
+            transform: scale(1.1);
         }
         
         .car-info {
@@ -169,78 +179,82 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(10,31,68,0.85);
-            padding: 15px;
+            background: linear-gradient(to top, rgba(10,31,68,0.95), transparent);
+            padding: 20px;
             color: white;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         
         .car-image-container:hover .car-info {
-            background: rgba(57,255,20,0.85);
+            background: linear-gradient(to top, rgba(57,255,20,0.85), transparent);
         }
         
         .car-model {
-            font-size: clamp(18px, 4.5vw, 22px);
-            font-weight: 600;
-            margin-bottom: 5px;
+            font-size: clamp(20px, 4.5vw, 26px);
+            font-weight: 700;
+            margin-bottom: 8px;
         }
         
         .car-specs {
-            font-size: clamp(14px, 3.5vw, 16px);
+            font-size: clamp(16px, 3.5vw, 18px);
             opacity: 0.9;
         }
         
         .customer-comment {
             flex: 1;
             background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 25px;
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 35px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.4s ease;
+            transition: all 0.5s ease;
             position: relative;
         }
         
         .customer-comment:hover {
             background: rgba(255,255,255,0.15);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
             border-color: rgba(57,255,20,0.5);
         }
         
         .comment-text {
-            font-size: clamp(16px, 4vw, 20px);
-            line-height: 1.7;
-            margin-bottom: 20px;
+            font-size: clamp(18px, 4vw, 22px);
+            line-height: 1.8;
+            margin-bottom: 25px;
             font-style: italic;
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
         
         .customer-comment:hover .comment-text {
             color: #fff;
         }
         
-        .comment-text:before {
-            content: """;
-            font-size: 60px;
-            color: rgba(255,255,255,0.3);
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            font-family: Georgia, serif;
-            transition: color 0.3s ease;
-        }
+       .comment-text:before {
+    content: "“";
+    font-size: 80px;
+    color: rgba(255,255,255,0.2);
+    position: absolute;
+    top: -30px;
+    left: 10px;
+    font-family: Georgia, serif;
+    transition: color 0.3s ease;
+    z-index: -1;
+}
+
         
         .customer-comment:hover .comment-text:before {
-            color: rgba(57,255,20,0.5);
+            color: rgba(57,255,20,0.3);
         }
         
         .comment-rating {
             display: flex;
-            gap: 5px;
+            gap: 8px;
             justify-content: center;
             transition: all 0.3s ease;
         }
@@ -251,54 +265,55 @@
         
         .rating-star {
             color: #FFD700;
-            font-size: 20px;
+            font-size: 24px;
             transition: transform 0.3s ease;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         
         .rating-star:hover {
-            transform: scale(1.3);
+            transform: scale(1.4);
         }
         
         /* Carousel Controls */
         .carousel-controls {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
+            gap: 20px;
+            margin-top: 40px;
         }
         
         .carousel-btn {
             background: rgba(255,255,255,0.9);
             color: #0A1F44;
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 22px;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         
         .carousel-btn:hover {
             background: #39FF14;
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 8px 20px rgba(57,255,20,0.4);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 12px 25px rgba(57,255,20,0.4);
         }
         
         .carousel-dots {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 25px;
         }
         
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: rgba(255,255,255,0.4);
             cursor: pointer;
@@ -307,85 +322,91 @@
         
         .dot.active {
             background: #39FF14;
-            transform: scale(1.2);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(57,255,20,0.7);
         }
         
         .dot:hover {
             background: #39FF14;
-            transform: scale(1.3);
+            transform: scale(1.4);
         }
         
         /* Auto-slide progress bar */
         .progress-bar {
-            height: 4px;
+            height: 6px;
             background: rgba(255,255,255,0.3);
             width: 100%;
-            margin-top: 20px;
-            border-radius: 2px;
+            margin-top: 25px;
+            border-radius: 3px;
             overflow: hidden;
         }
         
         .progress-fill {
             height: 100%;
-            background: #39FF14;
+            background: linear-gradient(to right, #39FF14, #00AEEF);
             width: 0%;
             transition: width 0.1s linear;
-            border-radius: 2px;
+            border-radius: 3px;
         }
         
-        /* Responsive Design */
-        @media (min-width: 768px) {
-            .testimonial-slide {
-                padding: 50px 40px;
-            }
-            
-            .testimonial-details {
-                flex-direction: row;
-                align-items: center;
-            }
-            
-            .customer-info {
-                margin-bottom: 40px;
-            }
-            
-            .customer-avatar {
-                width: 140px;
-                height: 140px;
-            }
-            
-            .car-image {
-                height: 300px;
-            }
+        /* WhatsApp Form Section */
+        .whatsapp-form-section {
+            max-width: 800px;
+            margin: 80px auto 0;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            text-align: center;
         }
         
-        @media (max-width: 767px) {
-            .testimonial-slide {
-                padding: 30px 15px;
-                min-height: auto;
-            }
-            
-            .customer-avatar {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .car-image {
-                height: 200px;
-            }
-            
-            .customer-comment {
-                padding: 20px;
-            }
+        .whatsapp-form-section h3 {
+            font-size: clamp(24px, 5vw, 32px);
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .whatsapp-form-section p {
+            font-size: clamp(16px, 4vw, 20px);
+            color: #d0e7ff;
+            margin-bottom: 30px;
+        }
+        
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #25D366;
+            color: white;
+            padding: 18px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(37,211,102,0.3);
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(37,211,102,0.4);
+        }
+        
+        .whatsapp-btn i {
+            margin-right: 12px;
+            font-size: 24px;
         }
         
         /* Animation */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         .testimonial-slide {
-            animation: fadeIn 0.8s ease;
+            animation: fadeIn 1s ease;
         }
         
         /* Hover effects for the entire slide */
@@ -396,6 +417,67 @@
         .testimonial-slide:hover .customer-role {
             color: #fff;
         }
+        
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .testimonial-slide {
+                padding: 60px 50px;
+            }
+            
+            .testimonial-details {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .customer-info {
+                margin-bottom: 50px;
+            }
+            
+            .customer-avatar {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .car-image {
+                height: 320px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .testimonial-slide {
+                padding: 40px 20px;
+                min-height: auto;
+            }
+            
+            .customer-avatar {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .car-image {
+                height: 220px;
+            }
+            
+            .customer-comment {
+                padding: 25px;
+            }
+            
+            .whatsapp-form-section {
+                padding: 30px 20px;
+            }
+        }
+        
+        /* Decorative Elements */
+        .testimonials-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%2339FF14" opacity="0.03"><circle cx="20" cy="20" r="5"/><circle cx="80" cy="40" r="8"/><circle cx="40" cy="80" r="6"/><circle cx="70" cy="20" r="4"/><circle cx="90" cy="70" r="7"/></svg>');
+            z-index: 0;
+        }
     </style>
 </head>
 <body>
@@ -403,7 +485,7 @@
     <section class="testimonials-section">
         <div class="section-header">
             <h2>💬 What Our Customers Say</h2>
-            <p>Real feedback from our happy clients</p>
+            <p>Real feedback from our happy clients who found their perfect vehicles with us</p>
         </div>
         
         <div class="testimonial-carousel">
@@ -412,22 +494,24 @@
                 <div class="testimonial-slide">
                     <div class="testimonial-content">
                         <div class="customer-info">
-                            <img src="https://i.ibb.co/MyztSZgH/Whats-App-Image-2025-07-12-at-11-09-15-AM-Copy.jpg" alt="Samuel Mahia" class="customer-avatar">
-                            <h3 class="customer-name">Samuel Mahia</h3>
-                            <p class="customer-role">Business Owner</p>
+                            <img src="https://i.ibb.co/fdZC7n9t/Whats-App-Image-2025-11-06-at-9-41-03-AM.jpg
+" alt="Samuel Mahia" class="customer-avatar">
+                            <h3 class="customer-name">Mr Musau </h3>
+                            <p class="customer-role">Business man</p>
                         </div>
                         
                         <div class="testimonial-details">
                             <div class="car-image-container">
-                                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Toyota Ractis" class="car-image">
+                                <img src="https://i.ibb.co/LX6LNppq/Whats-App-Image-2025-11-06-at-9-49-50-AM.jpg
+" alt="Toyota wish" class="car-image">
                                 <div class="car-info">
-                                    <div class="car-model">Toyota Ractis</div>
+                                    <div class="car-model">Toyota wish</div>
                                     <div class="car-specs">2016 • Automatic • 1500cc</div>
                                 </div>
                             </div>
                             
                             <div class="customer-comment">
-                                <p class="comment-text">"MotorPride helped me get my dream car through their flexible loan options. The process was smooth and transparent. Highly recommended!"</p>
+                                <p class="comment-text">MotorPride helped me get my dream car through their sales  options. The process was smooth and transparent. Highly recommended!</p>
                                 <div class="comment-rating">
                                     <i class="fas fa-star rating-star"></i>
                                     <i class="fas fa-star rating-star"></i>
@@ -587,6 +671,15 @@
             <!-- Carousel Dots -->
             <div class="carousel-dots" id="carouselDots"></div>
         </div>
+        
+        <!-- WhatsApp Form Section -->
+        <div class="whatsapp-form-section">
+            <h3>Share Your Experience</h3>
+            <p>Have you purchased a vehicle from us? Share your experience and help others make the right choice!</p>
+            <a href="https://wa.me/254724804354?text=Hello%20MotorPride%20Kenya,%20I%20would%20like%20to%20share%20my%20experience%20with%20your%20services." class="whatsapp-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> Share Your Testimonial via WhatsApp
+            </a>
+        </div>
     </section>
 
     <script>
@@ -644,7 +737,7 @@
                 updateCarousel();
             }
             
-            // Auto slide progress bar
+            // Auto slide progress bar (30 seconds)
             function startProgressBar() {
                 let width = 0;
                 clearInterval(progressInterval);
@@ -655,10 +748,10 @@
                         nextSlide();
                         startProgressBar();
                     } else if (!isPaused) {
-                        width += 100 / (3000 / 50); // 3 seconds total, update every 50ms
+                        width += 100 / (30000 / 100); // 30 seconds total, update every 100ms
                         progressFill.style.width = width + '%';
                     }
-                }, 50);
+                }, 100);
             }
             
             function resetProgressBar() {
@@ -678,7 +771,7 @@
             
             // Auto-advance slides every 30 seconds
             function startAutoSlide() {
-                slideInterval = setInterval(nextSlide, 3000);
+                slideInterval = setInterval(nextSlide, 30000);
             }
             
             function resetAutoSlide() {
