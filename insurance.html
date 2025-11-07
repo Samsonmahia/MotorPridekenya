@@ -350,6 +350,243 @@
             transform: scale(1.05);
         }
 
+        /* Quote Form Modal */
+        .quote-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            margin: 50px auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .form-section h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-section h3 i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        .upload-section {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .upload-instructions {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .file-input-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-label {
+            display: block;
+            padding: 12px 15px;
+            background: white;
+            border: 1px dashed #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-label:hover {
+            border-color: var(--primary);
+            background: #f0f7ff;
+        }
+
+        .file-label i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+
+        .file-list {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .declaration {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .declaration-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .declaration-checkbox input {
+            margin-top: 3px;
+        }
+
+        .declaration-text {
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
+            font-size: 1rem;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-email {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-whatsapp:hover {
+            background: #1da851;
+        }
+
+        .btn-email:hover {
+            background: #2d4a7c;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .welcome-quote {
@@ -385,6 +622,18 @@
             .contact-section {
                 border-top-left-radius: 30px;
                 border-top-right-radius: 30px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                margin: 20px auto;
             }
         }
     </style>
@@ -437,7 +686,7 @@
                             <li><i class="fas fa-check-circle"></i> Personal accident cover for driver</li>
                             <li><i class="fas fa-check-circle"></i> 24/7 roadside assistance</li>
                         </ul>
-                        <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20the%20Comprehensive%20Insurance%20cover%20for%20my%20vehicle.%20Please%20provide%20more%20details." class="insurance-button" target="_blank">Get Quote</a>
+                        <button class="insurance-button get-quote-btn" data-insurance-type="Comprehensive Insurance">Get Quote</button>
                     </div>
                 </div>
 
@@ -465,7 +714,7 @@
                             <li><i class="fas fa-check-circle"></i> Quick and easy renewal process</li>
                             <li><i class="fas fa-check-circle"></i> Nationwide acceptance and validity</li>
                         </ul>
-                        <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20the%203rd%20Party%20Annual%20Insurance%20cover%20for%20my%20vehicle.%20Please%20provide%20more%20details." class="insurance-button" target="_blank">Get Quote</a>
+                        <button class="insurance-button get-quote-btn" data-insurance-type="3rd Party Insurance (Annual)">Get Quote</button>
                     </div>
                 </div>
 
@@ -493,7 +742,7 @@
                             <li><i class="fas fa-check-circle"></i> Automatic renewal reminders</li>
                             <li><i class="fas fa-check-circle"></i> No long-term commitment required</li>
                         </ul>
-                        <a href="https://wa.me/254724804354?text=Hello%20Samuel,%20I%20am%20interested%20in%20the%203rd%20Party%20Monthly%20Insurance%20cover%20for%20my%20vehicle.%20Please%20provide%20more%20details." class="insurance-button" target="_blank">Get Quote</a>
+                        <button class="insurance-button get-quote-btn" data-insurance-type="3rd Party Insurance (Monthly)">Get Quote</button>
                     </div>
                 </div>
             </div>
@@ -548,12 +797,396 @@
         </div>
     </section>
 
+    <!-- Quote Form Modal -->
+    <div class="quote-modal" id="quoteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Get Insurance Quote</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="form-container">
+                <form id="quoteForm">
+                    <input type="hidden" id="insuranceType" name="insuranceType">
+                    
+                    <!-- Personal Details Section -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-user"></i> Personal Details</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="idNumber">ID Number</label>
+                                <input type="text" id="idNumber" class="form-control" placeholder="Enter your ID number" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="kraPin">KRA PIN</label>
+                            <input type="text" id="kraPin" class="form-control" placeholder="Enter your KRA PIN" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Vehicle Information Section -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-car"></i> Vehicle Information</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="carMake">Car Make</label>
+                                <input type="text" id="carMake" class="form-control" placeholder="e.g., Toyota" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="carModel">Car Model</label>
+                                <input type="text" id="carModel" class="form-control" placeholder="e.g., Premio" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="yearOfManufacture">Year of Manufacture</label>
+                                <input type="number" id="yearOfManufacture" class="form-control" placeholder="e.g., 2018" min="1990" max="2025" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="registrationNumber">Registration Number</label>
+                                <input type="text" id="registrationNumber" class="form-control" placeholder="e.g., KDJ 456L" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="chassisNumber">Chassis Number</label>
+                                <input type="text" id="chassisNumber" class="form-control" placeholder="e.g., XYZ123456789" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="engineCapacity">Engine Capacity (CC)</label>
+                                <input type="number" id="engineCapacity" class="form-control" placeholder="e.g., 1800" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fuelType">Fuel Type</label>
+                                <select id="fuelType" class="form-control" required>
+                                    <option value="">Select Fuel Type</option>
+                                    <option value="Petrol">Petrol</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Hybrid">Hybrid</option>
+                                    <option value="Electric">Electric</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="estimatedValue">Estimated Value (Ksh)</label>
+                                <input type="number" id="estimatedValue" class="form-control" placeholder="e.g., 2,300,000" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="vehicleUsage">Vehicle Usage</label>
+                            <select id="vehicleUsage" class="form-control" required>
+                                <option value="">Select Vehicle Usage</option>
+                                <option value="Private">Private</option>
+                                <option value="Commercial">Commercial</option>
+                                <option value="PSV">PSV</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Insurance Details Section -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-file-contract"></i> Insurance Details</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="insuranceTypeSelect">Type of Insurance</label>
+                                <select id="insuranceTypeSelect" class="form-control" required>
+                                    <option value="">Select Insurance Type</option>
+                                    <option value="Comprehensive">Comprehensive</option>
+                                    <option value="Third Party Only">Third Party Only</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="preferredStartDate">Preferred Start Date</label>
+                                <input type="date" id="preferredStartDate" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="previousInsurance">Previous Insurance Company (if any)</label>
+                                <input type="text" id="previousInsurance" class="form-control" placeholder="e.g., Jubilee Insurance">
+                            </div>
+                            <div class="form-group">
+                                <label for="claimsLastYear">Claims in Last 12 Months</label>
+                                <select id="claimsLastYear" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="accidentsCount">No. of Accidents / Losses</label>
+                            <input type="number" id="accidentsCount" class="form-control" placeholder="e.g., 0" min="0" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Upload Section -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-upload"></i> Upload Section</h3>
+                        
+                        <div class="upload-section">
+                            <p class="upload-instructions">
+                                📸 Attach Images: Upload front, back, and side photos of the vehicle
+                            </p>
+                            <div class="file-input-container">
+                                <input type="file" id="vehicleImages" class="file-input" multiple accept="image/*">
+                                <label for="vehicleImages" class="file-label">
+                                    <i class="fas fa-images"></i> Select Vehicle Images (Up to 5 files)
+                                </label>
+                            </div>
+                            <div class="file-list" id="vehicleImagesList"></div>
+                        </div>
+                        
+                        <div class="upload-section" style="margin-top: 20px;">
+                            <p class="upload-instructions">
+                                📎 Upload logbook scan or copy (Attach up to 5 files)
+                            </p>
+                            <div class="file-input-container">
+                                <input type="file" id="logbookFiles" class="file-input" multiple accept=".pdf,.jpg,.jpeg,.png">
+                                <label for="logbookFiles" class="file-label">
+                                    <i class="fas fa-file-pdf"></i> Select Logbook Files (Up to 5 files)
+                                </label>
+                            </div>
+                            <div class="file-list" id="logbookFilesList"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Declaration Section -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-check-circle"></i> Declaration</h3>
+                        
+                        <div class="declaration">
+                            <div class="declaration-checkbox">
+                                <input type="checkbox" id="declaration" required>
+                                <label for="declaration" class="declaration-text">
+                                    I confirm that the details provided above are true to the best of my knowledge and I agree to the terms and conditions of MotorPride Kenya Insurance.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Form Buttons -->
+                    <div class="form-buttons">
+                        <button type="button" class="btn btn-whatsapp" id="sendWhatsApp">
+                            <i class="fab fa-whatsapp"></i> Send via WhatsApp
+                        </button>
+                        <button type="button" class="btn btn-email" id="sendEmail">
+                            <i class="fas fa-envelope"></i> Send via Email
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Add interactivity to insurance cards
         document.addEventListener('DOMContentLoaded', function() {
-            const insuranceCards = document.querySelectorAll('.insurance-card');
+            // Modal elements
+            const quoteModal = document.getElementById('quoteModal');
+            const closeModalBtn = document.getElementById('closeModal');
+            const getQuoteBtns = document.querySelectorAll('.get-quote-btn');
+            const insuranceTypeInput = document.getElementById('insuranceType');
+            const insuranceTypeSelect = document.getElementById('insuranceTypeSelect');
+            const sendWhatsAppBtn = document.getElementById('sendWhatsApp');
+            const sendEmailBtn = document.getElementById('sendEmail');
+            const vehicleImagesInput = document.getElementById('vehicleImages');
+            const logbookFilesInput = document.getElementById('logbookFiles');
+            const vehicleImagesList = document.getElementById('vehicleImagesList');
+            const logbookFilesList = document.getElementById('logbookFilesList');
             
-            // Add animation on scroll
+            // File input handlers
+            vehicleImagesInput.addEventListener('change', function() {
+                updateFileList(this, vehicleImagesList);
+            });
+            
+            logbookFilesInput.addEventListener('change', function() {
+                updateFileList(this, logbookFilesList);
+            });
+            
+            function updateFileList(input, listElement) {
+                const files = input.files;
+                listElement.innerHTML = '';
+                
+                if (files.length > 0) {
+                    let fileList = '<strong>Selected files:</strong><br>';
+                    for (let i = 0; i < files.length; i++) {
+                        fileList += `• ${files[i].name}<br>`;
+                    }
+                    listElement.innerHTML = fileList;
+                }
+            }
+            
+            // Open modal when Get Quote button is clicked
+            getQuoteBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const insuranceType = this.getAttribute('data-insurance-type');
+                    insuranceTypeInput.value = insuranceType;
+                    
+                    // Set the insurance type in the dropdown
+                    if (insuranceType.includes('Comprehensive')) {
+                        insuranceTypeSelect.value = 'Comprehensive';
+                    } else {
+                        insuranceTypeSelect.value = 'Third Party Only';
+                    }
+                    
+                    quoteModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                });
+            });
+            
+            // Close modal
+            closeModalBtn.addEventListener('click', function() {
+                quoteModal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === quoteModal) {
+                    quoteModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Send via WhatsApp
+            sendWhatsAppBtn.addEventListener('click', function() {
+                if (!validateForm()) return;
+                
+                const message = generateMessage();
+                const phoneNumber = '254724804354';
+                
+                // Create a more detailed instruction
+                const fullMessage = `${message}
+
+📎 FILE ATTACHMENT REMINDER:
+Please remember to ATTACH the following files in this WhatsApp chat:
+1. Vehicle photos (front, back, sides)
+2. Logbook copy/scans
+
+Simply tap the 📎 attachment icon in WhatsApp and select the files from your device.
+
+Thank you!`;
+                
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(fullMessage)}`;
+                
+                // Show reminder alert
+                alert('IMPORTANT: After WhatsApp opens, please remember to ATTACH your vehicle photos and logbook files using the attachment icon (📎) before sending the message.');
+                
+                window.open(whatsappUrl, '_blank');
+            });
+            
+            // Send via Email
+            sendEmailBtn.addEventListener('click', function() {
+                if (!validateForm()) return;
+                
+                // Since we can't automatically attach files in email from browser,
+                // we'll create a detailed email with instructions
+                const subject = `Insurance Quote Request - ${document.getElementById('carMake').value} ${document.getElementById('carModel').value}`;
+                const body = generateMessage() + `
+
+IMPORTANT: Please reply to this email and attach the following files:
+1. Vehicle photos (front, back, sides)
+2. Logbook copy/scans
+
+Thank you for choosing MotorPride Kenya Insurance Services.`;
+                
+                const email = 'motorpridekenya@gmail.com';
+                
+                const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                window.location.href = mailtoUrl;
+            });
+            
+            // Form validation
+            function validateForm() {
+                const form = document.getElementById('quoteForm');
+                if (!form.checkValidity()) {
+                    alert('Please fill in all required fields correctly.');
+                    return false;
+                }
+                
+                if (!document.getElementById('declaration').checked) {
+                    alert('Please agree to the declaration to proceed.');
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            // Generate message from form data
+            function generateMessage() {
+                const formData = {
+                    insuranceType: document.getElementById('insuranceType').value,
+                    fullName: document.getElementById('fullName').value,
+                    idNumber: document.getElementById('idNumber').value,
+                    kraPin: document.getElementById('kraPin').value,
+                    carMake: document.getElementById('carMake').value,
+                    carModel: document.getElementById('carModel').value,
+                    yearOfManufacture: document.getElementById('yearOfManufacture').value,
+                    registrationNumber: document.getElementById('registrationNumber').value,
+                    chassisNumber: document.getElementById('chassisNumber').value,
+                    engineCapacity: document.getElementById('engineCapacity').value,
+                    fuelType: document.getElementById('fuelType').value,
+                    estimatedValue: document.getElementById('estimatedValue').value,
+                    vehicleUsage: document.getElementById('vehicleUsage').value,
+                    insuranceTypeSelect: document.getElementById('insuranceTypeSelect').value,
+                    preferredStartDate: document.getElementById('preferredStartDate').value,
+                    previousInsurance: document.getElementById('previousInsurance').value,
+                    claimsLastYear: document.getElementById('claimsLastYear').value,
+                    accidentsCount: document.getElementById('accidentsCount').value
+                };
+                
+                return `Hello MotorPride Kenya,
+
+I would like to request an insurance quote with the following details:
+
+*PERSONAL DETAILS*
+• Full Name: ${formData.fullName}
+• ID Number: ${formData.idNumber}
+• KRA PIN: ${formData.kraPin}
+
+*INSURANCE TYPE*
+${formData.insuranceType}
+
+*VEHICLE INFORMATION*
+• Car Make: ${formData.carMake}
+• Car Model: ${formData.carModel}
+• Year of Manufacture: ${formData.yearOfManufacture}
+• Registration Number: ${formData.registrationNumber}
+• Chassis Number: ${formData.chassisNumber}
+• Engine Capacity: ${formData.engineCapacity} CC
+• Fuel Type: ${formData.fuelType}
+• Estimated Value: Ksh ${formData.estimatedValue}
+• Vehicle Usage: ${formData.vehicleUsage}
+
+*INSURANCE DETAILS*
+• Type of Insurance: ${formData.insuranceTypeSelect}
+• Preferred Start Date: ${formData.preferredStartDate}
+• Previous Insurance Company: ${formData.previousInsurance || 'N/A'}
+• Claims in Last 12 Months: ${formData.claimsLastYear}
+• No. of Accidents/Losses: ${formData.accidentsCount}
+
+I confirm that the details provided are true to the best of my knowledge.
+
+Thank you.`;
+            }
+            
+            // Add animation on scroll for insurance cards
+            const insuranceCards = document.querySelectorAll('.insurance-card');
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
