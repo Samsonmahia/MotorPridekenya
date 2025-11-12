@@ -1,762 +1,546 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - MotorPride Kenya</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary-color: #1a73e8;
-            --primary-dark: #0d5bb9;
-            --secondary-color: #f8f9fa;
-            --accent-color: #ff6b35;
-            --text-color: #333;
-            --light-text: #666;
-            --border-color: #e0e0e0;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
-            --transition: all 0.3s ease;
-        }
-
-        body {
-            background-color: #f5f5f5;
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* About Us Section Styles */
-        .about-us {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-        }
-
-        .about-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .about-header h1 {
-            font-size: 2.8rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-weight: 700;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease forwards;
-        }
-
-        .about-header .lead {
-            font-size: 1.3rem;
-            color: var(--light-text);
-            max-width: 700px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease 0.3s forwards;
-        }
-
-        .accent-line {
-            height: 4px;
-            width: 80px;
-            background: var(--accent-color);
-            margin: 20px auto;
-            border-radius: 2px;
-            opacity: 0;
-            transform: scaleX(0);
-            animation: growWidth 0.8s ease 0.6s forwards;
-        }
-
-        /* Company Overview */
-        .company-overview {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 5rem;
-            align-items: center;
-        }
-
-        .overview-content h2 {
-            color: var(--text-color);
-            margin-bottom: 1.5rem;
-            font-size: 2.2rem;
-            font-weight: 600;
-            opacity: 0;
-            transform: translateX(-30px);
-            animation: fadeInLeft 0.8s ease 0.8s forwards;
-        }
-
-        .overview-content p {
-            color: var(--light-text);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .overview-content p:nth-child(2) {
-            animation: fadeInUp 0.8s ease 1s forwards;
-        }
-        
-        .overview-content p:nth-child(3) {
-            animation: fadeInUp 0.8s ease 1.2s forwards;
-        }
-        
-        .overview-content p:nth-child(4) {
-            animation: fadeInUp 0.8s ease 1.4s forwards;
-        }
-
-        .overview-image {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            opacity: 0;
-            transform: translateX(30px);
-            animation: fadeInRight 0.8s ease 1s forwards;
-        }
-
-        .overview-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .overview-image:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Stats Section */
-        .stats-section {
-            background: var(--primary-color);
-            color: white;
-            padding: 4rem 0;
-            border-radius: 10px;
-            margin-bottom: 5rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease 1.6s forwards;
-        }
-
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .stat-item .number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item .label {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        /* Mission & Vision */
-        .mission-vision {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 5rem;
-        }
-
-        .mv-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: var(--transition);
-        }
-
-        .mv-card:nth-child(1) {
-            animation: fadeInUp 0.8s ease 1.8s forwards;
-        }
-        
-        .mv-card:nth-child(2) {
-            animation: fadeInUp 0.8s ease 2s forwards;
-        }
-
-        .mv-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .mv-card h3 {
-            color: var(--text-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .mv-card p {
-            color: var(--light-text);
-            line-height: 1.7;
-        }
-
-        .mv-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            transition: var(--transition);
-        }
-
-        .mv-card:hover .mv-icon {
-            transform: scale(1.2);
-            color: var(--accent-color);
-        }
-
-        /* Why Choose Us */
-        .why-choose {
-            margin-bottom: 5rem;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 2.2s forwards;
-        }
-
-        .section-title h2 {
-            color: var(--text-color);
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .section-title p {
-            color: var(--light-text);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .feature-item {
-            text-align: center;
-            padding: 2rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: var(--transition);
-        }
-
-        .feature-item:nth-child(1) {
-            animation: fadeInUp 0.8s ease 2.4s forwards;
-        }
-        
-        .feature-item:nth-child(2) {
-            animation: fadeInUp 0.8s ease 2.6s forwards;
-        }
-        
-        .feature-item:nth-child(3) {
-            animation: fadeInUp 0.8s ease 2.8s forwards;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            transition: var(--transition);
-        }
-
-        .feature-item:hover .feature-icon {
-            transform: scale(1.2) rotate(5deg);
-            color: var(--accent-color);
-        }
-
-        .feature-item h4 {
-            color: var(--text-color);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .feature-item p {
-            color: var(--light-text);
-            line-height: 1.6;
-        }
-
-        /* Team Section */
-        .team-section {
-            margin-bottom: 5rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease 3s forwards;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .team-member {
-            text-align: center;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .team-member:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .member-image {
-            height: 250px;
-            background-color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light-text);
-            font-size: 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .member-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .team-member:hover .member-image img {
-            transform: scale(1.1);
-        }
-
-        .member-info {
-            padding: 1.5rem;
-        }
-
-        .member-name {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-        }
-
-        .member-role {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .member-bio {
-            color: var(--light-text);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: #25D366;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .whatsapp-btn:hover {
-            background: #1EBE57;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(37, 211, 102, 0.3);
-        }
-
-        .whatsapp-btn i {
-            margin-right: 6px;
-            font-size: 1.1rem;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: var(--primary-color);
-            color: white;
-            padding: 4rem 2rem;
-            border-radius: 10px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease 3.2s forwards;
-        }
-
-        .cta-content h2 {
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .cta-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: var(--accent-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #e55a2b;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-
-        /* Animation Keyframes */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes growWidth {
-            from {
-                opacity: 0;
-                transform: scaleX(0);
-            }
-            to {
-                opacity: 1;
-                transform: scaleX(1);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .features-grid, .team-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .company-overview, .mission-vision {
-                grid-template-columns: 1fr;
-            }
-            
-            .features-grid, .team-grid, .stats-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 200px;
-                text-align: center;
-            }
-            
-            .about-header h1 {
-                font-size: 2.2rem;
-            }
-            
-            .overview-content h2, .section-title h2, .cta-content h2 {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MotorPride Kenya | About Us</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    :root {
+      --primary-color: #1a73e8;
+      --primary-dark: #0d5bb9;
+      --secondary-color: #f8f9fa;
+      --accent-color: #ff6b35;
+      --text-color: #333;
+      --light-text: #666;
+      --border-color: #e0e0e0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Section Header */
+    .about-header {
+      text-align: center;
+      padding-top: 70px;
+      margin-bottom: 50px;
+      animation: fadeDown 1s ease;
+    }
+
+    .about-header h1 {
+      font-size: 2.8rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .accent-line {
+      height: 4px;
+      width: 80px;
+      background: var(--accent-color);
+      margin: 10px auto 20px;
+      border-radius: 2px;
+    }
+
+    .about-header .lead {
+      font-size: 1.3rem;
+      color: var(--light-text);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Who We Are */
+    .company-overview {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .overview-content {
+      animation: slideUp 1.5s ease forwards;
+      opacity: 0;
+    }
+
+    .overview-content h2 {
+      color: var(--text-color);
+      margin-bottom: 1.5rem;
+      font-size: 2.2rem;
+      font-weight: 600;
+    }
+
+    .overview-content p {
+      color: var(--light-text);
+      line-height: 1.7;
+      margin-bottom: 1.3rem;
+      animation: fadeInText 3s ease forwards;
+    }
+
+    .overview-image {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.95);
+      opacity: 0;
+      animation: zoomIn 1.5s ease forwards 0.3s;
+    }
+
+    .overview-image img {
+      width: 100%;
+      display: block;
+      transition: 0.5s;
+    }
+
+    .overview-image img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Values Section */
+    .values-section {
+      margin-bottom: 80px;
+    }
+
+    .values-section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      color: var(--text-color);
+      margin-bottom: 3rem;
+      font-weight: 600;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .value-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: floatUp 1.2s ease forwards;
+    }
+
+    .value-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .value-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1.2rem;
+    }
+
+    .value-card h3 {
+      color: var(--text-color);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .value-card p {
+      color: var(--light-text);
+      line-height: 1.7;
+    }
+
+    /* Mission and Vision */
+    .mission-vision {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 80px;
+    }
+
+    .mv-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: floatUp 1.2s ease forwards;
+    }
+
+    .mv-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1.2rem;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    .mv-card h3 {
+      color: var(--text-color);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .mv-card p {
+      color: var(--light-text);
+      line-height: 1.8;
+      font-size: 1rem;
+      opacity: 0.9;
+      animation: fadeInText 3s ease forwards;
+    }
+
+    /* Team Section */
+    .team-section {
+      margin-bottom: 80px;
+    }
+
+    .team-section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      color: var(--text-color);
+      margin-bottom: 3rem;
+      font-weight: 600;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .team-member {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: floatUp 1.2s ease forwards;
+    }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .member-image {
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .member-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s;
+    }
+
+    .team-member:hover .member-image img {
+      transform: scale(1.1);
+    }
+
+    .member-info {
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .member-info h3 {
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .member-info p {
+      color: var(--light-text);
+      font-size: 0.9rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--primary-color);
+      color: white;
+      padding: 4rem 2rem;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 50px;
+      animation: fadeUp 1.5s ease;
+    }
+
+    .cta-content h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .cta-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--accent-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #e55a2b;
+    }
+
+    .btn-secondary {
+      background: #25d366;
+      color: white;
+      border: none;
+    }
+
+    .btn-secondary:hover {
+      background: #1ebe57;
+    }
+
+    /* Animations */
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInText {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.9;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .company-overview,
+      .mission-vision {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 220px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- About Us Section -->
-    <section class="about-us" id="about-us">
-        <div class="container">
-            <!-- Header Section -->
-            <div class="about-header">
-                <h1>About MotorPride Kenya</h1>
-                <div class="accent-line"></div>
-                <p class="lead">Your trusted partner for quality imported vehicles in Kenya</p>
-            </div>
+  <section class="about-us" id="about-us">
+    <div class="container">
+      <div class="about-header">
+        <h1>About MotorPride Kenya</h1>
+        <div class="accent-line"></div>
+        <p class="lead">Your trusted partner for quality imported vehicles in Kenya</p>
+      </div>
 
-            <!-- Company Overview -->
-            <div class="company-overview">
-                <div class="overview-content">
-                    <h2>Who We Are</h2>
-                    <p>At MotorPride Kenya, we're more than just a car dealership - we're your gateway to automotive excellence. Founded with a vision to transform Kenya's vehicle import industry, we've become a trusted name for discerning customers seeking quality, reliability, and value.</p>
-                    <p>Our journey began with a simple belief: every Kenyan deserves access to premium vehicles without the premium price tag. Through strategic partnerships with international suppliers and a meticulous selection process, we've turned this belief into reality for thousands of satisfied customers.</p>
-                    <p>Today, we stand as a beacon of trust in an industry often clouded by uncertainty, offering not just vehicles, but peace of mind and a driving experience that exceeds expectations.</p>
-                </div>
-                <div class="overview-image">
-                    <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="MotorPride Kenya Showroom">
-                </div>
-            </div>
-
-            <!-- Stats Section -->
-            <div class="stats-section">
-                <div class="stats-container">
-                    <div class="stat-item">
-                        <div class="number">5,000+</div>
-                        <div class="label">Vehicles Sold</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="number">10+</div>
-                        <div class="label">Years Experience</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="number">98%</div>
-                        <div class="label">Customer Satisfaction</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="number">50+</div>
-                        <div class="label">Vehicle Brands</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mission & Vision -->
-            <div class="mission-vision">
-                <div class="mv-card">
-                    <div class="mv-icon">
-                        <i class="fas fa-bullseye"></i>
-                    </div>
-                    <h3>Our Mission</h3>
-                    <p>To revolutionize vehicle ownership in Kenya by providing access to premium quality imports at transparent prices, backed by exceptional service that builds lasting relationships with our customers.</p>
-                </div>
-                <div class="mv-card">
-                    <div class="mv-icon">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <h3>Our Vision</h3>
-                    <p>To become East Africa's most trusted automotive partner, setting new standards in quality, transparency, and customer experience while making premium vehicle ownership accessible to all Kenyans.</p>
-                </div>
-            </div>
-
-            <!-- Why Choose Us -->
-            <div class="why-choose">
-                <div class="section-title">
-                    <h2>Why Choose MotorPride Kenya?</h2>
-                    <p>Discover what sets us apart in the competitive vehicle import market</p>
-                </div>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h4>Quality Assurance</h4>
-                        <p>Every vehicle undergoes a 150-point inspection process to ensure it meets our rigorous standards for safety, performance, and reliability.</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
-                        </div>
-                        <h4>Transparent Pricing</h4>
-                        <p>No hidden fees or surprises. We provide complete cost breakdowns so you know exactly what you're paying for.</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <h4>Lifetime Support</h4>
-                        <p>Our relationship doesn't end at purchase. We provide ongoing support and guidance throughout your ownership journey.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Team Section -->
-            <div class="team-section">
-                <div class="section-title">
-                    <h2>Meet Our Team</h2>
-                    <p>The passionate professionals driving MotorPride Kenya forward</p>
-                </div>
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="member-image">
-                            <img src="https://i.ibb.co/qMby9g7b/Whats-App-Image-2025-11-04-at-1-35-57-PM.jpg" alt="Samson Mahia - Founder & CEO">
-                        </div>
-                        <div class="member-info">
-                            <div class="member-name">Samson Mahia</div>
-                            <div class="member-role">Founder & CEO</div>
-                            <div class="member-bio">With over 15 years in the automotive industry, Samson leads our team with vision and expertise.</div>
-                            <a href="https://wa.me/254723098206?text=Hello%20Samson%2C%20I%27d%20like%20to%20learn%20more%20about%20MotorPride%20Kenya" class="whatsapp-btn" target="_blank">
-                                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-image">
-                            <img src="https://i.ibb.co/4Z89SBT9/Whats-App-Image-2025-11-04-at-1-35-59-PM.jpg" alt="Samuel - Sales Director">
-                        </div>
-                        <div class="member-info">
-                            <div class="member-name">Samuel</div>
-                            <div class="member-role">Sales Director</div>
-                            <div class="member-bio">Samuel ensures our customers receive the best service and find the perfect vehicle for their needs.</div>
-                            <a href="https://wa.me/254724804354?text=Hello%20Samuel%2C%20I%27m%20interested%20in%20buying%20a%20car%20through%20MotorPride%20Kenya" class="whatsapp-btn" target="_blank">
-                                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-image">
-                            <img src="https://i.ibb.co/p6gpkj68/Whats-App-Image-2025-11-04-at-1-36-00-PM.jpg" alt="David Ochieng - Operations Manager">
-                        </div>
-                        <div class="member-info">
-                            <div class="member-name">David Ochieng</div>
-                            <div class="member-role">Operations Manager</div>
-                            <div class="member-bio">David oversees our import and logistics operations, ensuring timely delivery of vehicles.</div>
-                            <a href="https://wa.me/254701112233?text=Hello%20David%2C%20I%27d%20like%20to%20inquire%20about%20vehicle%20logistics%20at%20MotorPride%20Kenya" class="whatsapp-btn" target="_blank">
-                                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA Section -->
-            <div class="cta-section">
-                <div class="cta-content">
-                    <h2>Ready to Find Your Dream Car?</h2>
-                    <p>Browse our extensive inventory of quality imported vehicles and experience the MotorPride Kenya difference.</p>
-                    <div class="cta-buttons">
-                        <a href="allcars.html" class="btn btn-primary">View Our Vehicles</a>
-                        <a href="https://wa.me/254724804354?text=Hello%20MotorPride%20Kenya%2C%20I%27d%20like%20to%20inquire%20about%20your%20vehicles" class="btn btn-secondary" target="_blank">Contact Us via WhatsApp</a>
-                    </div>
-                </div>
-            </div>
+      <div class="company-overview">
+        <div class="overview-content">
+          <h2>Who We Are</h2>
+          <p>
+            MotorPride Kenya is a premier vehicle import company dedicated to providing Kenyans with access to high-quality, reliable, and affordable vehicles. 
+          </p>
+          <p>
+            Our experienced automotive team ensures every vehicle meets international standards of safety and performance.
+          </p>
+          <p>
+            We believe in transparency, integrity, and putting our customers first  always.
+          </p>
         </div>
-    </section>
+        <div class="overview-image">
+          <img
+            src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80"
+            alt="MotorPride Kenya Showroom"
+          />
+        </div>
+      </div>
 
-    <script>
-        // Stats counter animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const statNumbers = document.querySelectorAll('.stat-item .number');
-            
-            // Function to check if element is in viewport
-            function isInViewport(element) {
-                const rect = element.getBoundingClientRect();
-                return (
-                    rect.top >= 0 &&
-                    rect.left >= 0 &&
-                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-                );
-            }
-            
-            // Function to animate numbers
-            function animateNumbers() {
-                statNumbers.forEach(stat => {
-                    if (isInViewport(stat) && !stat.classList.contains('animated')) {
-                        const finalValue = parseInt(stat.textContent);
-                        let currentValue = 0;
-                        const increment = finalValue / 50;
-                        const timer = setInterval(() => {
-                            currentValue += increment;
-                            if (currentValue >= finalValue) {
-                                stat.textContent = finalValue + (stat.textContent.includes('+') ? '+' : '%');
-                                clearInterval(timer);
-                                stat.classList.add('animated');
-                            } else {
-                                stat.textContent = Math.floor(currentValue);
-                            }
-                        }, 30);
-                    }
-                });
-            }
-            
-            // Initial check and scroll listener
-            animateNumbers();
-            window.addEventListener('scroll', animateNumbers);
-        });
-    </script>
+      <div class="mission-vision">
+        <div class="mv-card" style="animation-delay: 0.2s">
+          <div class="mv-icon">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <h3>Our Mission</h3>
+          <p>
+            To empower Kenyans with high-quality, reliable, and affordable imported vehicles while delivering unmatched customer service and trusted after-sales support.
+          </p>
+        </div>
+        <div class="mv-card" style="animation-delay: 0.4s">
+          <div class="mv-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3>Our Vision</h3>
+          <p>
+            To become Kenya's most trusted and preferred vehicle import company — setting the bar for transparency, reliability, and customer satisfaction.
+          </p>
+        </div>
+      </div>
+
+      <div class="team-section">
+        <h2>Meet Our Team</h2>
+        <div class="team-grid">
+          <div class="team-member" style="animation-delay: 0.1s">
+            <div class="member-image">
+              <img
+                src="https://i.ibb.co/qMby9g7b/Whats-App-Image-2025-11-04-at-1-35-57-PM.jpg"
+                alt="John Kamau - Founder"
+              />
+            </div>
+            <div class="member-info">
+              <h3>John Kamau</h3>
+              <p>managing director</p>
+            </div>
+          </div>
+          <div class="team-member" style="animation-delay: 0.2s">
+            <div class="member-image">
+              <img
+                src="https://i.ibb.co/4Z89SBT9/Whats-App-Image-2025-11-04-at-1-35-59-PM.jpg"
+                alt="Sarah Mwangi - Sales Director"
+              />
+            </div>
+            <div class="member-info">
+              <h3>Sarah Mwangi</h3>
+              <p>Sales Director</p>
+            </div>
+          </div>
+          <div class="team-member" style="animation-delay: 0.3s">
+            <div class="member-image">
+              <img
+                src="https://i.ibb.co/p6gpkj68/Whats-App-Image-2025-11-04-at-1-36-00-PM.jpg"
+                alt="Samuel kiarie - CEO"
+              />
+            </div>
+            <div class="member-info">
+              <h3>David Ochieng</h3>
+              <p>CEO</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-section">
+        <div class="cta-content">
+          <h2>Ready to Find Your Dream Car?</h2>
+          <p>
+            Explore our curated range of vehicles or chat directly with our agents on WhatsApp for instant support.
+          </p>
+          <div class="cta-buttons">
+            <a href="allcars.html" class="btn btn-primary">View Our Vehicles</a>
+            <a href="https://wa.me/254723098206?text=Hello%20MotorPride%20Kenya!%20I%20would%20like%20to%20inquire%20about%20your%20vehicles." 
+               target="_blank" class="btn btn-secondary">
+              <i class="fab fa-whatsapp"></i> Contact on WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
