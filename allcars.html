@@ -1533,6 +1533,17 @@ cars.forEach(car => {
             });
         }
 
+
+        function matchesFilter(vehicle, filters) {
+    return (
+        (!filters.make || vehicle.make === filters.make) &&
+        (!filters.model || vehicle.model === filters.model) &&
+        (!filters.year || vehicle.year == filters.year) &&
+        (!filters.fuel || vehicle.fuel === filters.fuel) &&
+        (!filters.transmission || vehicle.transmission === filters.transmission)
+    );
+}
+
         // Setup pagination
         function setupPagination() {
             const totalPages = Math.ceil(filteredCars.length / carsPerPage);
