@@ -1,11 +1,11 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>motorpride | Vehicle Search</title>
+    <title>motorpride | All Vehicles</title>
     <style>
+        /* Copy all your CSS styles from the main page here */
         :root {
             --primary-color: #1a73e8;
             --secondary-color: #f8f9fa;
@@ -28,9 +28,6 @@
             background-color: #f5f5f5;
             color: var(--text-color);
             line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         .container {
@@ -83,122 +80,172 @@
 
         /* Main Content */
         .main-content {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 40px 0;
         }
 
-        /* Search Section */
-        .search-section {
+        /* Search Results Header */
+        .results-header {
             background-color: white;
             border-radius: 12px;
             box-shadow: var(--shadow);
-            padding: 40px;
-            max-width: 900px;
-            width: 100%;
-            transform: translateY(20px);
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .section-title {
-            text-align: center;
+            padding: 30px;
             margin-bottom: 30px;
-            font-size: 32px;
+        }
+
+        .results-title {
+            font-size: 28px;
             color: var(--primary-color);
+            margin-bottom: 15px;
         }
 
-        .search-form {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-        }
-
-        .form-group {
+        .current-filters {
             display: flex;
-            flex-direction: column;
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeInUp 0.5s ease forwards;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        .form-group:nth-child(1) { animation-delay: 0.1s; }
-        .form-group:nth-child(2) { animation-delay: 0.2s; }
-        .form-group:nth-child(3) { animation-delay: 0.3s; }
-        .form-group:nth-child(4) { animation-delay: 0.4s; }
-        .form-group:nth-child(5) { animation-delay: 0.5s; }
-
-        .form-group label {
-            margin-bottom: 8px;
-            font-weight: 600;
+        .filter-tag {
+            background-color: var(--secondary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
             font-size: 14px;
-            color: var(--light-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .form-control {
-            padding: 14px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 16px;
-            transition: var(--transition);
-            background-color: white;
+        .filter-tag .remove {
+            color: var(--accent-color);
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-weight: bold;
         }
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .form-control:hover {
-            border-color: var(--primary-color);
-        }
-
-        .search-btn {
-            grid-column: 1 / -1;
+        .clear-filters {
             background-color: var(--accent-color);
             color: white;
             border: none;
-            padding: 16px;
+            padding: 10px 20px;
             border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
             cursor: pointer;
+            font-weight: 600;
             transition: var(--transition);
-            margin-top: 10px;
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeInUp 0.5s ease 0.6s forwards;
-            box-shadow: 0 4px 6px rgba(255, 107, 53, 0.3);
         }
 
-        .search-btn:hover {
+        .clear-filters:hover {
             background-color: #e55a2b;
+        }
+
+        /* Cars Grid */
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .car-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .car-image {
+            height: 180px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .car-details {
+            padding: 20px;
+        }
+
+        .car-make {
+            font-size: 12px;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .car-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+
+        .car-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .car-spec {
+            background: var(--secondary-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--light-text);
+        }
+
+        .car-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-top: 15px;
+        }
+
+        .car-year {
+            color: var(--light-text);
+            font-size: 14px;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .no-results h3 {
+            font-size: 24px;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .no-results p {
+            color: var(--light-text);
+            margin-bottom: 25px;
+        }
+
+        .back-to-search {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-to-search:hover {
+            background-color: #0d5fd1;
             transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(255, 107, 53, 0.4);
-        }
-
-        .search-btn:active {
-            transform: translateY(0);
-        }
-
-        .search-btn:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
 
         /* Footer */
@@ -207,7 +254,7 @@
             color: white;
             padding: 30px 0;
             text-align: center;
-            margin-top: auto;
+            margin-top: 50px;
         }
 
         .footer-content {
@@ -244,10 +291,10 @@
             font-size: 14px;
         }
 
-        /* Responsive adjustments */
+        /* Responsive */
         @media (max-width: 768px) {
-            .search-form {
-                grid-template-columns: 1fr;
+            .cars-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
             
             .header-content {
@@ -258,260 +305,214 @@
             nav ul {
                 margin-top: 10px;
             }
-            
-            .search-section {
-                padding: 30px 20px;
-            }
-            
-            .section-title {
-                font-size: 28px;
-            }
         }
 
         @media (max-width: 480px) {
-            .search-section {
-                padding: 25px 15px;
+            .cars-grid {
+                grid-template-columns: 1fr;
             }
             
-            .section-title {
-                font-size: 24px;
+            .current-filters {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
-   
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <section class="container">
-            <div class="search-section">
-                <h2 class="section-title">Find Your Perfect Vehicle</h2>
-                
-                <form class="search-form" id="searchForm">
-                    <div class="form-group">
-                        <label for="make">Make</label>
-                        <select id="make" class="form-control" name="make">
-                            <option value="">Select Make</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="model">Model</label>
-                        <select id="model" class="form-control" name="model" disabled>
-                            <option value="">Select Model</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="year">Year</label>
-                        <select id="year" class="form-control" name="year" disabled>
-                            <option value="">Select Year</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="transmission">Transmission</label>
-                        <select id="transmission" class="form-control" name="transmission" disabled>
-                            <option value="">Select Transmission</option>
-                            <option value="Automatic">Automatic</option>
-                            <option value="Manual">Manual</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="fuel">Fuel Type</label>
-                        <select id="fuel" class="form-control" name="fuel" disabled>
-                            <option value="">Select Fuel Type</option>
-                            <option value="Petrol">Petrol</option>
-                            <option value="Diesel">Diesel</option>
-                            <option value="Hybrid">Hybrid</option>
-                            <option value="Electric">Electric</option>
-                        </select>
-                    </div>
-                    
-                    <button type="submit" class="search-btn" id="searchBtn" disabled>Search Vehicles</button>
-                </form>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">motorpride</div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="allcars.html">All Vehicles</a></li>
+                        <li><a href="#">Sell Your Car</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
             </div>
-        </section>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="results-header" id="resultsHeader">
+                <!-- Filled by JavaScript -->
+            </div>
+
+            <div class="cars-grid" id="carsGrid">
+                <!-- Filled by JavaScript -->
+            </div>
+        </div>
     </main>
 
-    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">motorpride</div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="allcars.html">All Vehicles</a>
+                    <a href="#">Sell Your Car</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+                <div class="copyright">
+                    © 2024 motorpride.co.ke. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Static list of all makes and their models
-        const makeModelMap = {
-            "Toyota": ["Camry", "Corolla", "RAV4", "Hilux", "Land Cruiser", "Prado", "Yaris", "Vitz", "Harrier", "Noah", "Voxy", "Fielder", "Probox", "Ractis", "Esquire"],
-            "Nissan": ["X-Trail", "Note", "Navara", "Juke", "Serena", "Skyline", "Dualis", "Qashqai", "Murano", "Patrol"],
-            "Mazda": ["CX-5", "Demio", "Atenza", "Axela", "BT-50", "CX-3", "CX-8", "CX-9", "MX-5"],
-            "Subaru": ["Forester", "Outback", "Impreza", "Legacy", "XV", "BRZ"],
-            "Mercedes-Benz": ["A-Class", "C-Class", "E-Class", "S-Class", "GLA", "GLC", "GLE", "GLS", "A180", "GLC220D"],
-            "BMW": ["3 Series", "5 Series", "7 Series", "X1", "X3", "X5", "X6", "X7"],
-            "Volkswagen": ["Golf", "Passat", "Tiguan", "Polo", "Jetta", "T-Roc", "Touareg"],
-            "Audi": ["A3", "A4", "A5", "A6", "A7", "Q3", "Q5", "Q7", "Q8"],
-            "Honda": ["Civic", "Accord", "CR-V", "Fit", "HR-V", "Pilot", "Odyssey"],
-            "Mitsubishi": ["Outlander", "Lancer", "Pajero", "ASX", "Mirage", "Eclipse Cross"],
-            "Hyundai": ["Tucson", "Santa Fe", "Elantra", "Accent", "Kona", "i10", "i20", "i30"],
-            "Kia": ["Sportage", "Sorento", "Rio", "Cerato", "Picanto", "Stonic", "Ceed"],
-            "Peugeot": ["208", "308", "3008", "5008", "2008", "508"],
-            "Suzuki": ["Swift", "Vitara", "Alto", "Celerio", "Baleno", "Jimny", "S-Cross"],
-            "Ford": ["Ranger", "Focus", "Fiesta", "Explorer", "Everest", "Mustang", "Escape"],
-            "Chevrolet": ["Trailblazer", "Cruze", "Spark", "Colorado", "Malibu", "Camaro"],
-            "Land Rover": ["Discovery", "Range Rover", "Defender", "Evoque", "Velar"],
-            "Jeep": ["Compass", "Cherokee", "Wrangler", "Grand Cherokee", "Renegade"],
-            "Volvo": ["XC60", "XC90", "S60", "V40", "V60", "V90", "XC40"],
-            "Lexus": ["RX", "NX", "ES", "LX", "IS", "GS", "LS"],
-            "Tesla": ["Model 3", "Model S", "Model X", "Model Y"],
-            "Renault": ["Clio", "Megane", "Captur", "Kadjar", "Duster"],
-            "Skoda": ["Octavia", "Superb", "Kodiaq", "Karoq", "Fabia"],
-            "Citroen": ["C3", "C4", "C5", "Berlingo", "C4 Cactus"]
-        };
+        // Sample vehicle data - REPLACE THIS WITH YOUR ACTUAL VEHICLE DATABASE
+        const allVehicles = [
+            { id: 1, make: "Toyota", model: "Camry", year: 2022, transmission: "Automatic", fuel: "Petrol", price: 25000, image: "" },
+            { id: 2, make: "Toyota", model: "RAV4", year: 2023, transmission: "Automatic", fuel: "Hybrid", price: 32000, image: "" },
+            { id: 3, make: "BMW", model: "3 Series", year: 2021, transmission: "Automatic", fuel: "Petrol", price: 42000, image: "" },
+            { id: 4, make: "BMW", model: "X5", year: 2023, transmission: "Automatic", fuel: "Diesel", price: 65000, image: "" },
+            { id: 5, make: "Mercedes-Benz", model: "C-Class", year: 2022, transmission: "Automatic", fuel: "Petrol", price: 48000, image: "" },
+            { id: 6, make: "Honda", model: "Civic", year: 2021, transmission: "Manual", fuel: "Petrol", price: 22000, image: "" },
+            { id: 7, make: "Ford", model: "Ranger", year: 2023, transmission: "Automatic", fuel: "Diesel", price: 35000, image: "" },
+            { id: 8, make: "Toyota", model: "Hilux", year: 2022, transmission: "Manual", fuel: "Diesel", price: 30000, image: "" },
+            { id: 9, make: "BMW", model: "5 Series", year: 2023, transmission: "Automatic", fuel: "Hybrid", price: 55000, image: "" },
+            { id: 10, make: "Toyota", model: "Land Cruiser", year: 2023, transmission: "Automatic", fuel: "Diesel", price: 85000, image: "" },
+            { id: 11, make: "Nissan", model: "X-Trail", year: 2022, transmission: "Automatic", fuel: "Petrol", price: 28000, image: "" },
+            { id: 12, make: "BMW", model: "X3", year: 2021, transmission: "Automatic", fuel: "Diesel", price: 45000, image: "" },
+            { id: 13, make: "Toyota", model: "Corolla", year: 2020, transmission: "Manual", fuel: "Petrol", price: 18000, image: "" },
+            { id: 14, make: "BMW", model: "X1", year: 2022, transmission: "Automatic", fuel: "Petrol", price: 38000, image: "" },
+            { id: 15, make: "Mercedes-Benz", model: "E-Class", year: 2023, transmission: "Automatic", fuel: "Hybrid", price: 60000, image: "" },
+            { id: 16, make: "Audi", model: "A4", year: 2022, transmission: "Automatic", fuel: "Petrol", price: 42000, image: "" },
+            { id: 17, make: "Volkswagen", model: "Tiguan", year: 2023, transmission: "Automatic", fuel: "Diesel", price: 38000, image: "" },
+            { id: 18, make: "Hyundai", model: "Tucson", year: 2022, transmission: "Automatic", fuel: "Petrol", price: 32000, image: "" },
+            { id: 19, make: "Kia", model: "Sportage", year: 2023, transmission: "Automatic", fuel: "Diesel", price: 35000, image: "" },
+            { id: 20, make: "Mazda", model: "CX-5", year: 2022, transmission: "Automatic", fuel: "Petrol", price: 33000, image: "" }
+            // Add more vehicles here...
+        ];
+
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const makeFilter = urlParams.get('make');
+        const modelFilter = urlParams.get('model');
+        const yearFilter = urlParams.get('year');
+        const transmissionFilter = urlParams.get('transmission');
+        const fuelFilter = urlParams.get('fuel');
+        const isFiltered = urlParams.get('filtered') === 'true';
 
         // DOM Elements
-        const searchForm = document.getElementById('searchForm');
-        const makeSelect = document.getElementById('make');
-        const modelSelect = document.getElementById('model');
-        const yearSelect = document.getElementById('year');
-        const transmissionSelect = document.getElementById('transmission');
-        const fuelSelect = document.getElementById('fuel');
-        const searchBtn = document.getElementById('searchBtn');
+        const resultsHeader = document.getElementById('resultsHeader');
+        const carsGrid = document.getElementById('carsGrid');
 
-        // Initialize the search form
-        function initSearchForm() {
-            populateMakes();
-            populateYears();
-            setupEventListeners();
+        // Initialize the page
+        function initPage() {
+            const filteredVehicles = filterVehicles();
+            displayResultsHeader(filteredVehicles.length);
+            displayVehicles(filteredVehicles);
         }
 
-        // Populate makes dropdown
-        function populateMakes() {
-            const makes = Object.keys(makeModelMap).sort();
-            
-            makes.forEach(make => {
-                const option = document.createElement('option');
-                option.value = make;
-                option.textContent = make;
-                makeSelect.appendChild(option);
-            });
-        }
-
-        // Populate years from 2000 to 2024
-        function populateYears() {
-            for (let year = 2024; year >= 2000; year--) {
-                const option = document.createElement('option');
-                option.value = year;
-                option.textContent = year;
-                yearSelect.appendChild(option);
+        // Filter vehicles based on URL parameters
+        function filterVehicles() {
+            if (!isFiltered) {
+                return allVehicles; // Show all vehicles if no filters
             }
-        }
 
-        // Setup event listeners
-        function setupEventListeners() {
-            // Make selection event
-            makeSelect.addEventListener('change', function() {
-                if (this.value) {
-                    populateModels(this.value);
-                    modelSelect.disabled = false;
-                    yearSelect.disabled = false;
-                    transmissionSelect.disabled = false;
-                    fuelSelect.disabled = false;
-                    checkFormCompletion();
-                } else {
-                    resetDependentSelects([modelSelect, yearSelect, transmissionSelect, fuelSelect]);
-                    disableSearchButton();
-                }
-            });
-
-            // Other dropdown changes
-            modelSelect.addEventListener('change', checkFormCompletion);
-            yearSelect.addEventListener('change', checkFormCompletion);
-            transmissionSelect.addEventListener('change', checkFormCompletion);
-            fuelSelect.addEventListener('change', checkFormCompletion);
-
-            // Form submission - redirect to all-cars.html with search parameters
-            searchForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                redirectToAllCars();
+            return allVehicles.filter(vehicle => {
+                // Check each filter - if filter exists, vehicle must match
+                if (makeFilter && vehicle.make !== makeFilter) return false;
+                if (modelFilter && vehicle.model !== modelFilter) return false;
+                if (yearFilter && vehicle.year != yearFilter) return false;
+                if (transmissionFilter && vehicle.transmission !== transmissionFilter) return false;
+                if (fuelFilter && vehicle.fuel !== fuelFilter) return false;
+                return true;
             });
         }
 
-        // Populate models based on selected make
-        function populateModels(make) {
-            resetSelect(modelSelect);
-            modelSelect.disabled = false;
+        // Display results header with filter info
+        function displayResultsHeader(resultsCount) {
+            let headerHTML = '';
             
-            if (make && makeModelMap[make]) {
-                makeModelMap[make].forEach(model => {
-                    const option = document.createElement('option');
-                    option.value = model;
-                    option.textContent = model;
-                    modelSelect.appendChild(option);
-                });
+            if (isFiltered && (makeFilter || modelFilter || yearFilter || transmissionFilter || fuelFilter)) {
+                headerHTML = `
+                    <h2 class="results-title">Search Results</h2>
+                    <div class="current-filters" id="currentFilters">
+                        ${makeFilter ? `<span class="filter-tag">Make: ${makeFilter} <span class="remove" onclick="removeFilter('make')">×</span></span>` : ''}
+                        ${modelFilter ? `<span class="filter-tag">Model: ${modelFilter} <span class="remove" onclick="removeFilter('model')">×</span></span>` : ''}
+                        ${yearFilter ? `<span class="filter-tag">Year: ${yearFilter} <span class="remove" onclick="removeFilter('year')">×</span></span>` : ''}
+                        ${transmissionFilter ? `<span class="filter-tag">Transmission: ${transmissionFilter} <span class="remove" onclick="removeFilter('transmission')">×</span></span>` : ''}
+                        ${fuelFilter ? `<span class="filter-tag">Fuel: ${fuelFilter} <span class="remove" onclick="removeFilter('fuel')">×</span></span>` : ''}
+                    </div>
+                    <p>Found ${resultsCount} vehicle${resultsCount !== 1 ? 's' : ''} matching your criteria</p>
+                    <button class="clear-filters" onclick="clearAllFilters()">Clear All Filters</button>
+                `;
+            } else {
+                headerHTML = `
+                    <h2 class="results-title">All Vehicles</h2>
+                    <p>Browse our complete inventory of ${allVehicles.length} vehicles</p>
+                `;
             }
+            
+            resultsHeader.innerHTML = headerHTML;
         }
 
-        function checkFormCompletion() {
-    const hasAnyValue =
-        makeSelect.value ||
-        modelSelect.value ||
-        yearSelect.value ||
-        transmissionSelect.value ||
-        fuelSelect.value;
+        // Display vehicles in grid
+        function displayVehicles(vehicles) {
+            if (vehicles.length === 0) {
+                carsGrid.innerHTML = `
+                    <div class="no-results">
+                        <h3>No vehicles found matching your criteria</h3>
+                        <p>Try adjusting your search filters or browse all vehicles</p>
+                        <a href="index.html" class="back-to-search">Back to Search</a>
+                    </div>
+                `;
+                return;
+            }
 
-    searchBtn.disabled = !hasAnyValue;
-}
-
-
-        // Reset a select element to its default state
-        function resetSelect(selectElement) {
-            selectElement.innerHTML = '<option value="">Select ' + 
-                selectElement.name.charAt(0).toUpperCase() + 
-                selectElement.name.slice(1) + '</option>';
-        }
-
-        // Reset multiple dependent selects
-        function resetDependentSelects(selects) {
-            selects.forEach(select => {
-                resetSelect(select);
-                select.disabled = true;
+            let vehiclesHTML = '';
+            
+            vehicles.forEach(vehicle => {
+                vehiclesHTML += `
+                    <div class="car-card">
+                        <div class="car-image">
+                            ${vehicle.make} ${vehicle.model}
+                        </div>
+                        <div class="car-details">
+                            <div class="car-make">${vehicle.make}</div>
+                            <div class="car-name">${vehicle.model}</div>
+                            <div class="car-year">${vehicle.year}</div>
+                            <div class="car-specs">
+                                <span class="car-spec">${vehicle.transmission}</span>
+                                <span class="car-spec">${vehicle.fuel}</span>
+                            </div>
+                            <div class="car-price">$${vehicle.price.toLocaleString()}</div>
+                        </div>
+                    </div>
+                `;
             });
-        }
-
-        // Enable the search button
-        function enableSearchButton() {
-            searchBtn.disabled = false;
-        }
-
-        // Disable the search button
-        function disableSearchButton() {
-            searchBtn.disabled = true;
-        }
-
-        // Redirect to all-cars.html with search parameters
-        function redirectToAllCars() {
-            const make = makeSelect.value;
-            const model = modelSelect.value;
-            const year = yearSelect.value;
-            const transmission = transmissionSelect.value;
-            const fuel = fuelSelect.value;
             
-            // Build query string with proper encoding
-            const params = new URLSearchParams();
-            if (make) params.append('make', encodeURIComponent(make));
-            if (model) params.append('model', encodeURIComponent(model));
-            if (year) params.append('year', encodeURIComponent(year));
-            if (transmission) params.append('transmission', encodeURIComponent(transmission));
-            if (fuel) params.append('fuel', encodeURIComponent(fuel));
-            
-            // Add a search parameter to indicate this is a filtered search
-            params.append('search', 'true');
-            
-            // Redirect to all-cars.html with search parameters
-            window.location.href = 'allcars.html?' + params.toString();
+            carsGrid.innerHTML = vehiclesHTML;
         }
 
-        // Initialize the search form when DOM is loaded
-        document.addEventListener('DOMContentLoaded', initSearchForm);
+        // Remove a specific filter
+        function removeFilter(filterName) {
+            const params = new URLSearchParams(window.location.search);
+            params.delete(filterName);
+            
+            // Update URL without refreshing (for better UX)
+            const newUrl = window.location.pathname + '?' + params.toString();
+            window.history.replaceState({}, '', newUrl);
+            
+            // Reload the filtered results
+            initPage();
+        }
+
+        // Clear all filters
+        function clearAllFilters() {
+            window.location.href = 'allcars.html';
+        }
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initPage);
     </script>
 </body>
 </html>
