@@ -374,15 +374,25 @@
             flex-direction: column;
         }
 
-        .primary-image {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-            box-shadow: var(--shadow);
-        }
+      .primary-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+    box-shadow: var(--shadow);
+}
+
+/* ✅ Fix for phones */
+@media (max-width: 768px) {
+    .primary-image {
+        height: auto;
+        max-height: 65vh;   /* prevents it from being too tall */
+        object-fit: contain; /* shows full image */
+    }
+}
+
 
         .primary-image:hover {
             transform: scale(1.02);
@@ -938,6 +948,458 @@
 },
 
 {
+  id: "MPK0008A",
+  name: "2018 Jaguar F-Pace 25T R-Sport",
+  brand: "Jaguar",
+  model: "F-Pace",
+  year: 2018,
+  fuel: "Petrol",
+  transmission: "Automatic",
+  engine: "2000cc Turbo",
+  color: "Black",
+  interior: "Two-tone Leather (Red & Black)",
+  price: 5700000,
+  images: [
+    "https://i.ibb.co/5xTsVw0M/Whats-App-Image-2026-01-31-at-8-41-42-PM.jpg",
+    "https://i.ibb.co/TMDb1FKN/Whats-App-Image-2026-01-31-at-8-41-41-PM.jpg",
+    "https://i.ibb.co/99DfdtG4/Whats-App-Image-2026-01-31-at-8-41-40-PM-2.jpg",
+    "https://i.ibb.co/WW9TkwPT/Whats-App-Image-2026-01-31-at-8-41-36-PM.jpg",
+    "https://i.ibb.co/jvzhjDdP/Whats-App-Image-2026-01-31-at-8-41-35-PM-2.jpg",
+    "https://i.ibb.co/qYtz4yT8/Whats-App-Image-2026-01-31-at-8-41-35-PM-1.jpg",
+    "https://i.ibb.co/hFBQLxBr/Whats-App-Image-2026-01-31-at-8-41-40-PM-1.jpg",
+    "https://i.ibb.co/ZzFJ07jm/Whats-App-Image-2026-01-31-at-8-41-40-PM.jpg",
+    "https://i.ibb.co/vxg5Wv2r/Whats-App-Image-2026-01-31-at-8-41-38-PM-1.jpg",
+    "https://i.ibb.co/S4grd4bH/Whats-App-Image-2026-01-31-at-8-41-38-PM.jpg",
+    "https://i.ibb.co/zTL3ZGGc/Whats-App-Image-2026-01-31-at-8-41-37-PM-1.jpg",
+    "https://i.ibb.co/ymgtqKbk/Whats-App-Image-2026-01-31-at-8-41-37-PM.jpg",
+    "https://i.ibb.co/sdrV3NcY/Whats-App-Image-2026-01-31-at-8-41-35-PM.jpg"
+  ],
+  features: [
+    "Meridian Surround Sound System",
+    "Jaguar Drive Control",
+    "Signature Jaguar LED Headlamps",
+    "Daytime Running Lights",
+    "Fog Lights",
+    "360° Camera View",
+    "Parking Sensors",
+    "Power Tailgate",
+    "Heated & Power Folding Side Mirrors with Indicators",
+    "Power Adjustable Front Seats",
+    "Keyless Entry",
+    "Push Start",
+    "Multifunction Steering Wheel",
+    "Cruise Control",
+    "Paddle Shifters",
+    "Blind Spot Monitoring",
+    "Anti-Collision Assist",
+    "Lane Assist",
+    "Dual Zone Climate Control"
+  ]
+}
+,
+
+{
+  id: "MPK0022A",
+  name: "2019 Mercedes-Benz A180 W177",
+  brand: "Mercedes-Benz",
+  model: "A180",
+  year: 2019,
+  fuel: "Petrol",
+  transmission: "Automatic",
+  engine: "1300cc Turbo",
+  color: "Gray",
+  interior: "Leather",
+  price: 2750000,
+  images: [
+    "https://i.ibb.co/rGRX3M12/Whats-App-Image-2026-01-31-at-8-47-54-PM-2.jpg",
+    "https://i.ibb.co/PzwtDqr1/Whats-App-Image-2026-01-31-at-8-47-56-PM.jpg",
+    "https://i.ibb.co/jP264kzJ/Whats-App-Image-2026-01-31-at-8-47-55-PM-4.jpg",
+    "https://i.ibb.co/3yPmJ9B0/Whats-App-Image-2026-01-31-at-8-47-55-PM-3.jpg",
+    "https://i.ibb.co/whKMxf1L/Whats-App-Image-2026-01-31-at-8-47-55-PM-2.jpg",
+    "https://i.ibb.co/jvx6NnGC/Whats-App-Image-2026-01-31-at-8-47-55-PM-1.jpg",
+    "https://i.ibb.co/hxRf3jNx/Whats-App-Image-2026-01-31-at-8-47-55-PM.jpg",
+    "https://i.ibb.co/kLg6sQ7/Whats-App-Image-2026-01-31-at-8-47-54-PM-1.jpg",
+    "https://i.ibb.co/XrQbxjgL/Whats-App-Image-2026-01-31-at-8-47-54-PM.jpg",
+    "https://i.ibb.co/JwNFJ9PX/Whats-App-Image-2026-01-31-at-8-47-53-PM-2.jpg",
+    "https://i.ibb.co/sJ3bpQ8L/Whats-App-Image-2026-01-31-at-8-47-53-PM-1.jpg",
+    "https://i.ibb.co/1GNB5YCh/Whats-App-Image-2026-01-31-at-8-47-53-PM.jpg",
+    "https://i.ibb.co/GQ4sFJ82/Whats-App-Image-2026-01-31-at-8-47-52-PM.jpg"
+  ],
+  features: [
+    "Front Bucket Seats",
+    "Digital Instrument Cluster",
+    "Active Brake Assist",
+    "Lane Departure Warning",
+    "Blind Spot Monitoring",
+    "Front Heated Seats",
+    "Driver Memory Seat",
+    "Multifunction Steering Wheel",
+    "Apple CarPlay",
+    "Android Auto",
+    "All-Round Parking Sensors",
+    "360° Reverse Camera",
+    "Wireless Charging"
+  ]
+}
+,
+
+{
+  id: "MPK0037A",
+  name: "2018 Mazda Demio",
+  brand: "Mazda",
+  model: "Demio",
+  year: 2018,
+  fuel: "Petrol",
+  engine: "1300cc",
+  transmission: "Automatic",
+  drive: "FWD",
+  exteriorColor: "Pearl White",
+  interior: "Fabric",
+  price: 1400000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/CszjQGgC/Whats-App-Image-2026-01-31-at-8-56-24-PM-2.jpg",
+    "https://i.ibb.co/4wzqTN5k/Whats-App-Image-2026-01-31-at-8-56-26-PM-1.jpg",
+    "https://i.ibb.co/bgfKzxxK/Whats-App-Image-2026-01-31-at-8-56-26-PM.jpg",
+    "https://i.ibb.co/Q3YY27GS/Whats-App-Image-2026-01-31-at-8-56-25-PM-3.jpg",
+    "https://i.ibb.co/LXgKWf9L/Whats-App-Image-2026-01-31-at-8-56-25-PM-2.jpg",
+    "https://i.ibb.co/rfZTNctL/Whats-App-Image-2026-01-31-at-8-56-25-PM-1.jpg",
+    "https://i.ibb.co/Pv387Nd7/Whats-App-Image-2026-01-31-at-8-56-25-PM.jpg",
+    "https://i.ibb.co/Pvb87HDk/Whats-App-Image-2026-01-31-at-8-56-24-PM-1.jpg",
+    "https://i.ibb.co/sv0GmG6S/Whats-App-Image-2026-01-31-at-8-56-24-PM.jpg"
+  ],
+  features: [
+    "Multifunction Steering Wheel Controls",
+    "Heated Seats",
+    "Fog Lights",
+    "Multimedia Navigation Knob",
+    "Sport Mode",
+    "Touchscreen Infotainment (FM / DVD / Bluetooth)",
+    "Parking Sensors",
+    "Blind Spot Monitoring",
+    "Lane Departure Alert",
+    "i-Stop Technology",
+    "Traction Control",
+    "Alloy Wheels"
+  ],
+  status: "Available"
+}
+,
+
+{
+  id: "MPK0124A",
+  name: "2018 Honda Odyssey Hybrid",
+  brand: "Honda",
+  model: "Odyssey",
+  year: 2018,
+  fuel: "Hybrid (Petrol)",
+  engine: "2000cc",
+  transmission: "Automatic",
+  drive: "2WD",
+  exteriorColor: "Not specified",
+  interior: "Fabric",
+  price: 2650000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/1tSZTtx8/Whats-App-Image-2026-01-31-at-9-53-10-PM-2.jpg",
+    "https://i.ibb.co/Q7LD1dD3/Whats-App-Image-2026-01-31-at-9-53-14-PM-2.jpg",
+    "https://i.ibb.co/RT7fFYXT/Whats-App-Image-2026-01-31-at-9-53-14-PM-1.jpg",
+    "https://i.ibb.co/VpV3WMB8/Whats-App-Image-2026-01-31-at-9-53-14-PM.jpg",
+    "https://i.ibb.co/5gBHXWqK/Whats-App-Image-2026-01-31-at-9-53-13-PM-3.jpg",
+    "https://i.ibb.co/d9kcm0J/Whats-App-Image-2026-01-31-at-9-53-13-PM-2.jpg",
+    "https://i.ibb.co/nN27V9PC/Whats-App-Image-2026-01-31-at-9-53-13-PM-1.jpg",
+    "https://i.ibb.co/b5PvdF0d/Whats-App-Image-2026-01-31-at-9-53-13-PM.jpg",
+    "https://i.ibb.co/1GJhngHz/Whats-App-Image-2026-01-31-at-9-53-12-PM-3.jpg",
+    "https://i.ibb.co/xt1WJvZJ/Whats-App-Image-2026-01-31-at-9-53-12-PM-2.jpg",
+    "https://i.ibb.co/k6xkf6Tg/Whats-App-Image-2026-01-31-at-9-53-12-PM-1.jpg",
+    "https://i.ibb.co/hFrGS0Wm/Whats-App-Image-2026-01-31-at-9-53-12-PM.jpg",
+    "https://i.ibb.co/DgkSLffj/Whats-App-Image-2026-01-31-at-9-53-11-PM-1.jpg",
+    "https://i.ibb.co/MkzCcXJ8/Whats-App-Image-2026-01-31-at-9-53-11-PM.jpg",
+    "https://i.ibb.co/spynnrN8/Whats-App-Image-2026-01-31-at-9-53-10-PM-1.jpg",
+    "https://i.ibb.co/7NG4xWD7/Whats-App-Image-2026-01-31-at-9-53-10-PM.jpg"
+  ],
+  features: [
+    "Hybrid Powertrain",
+    "Automatic Transmission",
+    "Spacious 7-Seater MPV",
+    "Fuel Efficient",
+    "Power Steering",
+    "Dual Sliding Doors",
+    "Comfort-Oriented Interior",
+    "Ideal for Family & Executive Use"
+  ],
+  status: "Available"
+}
+,
+
+{
+  id: "MPK0108A",
+  name: "2018 Toyota Voxy Non-Hybrid",
+  brand: "Toyota",
+  model: "Voxy",
+  year: 2018,
+  fuel: "Petrol",
+  engine: "2000cc",
+  transmission: "Automatic",
+  drive: "2WD",
+  seating: 7,
+  exteriorColor: "Green",
+  interior: "Fabric / Not specified",
+  price: 2750000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/zVPD1RNy/Whats-App-Image-2026-01-31-at-10-25-33-PM-1.jpg",
+    "https://i.ibb.co/rfMT3thH/Whats-App-Image-2026-01-31-at-10-25-37-PM.jpg",
+    "https://i.ibb.co/0ydqVyqq/Whats-App-Image-2026-01-31-at-10-25-36-PM-2.jpg",
+    "https://i.ibb.co/kt4JMcH/Whats-App-Image-2026-01-31-at-10-25-36-PM-1.jpg",
+    "https://i.ibb.co/cqm3HZS/Whats-App-Image-2026-01-31-at-10-25-36-PM.jpg",
+    "https://i.ibb.co/xkDYvvL/Whats-App-Image-2026-01-31-at-10-25-35-PM-3.jpg",
+    "https://i.ibb.co/GQxVD7mt/Whats-App-Image-2026-01-31-at-10-25-35-PM-2.jpg",
+    "https://i.ibb.co/FkDKtskW/Whats-App-Image-2026-01-31-at-10-25-35-PM-1.jpg",
+    "https://i.ibb.co/fVZ2Z7X9/Whats-App-Image-2026-01-31-at-10-25-35-PM.jpg",
+    "https://i.ibb.co/rf0Yxyqs/Whats-App-Image-2026-01-31-at-10-25-34-PM-2.jpg",
+    "https://i.ibb.co/whS2FnLq/Whats-App-Image-2026-01-31-at-10-25-34-PM-1.jpg",
+    "https://i.ibb.co/6J7mHSWg/Whats-App-Image-2026-01-31-at-10-25-34-PM.jpg",
+    "https://i.ibb.co/x8XdtHY5/Whats-App-Image-2026-01-31-at-10-25-33-PM.jpg",
+    "https://i.ibb.co/KcMw60tB/Whats-App-Image-2026-01-31-at-10-25-32-PM-1.jpg",
+    "https://i.ibb.co/b5Xr6MLr/Whats-App-Image-2026-01-31-at-10-25-32-PM.jpg",
+    "https://i.ibb.co/4n7hFbCL/Whats-App-Image-2026-01-31-at-10-25-31-PM.jpg"
+  ],
+  features: [
+    "7-Seater Family Vehicle",
+    "Automatic Transmission",
+    "Petrol Engine 2000cc",
+    "2WD",
+    "Comfortable Interior",
+    "Spacious Cabin",
+    "Green Exterior",
+    "Reliable and Durable"
+  ],
+  status: "Available"
+}
+,
+
+{
+  id: "MPK0107A",
+  name: "2018 Toyota Voxy Hybrid",
+  brand: "Toyota",
+  model: "Voxy",
+  year: 2018,
+  fuel: "Petrol Hybrid",
+  engine: "1790cc",
+  transmission: "Automatic",
+  drive: "2WD",
+  seating: 7,
+  exteriorColor: "Not Specified",
+  interior: "Fabric / Not specified",
+  price: 2700000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/vCCCTnZx/Whats-App-Image-2026-02-01-at-3-46-57-AM-1.jpg",
+    "https://i.ibb.co/1JLFxsq6/Whats-App-Image-2026-02-01-at-3-46-58-AM.jpg",
+    "https://i.ibb.co/s9H9k7Q6/Whats-App-Image-2026-02-01-at-3-46-57-AM.jpg",
+    "https://i.ibb.co/tpgtKgtx/Whats-App-Image-2026-02-01-at-3-46-56-AM.jpg",
+    "https://i.ibb.co/YFyKvc6N/Whats-App-Image-2026-02-01-at-3-46-54-AM-2.jpg",
+    "https://i.ibb.co/cc2gq9qt/Whats-App-Image-2026-02-01-at-3-46-55-AM.jpg",
+    "https://i.ibb.co/tPYQMrsf/Whats-App-Image-2026-02-01-at-3-46-54-AM-1.jpg",
+    "https://i.ibb.co/21LcstFJ/Whats-App-Image-2026-02-01-at-3-46-54-AM.jpg",
+    "https://i.ibb.co/rRPRsQ6K/Whats-App-Image-2026-02-01-at-3-46-53-AM.jpg",
+    "https://i.ibb.co/JjNHCtqj/Whats-App-Image-2026-02-01-at-3-46-51-AM-1.jpg",
+    "https://i.ibb.co/XZWW715D/Whats-App-Image-2026-02-01-at-3-46-51-AM.jpg",
+    "https://i.ibb.co/Y7nMmKnj/Whats-App-Image-2026-02-01-at-3-46-50-AM.jpg",
+    "https://i.ibb.co/LzkKK41f/Whats-App-Image-2026-02-01-at-3-46-49-AM.jpg"
+  ],
+  features: [
+    "Hybrid Engine 1790cc",
+    "Automatic Transmission",
+    "2WD",
+    "7-Seater",
+    "Fuel Efficient",
+    "Comfortable Cabin",
+    "Reliable Family Vehicle"
+  ],
+  status: "Available"
+}
+,
+
+{
+  id: "MPK0106A",
+  name: "2018 Toyota Esquire",
+  brand: "Toyota",
+  model: "Esquire",
+  year: 2018,
+  fuel: "Petrol",
+  engine: "2000cc",
+  transmission: "Automatic",
+  drive: "2WD",
+  seating: 8,
+  exteriorColor: "Not Specified",
+  interior: "Fabric / Not specified",
+  price: 2700000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/VpmM70M1/Whats-App-Image-2026-02-01-at-3-50-31-AM-1.jpg",
+    "https://i.ibb.co/yF032wvD/Whats-App-Image-2026-02-01-at-3-50-31-AM.jpg",
+    "https://i.ibb.co/nNWt8H3T/Whats-App-Image-2026-02-01-at-3-50-30-AM.jpg",
+    "https://i.ibb.co/Dfr1MHhK/Whats-App-Image-2026-02-01-at-3-50-29-AM.jpg",
+    "https://i.ibb.co/JRGPKnd7/Whats-App-Image-2026-02-01-at-3-50-28-AM-2.jpg",
+    "https://i.ibb.co/XxdYkyFp/Whats-App-Image-2026-02-01-at-3-50-28-AM-1.jpg",
+    "https://i.ibb.co/TDVRWMdx/Whats-App-Image-2026-02-01-at-3-50-28-AM.jpg",
+    "https://i.ibb.co/d4djMmtG/Whats-App-Image-2026-02-01-at-3-50-25-AM.jpg",
+    "https://i.ibb.co/9mWRmjyK/Whats-App-Image-2026-02-01-at-3-50-24-AM-1.jpg",
+    "https://i.ibb.co/4zRshfn/Whats-App-Image-2026-02-01-at-3-50-24-AM.jpg",
+    "https://i.ibb.co/27STmD8h/Whats-App-Image-2026-02-01-at-3-50-23-AM.jpg",
+    "https://i.ibb.co/tMnh81K9/Whats-App-Image-2026-02-01-at-3-50-22-AM.jpg"
+  ],
+  features: [
+    "Automatic Transmission",
+    "2000cc Petrol Engine",
+    "2WD",
+    "8-Seater",
+    "Spacious Cabin",
+    "Family Vehicle",
+    "Comfortable Interior"
+  ],
+  status: "Available"
+}
+,
+
+{
+  id: "MPK0106A",
+  name: "2018 Toyota Esquire",
+  brand: "Toyota",
+  model: "Esquire",
+  year: 2018,
+  fuel: "Petrol",
+  engine: "2000cc",
+  transmission: "Automatic",
+  drive: "2WD",
+  seating: 8,
+  exteriorColor: "Not Specified",
+  interior: "Fabric / Not specified",
+  price: 2700000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/VpmM70M1/Whats-App-Image-2026-02-01-at-3-50-31-AM-1.jpg",
+    "https://i.ibb.co/yF032wvD/Whats-App-Image-2026-02-01-at-3-50-31-AM.jpg",
+    "https://i.ibb.co/nNWt8H3T/Whats-App-Image-2026-02-01-at-3-50-30-AM.jpg",
+    "https://i.ibb.co/Dfr1MHhK/Whats-App-Image-2026-02-01-at-3-50-29-AM.jpg",
+    "https://i.ibb.co/JRGPKnd7/Whats-App-Image-2026-02-01-at-3-50-28-AM-2.jpg",
+    "https://i.ibb.co/XxdYkyFp/Whats-App-Image-2026-02-01-at-3-50-28-AM-1.jpg",
+    "https://i.ibb.co/TDVRWMdx/Whats-App-Image-2026-02-01-at-3-50-28-AM.jpg",
+    "https://i.ibb.co/d4djMmtG/Whats-App-Image-2026-02-01-at-3-50-25-AM.jpg",
+    "https://i.ibb.co/9mWRmjyK/Whats-App-Image-2026-02-01-at-3-50-24-AM-1.jpg",
+    "https://i.ibb.co/4zRshfn/Whats-App-Image-2026-02-01-at-3-50-24-AM.jpg",
+    "https://i.ibb.co/27STmD8h/Whats-App-Image-2026-02-01-at-3-50-23-AM.jpg",
+    "https://i.ibb.co/tMnh81K9/Whats-App-Image-2026-02-01-at-3-50-22-AM.jpg"
+  ],
+  features: [
+    "Automatic Transmission",
+    "2000cc Petrol Engine",
+    "2WD",
+    "8-Seater",
+    "Spacious Cabin",
+    "Family Vehicle",
+    "Comfortable Interior"
+  ],
+  status: "Available"
+}
+,
+
+{
+  id: "MPK0316A",
+  name: "2018 Stepwgn",
+  brand: "Honda",
+  model: "Stepwgn",
+  year: 2018,
+  fuel: "Petrol",
+  engine: "2000cc",
+  transmission: "Automatic",
+  drive: "2WD",
+  hybrid: true,
+  seating: 7,
+  exteriorColor: "Not Specified",
+  interior: "Not Specified",
+  price: 2750000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/35QRnJdv/Whats-App-Image-2026-02-01-at-4-08-38-AM.jpg",
+    "https://i.ibb.co/NgCFhVJx/Whats-App-Image-2026-02-01-at-4-08-45-AM-2.jpg",
+    "https://i.ibb.co/wFqdQsbC/Whats-App-Image-2026-02-01-at-4-08-45-AM-1.jpg",
+    "https://i.ibb.co/wZ1Txydb/Whats-App-Image-2026-02-01-at-4-08-45-AM.jpg",
+    "https://i.ibb.co/MxqT5Qjy/Whats-App-Image-2026-02-01-at-4-08-44-AM-1.jpg",
+    "https://i.ibb.co/k630pdpw/Whats-App-Image-2026-02-01-at-4-08-44-AM.jpg",
+    "https://i.ibb.co/kszMwtRd/Whats-App-Image-2026-02-01-at-4-08-43-AM-2.jpg",
+    "https://i.ibb.co/yHHC5nZ/Whats-App-Image-2026-02-01-at-4-08-43-AM-1.jpg",
+    "https://i.ibb.co/mCKjGTDr/Whats-App-Image-2026-02-01-at-4-08-43-AM.jpg",
+    "https://i.ibb.co/Cs7Tjfd9/Whats-App-Image-2026-02-01-at-4-08-42-AM-1.jpg",
+    "https://i.ibb.co/ZpqfJ2hp/Whats-App-Image-2026-02-01-at-4-08-42-AM.jpg",
+    "https://i.ibb.co/mFvM0N88/Whats-App-Image-2026-02-01-at-4-08-41-AM.jpg",
+    "https://i.ibb.co/BdQ1m4m/Whats-App-Image-2026-02-01-at-4-08-40-AM-1.jpg",
+    "https://i.ibb.co/CshvfPJ1/Whats-App-Image-2026-02-01-at-4-08-40-AM.jpg"
+  ],
+  features: [
+    "Automatic Transmission",
+    "2000cc Petrol Engine",
+    "Hybrid",
+    "2WD",
+    "7-Seater",
+    "Family Vehicle",
+    "Comfortable Cabin"
+  ],
+  status: "Available"
+}
+,
+
+{
+  id: "MPK0098A",
+  name: "2018 Volvo S60",
+  brand: "Volvo",
+  model: "S60",
+  year: 2018,
+  fuel: "Diesel",
+  engine: "2000cc",
+  transmission: "Automatic",
+  drive: "2WD",
+  hybrid: false,
+  seating: 5,
+  exteriorColor: "Not Specified",
+  interior: "Not Specified",
+  price: 2500000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/ksqgsy7S/Whats-App-Image-2026-02-01-at-9-52-25-PM-1.jpg",
+    "https://i.ibb.co/8LPBcXhw/Whats-App-Image-2026-02-01-at-9-52-28-PM.jpg",
+    "https://i.ibb.co/Tqtf2jPm/Whats-App-Image-2026-02-01-at-9-52-27-PM.jpg",
+    "https://i.ibb.co/5gnQkdxC/Whats-App-Image-2026-02-01-at-9-52-26-PM-1.jpg",
+    "https://i.ibb.co/23rrqy6F/Whats-App-Image-2026-02-01-at-9-52-26-PM.jpg",
+    "https://i.ibb.co/Q3pS2KKy/Whats-App-Image-2026-02-01-at-9-52-25-PM.jpg",
+    "https://i.ibb.co/ns69x6TB/Whats-App-Image-2026-02-01-at-9-52-20-PM.jpg",
+    "https://i.ibb.co/rRBHSx4T/Whats-App-Image-2026-02-01-at-9-52-18-PM-1.jpg",
+    "https://i.ibb.co/xtnkfkPX/Whats-App-Image-2026-02-01-at-9-52-18-PM.jpg",
+    "https://i.ibb.co/LdDyYWp9/Whats-App-Image-2026-02-01-at-9-52-17-PM.jpg",
+    "https://i.ibb.co/s98dZcT8/Whats-App-Image-2026-02-01-at-9-52-15-PM.jpg",
+    "https://i.ibb.co/bRQcv2sh/Whats-App-Image-2026-02-01-at-9-52-12-PM.jpg",
+    "https://i.ibb.co/9mWTjwWG/Whats-App-Image-2026-02-01-at-9-52-07-PM.jpg",
+    "https://i.ibb.co/Q3SzdbdL/Whats-App-Image-2026-02-01-at-9-52-03-PM.jpg",
+    "https://i.ibb.co/BVydgySQ/Whats-App-Image-2026-02-01-at-9-52-02-PM.jpg"
+  ],
+  features: [
+    "2000cc Turbo Diesel Engine",
+    "Automatic Transmission",
+    "Sunroof",
+    "Premium Interior",
+    "Volvo Safety Systems",
+    "Fuel Efficient",
+    "Executive Sedan",
+    "Comfort & Stability Control"
+  ],
+  status: "Available"
+}
+,
+
+
+{
   "id": "MPK0028A",
   "name": "Mazda CX-30 2019",
   "make": "Mazda",
@@ -981,6 +1443,355 @@
     "Alloy Rims"
   ]
 },
+
+{
+  id: "MPK0205A",
+  name: "2019 Honda Vezel Hybrid",
+  brand: "Honda",
+  model: "Vezel",
+  year: 2019,
+  fuel: "Petrol Hybrid",
+  engine: "1500cc",
+  transmission: "Automatic",
+  drive: "2WD",
+  hybrid: true,
+  seating: 5,
+  exteriorColor: "Pearl White",
+  interior: "Not Specified",
+  price: 2650000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/nMm5cnp7/Whats-App-Image-2026-02-01-at-9-54-18-PM-1.jpg",
+    "https://i.ibb.co/d4z1Dgk3/Whats-App-Image-2026-02-01-at-9-54-25-PM.jpg",
+    "https://i.ibb.co/99t0VgD0/Whats-App-Image-2026-02-01-at-9-54-23-PM.jpg",
+    "https://i.ibb.co/tPm11vm2/Whats-App-Image-2026-02-01-at-9-54-21-PM.jpg",
+    "https://i.ibb.co/xSkdzgkV/Whats-App-Image-2026-02-01-at-9-54-20-PM.jpg",
+    "https://i.ibb.co/1YTbTyQZ/Whats-App-Image-2026-02-01-at-9-54-18-PM.jpg",
+    "https://i.ibb.co/rfzqsJHr/Whats-App-Image-2026-02-01-at-9-54-17-PM.jpg",
+    "https://i.ibb.co/Q3YL1Nff/Whats-App-Image-2026-02-01-at-9-54-13-PM.jpg",
+    "https://i.ibb.co/r2DY8yC1/Whats-App-Image-2026-02-01-at-9-54-08-PM.jpg",
+    "https://i.ibb.co/nNbY0BgW/Whats-App-Image-2026-02-01-at-9-54-06-PM.jpg"
+  ],
+  features: [
+    "1500cc Petrol Hybrid Engine",
+    "Automatic Transmission",
+    "Alloy Wheels",
+    "Lane Assist",
+    "Anti-Collision Safety Features",
+    "Fuel Efficient Hybrid System",
+    "Modern Interior Finish",
+    "Compact SUV Comfort"
+  ],
+  status: "Available"
+}
+,
+
+
+{
+  id: "MPK0025A",
+  name: "2019 Mercedes-Benz B180 W247",
+  brand: "Mercedes-Benz",
+  model: "B180",
+  year: 2019,
+  fuel: "Petrol",
+  engine: "1300cc Turbo",
+  transmission: "Automatic",
+  drive: "2WD",
+  hybrid: false,
+  seating: 5,
+  exteriorColor: "Grey",
+  interior: "Leather Upholstery",
+  mileage: 56000,
+  sunroof: "Panoramic",
+  price: 2800000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/TBDvsh2x/Whats-App-Image-2026-02-01-at-9-54-47-PM-1.jpg",
+    "https://i.ibb.co/d8m9ZMX/Whats-App-Image-2026-02-01-at-9-55-08-PM.jpg",
+    "https://i.ibb.co/ymsJcmyY/Whats-App-Image-2026-02-01-at-9-55-07-PM-1.jpg",
+    "https://i.ibb.co/whHLNksz/Whats-App-Image-2026-02-01-at-9-55-07-PM.jpg",
+    "https://i.ibb.co/Kp7PjkCv/Whats-App-Image-2026-02-01-at-9-55-05-PM.jpg",
+    "https://i.ibb.co/fzFxVQGY/Whats-App-Image-2026-02-01-at-9-54-58-PM.jpg",
+    "https://i.ibb.co/G3Fwz8NP/Whats-App-Image-2026-02-01-at-9-54-52-PM.jpg",
+    "https://i.ibb.co/35MBjmSy/Whats-App-Image-2026-02-01-at-9-54-50-PM.jpg",
+    "https://i.ibb.co/fG8xd9yq/Whats-App-Image-2026-02-01-at-9-54-49-PM-1.jpg",
+    "https://i.ibb.co/LXF6B95h/Whats-App-Image-2026-02-01-at-9-54-48-PM.jpg",
+    "https://i.ibb.co/WpW0HszC/Whats-App-Image-2026-02-01-at-9-54-47-PM.jpg"
+  ],
+  features: [
+    "Panoramic Sunroof",
+    "1300cc Turbo Petrol Engine",
+    "MBUX Infotainment System with Voice Command",
+    "Digital Instrument Cluster",
+    "Apple CarPlay & Android Auto",
+    "Active Brake Assist",
+    "Lane Departure Warning",
+    "Blind Spot Monitoring",
+    "360° Reverse Camera",
+    "All-Round Parking Sensors",
+    "Front Heated Seats",
+    "Driver Memory Seat",
+    "Multifunction Steering Wheel",
+    "Ambient Interior Lighting",
+    "Low Mileage – 56,000km"
+  ],
+  status: "Available"
+}
+,
+
+{
+  id: "MPK0125A",
+  name: "2018 Honda Shuttle Hybrid",
+  brand: "Honda",
+  model: "Shuttle",
+  year: 2018,
+  fuel: "Petrol Hybrid",
+  engine: "1490cc",
+  transmission: "Automatic",
+  drive: "2WD",
+  hybrid: true,
+  seating: 5,
+  exteriorColor: "N/A",
+  interior: "Fabric Upholstery",
+  mileage: null,
+  sunroof: false,
+  price: 1650000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/cXFGPrBB/Whats-App-Image-2026-02-01-at-9-55-49-PM.jpg",
+    "https://i.ibb.co/bMqJtzRZ/Whats-App-Image-2026-02-01-at-9-55-55-PM.jpg",
+    "https://i.ibb.co/jjsvsjm/Whats-App-Image-2026-02-01-at-9-55-50-PM-1.jpg",
+    "https://i.ibb.co/TDwWYM7g/Whats-App-Image-2026-02-01-at-9-55-50-PM.jpg",
+    "https://i.ibb.co/qX5WkQX/Whats-App-Image-2026-02-01-at-9-55-37-PM.jpg"
+  ],
+  features: [
+    "Petrol Hybrid System",
+    "1490cc Engine",
+    "Automatic Transmission",
+    "Fuel Efficient",
+    "Spacious Cargo Area",
+    "Multifunction Steering Wheel",
+    "Eco Drive Mode",
+    "Traction Control",
+    "ABS Braking System"
+  ],
+  status: "Available"
+}
+,
+
+{
+  id: "MPK0012A",
+  name: "2019 Volvo XC60 D4 AWD",
+  brand: "Volvo",
+  model: "XC60",
+  year: 2019,
+  fuel: "Diesel",
+  engine: "2000cc",
+  transmission: "Automatic",
+  drive: "AWD",
+  hybrid: false,
+  seating: 5,
+  exteriorColor: "Blue",
+  interior: "Leather Interior",
+  mileage: null,
+  sunroof: true,
+  price: 4550000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/4ZX37cxN/Whats-App-Image-2026-02-01-at-9-56-20-PM.jpg",
+    "https://i.ibb.co/7xXXbL2S/Whats-App-Image-2026-02-01-at-9-56-52-PM-2.jpg",
+    "https://i.ibb.co/5xx7CYmz/Whats-App-Image-2026-02-01-at-9-56-52-PM-1.jpg",
+    "https://i.ibb.co/d0VYSwbj/Whats-App-Image-2026-02-01-at-9-56-52-PM.jpg",
+    "https://i.ibb.co/fVyy5CfM/Whats-App-Image-2026-02-01-at-9-56-51-PM.jpg",
+    "https://i.ibb.co/xq6JqKzS/Whats-App-Image-2026-02-01-at-9-56-26-PM-1.jpg",
+    "https://i.ibb.co/dsvZkg2N/Whats-App-Image-2026-02-01-at-9-56-26-PM.jpg",
+    "https://i.ibb.co/HpgBvLvC/Whats-App-Image-2026-02-01-at-9-56-24-PM.jpg",
+    "https://i.ibb.co/KcVjMBjm/Whats-App-Image-2026-02-01-at-9-56-23-PM.jpg",
+    "https://i.ibb.co/DHcB93jq/Whats-App-Image-2026-02-01-at-9-56-22-PM.jpg",
+    "https://i.ibb.co/vG4stKg/Whats-App-Image-2026-02-01-at-9-56-18-PM.jpg"
+  ],
+  features: [
+    "All-Wheel Drive (AWD)",
+    "Panoramic Sunroof",
+    "Leather Interior",
+    "Multifunction Steering Wheel",
+    "Cruise Control",
+    "Push Start Button",
+    "Keyless Entry",
+    "Reverse Camera",
+    "Daytime Running Lights",
+    "Fog Lights",
+    "Alloy Wheels",
+    "Advanced Volvo Safety Systems"
+  ],
+  status: "Available"
+}
+,
+
+
+{
+  id: "MPK0012A",
+  name: "2019 Volvo XC60 D4 AWD",
+  brand: "Volvo",
+  model: "XC60",
+  year: 2019,
+  fuel: "Diesel",
+  engine: "2000cc",
+  transmission: "Automatic",
+  drive: "AWD",
+  hybrid: false,
+  seating: 5,
+  exteriorColor: "Blue",
+  interior: "Leather Interior",
+  mileage: null,
+  sunroof: true,
+  price: 4550000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/4ZX37cxN/Whats-App-Image-2026-02-01-at-9-56-20-PM.jpg",
+    "https://i.ibb.co/7xXXbL2S/Whats-App-Image-2026-02-01-at-9-56-52-PM-2.jpg",
+    "https://i.ibb.co/5xx7CYmz/Whats-App-Image-2026-02-01-at-9-56-52-PM-1.jpg",
+    "https://i.ibb.co/d0VYSwbj/Whats-App-Image-2026-02-01-at-9-56-52-PM.jpg",
+    "https://i.ibb.co/fVyy5CfM/Whats-App-Image-2026-02-01-at-9-56-51-PM.jpg",
+    "https://i.ibb.co/xq6JqKzS/Whats-App-Image-2026-02-01-at-9-56-26-PM-1.jpg",
+    "https://i.ibb.co/dsvZkg2N/Whats-App-Image-2026-02-01-at-9-56-26-PM.jpg",
+    "https://i.ibb.co/HpgBvLvC/Whats-App-Image-2026-02-01-at-9-56-24-PM.jpg",
+    "https://i.ibb.co/KcVjMBjm/Whats-App-Image-2026-02-01-at-9-56-23-PM.jpg",
+    "https://i.ibb.co/DHcB93jq/Whats-App-Image-2026-02-01-at-9-56-22-PM.jpg",
+    "https://i.ibb.co/vG4stKg/Whats-App-Image-2026-02-01-at-9-56-18-PM.jpg"
+  ],
+  features: [
+    "All-Wheel Drive (AWD)",
+    "Panoramic Sunroof",
+    "Leather Interior",
+    "Multifunction Steering Wheel",
+    "Cruise Control",
+    "Push Start Button",
+    "Keyless Entry",
+    "Reverse Camera",
+    "Daytime Running Lights",
+    "Fog Lights",
+    "Alloy Wheels",
+    "Advanced Volvo Safety Systems"
+  ],
+  status: "Available"
+}
+,
+{
+  id: "MPK0054A",
+  name: "2018 Toyota Corolla Axio Hybrid",
+  brand: "Toyota",
+  model: "Corolla Axio Hybrid",
+  year: 2018,
+  fuel: "Hybrid",
+  engine: "1500cc",
+  transmission: "Automatic",
+  drive: "FWD",
+  mileage: null,
+  exteriorColor: "Pearl White",
+  interior: "Fabric",
+  price: 1750000,
+  currency: "KES",
+  images: [
+    "https://i.ibb.co/4R68TZP3/Whats-App-Image-2026-01-31-at-8-14-08-PM-1.jpg",
+    "https://i.ibb.co/GvxLH8z8/Whats-App-Image-2026-01-31-at-8-14-08-PM.jpg",
+    "https://i.ibb.co/cXDhM4gx/Whats-App-Image-2026-01-31-at-8-14-14-PM.jpg",
+    "https://i.ibb.co/BHVFYFjR/Whats-App-Image-2026-01-31-at-8-14-13-PM.jpg",
+    "https://i.ibb.co/PRDJxjy/Whats-App-Image-2026-01-31-at-8-14-11-PM.jpg",
+    "https://i.ibb.co/zH5FPKzZ/Whats-App-Image-2026-01-31-at-8-14-10-PM-1.jpg",
+    "https://i.ibb.co/1fLNXp4Z/Whats-App-Image-2026-01-31-at-8-14-10-PM.jpg",
+    "https://i.ibb.co/xqC0QBK1/Whats-App-Image-2026-01-31-at-8-14-09-PM.jpg"
+  ],
+  features: [
+    "Hybrid engine",
+    "Fuel efficient",
+    "Steering wheel controls",
+    "Reverse camera",
+    "Fog lights",
+    "Alloy wheels",
+    "Low mileage",
+    "Reliable daily drive"
+  ],
+  status: "Available"
+}
+,
+
+{
+  id: "MPK0041A",
+  name: "2019 Nissan Silphy",
+  brand: "Nissan",
+  model: "Silphy",
+  year: 2019,
+  fuel: "Petrol",
+  transmission: "Automatic",
+  color: "White",
+  interior: "Fabric",
+  price: 1750000,
+  images: [
+    "https://i.ibb.co/Gj05Jmn/Whats-App-Image-2026-01-31-at-8-26-03-PM-2.jpg",
+    "https://i.ibb.co/tp9QLY2T/Whats-App-Image-2026-01-31-at-8-26-10-PM-1.jpg",
+    "https://i.ibb.co/KjvNtjgF/Whats-App-Image-2026-01-31-at-8-26-10-PM.jpg",
+    "https://i.ibb.co/xxYz5pg/Whats-App-Image-2026-01-31-at-8-26-09-PM.jpg",
+    "https://i.ibb.co/4Z5dMz23/Whats-App-Image-2026-01-31-at-8-26-03-PM-1.jpg",
+    "https://i.ibb.co/99b5YMwN/Whats-App-Image-2026-01-31-at-8-26-04-PM.jpg",
+    "https://i.ibb.co/7tzgQb1s/Whats-App-Image-2026-01-31-at-8-26-05-PM-1.jpg",
+    "https://i.ibb.co/6RRdrzrh/Whats-App-Image-2026-01-31-at-8-26-05-PM.jpg",
+    "https://i.ibb.co/VcFQBXBZ/Whats-App-Image-2026-01-31-at-8-26-03-PM.jpg"
+  ],
+  features: [
+    "Push to Start",
+    "Keyless Entry",
+    "Reverse Camera",
+    "Touchscreen Infotainment",
+    "Bluetooth Connectivity",
+    "Daytime Running Lights (DRL)",
+    "Alloy Wheels"
+  ]
+}
+,
+
+{
+  id: "MPK0030A",
+  name: "2018 Mazda CX-8 AWD",
+  brand: "Mazda",
+  model: "CX-8",
+  year: 2018,
+  fuel: "Diesel",
+  transmission: "Automatic",
+  drivetrain: "AWD",
+  engine: "2200cc",
+  seats: 6,
+  color: "Black",
+  interior: "Fabric",
+  price: 3500000,
+  images: [
+    "https://i.ibb.co/prn7YGxB/Whats-App-Image-2026-01-31-at-8-37-56-PM-1.jpg",
+    "https://i.ibb.co/wh6YZzkM/Whats-App-Image-2026-01-31-at-8-37-59-PM-2.jpg",
+    "https://i.ibb.co/bkbtxbF/Whats-App-Image-2026-01-31-at-8-37-59-PM-1.jpg",
+    "https://i.ibb.co/jPhBnQxC/Whats-App-Image-2026-01-31-at-8-37-59-PM.jpg",
+    "https://i.ibb.co/gbtCKdBv/Whats-App-Image-2026-01-31-at-8-37-58-PM-3.jpg",
+    "https://i.ibb.co/gMWGDTMF/Whats-App-Image-2026-01-31-at-8-37-58-PM-2.jpg",
+    "https://i.ibb.co/R4BCHLM3/Whats-App-Image-2026-01-31-at-8-37-58-PM-1.jpg",
+    "https://i.ibb.co/VWH54p0C/Whats-App-Image-2026-01-31-at-8-37-58-PM.jpg",
+    "https://i.ibb.co/cSn9TLR0/Whats-App-Image-2026-01-31-at-8-37-57-PM-2.jpg",
+    "https://i.ibb.co/3Yh2K2br/Whats-App-Image-2026-01-31-at-8-37-57-PM-1.jpg",
+    "https://i.ibb.co/gb9p2YJ9/Whats-App-Image-2026-01-31-at-8-37-57-PM.jpg",
+    "https://i.ibb.co/JRW4FnJn/Whats-App-Image-2026-01-31-at-8-37-56-PM.jpg",
+    "https://i.ibb.co/XgxK0sV/Whats-App-Image-2026-01-31-at-8-37-55-PM.jpg"
+  ],
+  features: [
+    "Heads-Up Display (HUD)",
+    "Lane Assist",
+    "Anti-Collision System",
+    "Blind Spot Monitoring",
+    "Adaptive Cruise Control",
+    "Multifunction Steering Wheel",
+    "Audio Controls on Steering",
+    "Heated Steering Wheel",
+    "Front Heated Seats"
+  ]
+}
+,
 
   {
   "id": "MPK0003A",
