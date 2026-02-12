@@ -489,6 +489,7 @@
     .import-car .service-text { color: #6f42c1; }
     .finance .service-text { color: #fd7e14; }
     .insurance .service-text { color: #17a2b8; }
+    
 
     /* Quick Search Section */
     .quick-search {
@@ -1462,15 +1463,15 @@
     <script>
         // Static list of all makes and their models
         const makeModelMap = {
-            "Toyota": ["Camry", "Corolla", "RAV4", "Hilux", "Land Cruiser", "Prado", "Yaris", "Vitz", "Harrier", "Noah", "Voxy", "Fielder", "Probox", "Ractis", "Esquire"],
-            "Nissan": ["X-Trail", "Note", "Note Nismo", "Note E13", "Navara", "NP300", "NV200", "Juke", "Serena", "Skyline", "Dualis", "Qashqai", "Murano", "Patrol", "Patrol Safari", "Advan", "Wingroad", "March", "Tiida", "Tiida Latio", "Bluebird Sylphy", "Teana", "Altima", "Sentra", "Sunny", "Elgrand", "Caravan", "Urvan", "Vanette", "Atlas", "Hardbody", "Fuga", "Cima", "Leaf", "Ariya", "Rogue", "Terrano", "Pathfinder", "Armada", "Cube", "Fairlady Z (370Z / 350Z)", "GT-R", "Primera", "Rasheen"],
+            "Toyota": ["Camry", "Axio", "Corolla ceres", "RAV4", "Hilux", "Land Cruiser", "Prado", "Yaris", "Vitz", "Harrier", "Noah", "Voxy", "Fielder", "Probox", "Ractis", "Esquire"],
+            "Nissan": ["X-Trail", "Note",  "Note", "Note Nismo", "Note E13", "Navara", "NP300", "sylphy", "NV200", "Juke", "Serena", "Skyline", "Dualis", "Qashqai", "Murano", "Patrol", "Patrol Safari", "Advan", "Wingroad", "March", "Tiida", "Tiida Latio", "Bluebird Sylphy", "Teana", "Altima", "Sentra", "Sunny", "Elgrand", "Caravan", "Urvan", "Vanette", "Atlas", "Hardbody", "Fuga", "Cima", "Leaf", "Ariya", "Rogue", "Terrano", "Pathfinder", "Armada", "Cube", "Fairlady Z (370Z / 350Z)", "GT-R", "Primera", "Rasheen"],
             "Mazda": ["CX-5", "Demio", "Mazda 2", "Atenza", "Axela", "BT-50", "CX-3", "CX-30", "CX-8", "CX-9", "MX-5", "Biante", "Premacy", "Tribute", "Verisa", "CX-7", "Roadster", "Mazda 3", "Mazda 6", "Familia", "MPV", "Proceed", "Scrum", "Laputa"],
            "Subaru": ["Forester", "Outback", "Impreza", "Legacy", "XV", "BRZ", "Vivio", "Leone", "Justy", "Sambar", "Stella", "Traviq", "Alfa", "Baja", "Rex", "WRX", "WRX STI", "Levorg", "Ascent", "Exiga", "Trezia", "Dias Wagon", "Pleo", "Dex", "Domingo", "Touring Wagon"],
             "Mercedes-Benz": ["A-Class", "A180", "B-Class", "C-Class", "C200", "C250", "C300", "E-Class", "E200", "E220", "E250", "E300", "S-Class", "S300", "S400", "S500", "GLA", "GLC", "GLC220D", "GLE", "GLS", "V-Class", "Vito", "Sprinter", "Sprinter 311", "Sprinter 313", "Sprinter 315", "Sprinter 416", "Actros", "Atego", "Axor", "Unimog", "1117", "1422", "200", "190E", "CLA", "CLS", "GLB", "ML350", "GLK", "X-Class"],
            "BMW": ["1 Series", "118i", "118d", "118l", "2 Series", "3 Series", "320i", "328i", "330i", "5 Series", "528i", "530i", "535i", "7 Series", "730i", "740i", "750i", "X1", "X2", "X3", "X4", "X5", "X6", "X7", "Z4", "M2", "M3", "M4", "M5", "i3", "i4", "i7", "i8", "Gran Coupe"],
             "Volkswagen": ["Golf", "Passat", "Tiguan", "Polo", "Jetta", "T-Roc", "Touareg"],
            "Audi": ["A3", "A4", "A5", "A6", "A7", "A8", "Q3", "Q5", "Q7", "Q8", "S3", "S4", "S5", "S6", "S7", "S8", "RS3", "RS4", "RS5", "RS6", "RS7", "TT", "TT RS", "R8", "Quattro", "Audi 90", "Audi 100", "Audi 4000", "Audi 5000", "Allroad", "e-tron", "Q2"],
-            "Honda": ["Civic", "Accord", "CR-V", "Fit", "HR-V", "Pilot", "Odyssey"],
+            "Honda": ["Civic", "Accord", "CR-V", "Fit", "HR-V", "Pilot", "Vezel", "Odyssey"],
            "Mitsubishi": ["Outlander", "Lancer", "Pajero", "Pajero Sport", "ASX", "RVR", "Mirage", "Eclipse Cross", "Delica", "Delica D:5", "Proudia", "eK Wagon", "eK X", "eK Space", "Attrage", "Galant", "Grandis", "Chariot", "Montero", "Triton", "L200", "Canter", "Fuso Fighter", "Fuso Super Great"],
             "Hyundai": ["Tucson", "Santa Fe", "Elantra", "Accent", "Kona", "i10", "i20", "i30"],
             "Kia": ["Sportage", "Sorento", "Rio", "Cerato", "Picanto", "Stonic", "Ceed"],
@@ -1805,6 +1806,7 @@
             .motorpride-text-content h2 {
                 font-size: 1.8rem;
             }
+            
         }
     </style>
 </head>
@@ -4522,27 +4524,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
       <div class="brand-item">
         <img src="https://i.ibb.co/Vc7z7DBh/Whats-App-Image-2025-11-04-at-2-54-12-PM-1.jpg" alt="Nissan">
-        <h4>Nissan</h4>
-      </div>
-
-      <div class="brand-item">
-        <img src="https://i.ibb.co/fV78pJbd/Whats-App-Image-2025-11-04-at-2-54-12-PM.jpg" alt="Mazda">
         <h4>Mazda</h4>
       </div>
 
       <div class="brand-item">
+        <img src="https://i.ibb.co/fV78pJbd/Whats-App-Image-2025-11-04-at-2-54-12-PM.jpg" alt="Mazda">
+        <h4>Nissan</h4>
+      </div>
+
+      <div class="brand-item">
         <img src="https://i.ibb.co/Rf2LspC/Whats-App-Image-2025-11-04-at-2-54-13-PM.jpg" alt="Subaru">
-        <h4>Subaru</h4>
+        <h4>Honda</h4>
       </div>
 
       <div class="brand-item">
         <img src="https://i.ibb.co/9H7MYzPW/Whats-App-Image-2025-11-04-at-2-54-14-PM-1.jpg" alt="Mercedes-Benz">
-        <h4>Mercedes-Benz</h4>
+        <h4>Mistubishi</h4>
       </div>
 
       <div class="brand-item">
         <img src="https://i.ibb.co/Mxms5qph/Whats-App-Image-2025-11-04-at-2-54-14-PM.jpg" alt="BMW">
-        <h4>BMW</h4>
+        <h4>Subaru</h4>
       </div>
     </div>
   </div>
